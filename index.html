@@ -4,13 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Youdidit.az — Tələbələr üçün resurs və imtahan mərkəzi</title>
-<meta name="description" content="Youdidit.az: tələbələr üçün öyrənmə resursları, səviyyələr üzrə dil imtahanları və sərbəst iş prezentasiyası üçün sifariş forması.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=2">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
-  /* ===== Aurora hero — prefixed with "aur-" so nothing here can collide with style.css ===== */
   :root{
     --aur-bg-deep:  #0a0714;
     --aur-bg-mid:   #1c1030;
@@ -20,15 +17,29 @@
     --aur-spark-2:  #d8bfff;
   }
 
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--aur-bg-deep);
+    color: var(--aur-ink);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
   .aur-hero{
-    position:relative;
-    width:100%;
-    min-height:640px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:64px 24px;
-    overflow:hidden;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+    overflow: hidden;
     background:
       radial-gradient(ellipse 60% 50% at 50% 8%, var(--aur-bg-glow) 0%, transparent 60%),
       radial-gradient(ellipse 80% 60% at 50% 100%, #150c28 0%, transparent 70%),
@@ -36,9 +47,9 @@
   }
 
   .aur-stars, .aur-stars2{
-    position:absolute; inset:-10%;
-    width:120%; height:120%;
-    pointer-events:none;
+    position: absolute; inset: -10%;
+    width: 120%; height: 120%;
+    pointer-events: none;
   }
   .aur-stars{
     background-image:
@@ -46,197 +57,139 @@
       radial-gradient(1.5px 1.5px at 82% 15%, var(--aur-spark-2) 0%, transparent 100%),
       radial-gradient(1px 1px at 25% 65%, var(--aur-ink-dim) 0%, transparent 100%),
       radial-gradient(1px 1px at 70% 72%, var(--aur-ink-dim) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 92% 55%, var(--aur-spark-2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 6% 78%, var(--aur-ink-dim) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 46% 10%, var(--aur-spark-2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 60% 90%, var(--aur-ink-dim) 0%, transparent 100%);
-    opacity:0.8;
-    animation:aur-drift-slow 50s linear infinite;
+      radial-gradient(1.5px 1.5px at 92% 55%, var(--aur-spark-2) 0%, transparent 100%);
+    opacity: 0.8;
+    animation: aur-drift-slow 50s linear infinite;
   }
   .aur-stars2{
     background-image:
       radial-gradient(1px 1px at 18% 40%, #ffffff 0%, transparent 100%),
       radial-gradient(1.2px 1.2px at 55% 25%, var(--aur-spark-2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 35% 82%, #ffffff 0%, transparent 100%),
-      radial-gradient(1.4px 1.4px at 88% 35%, var(--aur-spark-2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 75% 60%, #ffffff 0%, transparent 100%),
-      radial-gradient(1.2px 1.2px at 10% 55%, var(--aur-ink-dim) 0%, transparent 100%),
-      radial-gradient(1px 1px at 95% 85%, #ffffff 0%, transparent 100%),
-      radial-gradient(1.3px 1.3px at 42% 95%, var(--aur-spark-2) 0%, transparent 100%);
-    opacity:0.6;
-    animation:aur-drift-fast 34s linear infinite reverse, aur-twinkle 4.5s ease-in-out infinite;
+      radial-gradient(1px 1px at 35% 82%, #ffffff 0%, transparent 100%);
+    opacity: 0.6;
+    animation: aur-drift-fast 34s linear infinite reverse;
   }
   @keyframes aur-drift-slow{ 0%{transform:translate3d(0,0,0);} 100%{transform:translate3d(-6%,-4%,0);} }
   @keyframes aur-drift-fast{ 0%{transform:translate3d(0,0,0);} 100%{transform:translate3d(5%,-6%,0);} }
-  @keyframes aur-twinkle{ 0%,100%{opacity:0.35;} 50%{opacity:0.75;} }
-
-  .aur-lines{ position:absolute; inset:0; opacity:0.35; pointer-events:none; }
 
   .aur-card{
-    position:relative;
-    z-index:2;
-    width:100%;
-    max-width:820px;
-    text-align:center;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:28px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 820px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
   }
 
   .aur-brand{
-    font-family:'Sora', sans-serif;
-    font-weight:600;
-    font-size:15px;
-    letter-spacing:0.02em;
-    color:var(--aur-ink-dim);
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    color: var(--aur-ink-dim);
+    text-transform: uppercase;
   }
 
   .aur-card h1{
-    font-family:'Sora', sans-serif;
-    font-weight:800;
-    font-size:clamp(30px, 5.2vw, 52px);
-    line-height:1.08;
-    letter-spacing:0.01em;
-    color:var(--aur-ink);
-    text-shadow:0 0 30px rgba(180,150,255,0.25);
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 6vw, 48px);
+    line-height: 1.1;
+    color: var(--aur-ink);
   }
 
   .aur-sub{
-    max-width:520px;
-    color:var(--aur-ink-dim);
-    font-family:'Inter', sans-serif;
-    font-size:14.5px;
-    line-height:1.6;
-    margin-top:-8px;
+    max-width: 540px;
+    color: var(--aur-ink-dim);
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 0 10px;
   }
 
   .aur-emblem{
-    width:150px;
-    height:150px;
-    margin:6px 0 4px;
-    filter:drop-shadow(0 0 22px rgba(155,127,232,0.55));
+    width: 130px;
+    height: 130px;
+    margin: 4px 0;
+    filter: drop-shadow(0 0 20px rgba(155,127,232,0.5));
   }
 
   .aur-icon-row{
-    display:flex;
-    gap:44px;
-    flex-wrap:wrap;
-    justify-content:center;
-    margin-top:6px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
   }
-  .aur-icon-item{ display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .aur-icon-item{ 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 8px; 
+  }
   .aur-icon-circle{
-    position:relative;
-    width:54px; height:54px;
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    background:radial-gradient(circle at 50% 40%, rgba(155,127,232,0.35), rgba(155,127,232,0.05) 70%);
-    filter:drop-shadow(0 0 8px rgba(180,150,255,0.5));
+    position: relative;
+    width: 52px; 
+    height: 52px;
+    border-radius: 50%;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    background: radial-gradient(circle at 50% 40%, rgba(155,127,232,0.35), rgba(155,127,232,0.05) 70%);
+    box-shadow: 0 0 12px rgba(180,150,255,0.4);
   }
-  .aur-icon-circle svg{ width:24px; height:24px; stroke:var(--aur-ink); fill:none; stroke-width:1.6; }
+  .aur-icon-circle svg{ 
+    width: 22px; 
+    height: 22px; 
+    stroke: var(--aur-ink); 
+    fill: none; 
+    stroke-width: 1.6; 
+  }
   .aur-icon-label{
-    font-family:'Inter', sans-serif;
-    font-size:12.5px;
-    font-weight:600;
-    color:var(--aur-ink);
-    letter-spacing:0.01em;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--aur-ink);
   }
 
   .aur-cta{
-    margin-top:12px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:14px 42px;
-    border-radius:999px;
-    border:1px solid rgba(244,241,251,0.7);
-    color:var(--aur-ink);
-    background:transparent;
-    font-family:'Inter', sans-serif;
-    font-weight:700;
-    font-size:15px;
-    letter-spacing:0.01em;
-    cursor:pointer;
-    text-decoration:none;
-    transition:background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 38px;
+    border-radius: 999px;
+    border: 1px solid rgba(244,241,251,0.7);
+    color: var(--aur-ink);
+    background: transparent;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
   }
   .aur-cta:hover{
-    background:var(--aur-ink);
-    color:#160c2b;
-    box-shadow:0 0 24px rgba(216,191,255,0.5);
+    background: var(--aur-ink);
+    color: #160c2b;
+    box-shadow: 0 0 20px rgba(216,191,255,0.5);
   }
 
-  .aur-zappable{ cursor:pointer; -webkit-tap-highlight-color:transparent; }
-
-  @keyframes aur-zap-flash{
-    0%   { filter:brightness(1) drop-shadow(0 0 0 rgba(216,191,255,0)); }
-    8%   { filter:brightness(2.6) drop-shadow(0 0 18px rgba(216,191,255,0.95)); }
-    18%  { filter:brightness(1.1) drop-shadow(0 0 4px rgba(216,191,255,0.3)); }
-    28%  { filter:brightness(2.2) drop-shadow(0 0 16px rgba(216,191,255,0.9)); }
-    45%  { filter:brightness(1) drop-shadow(0 0 0 rgba(216,191,255,0)); }
-    100% { filter:brightness(1) drop-shadow(0 0 0 rgba(216,191,255,0)); }
+  .aur-zappable{ cursor: pointer; -webkit-tap-highlight-color: transparent; position: relative; }
+  @keyframes aur-zap-flash {
+    0% { filter: brightness(1); }
+    30% { filter: brightness(2.2) drop-shadow(0 0 12px rgba(216,191,255,0.8)); }
+    100% { filter: brightness(1); }
   }
-  @keyframes aur-zap-ring{
-    0%   { transform:scale(0.6); opacity:0.9; }
-    70%  { opacity:0.15; }
-    100% { transform:scale(2.4); opacity:0; }
-  }
-  .aur-zap-anim{ animation:aur-zap-flash 0.7s ease-out; }
-  .aur-zap-ring{
-    position:absolute; inset:0;
-    border-radius:50%;
-    border:1.5px solid var(--aur-spark-2);
-    pointer-events:none;
-    animation:aur-zap-ring 0.7s ease-out forwards;
-  }
-
-  @media (max-width:520px){
-    .aur-icon-row{ gap:26px; }
-    .aur-emblem{ width:110px; height:110px; }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .aur-stars, .aur-stars2{ animation:none; }
-  }
+  .aur-zap-anim { animation: aur-zap-flash 0.5s ease-out; }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="wrap">
-    <a href="index.html" class="brand">Youdidit<span class="dot">.az</span></a>
-    <nav class="main-nav" aria-label="Əsas naviqasiya">
-      <a href="index.html" aria-current="page">Ana səhifə</a>
-      <a href="resources.html">Resurslar</a>
-      <a href="exams.html">İmtahanlar</a>
-      <a href="sinif-testleri.html">Sinif testləri</a>
-      <a href="miq-kurikulum.html">MİQ Kurikulum</a>
-      <a href="order.html">Sərbəst iş sifarişi</a>
-    </nav>
-    <button class="menu-btn" aria-label="Menyunu aç" aria-expanded="false">Menyu</button>
-  </div>
-  <div class="mobile-nav">
-    <a href="index.html">Ana səhifə</a>
-    <a href="resources.html">Resurslar</a>
-    <a href="exams.html">İmtahanlar</a>
-    <a href="sinif-testleri.html">Sinif testləri</a>
-    <a href="miq-kurikulum.html">MİQ Kurikulum</a>
-    <a href="order.html">Sərbəst iş sifarişi</a>
-  </div>
-</header>
-
 <section class="aur-hero">
   <div class="aur-stars"></div>
   <div class="aur-stars2"></div>
-
-  <svg class="aur-lines" viewBox="0 0 820 640" preserveAspectRatio="none">
-    <line x1="60" y1="120" x2="220" y2="60" stroke="#9b7fe8" stroke-width="0.6"/>
-    <line x1="220" y1="60" x2="380" y2="100" stroke="#9b7fe8" stroke-width="0.6"/>
-    <line x1="600" y1="90" x2="760" y2="180" stroke="#9b7fe8" stroke-width="0.6"/>
-    <line x1="60" y1="120" x2="140" y2="260" stroke="#9b7fe8" stroke-width="0.4"/>
-    <line x1="700" y1="400" x2="760" y2="500" stroke="#9b7fe8" stroke-width="0.4"/>
-    <line x1="120" y1="450" x2="200" y2="560" stroke="#9b7fe8" stroke-width="0.4"/>
-  </svg>
 
   <div class="aur-card">
     <div class="aur-brand aur-zappable">youdidit.az</div>
@@ -259,36 +212,11 @@
           <stop offset="0%" stop-color="#1b5f75"/>
           <stop offset="100%" stop-color="#0d3a48"/>
         </linearGradient>
-        <clipPath id="arrowClip">
-          <path d="M62 178 L100 118 L86 108 L138 46 L134 84 L152 70 L132 118 L112 104 L98 128 Z"/>
-        </clipPath>
       </defs>
 
       <polygon points="52,168 100,72 148,168" fill="url(#peakBack)"/>
       <polygon points="30,178 78,92 126,178" fill="url(#peakFront)"/>
-
       <path d="M62 178 L100 118 L86 108 L138 46 L134 84 L152 70 L132 118 L112 104 L98 128 Z" fill="url(#arrowGrad)"/>
-      <g clip-path="url(#arrowClip)">
-        <circle cx="95" cy="150" r="1" fill="#f4f1fb" opacity="0.9"/>
-        <circle cx="108" cy="130" r="0.8" fill="#d8bfff" opacity="0.8"/>
-        <circle cx="118" cy="108" r="1.1" fill="#f4f1fb" opacity="0.9"/>
-        <circle cx="128" cy="88" r="0.7" fill="#d8bfff" opacity="0.7"/>
-        <circle cx="135" cy="70" r="1.2" fill="#ffffff" opacity="0.95"/>
-        <circle cx="145" cy="60" r="0.8" fill="#d8bfff" opacity="0.8"/>
-        <circle cx="102" cy="140" r="0.6" fill="#ffffff" opacity="0.6"/>
-        <circle cx="122" cy="96" r="0.6" fill="#ffffff" opacity="0.6"/>
-        <circle cx="140" cy="80" r="0.6" fill="#d8bfff" opacity="0.7"/>
-      </g>
-
-      <g fill="none" stroke="#f4f1fb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="41" cy="150" r="3.4" fill="#f4f1fb" stroke="none"/>
-        <path d="M41 154 L41 166"/>
-        <path d="M41 158 L34 166"/>
-        <path d="M41 158 L47 168"/>
-        <path d="M41 166 L36 178"/>
-        <path d="M41 166 L46 178"/>
-        <rect x="36" y="153" width="6" height="9" rx="1.5" fill="#f4f1fb" stroke="none" opacity="0.85"/>
-      </g>
     </svg>
 
     <div class="aur-icon-row">
@@ -318,75 +246,16 @@
       </div>
     </div>
 
-    <a href="resources.html" class="aur-cta aur-zappable">Başla</a>
+    <a href="#" class="aur-cta aur-zappable">Başla</a>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <div class="num">Bölmə 01</div>
-      <h2>Sayt üç hissədən ibarətdir</h2>
-    </div>
-
-    <div class="catalog-card" data-tab="Resurslar">
-      <h3>Öyrənmə resursları</h3>
-      <p>Fənlər üzrə seçilmiş material, məqalə və alət siyahısı — hər kateqoriya öz kartında.</p>
-      <a class="go" href="resources.html">Resurslara keç →</a>
-    </div>
-
-    <div class="catalog-card" data-tab="İmtahanlar">
-      <h3>Dil imtahanları, səviyyə üzrə</h3>
-      <p>İngilis, rus və alman dilləri üzrə A1-dən C2-yə qədər səviyyə testləri.</p>
-      <a class="go" href="exams.html">İmtahanlara keç →</a>
-    </div>
-
-    <div class="catalog-card" data-tab="Riyazi-məntiq">
-      <h3>Sinif testləri, 3–9-cu sinif</h3>
-      <p>Riyazi-məntiq testləri, çətinlik səviyyəsinə görə işarələnmiş suallarla.</p>
-      <a class="go" href="sinif-testleri.html">Sinif testlərinə keç →</a>
-    </div>
-
-    <div class="catalog-card" data-tab="MİQ">
-      <h3>MİQ Kurikulum imtahanı</h3>
-      <p>Müəllimlər üçün 100 suallıq kurikulum sertifikasiya imtahanı.</p>
-      <a class="go" href="miq-kurikulum.html">İmtahana keç →</a>
-    </div>
-
-    <div class="catalog-card" data-tab="Sifariş">
-      <h3>Sərbəst iş prezentasiyası sifarişi</h3>
-      <p>Mövzunu və tarixi yazın, formu göndərin — sorğu birbaşa emailə düşür.</p>
-      <a class="go" href="order.html">Sifariş formuna keç →</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div>Youdidit.az — tələbələr üçün resurs və imtahan mərkəzi</div>
-    <div>Sual və təkliflər üçün: <a href="mailto:youdiditaz@gmail.com">youdiditaz@gmail.com</a></div>
-  </div>
-</footer>
-
-<script src="script.js"></script>
 <script>
   document.querySelectorAll('.aur-zappable').forEach(function(el){
-    el.addEventListener('pointerdown', function(){
+    el.addEventListener('click', function(){
       el.classList.remove('aur-zap-anim');
       void el.offsetWidth;
       el.classList.add('aur-zap-anim');
-
-      var ring = document.createElement('span');
-      ring.className = 'aur-zap-ring';
-      var prevPosition = getComputedStyle(el).position;
-      if (prevPosition === 'static') el.style.position = 'relative';
-      el.appendChild(ring);
-      ring.addEventListener('animationend', function(){ ring.remove(); });
-
-      el.addEventListener('animationend', function handler(){
-        el.classList.remove('aur-zap-anim');
-        el.removeEventListener('animationend', handler);
-      });
     });
   });
 </script>
