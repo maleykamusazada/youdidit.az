@@ -1,0 +1,48 @@
+:root{
+  --aur-bg-deep:  #0a0714;
+  --aur-bg-mid:   #1c1030;
+  --aur-bg-glow:  #3a2166;
+  --aur-ink:      #f4f1fb;
+  --aur-ink-dim:  #b9aed6;
+  --aur-spark-2:  #d8bfff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--aur-bg-deep);
+  color: var(--aur-ink);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+/* Ümumi başlıq və mətnlər üçün tünd səhifə dizaynı */
+h1, h2, h3, p {
+  color: var(--aur-ink);
+}
+
+a {
+  color: var(--aur-spark-2);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Yuxarı menyu sətrləri üçün səliqəli görünüş */
+nav, .menu {
+  background: var(--aur-bg-mid);
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
