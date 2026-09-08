@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test — Youdidit.az</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Youdidit<span class="dot">.az</span></a>
+    <nav class="main-nav">
+      <a href="index.html">Ana səhifə</a>
+      <a href="sinif-testleri.html">Geri qayıt</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding: 40px 20px;">
+  <div class="wrap" style="max-width: 700px;">
+    <div id="quiz-container">
+      <h2 id="quiz-title">Test yüklənir...</h2>
+      <div id="quiz-content" style="margin-top: 20px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Dinamik olaraq müvafiq sinfin məlumatını və mühərriki qoşuruq -->
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const grade = urlParams.get('grade') || '3';
+  
+  // Scriptləri dinamik yükləyirik
+  const dataScript = document.createElement('script');
+  dataScript.src = `logic-data-${grade}.js`;
+  document.body.appendChild(dataScript);
+
+  dataScript.onload = function() {
+    const engineScript = document.createElement('script');
+    engineScript.src = 'logic-quiz-engine.js';
+    document.body.appendChild(engineScript);
+  };
+</script>
+</body>
+</html>
