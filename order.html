@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sərbəst iş sifarişi — Youdidit.az</title>
-<meta name="description" content="Sərbəst iş prezentasiyası üçün sifariş forması. Sorğu birbaşa emailə gəlir.">
+<meta name="description" content="Sərbəst iş prezentasiyası üçün mövzu və tarix bildirin, sorğunuz birbaşa emailə düşsün.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
@@ -30,59 +30,64 @@
     <a href="exams.html">İmtahanlar</a>
     <a href="sinif-testleri.html">Sinif testləri</a>
     <a href="miq-kurikulum.html">MİQ Kurikulum</a>
-    <a href="order.html">Sərbəst iş sifarişi</a>
+    <a href="order.html" aria-current="page">Sərbəst iş sifarişi</a>
   </div>
 </header>
 
-<section class="hero" style="padding-bottom:26px;">
+<section class="hero">
   <div class="wrap">
-    <div class="kicker">Sifariş</div>
-    <h1>Sərbəst iş prezentasiyası sifariş et</h1>
-    <p class="lede">Mövzunu və tarixini yaz, göndər — sorğu birbaşa youdiditaz@gmail.com ünvanına düşür.</p>
+    <div class="kicker">Sərbəst iş sifarişi</div>
+    <h1>Mövzunu və tarixi yazın, qalanını bizə buraxın.</h1>
+    <p class="lede">Formu doldurun — sorğunuz birbaşa emailimizə düşəcək. Adətən 24 saat ərzində sizinlə əlaqə saxlanılır.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <form id="order-form" class="order-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+    <form class="order-form" id="order-form" action="https://formsubmit.co/ajax/youdiditaz@gmail.com" method="POST">
+
+      <input type="hidden" name="_subject" value="Yeni sərbəst iş sifarişi — Youdidit.az">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none">
 
       <div class="field-row">
         <div class="field">
           <label for="name">Ad, Soyad</label>
-          <input type="text" id="name" name="Ad Soyad" required>
+          <input type="text" id="name" name="Ad Soyad" required autocomplete="name">
         </div>
         <div class="field">
-          <label for="contact">Email və ya telefon</label>
-          <input type="text" id="contact" name="Əlaqə" required>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="Email" required autocomplete="email">
         </div>
       </div>
 
       <div class="field-row">
         <div class="field">
-          <label for="subject">Fənn</label>
-          <input type="text" id="subject" name="Fənn" required>
+          <label for="subject-area">Sinif / Fənn</label>
+          <input type="text" id="subject-area" name="Sinif / Fənn" placeholder="məs. 9-cu sinif, Biologiya" required>
         </div>
         <div class="field">
-          <label for="deadline">Son tarix</label>
-          <input type="date" id="deadline" name="Son tarix" required>
+          <label for="due-date">Tələb olunan tarix</label>
+          <input type="date" id="due-date" name="Tarix" required>
         </div>
       </div>
 
       <div class="field">
         <label for="topic">Mövzu</label>
-        <input type="text" id="topic" name="Mövzu" required>
+        <input type="text" id="topic" name="Mövzu" placeholder="Prezentasiyanın mövzusu" required>
       </div>
 
       <div class="field">
-        <label for="details">Ətraflı təsvir</label>
-        <textarea id="details" name="Ətraflı təsvir" placeholder="Slaydların sayı, tələb olunan format, xüsusi tapşırıq şərtləri və s." required></textarea>
+        <label for="notes">Əlavə qeyd</label>
+        <textarea id="notes" name="Əlavə qeyd" placeholder="Slayd sayı, tələb olunan format, xüsusi istəklər və s."></textarea>
       </div>
 
-      <button type="submit" class="btn btn-primary">Sorğunu göndər</button>
-      <div id="form-status" role="status"></div>
+      <button type="submit" class="btn btn-primary">Sifarişi göndər</button>
+
+      <div id="form-status"></div>
     </form>
 
-    <p class="note">Bu form Formspree ilə işləyir. Saytı aktiv etmək üçün <a href="https://formspree.io" target="_blank" rel="noopener">formspree.io</a>-da youdiditaz@gmail.com ilə hesab aç, yeni form yarat və yuxarıdakı formun <code>action</code> sətrindəki <code>YOUR_FORM_ID</code> hissəsini öz form ID-nlə əvəz et.</p>
   </div>
 </section>
 
@@ -94,5 +99,35 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+  var form = document.getElementById('order-form');
+  var status = document.getElementById('form-status');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    status.className = '';
+    status.textContent = 'Göndərilir...';
+    status.classList.add('show');
+
+    fetch(form.action, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    })
+    .then(function(res){
+      if (res.ok) {
+        status.textContent = 'Təşəkkürlər! Sifarişiniz göndərildi, tezliklə sizinlə əlaqə saxlanılacaq.';
+        status.className = 'show ok';
+        form.reset();
+      } else {
+        throw new Error('Göndərmə uğursuz oldu');
+      }
+    })
+    .catch(function(){
+      status.textContent = 'Xəta baş verdi. Zəhmət olmasa bir az sonra yenidən cəhd edin, ya da birbaşa youdiditaz@gmail.com ünvanına yazın.';
+      status.className = 'show err';
+    });
+  });
+</script>
 </body>
 </html>
