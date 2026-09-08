@@ -1,21 +1,32 @@
 /* ==========================================================================
    Youdidit.az — design tokens
-   Forest/gold/off-white palette, Libre Baskerville + Inter
+   Cosmic/aurora palette — deep purple-navy, lavender accent, off-white ink
+   Sora (display) + Inter (body)
    ========================================================================== */
 
-:root {
-  --forest: #1B4332;
-  --forest-deep: #10281D;
-  --gold: #C9A227;
-  --gold-soft: #E4CE87;
-  --off-white: #FAFAF8;
-  --sage: #EDF1EC;
-  --ink: #1A1F1C;
-  --ink-soft: #4C554E;
-  --line: #D7DED7;
-  --white: #FFFFFF;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap');
 
-  --serif: "Libre Baskerville", Georgia, serif;
+:root {
+  --bg-deep: #0a0714;
+  --bg-mid: #150c28;
+  --bg-glow: #3a2166;
+  --panel: #170f2a;
+  --panel-soft: #1c1030;
+  --line: rgba(184, 164, 230, 0.16);
+  --line-strong: rgba(184, 164, 230, 0.32);
+
+  --ink: #f4f1fb;
+  --ink-soft: #b9aed6;
+  --ink-faint: #8b7fae;
+
+  --spark: #9b7fe8;
+  --spark-2: #d8bfff;
+  --spark-deep: #5a3fa0;
+
+  --danger: #ff9b8a;
+  --ok: #9be8c4;
+
+  --display: "Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --max: 760px;
@@ -30,7 +41,11 @@ html {
 
 body {
   margin: 0;
-  background: var(--off-white);
+  position: relative;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 60% 30% at 50% -5%, var(--bg-glow) 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
   color: var(--ink);
   font-family: var(--sans);
   font-size: 16px;
@@ -38,30 +53,83 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* fixed starfield behind all content, on every page */
+body::before, body::after {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 20%, var(--spark-2) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 82% 15%, var(--spark-2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 65%, var(--ink-soft) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 72%, var(--ink-soft) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 92% 55%, var(--spark-2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 6% 78%, var(--ink-soft) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 46% 40%, var(--spark-2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 90%, var(--ink-soft) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 10%, var(--ink-soft) 0%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 65% 5%, var(--spark-2) 0%, transparent 100%);
+  opacity: 0.55;
+  animation: drift-slow 60s linear infinite;
+}
+
+body::after {
+  background-image:
+    radial-gradient(1px 1px at 18% 40%, #ffffff 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 55% 25%, var(--spark-2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 82%, #ffffff 0%, transparent 100%),
+    radial-gradient(1.4px 1.4px at 88% 35%, var(--spark-2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 60%, #ffffff 0%, transparent 100%),
+    radial-gradient(1.2px 1.2px at 10% 55%, var(--ink-soft) 0%, transparent 100%),
+    radial-gradient(1px 1px at 95% 85%, #ffffff 0%, transparent 100%),
+    radial-gradient(1.3px 1.3px at 42% 95%, var(--spark-2) 0%, transparent 100%);
+  opacity: 0.35;
+  animation: drift-fast 38s linear infinite reverse, twinkle 4.5s ease-in-out infinite;
+}
+
+@keyframes drift-slow { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-6%,-4%,0); } }
+@keyframes drift-fast { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(5%,-6%,0); } }
+@keyframes twinkle { 0%, 100% { opacity: 0.25; } 50% { opacity: 0.5; } }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  body::before, body::after { animation: none; }
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
-a { color: inherit; }
+a { color: var(--spark-2); }
 
 img, svg { max-width: 100%; display: block; }
 
 h1, h2, h3 {
-  font-family: var(--serif);
-  font-weight: 400;
-  color: var(--forest);
+  font-family: var(--display);
+  font-weight: 700;
+  color: var(--ink);
   margin: 0 0 0.5em 0;
-  line-height: 1.25;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
 }
 
-h1 { font-size: 2.1rem; letter-spacing: -0.01em; }
+h1 { font-size: 2.1rem; font-weight: 800; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.15rem; }
 
-p { margin: 0 0 1em 0; max-width: 62ch; }
+p {
+  margin: 0 0 1em 0;
+  max-width: 62ch;
+  color: var(--ink-soft);
+}
 
 .wrap {
+  position: relative;
+  z-index: 1;
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 20px;
@@ -70,12 +138,14 @@ p { margin: 0 0 1em 0; max-width: 62ch; }
 /* ---------- header ---------- */
 
 .site-header {
-  background: var(--forest);
-  color: var(--sage);
+  position: relative;
+  z-index: 20;
+  background: rgba(10, 7, 20, 0.75);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
   padding: 16px 0;
   position: sticky;
   top: 0;
-  z-index: 20;
 }
 
 .site-header .wrap {
@@ -85,16 +155,17 @@ p { margin: 0 0 1em 0; max-width: 62ch; }
 }
 
 .brand {
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  color: var(--white);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ink);
   text-decoration: none;
   display: flex;
   align-items: baseline;
   gap: 2px;
 }
 
-.brand .dot { color: var(--gold); }
+.brand .dot { color: var(--spark-2); }
 
 nav.main-nav {
   display: none;
@@ -103,16 +174,16 @@ nav.main-nav {
 
 nav.main-nav a {
   text-decoration: none;
-  font-size: 0.92rem;
-  color: var(--sage);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
   padding-bottom: 3px;
   border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-nav.main-nav a:hover,
-nav.main-nav a[aria-current="page"] {
-  border-bottom-color: var(--gold);
-  color: var(--white);
+nav.main-nav a:hover, nav.main-nav a[aria-current="page"] {
+  border-bottom-color: var(--spark-2);
+  color: var(--ink);
 }
 
 @media (min-width: 640px) {
@@ -122,10 +193,10 @@ nav.main-nav a[aria-current="page"] {
 
 .menu-btn {
   background: none;
-  border: 1px solid rgba(255,255,255,0.35);
-  color: var(--white);
-  border-radius: 4px;
-  padding: 6px 10px;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 6px 14px;
   font-family: var(--sans);
   font-size: 0.85rem;
 }
@@ -133,36 +204,42 @@ nav.main-nav a[aria-current="page"] {
 .mobile-nav {
   display: none;
   flex-direction: column;
-  background: var(--forest-deep);
+  background: var(--bg-mid);
+  border-bottom: 1px solid var(--line);
   padding: 6px 20px 14px;
+  position: relative;
+  z-index: 20;
 }
 
 .mobile-nav.open { display: flex; }
 
 .mobile-nav a {
-  color: var(--sage);
+  color: var(--ink-soft);
   text-decoration: none;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid var(--line);
   font-size: 0.95rem;
 }
 
-/* ---------- hero ---------- */
+/* ---------- hero (simple text version, used on inner pages) ---------- */
 
 .hero {
+  position: relative;
+  z-index: 1;
   padding: 52px 0 40px;
   border-bottom: 1px solid var(--line);
 }
 
 .hero .kicker {
-  font-family: var(--serif);
-  font-style: italic;
-  color: var(--ink-soft);
-  font-size: 1rem;
+  font-family: var(--sans);
+  font-weight: 600;
+  color: var(--spark-2);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
   margin-bottom: 14px;
 }
 
-.hero h1 { font-size: 2.3rem; }
+.hero h1 { font-size: 2.3rem; text-shadow: 0 0 30px rgba(180,150,255,0.2); }
 
 .hero .lede {
   color: var(--ink-soft);
@@ -181,15 +258,21 @@ nav.main-nav a[aria-current="page"] {
   .hero-links { flex-direction: row; flex-wrap: wrap; }
 }
 
-/* ---------- catalog card (index-card motif) ---------- */
+/* ---------- catalog card ---------- */
 
 .catalog-card {
   position: relative;
-  background: var(--white);
+  z-index: 1;
+  background: linear-gradient(180deg, var(--panel-soft), var(--panel));
   border: 1px solid var(--line);
-  border-radius: 2px;
-  padding: 20px 20px 18px;
+  border-radius: 10px;
+  padding: 22px 20px 18px;
   margin-bottom: 14px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.catalog-card:hover {
+  border-color: var(--line-strong);
 }
 
 .catalog-card::before {
@@ -197,18 +280,17 @@ nav.main-nav a[aria-current="page"] {
   position: absolute;
   top: -11px;
   left: 18px;
-  background: var(--gold);
-  color: var(--forest-deep);
+  background: var(--spark);
+  color: var(--bg-deep);
   font-family: var(--sans);
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 3px 9px;
-  border-radius: 2px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 3px 10px;
+  border-radius: 999px;
 }
 
-.catalog-card h3 {
-  margin-top: 6px;
-}
+.catalog-card h3 { margin-top: 6px; }
 
 .catalog-card p {
   color: var(--ink-soft);
@@ -218,22 +300,24 @@ nav.main-nav a[aria-current="page"] {
 
 .catalog-card .meta {
   font-size: 0.85rem;
-  color: var(--ink-soft);
+  color: var(--ink-faint);
 }
 
 .catalog-card a.go {
   display: inline-block;
   margin-top: 10px;
   font-size: 0.9rem;
-  color: var(--forest);
+  color: var(--spark-2);
   text-decoration: none;
-  border-bottom: 1px solid var(--gold);
+  border-bottom: 1px solid var(--spark);
   padding-bottom: 1px;
 }
 
 /* ---------- section basics ---------- */
 
 section {
+  position: relative;
+  z-index: 1;
   padding: 40px 0;
 }
 
@@ -246,10 +330,11 @@ section + section {
 }
 
 .section-head .num {
-  font-family: var(--serif);
-  font-style: italic;
-  color: var(--gold);
-  font-size: 0.95rem;
+  font-family: var(--sans);
+  font-weight: 600;
+  color: var(--spark-2);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
 }
 
 /* ---------- buttons ---------- */
@@ -258,26 +343,33 @@ section + section {
   display: inline-block;
   text-decoration: none;
   font-family: var(--sans);
+  font-weight: 700;
   font-size: 0.95rem;
-  padding: 11px 20px;
-  border-radius: 3px;
+  padding: 12px 22px;
+  border-radius: 999px;
   text-align: center;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .btn-primary {
-  background: var(--gold);
-  color: var(--forest-deep);
-  font-weight: 600;
+  background: var(--ink);
+  color: var(--bg-deep);
+  border: 1px solid var(--ink);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 24px rgba(216,191,255,0.5);
 }
 
 .btn-outline {
-  border: 1px solid var(--forest);
-  color: var(--forest);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  background: transparent;
 }
 
-.hero .btn-outline {
-  border-color: var(--forest);
-  color: var(--forest);
+.btn-outline:hover {
+  border-color: var(--spark-2);
+  color: var(--spark-2);
 }
 
 /* ---------- level list (exams) ---------- */
@@ -296,11 +388,11 @@ section + section {
 .level-group-title h2 { margin: 0; }
 
 .level-group-title .lang-tag {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--ink-soft);
-  border: 1px solid var(--line);
-  padding: 2px 8px;
-  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  padding: 2px 10px;
+  border-radius: 999px;
 }
 
 .level-row {
@@ -316,9 +408,11 @@ section + section {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1.5px solid var(--forest);
-  color: var(--forest);
-  font-family: var(--serif);
+  border: 1.5px solid var(--spark);
+  color: var(--spark-2);
+  background: radial-gradient(circle at 50% 40%, rgba(155,127,232,0.25), transparent 70%);
+  font-family: var(--display);
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -341,9 +435,9 @@ section + section {
 .level-row .go {
   flex: 0 0 auto;
   font-size: 0.85rem;
-  color: var(--forest);
+  color: var(--spark-2);
   text-decoration: none;
-  border-bottom: 1px solid var(--gold);
+  border-bottom: 1px solid var(--spark);
   white-space: nowrap;
 }
 
@@ -362,9 +456,11 @@ section + section {
 /* ---------- form ---------- */
 
 .order-form {
-  background: var(--white);
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, var(--panel-soft), var(--panel));
   border: 1px solid var(--line);
-  border-radius: 3px;
+  border-radius: 12px;
   padding: 26px 22px;
 }
 
@@ -375,28 +471,28 @@ section + section {
 .field label {
   display: block;
   font-size: 0.9rem;
-  color: var(--forest);
+  color: var(--spark-2);
   margin-bottom: 6px;
   font-weight: 600;
 }
 
-.field input,
-.field select,
-.field textarea {
+.field input, .field select, .field textarea {
   width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 3px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
   padding: 11px 12px;
   font-family: var(--sans);
   font-size: 0.95rem;
-  background: var(--off-white);
+  background: rgba(10, 7, 20, 0.5);
   color: var(--ink);
 }
 
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  outline: 2px solid var(--gold);
+.field input::placeholder, .field textarea::placeholder {
+  color: var(--ink-faint);
+}
+
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 2px solid var(--spark-2);
   outline-offset: 1px;
 }
 
@@ -420,15 +516,17 @@ section + section {
 }
 
 #form-status.show { display: block; }
-
-#form-status.ok { color: var(--forest); }
-#form-status.err { color: #9A3B2E; }
+#form-status.ok { color: var(--ok); }
+#form-status.err { color: var(--danger); }
 
 /* ---------- footer ---------- */
 
 footer {
-  background: var(--forest-deep);
-  color: var(--sage);
+  position: relative;
+  z-index: 1;
+  background: rgba(10, 7, 20, 0.75);
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
   padding: 30px 0;
   margin-top: 20px;
 }
@@ -441,7 +539,7 @@ footer .wrap {
 }
 
 footer a {
-  color: var(--gold-soft);
+  color: var(--spark-2);
   text-decoration: none;
 }
 
@@ -450,12 +548,12 @@ footer a {
 .note {
   font-size: 0.85rem;
   color: var(--ink-soft);
-  border-left: 2px solid var(--gold);
+  border-left: 2px solid var(--spark);
   padding-left: 12px;
   margin: 22px 0;
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--spark-2);
   outline-offset: 2px;
 }
