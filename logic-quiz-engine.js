@@ -4,7 +4,7 @@
 //
 // Set FORMSPREE_ENDPOINT in quiz-engine.js's copy or below to receive results by email.
 
-var FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+var FORMSPREE_ENDPOINT = "https://formspree.io/f/mqpkglkb";
 var TIME_LIMIT_SECONDS = 2 * 60 * 60;
 
 (function () {
