@@ -52,3 +52,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+/* Mobil menyu üslubları */
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--aur-bg-mid);
+  padding: 15px 20px 20px;
+  border-bottom: 1px solid rgba(185, 174, 214, 0.1);
+}
+
+.mobile-nav.open {
+  display: flex !important;
+}
+
+.mobile-nav a {
+  color: var(--aur-ink-dim);
+  font-size: 14px;
+}
+
+.mobile-nav a:hover {
+  color: var(--aur-spark-2);
+}
+
+@media (min-width: 850px) {
+  .menu-btn {
+    display: none;
+  }
+  .mobile-nav {
+    display: none !important;
+  }
+}
+
