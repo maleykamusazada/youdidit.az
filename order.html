@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sərbəst iş sifarişi — Youdidit.az</title>
+<meta name="description" content="Sərbəst iş prezentasiyası üçün sifariş forması. Sorğu birbaşa emailə gəlir.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Youdidit<span class="dot">.az</span></a>
+    <nav class="main-nav" aria-label="Əsas naviqasiya">
+      <a href="index.html">Ana səhifə</a>
+      <a href="resources.html">Resurslar</a>
+      <a href="exams.html">İmtahanlar</a>
+      <a href="sinif-testleri.html">Sinif testləri</a>
+      <a href="miq-kurikulum.html">MİQ Kurikulum</a>
+      <a href="order.html" aria-current="page">Sərbəst iş sifarişi</a>
+    </nav>
+    <button class="menu-btn" aria-label="Menyunu aç" aria-expanded="false">Menyu</button>
+  </div>
+  <div class="mobile-nav">
+    <a href="index.html">Ana səhifə</a>
+    <a href="resources.html">Resurslar</a>
+    <a href="exams.html">İmtahanlar</a>
+    <a href="sinif-testleri.html">Sinif testləri</a>
+    <a href="miq-kurikulum.html">MİQ Kurikulum</a>
+    <a href="order.html">Sərbəst iş sifarişi</a>
+  </div>
+</header>
+
+<section class="hero" style="padding-bottom:26px;">
+  <div class="wrap">
+    <div class="kicker">Sifariş</div>
+    <h1>Sərbəst iş prezentasiyası sifariş et</h1>
+    <p class="lede">Mövzunu və tarixini yaz, göndər — sorğu birbaşa youdiditaz@gmail.com ünvanına düşür.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <form id="order-form" class="order-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Ad, Soyad</label>
+          <input type="text" id="name" name="Ad Soyad" required>
+        </div>
+        <div class="field">
+          <label for="contact">Email və ya telefon</label>
+          <input type="text" id="contact" name="Əlaqə" required>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="subject">Fənn</label>
+          <input type="text" id="subject" name="Fənn" required>
+        </div>
+        <div class="field">
+          <label for="deadline">Son tarix</label>
+          <input type="date" id="deadline" name="Son tarix" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="topic">Mövzu</label>
+        <input type="text" id="topic" name="Mövzu" required>
+      </div>
+
+      <div class="field">
+        <label for="details">Ətraflı təsvir</label>
+        <textarea id="details" name="Ətraflı təsvir" placeholder="Slaydların sayı, tələb olunan format, xüsusi tapşırıq şərtləri və s." required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Sorğunu göndər</button>
+      <div id="form-status" role="status"></div>
+    </form>
+
+    <p class="note">Bu form Formspree ilə işləyir. Saytı aktiv etmək üçün <a href="https://formspree.io" target="_blank" rel="noopener">formspree.io</a>-da youdiditaz@gmail.com ilə hesab aç, yeni form yarat və yuxarıdakı formun <code>action</code> sətrindəki <code>YOUR_FORM_ID</code> hissəsini öz form ID-nlə əvəz et.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Youdidit.az — tələbələr üçün resurs və imtahan mərkəzi</div>
+    <div>Sual və təkliflər üçün: <a href="mailto:youdiditaz@gmail.com">youdiditaz@gmail.com</a></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

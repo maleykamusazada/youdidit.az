@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alman dili A1 test — Youdidit.az</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .quiz-wrap { max-width: 640px; margin: 0 auto; padding: 34px 20px 60px; }
+  .quiz-progress-track { height: 6px; background: var(--sage); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+  .quiz-progress-fill { height: 100%; background: var(--gold); transition: width 0.25s ease; }
+  .quiz-count { font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 14px; }
+  .quiz-question { font-size: 1.2rem; margin-bottom: 18px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .quiz-option { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 3px; padding: 12px 14px; cursor: pointer; font-size: 0.98rem; background: var(--white); }
+  .quiz-option:has(input:checked) { border-color: var(--gold); background: var(--sage); }
+  .quiz-option input { accent-color: var(--forest); width: 17px; height: 17px; flex: 0 0 auto; }
+  .quiz-nav { display: flex; justify-content: space-between; gap: 12px; }
+  .quiz-result { text-align: center; padding: 30px 0; }
+  .quiz-result h2 { font-size: 1.6rem; }
+  .quiz-result p.ok { color: var(--forest); }
+  .quiz-result p.err { color: #9A3B2E; }
+  .quiz-intro-text { color: var(--ink-soft); font-size: 0.92rem; margin-bottom: 18px; }
+  .quiz-intro .field { margin-bottom: 14px; }
+  .quiz-intro .btn { width: 100%; margin-top: 6px; }
+  .quiz-skip { text-align: center; margin-top: 12px; }
+  .quiz-skip a { font-size: 0.85rem; color: var(--ink-soft); text-decoration: underline; }
+  .quiz-email-status { font-size: 0.85rem; color: var(--ink-soft); margin-top: 10px; }
+  .quiz-result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+  @media (min-width: 420px) { .quiz-result-actions { flex-direction: row; justify-content: center; } .quiz-result-actions .btn { flex: 1; } }
+  .timer-display { margin-left: auto; font-weight: 600; color: var(--forest); background: var(--sage); padding: 2px 9px; border-radius: 10px; font-variant-numeric: tabular-nums; }
+  .timer-display.timer-low { color: #9A3B2E; background: #F7E3E0; }
+  .quiz-count { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Youdidit<span class="dot">.az</span></a>
+    <nav class="main-nav" aria-label="Əsas naviqasiya">
+      <a href="index.html">Ana səhifə</a>
+      <a href="resources.html">Resurslar</a>
+      <a href="exams.html" aria-current="page">İmtahanlar</a>
+      <a href="sinif-testleri.html">Sinif testləri</a>
+      <a href="miq-kurikulum.html">MİQ Kurikulum</a>
+      <a href="order.html">Sərbəst iş sifarişi</a>
+    </nav>
+    <button class="menu-btn" aria-label="Menyunu aç" aria-expanded="false">Menyu</button>
+  </div>
+  <div class="mobile-nav">
+    <a href="index.html">Ana səhifə</a>
+    <a href="resources.html">Resurslar</a>
+    <a href="exams.html">İmtahanlar</a>
+    <a href="sinif-testleri.html">Sinif testləri</a>
+    <a href="miq-kurikulum.html">MİQ Kurikulum</a>
+    <a href="order.html">Sərbəst iş sifarişi</a>
+  </div>
+</header>
+
+<div class="quiz-wrap">
+  <div class="kicker" style="font-family:var(--serif);font-style:italic;color:var(--ink-soft);margin-bottom:6px;">Alman dili · A1</div>
+  <h1 style="margin-bottom:20px;">Səviyyə testi — 100 sual</h1>
+  <div id="quiz-root"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>Youdidit.az — tələbələr üçün resurs və imtahan mərkəzi</div>
+    <div>Sual və təkliflər üçün: <a href="mailto:youdiditaz@gmail.com">youdiditaz@gmail.com</a></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="exam-data-de-a1.js"></script>
+<script src="quiz-engine.js"></script>
+</body>
+</html>
