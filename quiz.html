@@ -148,12 +148,14 @@ function initQuizEngine() {
     html += '<h2 style="font-size:18px; margin-bottom:20px;">' + (item.q ? item.q.replace(/\n/g, '<br>') : '') + '</h2>';
     html += '<div style="display:flex; flex-direction:column; gap:10px; margin-bottom:25px;">';
     
-    if (item.options) {
-      item.options.forEach(function (opt, i) {
+        var opts = item.options || item.variants;
+    if (opts) {
+      opts.forEach(function (opt, i) {
         var checked = answers[current] === i ? ' checked' : '';
-        html += '<label style="display:flex; align-items:center; gap:10px; padding:12px; border:1px solid #ddd; border-radius:8px; cursor:pointer;"><input type="radio" name="opt" value="' + i + '"' + checked + '><span>' + opt + '</span></label>';
+        html += '<label style="display:flex; align-items:center; gap:10px; padding:12px; border:1px solid #ddd; border-radius:8px; cursor:pointer; margin-bottom:8px;"><input type="radio" name="opt" value="' + i + '"' + checked + '><span>' + opt + '</span></label>';
       });
     }
+    
     html += '</div>';
     html += '<div style="display:flex; justify-content:space-between;">';
     html += '<button type="button" id="prev-btn" style="padding:8px 16px; background:transparent; border:1px solid #ccc; border-radius:6px; cursor:pointer;' + (current === 0 ? ' opacity:0.5; pointer-events:none;' : '') + '">Geri</button>';
