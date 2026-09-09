@@ -1,133 +1,2585 @@
 <!DOCTYPE html>
+
 <html lang="az">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sərbəst iş sifarişi — Youdidit.az</title>
-<meta name="description" content="Sərbəst iş prezentasiyası üçün mövzu və tarix bildirin, sorğunuz birbaşa emailə düşsün.">
+
+<title>Sifariş et — Youdidit.az</title>
+
+<meta name="description" content="Excel, slayd, dizayn, logo, video dərslik, CV, LinkedIn, GitHub, dissertasiya, məqalə və digər işləri Youdidit.az vasitəsilə sifariş edin.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=2">
+
+<link rel="stylesheet" href="style.css?v=6">
+
+<style>
+
+/* =========================================
+
+   SİFARİŞ SƏHİFƏSİ
+
+   ========================================= */
+
+.order-page {
+
+  background:
+
+    radial-gradient(circle at 85% 8%, rgba(116, 75, 255, .15), transparent 30%),
+
+    radial-gradient(circle at 5% 35%, rgba(82, 65, 190, .10), transparent 28%);
+
+}
+
+/* HERO */
+
+.order-hero {
+
+  padding: 75px 0 60px;
+
+}
+
+.order-hero-grid {
+
+  display: grid;
+
+  grid-template-columns: 1.08fr .92fr;
+
+  gap: 55px;
+
+  align-items: center;
+
+}
+
+.order-kicker {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 9px 16px;
+
+  border-radius: 999px;
+
+  background: rgba(119, 79, 255, .13);
+
+  border: 1px solid rgba(153, 119, 255, .35);
+
+  color: #cdbaff;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: .6px;
+
+  margin-bottom: 22px;
+
+}
+
+.order-hero h1 {
+
+  font-family: "Sora", sans-serif;
+
+  font-size: clamp(42px, 6vw, 72px);
+
+  line-height: 1.05;
+
+  letter-spacing: -2.8px;
+
+  margin: 0 0 24px;
+
+}
+
+.order-hero h1 span {
+
+  background: linear-gradient(90deg, #a477ff, #d58cff);
+
+  -webkit-background-clip: text;
+
+  background-clip: text;
+
+  color: transparent;
+
+}
+
+.order-hero-text {
+
+  max-width: 650px;
+
+  color: #bdb4d2;
+
+  font-size: 18px;
+
+  line-height: 1.75;
+
+  margin: 0;
+
+}
+
+.hero-points {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 20px;
+
+  margin-top: 30px;
+
+}
+
+.hero-point {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #eeeaff;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+}
+
+.hero-check {
+
+  width: 23px;
+
+  height: 23px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #734bff, #a45cff);
+
+  color: #fff;
+
+  font-size: 12px;
+
+}
+
+/* HERO VISUAL */
+
+.order-visual {
+
+  min-height: 330px;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+.visual-card {
+
+  width: 290px;
+
+  min-height: 210px;
+
+  padding: 25px;
+
+  box-sizing: border-box;
+
+  border-radius: 24px;
+
+  background:
+
+    linear-gradient(145deg, rgba(39, 32, 91, .98), rgba(17, 17, 53, .98));
+
+  border: 1px solid rgba(157, 126, 255, .55);
+
+  box-shadow:
+
+    0 30px 80px rgba(55, 30, 160, .28),
+
+    inset 0 0 40px rgba(126, 87, 255, .08);
+
+  transform: rotate(-3deg);
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+.visual-top {
+
+  display: flex;
+
+  gap: 7px;
+
+  margin-bottom: 22px;
+
+}
+
+.visual-dot {
+
+  width: 8px;
+
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #8275a8;
+
+}
+
+.visual-title {
+
+  font-family: "Sora", sans-serif;
+
+  font-size: 17px;
+
+  color: #f7f3ff;
+
+  margin-bottom: 17px;
+
+}
+
+.visual-line {
+
+  height: 8px;
+
+  border-radius: 20px;
+
+  background: rgba(151, 126, 226, .22);
+
+  margin-bottom: 10px;
+
+}
+
+.visual-line.short {
+
+  width: 62%;
+
+}
+
+.visual-line.medium {
+
+  width: 78%;
+
+}
+
+.visual-line.long {
+
+  width: 92%;
+
+}
+
+.visual-badge {
+
+  display: inline-flex;
+
+  margin-top: 12px;
+
+  padding: 7px 11px;
+
+  border-radius: 8px;
+
+  background: rgba(120, 75, 255, .18);
+
+  color: #cdbaff;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+}
+
+.floating-icon {
+
+  position: absolute;
+
+  width: 57px;
+
+  height: 57px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 17px;
+
+  font-size: 24px;
+
+  background: rgba(27, 25, 69, .96);
+
+  border: 1px solid rgba(154, 124, 255, .45);
+
+  box-shadow: 0 14px 35px rgba(0,0,0,.25);
+
+  z-index: 3;
+
+}
+
+.icon-one {
+
+  top: 10px;
+
+  right: 17%;
+
+}
+
+.icon-two {
+
+  top: 80px;
+
+  left: 4%;
+
+}
+
+.icon-three {
+
+  bottom: 25px;
+
+  right: 5%;
+
+}
+
+.icon-four {
+
+  bottom: 5px;
+
+  left: 17%;
+
+}
+
+/* SERVICES */
+
+.services-section {
+
+  padding: 55px 0 80px;
+
+}
+
+.section-heading {
+
+  margin-bottom: 30px;
+
+}
+
+.section-heading h2 {
+
+  font-family: "Sora", sans-serif;
+
+  font-size: 34px;
+
+  margin: 0 0 8px;
+
+}
+
+.section-heading p {
+
+  color: #aaa2c2;
+
+  font-size: 15px;
+
+  margin: 0;
+
+}
+
+.services-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 17px;
+
+}
+
+.service-card {
+
+  min-height: 190px;
+
+  padding: 22px;
+
+  border-radius: 20px;
+
+  background:
+
+    linear-gradient(145deg, rgba(29, 26, 76, .97), rgba(14, 14, 45, .98));
+
+  border: 1px solid rgba(122, 98, 224, .32);
+
+  position: relative;
+
+  cursor: pointer;
+
+  transition:
+
+    transform .25s ease,
+
+    border-color .25s ease,
+
+    box-shadow .25s ease;
+
+}
+
+.service-card:hover {
+
+  transform: translateY(-5px);
+
+  border-color: rgba(161, 128, 255, .7);
+
+  box-shadow: 0 18px 45px rgba(72, 45, 175, .2);
+
+}
+
+.service-card.active {
+
+  border-color: #8c65ff;
+
+  box-shadow: 0 0 0 2px rgba(140, 101, 255, .12);
+
+}
+
+.service-icon {
+
+  width: 47px;
+
+  height: 47px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 14px;
+
+  margin-bottom: 16px;
+
+  color: white;
+
+  font-size: 22px;
+
+  font-weight: 800;
+
+  background: linear-gradient(135deg, #6744e9, #9a5aff);
+
+  box-shadow: 0 9px 25px rgba(103, 68, 233, .25);
+
+}
+
+.service-card:nth-child(2) .service-icon {
+
+  background: linear-gradient(135deg, #078c5d, #20c981);
+
+}
+
+.service-card:nth-child(3) .service-icon {
+
+  background: linear-gradient(135deg, #e25b22, #ff864d);
+
+}
+
+.service-card:nth-child(4) .service-icon {
+
+  background: linear-gradient(135deg, #a339e3, #df62ff);
+
+}
+
+.service-card:nth-child(5) .service-icon {
+
+  background: linear-gradient(135deg, #e51e5d, #ff4b80);
+
+}
+
+.service-card:nth-child(6) .service-icon {
+
+  background: linear-gradient(135deg, #1178cf, #3daaff);
+
+}
+
+.service-card:nth-child(7) .service-icon {
+
+  background: linear-gradient(135deg, #7341d4, #aa6cff);
+
+}
+
+.service-card:nth-child(8) .service-icon {
+
+  background: linear-gradient(135deg, #4d5e91, #7181b4);
+
+}
+
+.service-card h3 {
+
+  color: #f5f2ff;
+
+  font-size: 16px;
+
+  margin: 0 0 8px;
+
+}
+
+.service-card p {
+
+  color: #aaa5bf;
+
+  font-size: 12.5px;
+
+  line-height: 1.55;
+
+  margin: 0;
+
+  max-width: 220px;
+
+}
+
+.service-arrow {
+
+  position: absolute;
+
+  right: 15px;
+
+  bottom: 15px;
+
+  width: 33px;
+
+  height: 33px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: rgba(111, 71, 255, .18);
+
+  color: #c9b7ff;
+
+  font-size: 18px;
+
+}
+
+/* ORDER BOX */
+
+.order-section {
+
+  padding: 0 0 85px;
+
+}
+
+.order-box {
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr) 300px;
+
+  gap: 25px;
+
+  padding: 30px;
+
+  border-radius: 27px;
+
+  background:
+
+    linear-gradient(145deg, rgba(26, 24, 73, .98), rgba(10, 11, 39, .98));
+
+  border: 1px solid rgba(120, 94, 230, .42);
+
+  box-shadow: 0 25px 70px rgba(0,0,0,.2);
+
+}
+
+.order-form-title {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 15px;
+
+  margin-bottom: 25px;
+
+}
+
+.form-title-icon {
+
+  width: 48px;
+
+  height: 48px;
+
+  flex: 0 0 48px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 14px;
+
+  background: linear-gradient(135deg, #6b4aff, #a05bff);
+
+  color: white;
+
+  font-size: 22px;
+
+}
+
+.order-form-title h2 {
+
+  font-family: "Sora", sans-serif;
+
+  font-size: 25px;
+
+  margin: 0 0 5px;
+
+}
+
+.order-form-title p {
+
+  color: #aaa5c0;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  margin: 0;
+
+}
+
+/* FORM */
+
+.order-form {
+
+  display: block;
+
+}
+
+.order-form .field-row {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 17px;
+
+}
+
+.order-form .field {
+
+  margin-bottom: 17px;
+
+}
+
+.order-form label {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #e7e1f5;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+}
+
+.order-form input,
+
+.order-form select,
+
+.order-form textarea {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(112, 102, 173, .45);
+
+  border-radius: 11px;
+
+  background: rgba(8, 11, 40, .75);
+
+  color: #f4f1ff;
+
+  padding: 14px 15px;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+
+    border-color .2s ease,
+
+    box-shadow .2s ease;
+
+}
+
+.order-form input,
+
+.order-form select {
+
+  min-height: 48px;
+
+}
+
+.order-form input::placeholder,
+
+.order-form textarea::placeholder {
+
+  color: #706b8b;
+
+}
+
+.order-form input:focus,
+
+.order-form select:focus,
+
+.order-form textarea:focus {
+
+  border-color: #835cff;
+
+  box-shadow: 0 0 0 3px rgba(131, 92, 255, .12);
+
+}
+
+.order-form select option {
+
+  background: #15133b;
+
+  color: white;
+
+}
+
+.order-form textarea {
+
+  min-height: 125px;
+
+  resize: vertical;
+
+}
+
+.order-form input[type="date"] {
+
+  color-scheme: dark;
+
+}
+
+/* FILE */
+
+.file-box {
+
+  padding: 15px;
+
+  border-radius: 12px;
+
+  border: 1px dashed rgba(136, 108, 230, .48);
+
+  background: rgba(10, 11, 40, .5);
+
+}
+
+.file-box input[type="file"] {
+
+  border: 0;
+
+  padding: 4px;
+
+  background: transparent;
+
+  box-shadow: none;
+
+}
+
+/* SUBMIT */
+
+.order-submit {
+
+  width: 100%;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  padding: 15px 20px;
+
+  margin-top: 5px;
+
+  background: linear-gradient(90deg, #7651ff, #397cff);
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 10px 30px rgba(77, 76, 255, .22);
+
+  transition: transform .2s ease, opacity .2s ease;
+
+}
+
+.order-submit:hover {
+
+  transform: translateY(-2px);
+
+}
+
+.order-submit:disabled {
+
+  opacity: .65;
+
+  cursor: wait;
+
+}
+
+/* SIDEBAR */
+
+.order-side {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+}
+
+.side-card {
+
+  padding: 23px;
+
+  border-radius: 19px;
+
+  background: rgba(27, 25, 73, .75);
+
+  border: 1px solid rgba(120, 94, 230, .32);
+
+}
+
+.side-card h3 {
+
+  font-family: "Sora", sans-serif;
+
+  font-size: 19px;
+
+  margin: 0 0 18px;
+
+}
+
+.side-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 13px;
+
+}
+
+.side-item {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  color: #d8d2e9;
+
+  font-size: 12.5px;
+
+  line-height: 1.45;
+
+}
+
+.side-check {
+
+  width: 19px;
+
+  height: 19px;
+
+  flex: 0 0 19px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #15b7a2;
+
+  color: white;
+
+  font-size: 11px;
+
+  margin-top: 1px;
+
+}
+
+.offer-card {
+
+  background:
+
+    linear-gradient(135deg, rgba(76, 40, 142, .88), rgba(44, 24, 99, .96));
+
+}
+
+.offer-card strong {
+
+  display: block;
+
+  color: #ffd86a;
+
+  font-size: 14px;
+
+  margin-bottom: 8px;
+
+}
+
+.offer-card p {
+
+  color: #ded5ef;
+
+  font-size: 12.5px;
+
+  line-height: 1.5;
+
+  margin: 0;
+
+}
+
+/* CONTACT */
+
+.contact-card h3 {
+
+  margin-bottom: 9px;
+
+}
+
+.contact-card p {
+
+  color: #aaa5c0;
+
+  font-size: 12.5px;
+
+  line-height: 1.55;
+
+  margin: 0 0 17px;
+
+}
+
+.contact-buttons {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 9px;
+
+}
+
+.contact-buttons a {
+
+  text-decoration: none;
+
+  text-align: center;
+
+  padding: 11px 8px;
+
+  border-radius: 10px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  transition: transform .2s ease;
+
+}
+
+.contact-buttons a:hover {
+
+  transform: translateY(-2px);
+
+}
+
+.email-btn {
+
+  background: rgba(82, 72, 145, .55);
+
+  border: 1px solid rgba(139, 117, 220, .35);
+
+  color: white;
+
+}
+
+.instagram-btn {
+
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+
+  color: white;
+
+}
+
+/* STATUS */
+
+#form-status {
+
+  display: none;
+
+  margin-top: 15px;
+
+  padding: 13px 15px;
+
+  border-radius: 11px;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+}
+
+#form-status.show {
+
+  display: block;
+
+}
+
+#form-status.ok {
+
+  background: rgba(21, 184, 111, .12);
+
+  border: 1px solid rgba(21, 184, 111, .35);
+
+  color: #70e5ad;
+
+}
+
+#form-status.err {
+
+  background: rgba(255, 71, 91, .12);
+
+  border: 1px solid rgba(255, 71, 91, .35);
+
+  color: #ff9da8;
+
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+  .order-hero {
+
+    padding: 55px 0 45px;
+
+  }
+
+  .order-hero-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+  }
+
+  .order-visual {
+
+    min-height: 280px;
+
+  }
+
+  .services-grid {
+
+    grid-template-columns: repeat(2, 1fr);
+
+  }
+
+  .order-box {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .order-hero h1 {
+
+    font-size: 40px;
+
+    letter-spacing: -1.5px;
+
+  }
+
+  .order-hero-text {
+
+    font-size: 16px;
+
+    line-height: 1.65;
+
+  }
+
+  .hero-points {
+
+    flex-direction: column;
+
+    gap: 11px;
+
+  }
+
+  .order-visual {
+
+    transform: scale(.9);
+
+    margin-top: -5px;
+
+  }
+
+  .services-section {
+
+    padding: 40px 0 55px;
+
+  }
+
+  .section-heading h2 {
+
+    font-size: 28px;
+
+  }
+
+  .services-grid {
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 11px;
+
+  }
+
+  .service-card {
+
+    min-height: 190px;
+
+    padding: 17px;
+
+    border-radius: 16px;
+
+  }
+
+  .service-card h3 {
+
+    font-size: 14px;
+
+  }
+
+  .service-card p {
+
+    font-size: 11.5px;
+
+  }
+
+  .service-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    font-size: 19px;
+
+    margin-bottom: 13px;
+
+  }
+
+  .order-box {
+
+    padding: 19px;
+
+    border-radius: 20px;
+
+  }
+
+  .order-form .field-row {
+
+    grid-template-columns: 1fr;
+
+    gap: 0;
+
+  }
+
+  .order-form-title h2 {
+
+    font-size: 21px;
+
+  }
+
+  .order-side {
+
+    margin-top: 5px;
+
+  }
+
+  .visual-card {
+
+    transform: scale(.85) rotate(-3deg);
+
+  }
+
+  .floating-icon {
+
+    transform: scale(.8);
+
+  }
+
+}
+
+</style>
+
 </head>
-<body>
+
+<body class="order-page">
 
 <header class="site-header">
+
   <div class="wrap">
-    <a href="index.html" class="brand">Youdidit<span class="dot">.az</span></a>
+
+    <a href="index.html" class="brand">
+
+      Youdidit<span class="dot">.az</span>
+
+    </a>
+
     <nav class="main-nav" aria-label="Əsas naviqasiya">
+
       <a href="index.html">Ana səhifə</a>
+
       <a href="resources.html">Resurslar</a>
+
       <a href="exams.html">İmtahanlar</a>
+
       <a href="sinif-testleri.html">Sinif testləri</a>
+
       <a href="miq-kurikulum.html">MİQ Kurikulum</a>
-      <a href="order.html" aria-current="page">Sərbəst iş sifarişi</a>
+
+      <a href="order.html" aria-current="page">
+
+        Sifariş et
+
+      </a>
+
     </nav>
-    <button class="menu-btn" aria-label="Menyunu aç" aria-expanded="false">Menyu</button>
+
+    <button
+
+      class="menu-btn"
+
+      aria-label="Menyunu aç"
+
+      aria-expanded="false"
+
+    >
+
+      Menyu
+
+    </button>
+
   </div>
+
   <div class="mobile-nav">
+
     <a href="index.html">Ana səhifə</a>
+
     <a href="resources.html">Resurslar</a>
+
     <a href="exams.html">İmtahanlar</a>
+
     <a href="sinif-testleri.html">Sinif testləri</a>
+
     <a href="miq-kurikulum.html">MİQ Kurikulum</a>
-    <a href="order.html" aria-current="page">Sərbəst iş sifarişi</a>
+
+    <a href="order.html" aria-current="page">
+
+      Sifariş et
+
+    </a>
+
   </div>
+
 </header>
 
-<section class="hero">
+<!-- =========================================
+
+     HERO
+
+     ========================================= -->
+
+<section class="order-hero">
+
   <div class="wrap">
-    <div class="kicker">Sərbəst iş sifarişi</div>
-    <h1>Mövzunu və tarixi yazın, qalanını bizə buraxın.</h1>
-    <p class="lede">Formu doldurun — sorğunuz birbaşa emailimizə düşəcək. Adətən 24 saat ərzində sizinlə əlaqə saxlanılır.</p>
+
+    <div class="order-hero-grid">
+
+      <div>
+
+        <div class="order-kicker">
+
+          YOU DID IT • XİDMƏTLƏR
+
+        </div>
+
+        <h1>
+
+          Sizə <span>nə lazımdır?</span>
+
+        </h1>
+
+        <p class="order-hero-text">
+
+          Akademik işlərdən rəqəmsal xidmətlərə, peşəkar CV-dən
+
+          LinkedIn və GitHub optimizasiyasına, dizayndan video
+
+          dərsliyə qədər müxtəlif işləri sifariş edə bilərsiniz.
+
+        </p>
+
+        <div class="hero-points">
+
+          <div class="hero-point">
+
+            <span class="hero-check">✓</span>
+
+            Peşəkar yanaşma
+
+          </div>
+
+          <div class="hero-point">
+
+            <span class="hero-check">✓</span>
+
+            Fərdi yanaşma
+
+          </div>
+
+          <div class="hero-point">
+
+            <span class="hero-check">✓</span>
+
+            Vaxtında təhvil
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="order-visual">
+
+        <div class="floating-icon icon-one">
+
+          📊
+
+        </div>
+
+        <div class="floating-icon icon-two">
+
+          🎓
+
+        </div>
+
+        <div class="floating-icon icon-three">
+
+          💼
+
+        </div>
+
+        <div class="floating-icon icon-four">
+
+          🎨
+
+        </div>
+
+        <div class="visual-card">
+
+          <div class="visual-top">
+
+            <span class="visual-dot"></span>
+
+            <span class="visual-dot"></span>
+
+            <span class="visual-dot"></span>
+
+          </div>
+
+          <div class="visual-title">
+
+            Sizin layihəniz
+
+          </div>
+
+          <div class="visual-line long"></div>
+
+          <div class="visual-line medium"></div>
+
+          <div class="visual-line short"></div>
+
+          <div class="visual-badge">
+
+            Hazırlanır...
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
+
 </section>
 
-<section>
+<!-- =========================================
+
+     SERVICES
+
+     ========================================= -->
+
+<section class="services-section">
+
   <div class="wrap">
 
-    <form class="order-form" id="order-form" action="https://formsubmit.co/ajax/youdiditaz@gmail.com" method="POST">
+    <div class="section-heading">
 
-      <input type="hidden" name="_subject" value="Yeni sərbəst iş sifarişi — Youdidit.az">
-      <input type="hidden" name="_template" value="table">
-      <input type="text" name="_honey" style="display:none">
+      <h2>
 
-      <div class="field-row">
-        <div class="field">
-          <label for="name">Ad, Soyad</label>
-          <input type="text" id="name" name="Ad Soyad" required autocomplete="name">
+        Xidmətlərimiz
+
+      </h2>
+
+      <p>
+
+        Sizə lazım olan xidməti seçin və sifariş formasını doldurun.
+
+      </p>
+
+    </div>
+
+    <div class="services-grid">
+
+      <div
+
+        class="service-card"
+
+        data-service="Akademik iş"
+
+      >
+
+        <div class="service-icon">
+
+          🎓
+
         </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="Email" required autocomplete="email">
+
+        <h3>
+
+          Akademik işlər
+
+        </h3>
+
+        <p>
+
+          Sərbəst iş, referat, kurs işi, dissertasiya,
+
+          tədqiqat və digər akademik işlər.
+
+        </p>
+
+        <div class="service-arrow">
+
+          →
+
         </div>
+
       </div>
 
-      <div class="field-row">
-        <div class="field">
-          <label for="subject-area">Sinif / Fənn</label>
-          <input type="text" id="subject-area" name="Sinif / Fənn" placeholder="məs. 9-cu sinif, Biologiya" required>
+      <div
+
+        class="service-card"
+
+        data-service="Excel"
+
+      >
+
+        <div class="service-icon">
+
+          📊
+
         </div>
-        <div class="field">
-          <label for="due-date">Tələb olunan tarix</label>
-          <input type="date" id="due-date" name="Tarix" required>
+
+        <h3>
+
+          Excel
+
+        </h3>
+
+        <p>
+
+          Cədvəllər, formulalar, hesabatlar, analizlər
+
+          və dashboard hazırlanması.
+
+        </p>
+
+        <div class="service-arrow">
+
+          →
+
         </div>
+
       </div>
 
-      <div class="field">
-        <label for="topic">Mövzu</label>
-        <input type="text" id="topic" name="Mövzu" placeholder="Prezentasiyanın mövzusu" required>
+      <div
+
+        class="service-card"
+
+        data-service="Slayd / Təqdimat"
+
+      >
+
+        <div class="service-icon">
+
+          📑
+
+        </div>
+
+        <h3>
+
+          Slayd / Təqdimat
+
+        </h3>
+
+        <p>
+
+          PowerPoint təqdimatları, dərs, layihə və
+
+          akademik təqdimatlar.
+
+        </p>
+
+        <div class="service-arrow">
+
+          →
+
+        </div>
+
       </div>
 
-      <div class="field">
-        <label for="notes">Əlavə qeyd</label>
-        <textarea id="notes" name="Əlavə qeyd" placeholder="Slayd sayı, tələb olunan format, xüsusi istəklər və s."></textarea>
+      <div
+
+        class="service-card"
+
+        data-service="Logo / Dizayn"
+
+      >
+
+        <div class="service-icon">
+
+          🎨
+
+        </div>
+
+        <h3>
+
+          Logo və dizayn
+
+        </h3>
+
+        <p>
+
+          Logo, poster, CV dizaynı, sosial media
+
+          və digər vizual materiallar.
+
+        </p>
+
+        <div class="service-arrow">
+
+          →
+
+        </div>
+
       </div>
 
-      <button type="submit" class="btn btn-primary">Sifarişi göndər</button>
+      <div
 
-      <div id="form-status"></div>
-    </form>
+        class="service-card"
+
+        data-service="Video dərslik"
+
+      >
+
+        <div class="service-icon">
+
+          ▶
+
+        </div>
+
+        <h3>
+
+          Video dərslik
+
+        </h3>
+
+        <p>
+
+          Mövzu üzrə izahlı video, tədris materialı
+
+          və təqdimat + video hazırlanması.
+
+        </p>
+
+        <div class="service-arrow">
+
+          →
+
+        </div>
+
+      </div>
+
+      <div
+
+        class="service-card"
+
+        data-service="Karyera və şəxsi brend"
+
+      >
+
+        <div class="service-icon">
+
+          in
+
+        </div>
+
+        <h3>
+
+          Karyera və şəxsi brend
+
+        </h3>
+
+        <p>
+
+          CV, LinkedIn, GitHub, portfolio və
+
+          karyera planlaması.
+
+        </p>
+
+        <div class="service-arrow">
+
+          →
+
+        </div>
+
+      </div>
+
+      <div
+
+        class="service-card"
+
+        data-service="Məqalə / Dissertasiya"
+
+      >
+
+        <div class="service-icon">
+
+          📝
+
+        </div>
+
+        <h3>
+
+          Məqalə və dissertasiya
+
+        </h3>
+
+        <p>
+
+          Məqalə, dissertasiya üzrə struktur,
+
+          redaktə, formatlaşdırma və tədqiqat dəstəyi.
+
+        </p>
+
+        <div class="service-arrow">
+
+          →
+
+        </div>
+
+      </div>
+
+      <div
+
+        class="service-card"
+
+        data-service="Digər"
+
+      >
+
+        <div class="service-icon">
+
+          •••
+
+        </div>
+
+        <h3>
+
+          Digər işlər
+
+        </h3>
+
+        <p>
+
+          Siyahıda olmayan xüsusi bir işiniz varsa,
+
+          fərdi sifariş göndərin.
+
+        </p>
+
+        <div class="service-arrow">
+
+          →
+
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
+
+</section>
+
+<!-- =========================================
+
+     ORDER FORM
+
+     ========================================= -->
+
+<section class="order-section">
+
+  <div class="wrap">
+
+    <div class="order-box">
+
+      <div>
+
+        <div class="order-form-title">
+
+          <div class="form-title-icon">
+
+            ✎
+
+          </div>
+
+          <div>
+
+            <h2>
+
+              Sifarişinizi göndərin
+
+            </h2>
+
+            <p>
+
+              İşiniz haqqında məlumatları yazın.
+
+              Sorğunuz birbaşa e-mailimizə göndəriləcək.
+
+            </p>
+
+          </div>
+
+        </div>
+
+        <form
+
+          class="order-form"
+
+          id="order-form"
+
+          action="https://formsubmit.co/ajax/youdidit.az@gmail.com"
+
+          method="POST"
+
+        >
+
+          <input
+
+            type="hidden"
+
+            name="_subject"
+
+            value="Yeni iş sifarişi — Youdidit.az"
+
+          >
+
+          <input
+
+            type="hidden"
+
+            name="_template"
+
+            value="table"
+
+          >
+
+          <input
+
+            type="hidden"
+
+            name="_captcha"
+
+            value="false"
+
+          >
+
+          <input
+
+            type="text"
+
+            name="_honey"
+
+            style="display:none"
+
+          >
+
+          <!-- XİDMƏT + MÖVZU -->
+
+          <div class="field-row">
+
+            <div class="field">
+
+              <label for="service">
+
+                İşin növü *
+
+              </label>
+
+              <select
+
+                id="service"
+
+                name="İşin növü"
+
+                required
+
+              >
+
+                <option value="">
+
+                  Xidmət seçin
+
+                </option>
+
+                <option value="Akademik iş">
+
+                  Akademik iş
+
+                </option>
+
+                <option value="Excel">
+
+                  Excel
+
+                </option>
+
+                <option value="Slayd / Təqdimat">
+
+                  Slayd / Təqdimat
+
+                </option>
+
+                <option value="Logo / Dizayn">
+
+                  Logo / Dizayn
+
+                </option>
+
+                <option value="Video dərslik">
+
+                  Video dərslik
+
+                </option>
+
+                <option value="CV hazırlanması">
+
+                  CV hazırlanması
+
+                </option>
+
+                <option value="LinkedIn yaradılması / optimizasiyası">
+
+                  LinkedIn yaradılması / optimizasiyası
+
+                </option>
+
+                <option value="GitHub yaradılması / optimizasiyası">
+
+                  GitHub yaradılması / optimizasiyası
+
+                </option>
+
+                <option value="Portfolio hazırlanması">
+
+                  Portfolio hazırlanması
+
+                </option>
+
+                <option value="Karyera planlaması">
+
+                  Karyera planlaması
+
+                </option>
+
+                <option value="Dissertasiya">
+
+                  Dissertasiya
+
+                </option>
+
+                <option value="Məqalə">
+
+                  Məqalə
+
+                </option>
+
+                <option value="Digər">
+
+                  Digər
+
+                </option>
+
+              </select>
+
+            </div>
+
+            <div class="field">
+
+              <label for="topic">
+
+                Mövzu / tapşırıq *
+
+              </label>
+
+              <input
+
+                type="text"
+
+                id="topic"
+
+                name="Mövzu / Tapşırıq"
+
+                placeholder="Məsələn: Peşəkar CV hazırlanması"
+
+                required
+
+              >
+
+            </div>
+
+          </div>
+
+          <!-- TƏLƏBLƏR -->
+
+          <div class="field">
+
+            <label for="notes">
+
+              Ətraflı tələblər *
+
+            </label>
+
+            <textarea
+
+              id="notes"
+
+              name="Ətraflı tələblər"
+
+              placeholder="İstədiyiniz işi ətraflı izah edin. Səhifə və ya slayd sayı, format, xüsusi istəklər, mənbələr və digər məlumatları qeyd edə bilərsiniz."
+
+              required
+
+            ></textarea>
+
+          </div>
+
+          <!-- TARİX + SAHƏ -->
+
+          <div class="field-row">
+
+            <div class="field">
+
+              <label for="due-date">
+
+                Son tarix *
+
+              </label>
+
+              <input
+
+                type="date"
+
+                id="due-date"
+
+                name="Son tarix"
+
+                required
+
+              >
+
+            </div>
+
+            <div class="field">
+
+              <label for="subject-area">
+
+                Sinif / Fənn / Sahə
+
+              </label>
+
+              <input
+
+                type="text"
+
+                id="subject-area"
+
+                name="Sinif / Fənn / Sahə"
+
+                placeholder="Məs. 11-ci sinif, Biologiya"
+
+              >
+
+            </div>
+
+          </div>
+
+          <!-- AD + EMAIL -->
+
+          <div class="field-row">
+
+            <div class="field">
+
+              <label for="name">
+
+                Ad, Soyad *
+
+              </label>
+
+              <input
+
+                type="text"
+
+                id="name"
+
+                name="Ad Soyad"
+
+                placeholder="Adınızı və soyadınızı yazın"
+
+                required
+
+                autocomplete="name"
+
+              >
+
+            </div>
+
+            <div class="field">
+
+              <label for="email">
+
+                E-mail *
+
+              </label>
+
+              <input
+
+                type="email"
+
+                id="email"
+
+                name="Email"
+
+                placeholder="example@gmail.com"
+
+                required
+
+                autocomplete="email"
+
+              >
+
+            </div>
+
+          </div>
+
+          <!-- FAYL -->
+
+          <div class="field">
+
+            <label for="attachment">
+
+              Fayl / material
+
+            </label>
+
+            <div class="file-box">
+
+              <input
+
+                type="file"
+
+                id="attachment"
+
+                name="Əlavə fayl"
+
+                accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.jpg,.jpeg,.png"
+
+              >
+
+            </div>
+
+          </div>
+
+          <button
+
+            type="submit"
+
+            class="order-submit"
+
+            id="submit-button"
+
+          >
+
+            Sifarişi göndər →
+
+          </button>
+
+          <div id="form-status"></div>
+
+        </form>
+
+      </div>
+
+      <!-- SAĞ TƏRƏF -->
+
+      <aside class="order-side">
+
+        <div class="side-card">
+
+          <h3>
+
+            ⚡ Niyə Youdidit?
+
+          </h3>
+
+          <div class="side-list">
+
+            <div class="side-item">
+
+              <span class="side-check">
+
+                ✓
+
+              </span>
+
+              Peşəkar və fərdi yanaşma
+
+            </div>
+
+            <div class="side-item">
+
+              <span class="side-check">
+
+                ✓
+
+              </span>
+
+              Müasir və səliqəli nəticə
+
+            </div>
+
+            <div class="side-item">
+
+              <span class="side-check">
+
+                ✓
+
+              </span>
+
+              Müxtəlif fayl formatları
+
+            </div>
+
+            <div class="side-item">
+
+              <span class="side-check">
+
+                ✓
+
+              </span>
+
+              Razılaşdırılmış vaxtda təhvil
+
+            </div>
+
+            <div class="side-item">
+
+              <span class="side-check">
+
+                ✓
+
+              </span>
+
+              Sifarişə uyğun fərdi həll
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="side-card offer-card">
+
+          <strong>
+
+            ⭐ Fərdi sifariş
+
+          </strong>
+
+          <p>
+
+            Siyahıda olmayan xidmətə ehtiyacınız varsa,
+
+            onu da sifariş formasında ətraflı qeyd edə bilərsiniz.
+
+          </p>
+
+        </div>
+
+        <div class="side-card contact-card">
+
+          <h3>
+
+            Əlaqə
+
+          </h3>
+
+          <p>
+
+            Sifariş və xidmətlərlə bağlı sualınız varsa,
+
+            bizimlə e-mail və Instagram vasitəsilə əlaqə saxlaya bilərsiniz.
+
+          </p>
+
+          <div class="contact-buttons">
+
+            <a
+
+              class="email-btn"
+
+              href="mailto:youdidit.az@gmail.com"
+
+            >
+
+              ✉ E-mail
+
+            </a>
+
+            <a
+
+              class="instagram-btn"
+
+              href="https://www.instagram.com/youdidit.az/"
+
+              target="_blank"
+
+              rel="noopener noreferrer"
+
+            >
+
+              ◎ Instagram
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </div>
+
 </section>
 
 <footer>
+
   <div class="wrap">
-    <div>Youdidit.az — tələbələr üçün resurs və imtahan mərkəzi</div>
-    <div>Sual və təkliflər üçün: <a href="mailto:youdiditaz@gmail.com">youdiditaz@gmail.com</a></div>
+
+    <div>
+
+      Youdidit.az — tələbələr və gənclər üçün resurs və xidmət platforması
+
+    </div>
+
+    <div>
+
+      Əlaqə:
+
+      <a href="mailto:youdidit.az@gmail.com">
+
+        youdidit.az@gmail.com
+
+      </a>
+
+    </div>
+
   </div>
+
 </footer>
 
 <script src="script.js"></script>
+
 <script>
-  var form = document.getElementById('order-form');
-  var status = document.getElementById('form-status');
 
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    status.className = '';
-    status.textContent = 'Göndərilir...';
-    status.classList.add('show');
+/* =========================================
 
-    fetch(form.action, {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
-    })
-    .then(function(res){
-      if (res.ok) {
-        status.textContent = 'Təşəkkürlər! Sifarişiniz göndərildi, tezliklə sizinlə əlaqə saxlanılacaq.';
-        status.className = 'show ok';
-        form.reset();
-      } else {
-        throw new Error('Göndərmə uğursuz oldu');
-      }
-    })
-    .catch(function(){
-      status.textContent = 'Xəta baş verdi. Zəhmət olmasa bir az sonra yenidən cəhd edin, ya da birbaşa youdiditaz@gmail.com ünvanına yazın.';
-      status.className = 'show err';
+   XİDMƏT KARTLARININ FORM İLƏ ƏLAQƏSİ
+
+   ========================================= */
+
+var form = document.getElementById("order-form");
+
+var status = document.getElementById("form-status");
+
+var submitButton = document.getElementById("submit-button");
+
+var serviceSelect = document.getElementById("service");
+
+var serviceCards = document.querySelectorAll(".service-card");
+
+serviceCards.forEach(function(card) {
+
+  card.addEventListener("click", function() {
+
+    var selectedService =
+
+      card.getAttribute("data-service");
+
+    /*
+
+      Kartdakı xidmətin formadakı
+
+      uyğun seçimə çevrilməsi
+
+    */
+
+    if (selectedService === "Akademik iş") {
+
+      serviceSelect.value = "Akademik iş";
+
+    }
+
+    else if (selectedService === "Excel") {
+
+      serviceSelect.value = "Excel";
+
+    }
+
+    else if (selectedService === "Slayd / Təqdimat") {
+
+      serviceSelect.value = "Slayd / Təqdimat";
+
+    }
+
+    else if (selectedService === "Logo / Dizayn") {
+
+      serviceSelect.value = "Logo / Dizayn";
+
+    }
+
+    else if (selectedService === "Video dərslik") {
+
+      serviceSelect.value = "Video dərslik";
+
+    }
+
+    else if (selectedService === "Karyera və şəxsi brend") {
+
+      serviceSelect.value = "CV hazırlanması";
+
+    }
+
+    else if (selectedService === "Məqalə / Dissertasiya") {
+
+      serviceSelect.value = "Məqalə";
+
+    }
+
+    else if (selectedService === "Digər") {
+
+      serviceSelect.value = "Digər";
+
+    }
+
+    /* Aktiv kart */
+
+    serviceCards.forEach(function(item) {
+
+      item.classList.remove("active");
+
     });
+
+    card.classList.add("active");
+
+    /* Formaya keç */
+
+    document
+
+      .querySelector(".order-section")
+
+      .scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "start"
+
+      });
+
   });
+
+});
+
+/* =========================================
+
+   FORM GÖNDƏRİLMƏSİ
+
+   ========================================= */
+
+form.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  status.className = "";
+
+  status.textContent =
+
+    "Sifarişiniz göndərilir...";
+
+  status.classList.add("show");
+
+  submitButton.disabled = true;
+
+  submitButton.textContent =
+
+    "Göndərilir...";
+
+  fetch(form.action, {
+
+    method: "POST",
+
+    headers: {
+
+      "Accept": "application/json"
+
+    },
+
+    body: new FormData(form)
+
+  })
+
+  .then(function(res) {
+
+    if (!res.ok) {
+
+      throw new Error(
+
+        "Göndərmə uğursuz oldu"
+
+      );
+
+    }
+
+    return res.json();
+
+  })
+
+  .then(function() {
+
+    status.textContent =
+
+      "Təşəkkürlər! Sifarişiniz uğurla göndərildi. Tezliklə sizinlə e-mail vasitəsilə əlaqə saxlanılacaq.";
+
+    status.className =
+
+      "show ok";
+
+    form.reset();
+
+    serviceCards.forEach(function(card) {
+
+      card.classList.remove("active");
+
+    });
+
+    submitButton.disabled = false;
+
+    submitButton.textContent =
+
+      "Sifarişi göndər →";
+
+  })
+
+  .catch(function() {
+
+    status.textContent =
+
+      "Xəta baş verdi. Zəhmət olmasa bir az sonra yenidən cəhd edin və ya birbaşa youdidit.az@gmail.com ünvanına yazın.";
+
+    status.className =
+
+      "show err";
+
+    submitButton.disabled = false;
+
+    submitButton.textContent =
+
+      "Sifarişi göndər →";
+
+  });
+
+});
+
 </script>
+
 </body>
-</html>
+
+</html
