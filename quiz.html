@@ -6,7 +6,7 @@
 <title>Test — Youdidit.az</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
@@ -33,7 +33,7 @@
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   const grade = urlParams.get('grade') || '3';
-  
+
   // Scriptləri dinamik yükləyirik
   const dataScript = document.createElement('script');
   dataScript.src = `logic-data-${grade}.js`;
