@@ -8,9 +8,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Youdidit.az — Təhsil, testlər və karyera</title>
+<title>Youdidit.az — Təhsil, İmtahan, Test və Karyera Platforması</title>
 
-<meta name="description" content="Youdidit.az — 3-cü sinifdən 11-ci sinfə qədər bütün fənlər üzrə testlər, beynəlxalq sertifikatlı kurslar, akademik xidmətlər və karyera dəstəyi.">
+<meta name="description" content="Youdidit.az — dil imtahanları, beynəlxalq imtahanlar, 3-cü sinifdən 11-ci sinfə qədər testlər, akademik xidmətlər, beynəlxalq sertifikatlı kurslar və karyera dəstəyi.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -24,7 +24,7 @@
 
   --bg:#050713;
 
-  --bg2:#080b1b;
+  --bg2:#090b1d;
 
   --card:#0d1128;
 
@@ -38,7 +38,7 @@
 
   --purple2:#a454ff;
 
-  --blue:#367dff;
+  --blue:#397cff;
 
   --cyan:#16cfff;
 
@@ -51,12 +51,6 @@
   --border:rgba(255,255,255,.10);
 
 }
-
-/* =========================
-
-   RESET
-
-========================= */
 
 *{
 
@@ -78,7 +72,7 @@ body{
 
   background:
 
-    radial-gradient(circle at 10% 0%,rgba(118,81,255,.13),transparent 30%),
+    radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),
 
     radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),
 
@@ -91,28 +85,6 @@ body{
   overflow-x:hidden;
 
 }
-
-a{
-
-  color:inherit;
-
-  text-decoration:none;
-
-}
-
-.container{
-
-  width:min(1180px,calc(100% - 32px));
-
-  margin:auto;
-
-}
-
-/* =========================
-
-   BACKGROUND
-
-========================= */
 
 body::before{
 
@@ -140,6 +112,22 @@ body::before{
 
 }
 
+a{
+
+  color:inherit;
+
+  text-decoration:none;
+
+}
+
+.container{
+
+  width:min(1180px,calc(100% - 32px));
+
+  margin:auto;
+
+}
+
 /* =========================
 
    NAVBAR
@@ -154,7 +142,7 @@ body::before{
 
   z-index:1000;
 
-  background:rgba(5,7,19,.72);
+  background:rgba(5,7,19,.76);
 
   backdrop-filter:blur(20px);
 
@@ -200,7 +188,7 @@ body::before{
 
   align-items:center;
 
-  gap:23px;
+  gap:22px;
 
 }
 
@@ -236,11 +224,63 @@ body::before{
 
   box-shadow:0 8px 25px rgba(118,81,255,.28);
 
-  transition:.25s;
+}
+
+/* =========================
+
+   BUTTONS
+
+========================= */
+
+.btn{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:9px;
+
+  padding:14px 21px;
+
+  border-radius:14px;
+
+  font-size:13px;
+
+  font-weight:800;
+
+  transition:.3s;
 
 }
 
-.nav-button:hover{
+.btn-primary{
+
+  background:linear-gradient(135deg,#5d55ff,#a84fff);
+
+  box-shadow:0 12px 35px rgba(118,81,255,.32);
+
+}
+
+.btn-primary:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:0 18px 45px rgba(118,81,255,.45);
+
+}
+
+.btn-secondary{
+
+  background:rgba(255,255,255,.035);
+
+  border:1px solid rgba(255,255,255,.13);
+
+}
+
+.btn-secondary:hover{
+
+  background:rgba(255,255,255,.08);
 
   transform:translateY(-2px);
 
@@ -256,7 +296,7 @@ body::before{
 
   position:relative;
 
-  min-height:690px;
+  min-height:650px;
 
   display:flex;
 
@@ -282,49 +322,9 @@ body::before{
 
   border-radius:50%;
 
-  background:
-
-    radial-gradient(
-
-      circle,
-
-      rgba(118,81,255,.28),
-
-      transparent 68%
-
-    );
+  background:radial-gradient(circle,rgba(118,81,255,.28),transparent 68%);
 
   filter:blur(15px);
-
-}
-
-.hero::after{
-
-  content:"";
-
-  position:absolute;
-
-  width:500px;
-
-  height:500px;
-
-  left:-250px;
-
-  bottom:-280px;
-
-  border-radius:50%;
-
-  background:
-
-    radial-gradient(
-
-      circle,
-
-      rgba(57,124,255,.15),
-
-      transparent 68%
-
-    );
 
 }
 
@@ -347,8 +347,6 @@ body::before{
 .badge{
 
   display:inline-flex;
-
-  align-items:center;
 
   padding:8px 13px;
 
@@ -378,25 +376,11 @@ body::before{
 
   letter-spacing:-3px;
 
-  max-width:650px;
-
 }
 
 .gradient{
 
-  background:
-
-    linear-gradient(
-
-      90deg,
-
-      #ffffff,
-
-      #9a70ff,
-
-      #c45aff
-
-    );
+  background:linear-gradient(90deg,#fff,#9a70ff,#c45aff);
 
   -webkit-background-clip:text;
 
@@ -462,77 +446,9 @@ body::before{
 
 }
 
-.btn{
-
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:9px;
-
-  padding:14px 21px;
-
-  border-radius:14px;
-
-  font-size:13px;
-
-  font-weight:800;
-
-  transition:.3s;
-
-}
-
-.btn-primary{
-
-  background:
-
-    linear-gradient(
-
-      135deg,
-
-      #5d55ff,
-
-      #a84fff
-
-    );
-
-  box-shadow:
-
-    0 12px 35px rgba(118,81,255,.32);
-
-}
-
-.btn-primary:hover{
-
-  transform:translateY(-3px);
-
-  box-shadow:
-
-    0 18px 45px rgba(118,81,255,.45);
-
-}
-
-.btn-secondary{
-
-  background:rgba(255,255,255,.035);
-
-  border:1px solid rgba(255,255,255,.13);
-
-}
-
-.btn-secondary:hover{
-
-  background:rgba(255,255,255,.08);
-
-  transform:translateY(-2px);
-
-}
-
 /* =========================
 
-   HERO VISUAL
+   HERO DASHBOARD
 
 ========================= */
 
@@ -540,7 +456,7 @@ body::before{
 
   position:relative;
 
-  min-height:490px;
+  min-height:460px;
 
   display:flex;
 
@@ -560,17 +476,7 @@ body::before{
 
   border-radius:50%;
 
-  background:
-
-    radial-gradient(
-
-      circle,
-
-      rgba(118,81,255,.40),
-
-      transparent 68%
-
-    );
+  background:radial-gradient(circle,rgba(118,81,255,.40),transparent 68%);
 
   filter:blur(10px);
 
@@ -586,17 +492,7 @@ body::before{
 
   border-radius:27px;
 
-  background:
-
-    linear-gradient(
-
-      145deg,
-
-      rgba(27,32,77,.96),
-
-      rgba(8,11,31,.97)
-
-    );
+  background:linear-gradient(145deg,rgba(27,32,77,.96),rgba(8,11,31,.97));
 
   border:1px solid rgba(255,255,255,.15);
 
@@ -607,36 +503,6 @@ body::before{
     0 0 70px rgba(118,81,255,.22);
 
   transform:rotate(-2deg);
-
-}
-
-.dashboard::before{
-
-  content:"";
-
-  position:absolute;
-
-  width:220px;
-
-  height:220px;
-
-  right:-70px;
-
-  top:-100px;
-
-  border-radius:50%;
-
-  background:
-
-    radial-gradient(
-
-      circle,
-
-      rgba(164,92,255,.4),
-
-      transparent 70%
-
-    );
 
 }
 
@@ -720,17 +586,7 @@ body::before{
 
   border-radius:12px;
 
-  background:
-
-    linear-gradient(
-
-      135deg,
-
-      #7056ff,
-
-      #a34fff
-
-    );
+  background:linear-gradient(135deg,#7056ff,#a34fff);
 
   margin-bottom:12px;
 
@@ -758,69 +614,29 @@ body::before{
 
 }
 
-.floating{
-
-  position:absolute;
-
-  padding:13px 16px;
-
-  border-radius:15px;
-
-  background:rgba(13,16,39,.88);
-
-  border:1px solid rgba(255,255,255,.13);
-
-  backdrop-filter:blur(15px);
-
-  box-shadow:0 15px 40px rgba(0,0,0,.35);
-
-}
-
-.floating strong{
-
-  display:block;
-
-  font-size:12px;
-
-}
-
-.floating span{
-
-  display:block;
-
-  color:#8e95b7;
-
-  font-size:9px;
-
-  margin-top:4px;
-
-}
-
-.float-one{
-
-  right:-15px;
-
-  top:40px;
-
-}
-
-.float-two{
-
-  left:-20px;
-
-  bottom:40px;
-
-}
-
 /* =========================
 
-   SECTIONS
+   GENERAL SECTION
 
 ========================= */
 
 .section{
 
-  padding:85px 0;
+  padding:80px 0;
+
+}
+
+.section-head{
+
+  display:flex;
+
+  align-items:end;
+
+  justify-content:space-between;
+
+  gap:30px;
+
+  margin-bottom:32px;
 
 }
 
@@ -864,25 +680,399 @@ body::before{
 
 }
 
-.section-head{
+/* ==================================================
 
-  display:flex;
+   EXAMS
 
-  align-items:end;
+================================================== */
 
-  justify-content:space-between;
+.exam-section{
 
-  gap:30px;
-
-  margin-bottom:32px;
+  padding-top:45px;
 
 }
 
-/* =========================
+.exam-wrapper{
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:30px;
+
+  padding:38px;
+
+  background:
+
+    radial-gradient(
+
+      circle at 90% 10%,
+
+      rgba(118,81,255,.22),
+
+      transparent 35%
+
+    ),
+
+    linear-gradient(
+
+      135deg,
+
+      #0c102b,
+
+      #090b1d
+
+    );
+
+  border:1px solid rgba(255,255,255,.10);
+
+}
+
+.exam-intro{
+
+  max-width:700px;
+
+  margin-bottom:28px;
+
+}
+
+.exam-intro h2{
+
+  font-family:'Sora',sans-serif;
+
+  font-size:34px;
+
+  line-height:1.15;
+
+}
+
+.exam-intro p{
+
+  color:#a5accb;
+
+  font-size:13px;
+
+  line-height:1.7;
+
+  margin-top:12px;
+
+}
+
+.exam-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:13px;
+
+}
+
+.exam-card{
+
+  position:relative;
+
+  min-height:230px;
+
+  padding:21px;
+
+  border-radius:20px;
+
+  background:
+
+    linear-gradient(
+
+      145deg,
+
+      rgba(255,255,255,.065),
+
+      rgba(255,255,255,.018)
+
+    );
+
+  border:1px solid rgba(255,255,255,.10);
+
+  overflow:hidden;
+
+  transition:.35s;
+
+}
+
+.exam-card:hover{
+
+  transform:translateY(-7px);
+
+  border-color:rgba(151,113,255,.45);
+
+  box-shadow:0 25px 55px rgba(0,0,0,.35);
+
+}
+
+.exam-card::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:130px;
+
+  height:130px;
+
+  right:-65px;
+
+  bottom:-65px;
+
+  border-radius:50%;
+
+  background:var(--exam-glow);
+
+  filter:blur(8px);
+
+}
+
+.exam-icon{
+
+  width:48px;
+
+  height:48px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:14px;
+
+  background:linear-gradient(
+
+    135deg,
+
+    var(--e1),
+
+    var(--e2)
+
+  );
+
+  font-size:21px;
+
+  margin-bottom:18px;
+
+}
+
+.exam-card h3{
+
+  font-size:15px;
+
+  margin-bottom:8px;
+
+}
+
+.exam-card p{
+
+  color:#9299ba;
+
+  font-size:10px;
+
+  line-height:1.65;
+
+}
+
+.exam-list{
+
+  margin-top:15px;
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+}
+
+.exam-tag{
+
+  padding:6px 8px;
+
+  border-radius:7px;
+
+  background:rgba(255,255,255,.05);
+
+  border:1px solid rgba(255,255,255,.08);
+
+  color:#c6cae0;
+
+  font-size:9px;
+
+  font-weight:700;
+
+}
+
+.exam-link{
+
+  display:inline-block;
+
+  margin-top:17px;
+
+  color:#b99cff;
+
+  font-size:10px;
+
+  font-weight:800;
+
+}
+
+/* ==================================================
+
+   LANGUAGE EXAMS
+
+================================================== */
+
+.language-section{
+
+  padding-top:30px;
+
+}
+
+.language-box{
+
+  padding:35px;
+
+  border-radius:27px;
+
+  background:
+
+    radial-gradient(
+
+      circle at 10% 100%,
+
+      rgba(22,207,255,.11),
+
+      transparent 32%
+
+    ),
+
+    linear-gradient(
+
+      135deg,
+
+      #0c122d,
+
+      #090b1e
+
+    );
+
+  border:1px solid rgba(255,255,255,.09);
+
+}
+
+.language-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(6,1fr);
+
+  gap:10px;
+
+  margin-top:25px;
+
+}
+
+.language-card{
+
+  min-height:130px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:14px;
+
+  border-radius:17px;
+
+  background:rgba(255,255,255,.045);
+
+  border:1px solid rgba(255,255,255,.09);
+
+  transition:.3s;
+
+}
+
+.language-card:hover{
+
+  transform:translateY(-5px);
+
+  background:rgba(118,81,255,.11);
+
+  border-color:rgba(155,119,255,.38);
+
+}
+
+.language-flag{
+
+  font-size:30px;
+
+  margin-bottom:9px;
+
+}
+
+.language-card strong{
+
+  font-size:11px;
+
+}
+
+.language-card span{
+
+  color:#7f87a8;
+
+  font-size:9px;
+
+  margin-top:5px;
+
+}
+
+.levels{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:7px;
+
+  margin-top:20px;
+
+}
+
+.level{
+
+  padding:8px 11px;
+
+  border-radius:9px;
+
+  background:rgba(118,81,255,.10);
+
+  border:1px solid rgba(118,81,255,.20);
+
+  color:#c9bbff;
+
+  font-size:10px;
+
+  font-weight:800;
+
+}
+
+/* ==================================================
 
    SERVICES
 
-========================= */
+================================================== */
 
 .services-grid{
 
@@ -898,7 +1088,7 @@ body::before{
 
   position:relative;
 
-  min-height:215px;
+  min-height:205px;
 
   padding:22px;
 
@@ -940,28 +1130,6 @@ body::before{
 
 }
 
-.service-card::after{
-
-  content:"";
-
-  position:absolute;
-
-  width:130px;
-
-  height:130px;
-
-  right:-65px;
-
-  bottom:-65px;
-
-  border-radius:50%;
-
-  background:var(--glow);
-
-  filter:blur(5px);
-
-}
-
 .service-icon{
 
   width:47px;
@@ -976,19 +1144,15 @@ body::before{
 
   border-radius:14px;
 
-  background:
+  background:linear-gradient(
 
-    linear-gradient(
+    135deg,
 
-      135deg,
+    var(--i1),
 
-      var(--i1),
+    var(--i2)
 
-      var(--i2)
-
-    );
-
-  box-shadow:0 10px 25px rgba(118,81,255,.2);
+  );
 
   font-size:21px;
 
@@ -1036,21 +1200,13 @@ body::before{
 
   background:rgba(255,255,255,.07);
 
-  font-size:13px;
-
 }
 
-/* =========================
+/* ==================================================
 
-   COURSES
+   INTERNATIONAL COURSES
 
-========================= */
-
-.course-section{
-
-  position:relative;
-
-}
+================================================== */
 
 .course-box{
 
@@ -1098,27 +1254,7 @@ body::before{
 
 }
 
-.course-box::after{
-
-  content:"✦";
-
-  position:absolute;
-
-  right:45px;
-
-  top:12px;
-
-  font-size:120px;
-
-  color:rgba(255,255,255,.035);
-
-}
-
 .course-content{
-
-  position:relative;
-
-  z-index:2;
 
   max-width:700px;
 
@@ -1174,11 +1310,11 @@ body::before{
 
 }
 
-/* =========================
+/* ==================================================
 
-   TESTS
+   SCHOOL TESTS
 
-========================= */
+================================================== */
 
 .tests-box{
 
@@ -1294,17 +1430,7 @@ body::before{
 
   transform:translateY(-4px);
 
-  background:
-
-    linear-gradient(
-
-      135deg,
-
-      #5d55ff,
-
-      #a84fff
-
-    );
+  background:linear-gradient(135deg,#5d55ff,#a84fff);
 
 }
 
@@ -1320,7 +1446,7 @@ body::before{
 
 .subject{
 
-  min-height:90px;
+  min-height:88px;
 
   display:flex;
 
@@ -1368,11 +1494,11 @@ body::before{
 
 }
 
-/* =========================
+/* ==================================================
 
    WHY
 
-========================= */
+================================================== */
 
 .why-grid{
 
@@ -1414,17 +1540,7 @@ body::before{
 
   border-radius:13px;
 
-  background:
-
-    linear-gradient(
-
-      135deg,
-
-      #624cff,
-
-      #a253ff
-
-    );
+  background:linear-gradient(135deg,#624cff,#a253ff);
 
   margin-bottom:15px;
 
@@ -1448,11 +1564,11 @@ body::before{
 
 }
 
-/* =========================
+/* ==================================================
 
    CTA
 
-========================= */
+================================================== */
 
 .cta{
 
@@ -1518,11 +1634,11 @@ body::before{
 
 }
 
-/* =========================
+/* ==================================================
 
    FOOTER
 
-========================= */
+================================================== */
 
 footer{
 
@@ -1588,8 +1704,6 @@ footer{
 
   font-size:10px;
 
-  transition:.2s;
-
 }
 
 .footer-links a:hover{
@@ -1598,11 +1712,11 @@ footer{
 
 }
 
-/* =========================
+/* ==================================================
 
-   MOBILE
+   RESPONSIVE
 
-========================= */
+================================================== */
 
 @media(max-width:1000px){
 
@@ -1639,6 +1753,18 @@ footer{
   .hero-actions{
 
     justify-content:center;
+
+  }
+
+  .exam-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+  }
+
+  .language-grid{
+
+    grid-template-columns:repeat(3,1fr);
 
   }
 
@@ -1692,11 +1818,7 @@ footer{
 
     min-height:auto;
 
-    padding:
-
-      70px 0
-
-      55px;
+    padding:65px 0 50px;
 
   }
 
@@ -1720,21 +1842,9 @@ footer{
 
   }
 
-  .dashboard{
-
-    padding:17px;
-
-  }
-
-  .floating{
-
-    display:none;
-
-  }
-
   .section{
 
-    padding:65px 0;
+    padding:60px 0;
 
   }
 
@@ -1746,21 +1856,13 @@ footer{
 
   .section-head .btn{
 
-    margin-top:20px;
+    margin-top:18px;
 
   }
 
-  .services-grid{
+  .exam-wrapper,
 
-    grid-template-columns:1fr;
-
-  }
-
-  .service-card{
-
-    min-height:195px;
-
-  }
+  .language-box,
 
   .course-box,
 
@@ -1768,17 +1870,25 @@ footer{
 
   .cta{
 
-    padding:27px 20px;
+    padding:25px 18px;
 
   }
 
-  .course-content h2,
+  .exam-grid{
 
-  .tests-copy h2,
+    grid-template-columns:1fr;
 
-  .cta h2{
+  }
 
-    font-size:27px;
+  .language-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+  }
+
+  .services-grid{
+
+    grid-template-columns:1fr;
 
   }
 
@@ -1824,7 +1934,7 @@ footer{
 
 <!-- ==================================================
 
-     NAVBAR
+     NAVIGATION
 
 ================================================== -->
 
@@ -1840,15 +1950,35 @@ footer{
 
     <div class="nav-links">
 
-      <a href="index.html">Ana səhifə</a>
+      <a href="index.html">
 
-      <a href="resources.html">Resurslar</a>
+        Ana səhifə
 
-      <a href="exams.html">İmtahanlar</a>
+      </a>
 
-      <a href="sinif-testleri.html">Sinif testləri</a>
+      <a href="#exams">
 
-      <a href="#services">Xidmətlər</a>
+        İmtahanlar
+
+      </a>
+
+      <a href="resources.html">
+
+        Resurslar
+
+      </a>
+
+      <a href="sinif-testleri.html">
+
+        Sinif testləri
+
+      </a>
+
+      <a href="#services">
+
+        Xidmətlər
+
+      </a>
 
     </div>
 
@@ -1876,17 +2006,17 @@ footer{
 
       <div class="badge">
 
-        ✦ Təhsil • Test • Karyera • İnkişaf
+        ✦ Təhsil • İmtahan • Karyera • İnkişaf
 
       </div>
 
       <h1>
 
-        Təhsil yolunda
+        Öz gələcəyini
 
         <span class="gradient">
 
-          sənin yanındayıq.
+          bu gündən qur.
 
         </span>
 
@@ -1894,19 +2024,29 @@ footer{
 
       <p class="hero-text">
 
-        Youdidit.az — məktəbdən universitetə,
+        Youdidit.az — imtahanlara hazırlaşmaq,
 
-        akademik işlərdən karyera inkişafına qədər
+        biliklərini yoxlamaq, beynəlxalq kurslar
 
-        ehtiyac duyduğun resursları, testləri,
+        tapmaq və akademik-karyera inkişafında
 
-        kurs imkanlarını və peşəkar xidmətləri
-
-        bir platformada birləşdirir.
+        dəstək almaq üçün vahid platformadır.
 
       </p>
 
       <div class="hero-tags">
+
+        <span class="hero-tag">
+
+          ✓ Dil imtahanları
+
+        </span>
+
+        <span class="hero-tag">
+
+          ✓ Beynəlxalq imtahanlar
+
+        </span>
 
         <span class="hero-tag">
 
@@ -1920,51 +2060,25 @@ footer{
 
         </span>
 
-        <span class="hero-tag">
-
-          ✓ Beynəlxalq kurslar
-
-        </span>
-
-        <span class="hero-tag">
-
-          ✓ Karyera dəstəyi
-
-        </span>
-
       </div>
 
       <div class="hero-actions">
 
-        <a
+        <a href="#exams" class="btn btn-primary">
 
-          href="sinif-testleri.html"
-
-          class="btn btn-primary"
-
-        >
-
-          Testlərə başla →
+          İmtahanlara bax →
 
         </a>
 
-        <a
+        <a href="sinif-testleri.html" class="btn btn-secondary">
 
-          href="#services"
-
-          class="btn btn-secondary"
-
-        >
-
-          Xidmətlərə bax
+          Testlərə başla
 
         </a>
 
       </div>
 
     </div>
-
-    <!-- HERO DASHBOARD -->
 
     <div class="hero-visual">
 
@@ -1990,11 +2104,55 @@ footer{
 
         <div class="dashboard-sub">
 
-          Öyrən • Yoxla • İnkişaf et • Nəticə qazan
+          Hazırlaş • Yoxla • Sertifikat qazan • İnkişaf et
 
         </div>
 
         <div class="dashboard-grid">
+
+          <div class="dashboard-card">
+
+            <div class="dashboard-icon">
+
+              🗣️
+
+            </div>
+
+            <strong>
+
+              Dil imtahanları
+
+            </strong>
+
+            <span>
+
+              IELTS • TOEFL • Cambridge
+
+            </span>
+
+          </div>
+
+          <div class="dashboard-card">
+
+            <div class="dashboard-icon">
+
+              🌍
+
+            </div>
+
+            <strong>
+
+              Beynəlxalq imtahanlar
+
+            </strong>
+
+            <span>
+
+              SAT • GMAT • GRE və s.
+
+            </span>
+
+          </div>
 
           <div class="dashboard-card">
 
@@ -2022,28 +2180,6 @@ footer{
 
             <div class="dashboard-icon">
 
-              🌍
-
-            </div>
-
-            <strong>
-
-              Beynəlxalq kurslar
-
-            </strong>
-
-            <span>
-
-              Sertifikatlı proqramlar
-
-            </span>
-
-          </div>
-
-          <div class="dashboard-card">
-
-            <div class="dashboard-icon">
-
               💼
 
             </div>
@@ -2062,59 +2198,523 @@ footer{
 
           </div>
 
-          <div class="dashboard-card">
+        </div>
 
-            <div class="dashboard-icon">
+      </div>
 
-              ⚡
+    </div>
 
-            </div>
+  </div>
 
-            <strong>
+</section>
 
-              Peşəkar xidmət
+<!-- ==================================================
 
-            </strong>
+     EXAMS — FIRST MAJOR SECTION
 
-            <span>
+================================================== -->
 
-              Sifarişini bizə həvalə et
+<section class="section exam-section" id="exams">
+
+  <div class="container">
+
+    <div class="exam-wrapper">
+
+      <div class="exam-intro">
+
+        <div class="section-label">
+
+          İMTAHAN MƏRKƏZİ
+
+        </div>
+
+        <h2>
+
+          Hansı imtahana hazırlaşırsan?
+
+        </h2>
+
+        <p>
+
+          Dil biliklərindən beynəlxalq sertifikatlara,
+
+          məktəb və abituriyent imtahanlarından
+
+          səviyyə yoxlamalarına qədər müxtəlif
+
+          istiqamətlər üzrə seçimlər.
+
+        </p>
+
+      </div>
+
+      <div class="exam-grid">
+
+        <!-- LANGUAGE -->
+
+        <a href="exams.html"
+
+           class="exam-card"
+
+           style="--e1:#5d55ff;--e2:#a84fff;--exam-glow:rgba(118,81,255,.22);">
+
+          <div class="exam-icon">
+
+            🗣️
+
+          </div>
+
+          <h3>
+
+            Dil imtahanları
+
+          </h3>
+
+          <p>
+
+            Xarici dil səviyyəni yoxla və
+
+            beynəlxalq dil imtahanlarına hazırlaş.
+
+          </p>
+
+          <div class="exam-list">
+
+            <span class="exam-tag">
+
+              IELTS
+
+            </span>
+
+            <span class="exam-tag">
+
+              TOEFL
+
+            </span>
+
+            <span class="exam-tag">
+
+              Cambridge
+
+            </span>
+
+            <span class="exam-tag">
+
+              A1–C2
 
             </span>
 
           </div>
 
-        </div>
+          <span class="exam-link">
+
+            Dil imtahanlarına bax →
+
+          </span>
+
+        </a>
+
+        <!-- INTERNATIONAL -->
+
+        <a href="exams.html"
+
+           class="exam-card"
+
+           style="--e1:#287cff;--e2:#18cfff;--exam-glow:rgba(22,207,255,.18);">
+
+          <div class="exam-icon">
+
+            🌍
+
+          </div>
+
+          <h3>
+
+            Beynəlxalq imtahanlar
+
+          </h3>
+
+          <p>
+
+            Xaricdə təhsil, magistratura,
+
+            biznes və akademik məqsədlər üçün.
+
+          </p>
+
+          <div class="exam-list">
+
+            <span class="exam-tag">
+
+              SAT
+
+            </span>
+
+            <span class="exam-tag">
+
+              GRE
+
+            </span>
+
+            <span class="exam-tag">
+
+              GMAT
+
+            </span>
+
+            <span class="exam-tag">
+
+              Digərləri
+
+            </span>
+
+          </div>
+
+          <span class="exam-link">
+
+            İmtahanlara bax →
+
+          </span>
+
+        </a>
+
+        <!-- SCHOOL -->
+
+        <a href="exams.html"
+
+           class="exam-card"
+
+           style="--e1:#18b88e;--e2:#29d8a9;--exam-glow:rgba(32,211,163,.18);">
+
+          <div class="exam-icon">
+
+            🎓
+
+          </div>
+
+          <h3>
+
+            Məktəb və qəbul
+
+          </h3>
+
+          <p>
+
+            Məktəb proqramı, buraxılış və
+
+            ali məktəbə qəbul istiqamətində hazırlıq.
+
+          </p>
+
+          <div class="exam-list">
+
+            <span class="exam-tag">
+
+              Buraxılış
+
+            </span>
+
+            <span class="exam-tag">
+
+              Qəbul
+
+            </span>
+
+            <span class="exam-tag">
+
+              Fənn testləri
+
+            </span>
+
+          </div>
+
+          <span class="exam-link">
+
+            Hazırlığa başla →
+
+          </span>
+
+        </a>
+
+        <!-- LEVEL -->
+
+        <a href="exams.html"
+
+           class="exam-card"
+
+           style="--e1:#ff6f51;--e2:#ffb04d;--exam-glow:rgba(255,139,77,.18);">
+
+          <div class="exam-icon">
+
+            🧠
+
+          </div>
+
+          <h3>
+
+            Səviyyə testləri
+
+          </h3>
+
+          <p>
+
+            Hazırkı bilik səviyyəni müəyyən et,
+
+            zəif və güclü tərəflərini kəşf et.
+
+          </p>
+
+          <div class="exam-list">
+
+            <span class="exam-tag">
+
+              Placement
+
+            </span>
+
+            <span class="exam-tag">
+
+              Level Test
+
+            </span>
+
+            <span class="exam-tag">
+
+              Practice
+
+            </span>
+
+          </div>
+
+          <span class="exam-link">
+
+            Səviyyəni yoxla →
+
+          </span>
+
+        </a>
 
       </div>
 
-      <div class="floating float-one">
+    </div>
 
-        <strong>
+  </div>
 
-          ✨ Yeni imkanlar
+</section>
 
-        </strong>
+<!-- ==================================================
 
-        <span>
+     LANGUAGE EXAMS
 
-          Öyrənmək üçün daha çox seçim
+================================================== -->
+
+<section class="section language-section">
+
+  <div class="container">
+
+    <div class="language-box">
+
+      <div class="section-label">
+
+        DİL İMTAHANLARI
+
+      </div>
+
+      <h2 class="section-title">
+
+        Dilini yoxla, dünyaya açıl.
+
+      </h2>
+
+      <p class="section-description">
+
+        İngilis, alman, fransız, ispan, rus və digər
+
+        dillər üzrə səviyyə testləri və gələcəkdə
+
+        müxtəlif beynəlxalq dil imtahanlarına
+
+        hazırlıq istiqamətləri.
+
+      </p>
+
+      <div class="language-grid">
+
+        <a href="exams.html" class="language-card">
+
+          <div class="language-flag">
+
+            🇬🇧
+
+          </div>
+
+          <strong>
+
+            İngilis dili
+
+          </strong>
+
+          <span>
+
+            IELTS • TOEFL • Cambridge
+
+          </span>
+
+        </a>
+
+        <a href="exams.html" class="language-card">
+
+          <div class="language-flag">
+
+            🇩🇪
+
+          </div>
+
+          <strong>
+
+            Alman dili
+
+          </strong>
+
+          <span>
+
+            Goethe • TELC
+
+          </span>
+
+        </a>
+
+        <a href="exams.html" class="language-card">
+
+          <div class="language-flag">
+
+            🇫🇷
+
+          </div>
+
+          <strong>
+
+            Fransız dili
+
+          </strong>
+
+          <span>
+
+            DELF • DALF
+
+          </span>
+
+        </a>
+
+        <a href="exams.html" class="language-card">
+
+          <div class="language-flag">
+
+            🇪🇸
+
+          </div>
+
+          <strong>
+
+            İspan dili
+
+          </strong>
+
+          <span>
+
+            DELE • SIELE
+
+          </span>
+
+        </a>
+
+        <a href="exams.html" class="language-card">
+
+          <div class="language-flag">
+
+            🇷🇺
+
+          </div>
+
+          <strong>
+
+            Rus dili
+
+          </strong>
+
+          <span>
+
+            Səviyyə testləri
+
+          </span>
+
+        </a>
+
+        <a href="exams.html" class="language-card">
+
+          <div class="language-flag">
+
+            🌐
+
+          </div>
+
+          <strong>
+
+            Digər dillər
+
+          </strong>
+
+          <span>
+
+            Yeni dillər əlavə olunur
+
+          </span>
+
+        </a>
+
+      </div>
+
+      <div class="levels">
+
+        <span class="level">
+
+          A1
 
         </span>
 
-      </div>
+        <span class="level">
 
-      <div class="floating float-two">
+          A2
 
-        <strong>
+        </span>
 
-          📈 İnkişaf et
+        <span class="level">
 
-        </strong>
+          B1
 
-        <span>
+        </span>
 
-          Növbəti səviyyəyə keç
+        <span class="level">
+
+          B2
+
+        </span>
+
+        <span class="level">
+
+          C1
+
+        </span>
+
+        <span class="level">
+
+          C2
+
+        </span>
+
+        <span class="level">
+
+          Level Test
 
         </span>
 
@@ -2148,17 +2748,15 @@ footer{
 
         <h2 class="section-title">
 
-          Sənə lazım olan hər şey.
+          Təhsil və karyera üçün dəstək.
 
         </h2>
 
         <p class="section-description">
 
-          Təhsil, akademik iş, rəqəmsal bacarıqlar
+          Akademik işlərdən rəqəmsal bacarıqlara,
 
-          və karyera istiqamətində fərdi ehtiyaclarına
-
-          uyğun xidmətlər.
+          şəxsi brenddən beynəlxalq kurslara qədər.
 
         </p>
 
@@ -2174,11 +2772,11 @@ footer{
 
     <div class="services-grid">
 
-      <!-- 1 -->
+      <a href="order.html"
 
-      <a href="order.html" class="service-card"
+         class="service-card"
 
-         style="--i1:#7656ff;--i2:#b452ff;--glow:rgba(118,81,255,.23);">
+         style="--i1:#7656ff;--i2:#b452ff;">
 
         <div class="service-icon">
 
@@ -2196,7 +2794,7 @@ footer{
 
           Sərbəst iş, referat, kurs işi,
 
-          dissertasiya, məqalə və digər akademik layihələr.
+          məqalə və digər akademik layihələr.
 
         </p>
 
@@ -2208,11 +2806,11 @@ footer{
 
       </a>
 
-      <!-- 2 -->
+      <a href="order.html"
 
-      <a href="order.html" class="service-card"
+         class="service-card"
 
-         style="--i1:#0cbd91;--i2:#28d9aa;--glow:rgba(32,211,163,.18);">
+         style="--i1:#0cbd91;--i2:#28d9aa;">
 
         <div class="service-icon">
 
@@ -2228,9 +2826,9 @@ footer{
 
         <p>
 
-          Cədvəllər, formulalar, hesabatlar,
+          Cədvəllər, formulalar, analizlər,
 
-          analizlər və dashboard hazırlanması.
+          hesabatlar və dashboardlar.
 
         </p>
 
@@ -2242,11 +2840,11 @@ footer{
 
       </a>
 
-      <!-- 3 -->
+      <a href="order.html"
 
-      <a href="order.html" class="service-card"
+         class="service-card"
 
-         style="--i1:#ff793f;--i2:#ffad54;--glow:rgba(255,139,77,.18);">
+         style="--i1:#ff793f;--i2:#ffad54;">
 
         <div class="service-icon">
 
@@ -2262,9 +2860,9 @@ footer{
 
         <p>
 
-          PowerPoint təqdimatları,
+          PowerPoint, layihə, dərs və
 
-          layihə və dərs slaydları.
+          peşəkar təqdimat hazırlanması.
 
         </p>
 
@@ -2276,11 +2874,11 @@ footer{
 
       </a>
 
-      <!-- 4 -->
+      <a href="order.html"
 
-      <a href="order.html" class="service-card"
+         class="service-card"
 
-         style="--i1:#e94fc6;--i2:#9e52ff;--glow:rgba(246,83,197,.18);">
+         style="--i1:#e94fc6;--i2:#9e52ff;">
 
         <div class="service-icon">
 
@@ -2296,9 +2894,9 @@ footer{
 
         <p>
 
-          Logo, poster, sosial media,
+          Logo, poster, sosial media və
 
-          CV və vizual brend dizaynları.
+          digər vizual dizaynlar.
 
         </p>
 
@@ -2310,11 +2908,11 @@ footer{
 
       </a>
 
-      <!-- 5 -->
+      <a href="order.html"
 
-      <a href="order.html" class="service-card"
+         class="service-card"
 
-         style="--i1:#685cff;--i2:#397cff;--glow:rgba(57,124,255,.18);">
+         style="--i1:#685cff;--i2:#397cff;">
 
         <div class="service-icon">
 
@@ -2330,9 +2928,9 @@ footer{
 
         <p>
 
-          Mövzuya uyğun fərdi izahlar,
+          Mövzuya uyğun fərdi izah,
 
-          tədris videoları və materiallar.
+          video dərs və tədris materialı.
 
         </p>
 
@@ -2344,11 +2942,11 @@ footer{
 
       </a>
 
-      <!-- 6 -->
+      <a href="order.html"
 
-      <a href="order.html" class="service-card"
+         class="service-card"
 
-         style="--i1:#168cff;--i2:#19cffb;--glow:rgba(22,207,255,.18);">
+         style="--i1:#168cff;--i2:#19cffb;">
 
         <div class="service-icon">
 
@@ -2358,15 +2956,15 @@ footer{
 
         <h3>
 
-          Karyera və şəxsi brend
+          CV • LinkedIn • GitHub
 
         </h3>
 
         <p>
 
-          CV, LinkedIn, GitHub, portfolio
+          Professional CV, LinkedIn və
 
-          və karyera planlaması.
+          GitHub profilinin yaradılması və optimizasiyası.
 
         </p>
 
@@ -2378,11 +2976,11 @@ footer{
 
       </a>
 
-      <!-- 7 -->
+      <a href="order.html"
 
-      <a href="order.html" class="service-card"
+         class="service-card"
 
-         style="--i1:#9d55ff;--i2:#e85cff;--glow:rgba(164,92,255,.22);">
+         style="--i1:#9d55ff;--i2:#e85cff;">
 
         <div class="service-icon">
 
@@ -2392,15 +2990,15 @@ footer{
 
         <h3>
 
-          Məqalə və dissertasiya
+          Məqalə / Dissertasiya
 
         </h3>
 
         <p>
 
-          Mətn hazırlığı, strukturlaşdırma,
+          Akademik mətnlərin hazırlanması,
 
-          redaktə və formatlaşdırma.
+          strukturlaşdırılması və redaktəsi.
 
         </p>
 
@@ -2412,29 +3010,29 @@ footer{
 
       </a>
 
-      <!-- 8 -->
+      <a href="order.html"
 
-      <a href="order.html" class="service-card"
+         class="service-card"
 
-         style="--i1:#5368ff;--i2:#7651ff;--glow:rgba(118,81,255,.22);">
+         style="--i1:#5368ff;--i2:#7651ff;">
 
         <div class="service-icon">
 
-          ✦
+          🚀
 
         </div>
 
         <h3>
 
-          Digər xidmətlər
+          Karyera planlaması
 
         </h3>
 
         <p>
 
-          Siyahıda olmayan xüsusi ehtiyacın varsa,
+          Bacarıqlarını müəyyən et,
 
-          fərdi sifariş göndər.
+          məqsədini seç və karyera yolunu qur.
 
         </p>
 
@@ -2458,7 +3056,7 @@ footer{
 
 ================================================== -->
 
-<section class="section course-section">
+<section class="section">
 
   <div class="container">
 
@@ -2468,29 +3066,27 @@ footer{
 
         <div class="section-label">
 
-          BEYNƏLXALQ TƏHSİL İMKANLARI
+          BEYNƏLXALQ SERTİFİKATLI KURSLAR
 
         </div>
 
         <h2>
 
-          Beynəlxalq sertifikatlı
+          Dünyanın ən yaxşı təhsil
 
-          kurslara doğru addım at.
+          platformalarından öyrən.
 
         </h2>
 
         <p>
 
-          Coursera, edX və digər beynəlxalq təhsil
+          Coursera, edX və digər beynəlxalq platformalarda
 
-          platformalarında uyğun kursları tapmaq,
+          uyğun kursları tapmaq, seçim etmək və mövcud
 
-          seçim etmək və mövcud maliyyə yardımı
+          maliyyə yardımı və digər imkanlarla müraciət
 
-          və digər imkanlarla müraciət prosesində
-
-          dəstək almaq üçün bizə müraciət edə bilərsən.
+          prosesində dəstək almaq üçün bizə müraciət edə bilərsən.
 
         </p>
 
@@ -2544,7 +3140,7 @@ footer{
 
 <!-- ==================================================
 
-     TESTS
+     SCHOOL TESTS
 
 ================================================== -->
 
@@ -2566,77 +3162,41 @@ footer{
 
           <h2>
 
-            Biliyini yoxla.<br>
+            3-cü sinifdən
 
-            Səviyyəni kəşf et.
+            11-ci sinfə qədər.
 
           </h2>
 
           <p>
 
-            3-cü sinifdən 11-ci sinfə qədər
+            Müxtəlif fənlər üzrə testlər.
 
-            müxtəlif fənlər üzrə testlər,
+            Yeni fənlər və yeni testlər
 
-            mövzu sualları və imtahan hazırlığı.
+            mütəmadi olaraq əlavə edilə bilər.
 
           </p>
 
           <div class="grades">
 
-            <a href="quiz.html?grade=3" class="grade">
+            <a href="quiz.html?grade=3" class="grade">3-cü</a>
 
-              3-cü
+            <a href="quiz.html?grade=4" class="grade">4-cü</a>
 
-            </a>
+            <a href="quiz.html?grade=5" class="grade">5-ci</a>
 
-            <a href="quiz.html?grade=4" class="grade">
+            <a href="quiz.html?grade=6" class="grade">6-cı</a>
 
-              4-cü
+            <a href="quiz.html?grade=7" class="grade">7-ci</a>
 
-            </a>
+            <a href="quiz.html?grade=8" class="grade">8-ci</a>
 
-            <a href="quiz.html?grade=5" class="grade">
+            <a href="quiz.html?grade=9" class="grade">9-cu</a>
 
-              5-ci
+            <a href="quiz.html?grade=10" class="grade">10-cu</a>
 
-            </a>
-
-            <a href="quiz.html?grade=6" class="grade">
-
-              6-cı
-
-            </a>
-
-            <a href="quiz.html?grade=7" class="grade">
-
-              7-ci
-
-            </a>
-
-            <a href="quiz.html?grade=8" class="grade">
-
-              8-ci
-
-            </a>
-
-            <a href="quiz.html?grade=9" class="grade">
-
-              9-cu
-
-            </a>
-
-            <a href="quiz.html?grade=10" class="grade">
-
-              10-cu
-
-            </a>
-
-            <a href="quiz.html?grade=11" class="grade">
-
-              11-ci
-
-            </a>
+            <a href="quiz.html?grade=11" class="grade">11-ci</a>
 
           </div>
 
@@ -2655,8 +3215,6 @@ footer{
           </a>
 
         </div>
-
-        <!-- SUBJECTS -->
 
         <div class="subject-grid">
 
@@ -2832,7 +3390,7 @@ footer{
 
 <!-- ==================================================
 
-     WHY US
+     WHY
 
 ================================================== -->
 
@@ -2872,15 +3430,15 @@ footer{
 
         <h3>
 
-          Keyfiyyətli material
+          Çoxşaxəli
 
         </h3>
 
         <p>
 
-          Aydın, səliqəli və istifadəyə
+          İmtahan, test, kurs,
 
-          hazır məzmun.
+          akademik iş və karyera.
 
         </p>
 
@@ -2896,7 +3454,7 @@ footer{
 
         <h3>
 
-          Sürətli xidmət
+          Sürətli
 
         </h3>
 
@@ -2920,7 +3478,7 @@ footer{
 
         <h3>
 
-          Peşəkar yanaşma
+          Peşəkar
 
         </h3>
 
@@ -2938,21 +3496,21 @@ footer{
 
         <div class="why-icon">
 
-          ♥
+          🌍
 
         </div>
 
         <h3>
 
-          Fərdi yanaşma
+          Beynəlxalq
 
         </h3>
 
         <p>
 
-          Sənin məqsədinə uyğun
+          Qlobal kurs və imtahan
 
-          xüsusi həll.
+          imkanlarına çıxış.
 
         </p>
 
@@ -2990,7 +3548,7 @@ footer{
 
 <!-- ==================================================
 
-     FINAL CTA
+     CTA
 
 ================================================== -->
 
@@ -3004,21 +3562,21 @@ footer{
 
         <div class="section-label" style="color:#dacaff;">
 
-          XÜSUSİ SİFARİŞ
+          SİZİN ÜÇÜN
 
         </div>
 
         <h2>
 
-          İstədiyin işi bizə həvalə et.
+          Ehtiyacın olanı tapmadın?
 
         </h2>
 
         <p>
 
-          Mövzunu, ehtiyacını və son tarixini yaz.
+          İmtahan, test, kurs və ya xüsusi xidmət
 
-          Qalan detalları birlikdə həll edək.
+          barədə bizə yaz — birlikdə həll edək.
 
         </p>
 
@@ -3026,7 +3584,7 @@ footer{
 
       <a href="order.html" class="btn btn-primary">
 
-        Sifariş et →
+        Müraciət et →
 
       </a>
 
@@ -3056,7 +3614,7 @@ footer{
 
       <div class="footer-description">
 
-        Tələbələr üçün resurs, test və inkişaf platforması.
+        Təhsil • İmtahan • Karyera • İnkişaf
 
       </div>
 
@@ -3064,15 +3622,15 @@ footer{
 
     <div class="footer-links">
 
-      <a href="resources.html">
-
-        Resurslar
-
-      </a>
-
       <a href="exams.html">
 
         İmtahanlar
+
+      </a>
+
+      <a href="resources.html">
+
+        Resurslar
 
       </a>
 
