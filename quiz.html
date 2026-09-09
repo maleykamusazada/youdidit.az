@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Test — Youdidit.az</title>
+<title>İmtahan — Youdidit.az</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=5">
@@ -17,9 +17,9 @@
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" style="padding-bottom: 20px;">
   <div class="wrap">
-    <div class="kicker" id="quiz-kicker">Onlayn imtahan</div>
+    <div class="kicker" id="quiz-kicker">Onlayn İmtahan</div>
     <h1 id="quiz-title">Test yüklənir...</h1>
     <p class="lede" id="quiz-desc">Zəhmət olmasa gözləyin, suallar hazırlanır.</p>
   </div>
@@ -27,10 +27,9 @@
 
 <section>
   <div class="wrap">
-    <div class="catalog-card" style="max-width: 600px; margin: 0 auto; text-align: center; padding: 40px;">
-      <h3 style="margin-bottom: 15px;">Sual sistemi aktivdir</h3>
-      <p style="margin-bottom: 20px;">Seçdiyiniz istiqamət üzrə test tapşırıqları tezliklə tam yüklənəcək.</p>
-      <a class="go" href="sinif-testleri.html">Digər testlərə bax</a>
+    <div class="catalog-card" style="max-width: 750px; margin: 0 auto; padding: 30px;">
+      <!-- Quiz mühərrikinin əsas qoşulduğu yer -->
+      <div id="quiz-root"></div>
     </div>
   </div>
 </section>
@@ -43,19 +42,227 @@
 </footer>
 
 <script>
+  // URL parametrlərini oxuyub başlıqları dinamik təyin edirik
   const urlParams = new URLSearchParams(window.location.search);
   const grade = urlParams.get('grade');
   const exam = urlParams.get('exam');
 
   if (grade) {
     document.getElementById('quiz-title').innerText = grade + '-cü sinif testləri';
-    document.getElementById('quiz-desc').innerText = grade + '-cü sinif üzrə riyazi-məntiq tapşırıqları və suallar.';
+    document.getElementById('quiz-desc').innerText = grade + '-cü sinif üzrə riyazi-məntiq və intellektual tapşırıqlar.';
     document.getElementById('quiz-kicker').innerText = 'Sinif testləri';
   } else if (exam) {
     document.getElementById('quiz-title').innerText = 'Dil imtahanı: ' + exam.toUpperCase();
-    document.getElementById('quiz-desc').innerText = 'Seçilmiş dil səviyyəsi üzrə qiymətləndirmə testi.';
+    document.getElementById('quiz-desc').innerText = 'Seçilmiş dil səviyyəsi üzrə qrammatika və bilik qiymətləndirməsi.';
     document.getElementById('quiz-kicker').innerText = 'Səviyyə təyinatı';
   }
+
+  // Dinamik nümunə suallar (Hər kateqoriya üçün öz suallarınızı bura əlavə edə bilərsiniz)
+  var QUIZ_META = { title: grade ? (grade + '-cü sinif testi') : (exam ? ('Dil imtahanı: ' + exam) : 'Ümumi Test'), lang: "az" };
+  var QUESTIONS = [
+    {
+      q: "Aşağıdakı ardıcıllıqda növbəti ədəd hansıdır?\n3, 6, 9, 12, ...",
+      options: ["13", "14", "15", "16"],
+      a: 2
+    },
+    {
+      q: "Hansı söz digərlərindən fərqlənir?",
+      options: ["Alma", "Armud", "Gaval", "Stol"],
+      a: 3
+    },
+    {
+      q: "5 ədədinin 4 qatı neçə edər?",
+      options: ["15", "20", "25", "30"],
+      a: 1
+    }
+  ];
+  var FORMSPREE_ENDPOINT = "https://formspree.io/f/mqpkglkb";
+  var TIME_LIMIT_SECONDS = 90 * 60;
+</script>
+
+<!-- Paylaşılan Quiz Mühərriki Ssenari Kodları -->
+<script>
+(function () {
+  var current = 0;
+  var score = 0;
+  var answers = new Array(QUESTIONS.length).fill(null);
+  var student = { name: "", email: "" };
+  var timeRemaining = TIME_LIMIT_SECONDS;
+  var timerInterval = null;
+  var timedOut = false;
+
+  var root = document.getElementById("quiz-root");
+
+  function formatTime(sec) {
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    return m + ":" + (s < 10 ? "0" : "") + s;
+  }
+
+  function startTimer() {
+    if (timerInterval) return;
+    timerInterval = setInterval(function () {
+      timeRemaining--;
+      var el = document.getElementById("timer-display");
+      if (el) {
+        el.textContent = formatTime(Math.max(0, timeRemaining));
+        if (timeRemaining <= 60) el.classList.add("timer-low");
+      }
+      if (timeRemaining <= 0) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timedOut = true;
+        finish();
+      }
+    }, 1000);
+  }
+
+  function stopTimer() {
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  }
+
+  function renderIntro() {
+    var html = '';
+    html += '<div class="quiz-intro" style="text-align: left;">';
+    html += '<p class="quiz-intro-text" style="margin-bottom: 15px;">Nəticəni email ilə almaq və sertifikat əldə etmək üçün adını və emailini qeyd et.</p>';
+    html += '<div class="field" style="margin-bottom: 12px;"><label for="qs-name" style="display:block; margin-bottom:5px; font-weight:600;">Ad, Soyad</label><input type="text" id="qs-name" placeholder="Adınız" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;"></div>';
+    html += '<div class="field" style="margin-bottom: 15px;"><label for="qs-email" style="display:block; margin-bottom:5px; font-weight:600;">Email</label><input type="email" id="qs-email" placeholder="sən@example.com" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;"></div>';
+    html += '<button type="button" id="start-btn" class="go" style="width:100%; justify-content:center; border:none; cursor:pointer; margin-bottom:10px;">Testə başla</button>';
+    html += '<p class="quiz-skip" style="text-align:center;"><a href="#" id="skip-link" style="color:var(--aur-ink-dim); font-size:13px;">Email olmadan davam et</a></p>';
+    html += '</div>';
+    root.innerHTML = html;
+
+    document.getElementById("start-btn").addEventListener("click", function () {
+      student.name = document.getElementById("qs-name").value.trim();
+      student.email = document.getElementById("qs-email").value.trim();
+      startTimer();
+      render();
+    });
+    document.getElementById("skip-link").addEventListener("click", function (e) {
+      e.preventDefault();
+      startTimer();
+      render();
+    });
+  }
+
+  function render() {
+    var item = QUESTIONS[current];
+    var pct = Math.round((current / QUESTIONS.length) * 100);
+
+    var html = '';
+    html += '<div class="quiz-progress-track" style="background:#eee; height:6px; border-radius:3px; margin-bottom:15px;"><div class="quiz-progress-fill" style="width:' + pct + '%; background:var(--aur-spark-2); height:100%; border-radius:3px;"></div></div>';
+    html += '<div class="quiz-count" style="display:flex; justify-content:space-between; font-size:13px; color:var(--aur-ink-dim); margin-bottom:15px;"><span>Sual ' + (current + 1) + ' / ' + QUESTIONS.length + '</span> <span id="timer-display" style="font-weight:600;">' + formatTime(timeRemaining) + '</span></div>';
+    html += '<h2 class="quiz-question" style="font-size:18px; margin-bottom:20px;">' + item.q.replace(/\n/g, '<br>') + '</h2>';
+    html += '<div class="quiz-options" style="display:flex; flex-direction:column; gap:10px; margin-bottom:25px;">';
+    item.options.forEach(function (opt, i) {
+      var checked = answers[current] === i ? ' checked' : '';
+      html += '<label class="quiz-option" style="display:flex; align-items:center; gap:10px; padding:12px; border:1px solid #ddd; border-radius:8px; cursor:pointer;"><input type="radio" name="opt" value="' + i + '"' + checked + '><span>' + opt + '</span></label>';
+    });
+    html += '</div>';
+    html += '<div class="quiz-nav" style="display:flex; justify-content:space-between;">';
+    html += '<button type="button" id="prev-btn" class="go" style="background:transparent; border:1px solid #ccc; color:inherit;' + (current === 0 ? ' opacity:0.5; pointer-events:none;' : '') + '">Geri</button>';
+    html += '<button type="button" id="next-btn" class="go" style="border:none; cursor:pointer;">' + (current === QUESTIONS.length - 1 ? 'Bitir' : 'Növbəti') + '</button>';
+    html += '</div>';
+
+    root.innerHTML = html;
+
+    root.querySelectorAll('input[name="opt"]').forEach(function (input) {
+      input.addEventListener("change", function () {
+        answers[current] = parseInt(this.value, 10);
+      });
+    });
+
+    document.getElementById("next-btn").addEventListener("click", function () {
+      if (answers[current] === null) {
+        alert("Zəhmət olmasa bir cavab seç.");
+        return;
+      }
+      if (current < QUESTIONS.length - 1) {
+        current++;
+        render();
+      } else {
+        finish();
+      }
+    });
+
+    var prevBtn = document.getElementById("prev-btn");
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        if (current > 0) {
+          current--;
+          render();
+        }
+      });
+    }
+  }
+
+  function finish() {
+    stopTimer();
+    score = 0;
+    for (var i = 0; i < QUESTIONS.length; i++) {
+      if (answers[i] === QUESTIONS[i].a) score++;
+    }
+    var pct = Math.round((score / QUESTIONS.length) * 100);
+    var verdict = timedOut ? "Vaxt bitdi. " : "";
+    if (pct >= 80) {
+      verdict += "Əla! Testi uğurla tamamladınız.";
+    } else if (pct >= 55) {
+      verdict += "Yaxşı nəticədir.";
+    } else {
+      verdict += "Mövzunu bir daha təkrar etmək məsləhətdir.";
+    }
+
+    var html = '';
+    html += '<div class="quiz-result" style="text-align:center;">';
+    html += '<h2 style="margin-bottom:10px;">Nəticə: ' + score + ' / ' + QUESTIONS.length + ' (' + pct + '%)</h2>';
+    html += '<p style="margin-bottom:20px; color:var(--aur-ink-dim);">' + verdict + '</p>';
+    html += '<p id="email-status" style="font-size:13px; margin-bottom:15px; color:#666;"></p>';
+    html += '<div class="quiz-result-actions" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">';
+    html += '<button type="button" id="restart-btn" class="go" style="background:transparent; border:1px solid #ccc; color:inherit; cursor:pointer;">Yenidən başla</button>';
+    html += '</div>';
+    html += '</div>';
+    root.innerHTML = html;
+
+    document.getElementById("restart-btn").addEventListener("click", function () {
+      current = 0;
+      score = 0;
+      answers = new Array(QUESTIONS.length).fill(null);
+      timeRemaining = TIME_LIMIT_SECONDS;
+      timedOut = false;
+      renderIntro();
+    });
+
+    sendResultByEmail(pct);
+  }
+
+  function sendResultByEmail(pct) {
+    var statusEl = document.getElementById("email-status");
+    if (!student.email) return;
+    if (statusEl) statusEl.textContent = "Nəticə göndərilir...";
+
+    var data = new FormData();
+    data.append("Ad Soyad", student.name || "(qeyd olunmayıb)");
+    data.append("Email", student.email);
+    data.append("Test", QUIZ_META.title);
+    data.append("Nəticə", score + " / " + QUESTIONS.length + " (" + pct + "%)");
+
+    fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" },
+    })
+      .then(function (response) {
+        if (statusEl) {
+          statusEl.textContent = response.ok ? "Nəticə email ünvanınıza göndərildi." : "Nəticəni göndərmək mümkün olmadı.";
+        }
+      })
+      .catch(function () {
+        if (statusEl) statusEl.textContent = "Nəticəni göndərmək mümkün olmadı.";
+      });
+  }
+
+  renderIntro();
+})();
 </script>
 </body>
 </html>
