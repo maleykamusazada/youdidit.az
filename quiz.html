@@ -38,7 +38,7 @@
 </footer>
 
 <script>
-  // URL parametrlərini oxuyub birbaşa sizin hazırladığınız .js faylını səhifəyə qoşuruq
+  // URL parametrlərini oxuyub birbaşa .js faylını qoşuruq
   const urlParams = new URLSearchParams(window.location.search);
   const grade = urlParams.get('grade');
   const exam = urlParams.get('exam');
@@ -54,12 +54,11 @@
     document.getElementById('quiz-kicker').innerText = 'Səviyyə təyinatı';
   }
 
-  // Dinamik olaraq sizin hazırladığınız 60 suallıq .js faylını yükləyirik
+  // Dinamik olaraq .js faylını yükləyirik
   if (scriptFile) {
     var tag = document.createElement('script');
     tag.src = scriptFile;
     tag.onload = function() {
-      // Fayl yüklənən kimi quiz mühərriki işə düşür
       initQuizEngine();
     };
     document.body.appendChild(tag);
@@ -148,14 +147,16 @@ function initQuizEngine() {
     html += '<h2 style="font-size:18px; margin-bottom:20px;">' + (item.q ? item.q.replace(/\n/g, '<br>') : '') + '</h2>';
     html += '<div style="display:flex; flex-direction:column; gap:10px; margin-bottom:25px;">';
     
-        var opts = item.options || item.variants;
+    // Bütün variant adlandırma variantlarını dəstəkləyən hissə
+    var opts = item.options || item.variants || item.choices || item.cavablar;
     if (opts) {
       opts.forEach(function (opt, i) {
         var checked = answers[current] === i ? ' checked' : '';
-        html += '<label style="display:flex; align-items:center; gap:10px; padding:12px; border:1px solid #ddd; border-radius:8px; cursor:pointer; margin-bottom:8px;"><input type="radio" name="opt" value="' + i + '"' + checked + '><span>' + opt + '</span></label>';
+        var optText = (typeof opt === 'object' && opt !== null) ? (opt.text || opt.answer || opt.title || '') : opt;
+        html += '<label style="display:flex; align-items:center; gap:10px; padding:12px; border:1px solid #ddd; border-radius:8px; cursor:pointer; margin-bottom:8px;"><input type="radio" name="opt" value="' + i + '"' + checked + '><span>' + optText + '</span></label>';
       });
     }
-    
+
     html += '</div>';
     html += '<div style="display:flex; justify-content:space-between;">';
     html += '<button type="button" id="prev-btn" style="padding:8px 16px; background:transparent; border:1px solid #ccc; border-radius:6px; cursor:pointer;' + (current === 0 ? ' opacity:0.5; pointer-events:none;' : '') + '">Geri</button>';
