@@ -3,116 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sinif testləri — Youdidit.az</title>
-<meta name="description" content="3-cü sinifdən 9-cu sinifə qədər məntiq testləri.">
+<title>Test — Youdidit.az</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
     <a href="index.html" class="brand">Youdidit<span class="dot">.az</span></a>
-    <nav class="main-nav" aria-label="Əsas naviqasiya">
+    <nav class="main-nav">
       <a href="index.html">Ana səhifə</a>
-      <a href="resources.html">Resurslar</a>
-      <a href="exams.html">İmtahanlar</a>
-      <a href="sinif-testleri.html" aria-current="page">Sinif testləri</a>
-      <a href="miq-kurikulum.html">MİQ Kurikulum</a>
-      <a href="order.html">Sərbəst iş sifarişi</a>
+      <a href="sinif-testleri.html">Geri qayıt</a>
     </nav>
-    <button class="menu-btn" aria-label="Menyunu aç" aria-expanded="false">Menyu</button>
-  </div>
-  <div class="mobile-nav">
-    <a href="index.html">Ana səhifə</a>
-    <a href="resources.html">Resurslar</a>
-    <a href="exams.html">İmtahanlar</a>
-    <a href="sinif-testleri.html">Sinif testləri</a>
-    <a href="miq-kurikulum.html">MİQ Kurikulum</a>
-    <a href="order.html">Sərbəst iş sifarişi</a>
   </div>
 </header>
 
-<section class="hero" style="padding-bottom:26px;">
-  <div class="wrap">
-    <div class="kicker">Məntiq və riyaziyyat</div>
-    <h1>Sinif testləri</h1>
-    <p class="lede">3-cü sinifdən 9-cu sinifə qədər proqrama uyğun məntiq sualları. Hər test 60 sualdan ibarətdir, asan/orta/çətin qarışıq verilib. Özünü yoxlama rejimi: düşün, cavabı göstər, "Bildim/Bilmədim" seç.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="catalog-grid">
-
-      <div class="catalog-card">
-        <div>
-          <h3>3-cü sinif</h3>
-          <p>Toplama-çıxma, vurma-bölmə, sadə məntiq məsələləri, ardıcıllıqlar.</p>
-        </div>
-        <a class="go" href="quiz.html?grade=3">Testə başla →</a>
-      </div>
-
-      <div class="catalog-card">
-        <div>
-          <h3>4-cü sinif</h3>
-          <p>Perimetr/sahə, orta qiymət, nisbət məsələləri, çoxpilləli məntiq.</p>
-        </div>
-        <a class="go" href="quiz.html?grade=4">Testə başla →</a>
-      </div>
-
-      <div class="catalog-card">
-        <div>
-          <h3>5-ci sinif</h3>
-          <p>Kəsrlər, faizlər, EBOB-EKOB, həndəsə (perimetr/sahə/həcm).</p>
-        </div>
-        <a class="go" href="quiz.html?grade=5">Testə başla →</a>
-      </div>
-
-      <div class="catalog-card">
-        <div>
-          <h3>6-cı sinif</h3>
-          <p>Mənfi ədədlər, nisbət-tənasüb, dairə, silindr/kub həcmi, statistika, tənliklər.</p>
-        </div>
-        <a class="go" href="quiz.html?grade=6">Testə başla →</a>
-      </div>
-
-      <div class="catalog-card">
-        <div>
-          <h3>7-ci sinif</h3>
-          <p>Rasional ədədlər, qüvvətlər, vurma düsturları, tənliklər sistemi, üçbucaq, xətti funksiya, ehtimal.</p>
-        </div>
-        <a class="go" href="quiz.html?grade=7">Testə başla →</a>
-      </div>
-
-      <div class="catalog-card">
-        <div>
-          <h3>8-ci sinif</h3>
-          <p>İrrasional ədədlər, kvadrat tənlik və bərabərsizlik, Pifaqor teoremi, triqonometriya, sahələr.</p>
-        </div>
-        <a class="go" href="quiz.html?grade=8">Testə başla →</a>
-      </div>
-
-      <div class="catalog-card">
-        <div>
-          <h3>9-cu sinif</h3>
-          <p>Köklər və rasional üstlü qüvvət, silsilələr, bərabərsizliklər sistemi, çevrə, vektorlar, ehtimal.</p>
-        </div>
-        <a class="go" href="quiz.html?grade=9">Testə başla →</a>
-      </div>
-
+<section class="hero" style="padding: 40px 20px;">
+  <div class="wrap" style="max-width: 700px;">
+    <div id="quiz-container">
+      <h2 id="quiz-title">Test yüklənir...</h2>
+      <div id="quiz-content" style="margin-top: 20px;"></div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <div>Youdidit.az — tələbələr üçün resurs və imtahan mərkəzi</div>
-    <div>Sual və təkliflər üçün: <a href="mailto:youdiditaz@gmail.com">youdiditaz@gmail.com</a></div>
-  </div>
-</footer>
+<!-- Dinamik olaraq müvafiq sinfin məlumatını və mühərriki qoşuruq -->
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const grade = urlParams.get('grade') || '3';
 
-<script src="script.js"></script>
+  // Scriptləri dinamik yükləyirik
+  const dataScript = document.createElement('script');
+  dataScript.src = `logic-data-${grade}.js`;
+  document.body.appendChild(dataScript);
+
+  dataScript.onload = function() {
+    const engineScript = document.createElement('script');
+    engineScript.src = 'logic-quiz-engine.js';
+    document.body.appendChild(engineScript);
+  };
+</script>
 </body>
 </html>
