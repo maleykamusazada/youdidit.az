@@ -5,45 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Test — Youdidit.az</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=2">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap">
     <a href="index.html" class="brand">Youdidit<span class="dot">.az</span></a>
-    <nav class="main-nav">
-      <a href="index.html">Ana səhifə</a>
-      <a href="sinif-testleri.html">Geri qayıt</a>
-    </nav>
+    <a href="sinif-testleri.html" class="go" style="padding: 6px 12px; font-size: 12px;">← Geri qayıt</a>
   </div>
 </header>
 
-<section class="hero" style="padding: 40px 20px;">
-  <div class="wrap" style="max-width: 700px;">
-    <div id="quiz-container">
-      <h2 id="quiz-title">Test yüklənir...</h2>
-      <div id="quiz-content" style="margin-top: 20px;"></div>
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker" id="quiz-kicker">Onlayn imtahan</div>
+    <h1 id="quiz-title">Test yüklənir...</h1>
+    <p class="lede" id="quiz-desc">Zəhmət olmasa gözləyin, suallar hazırlanır.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="catalog-card" style="max-width: 600px; margin: 0 auto; text-align: center; padding: 40px;">
+      <h3 style="margin-bottom: 15px;">Sual sistemi aktivdir</h3>
+      <p style="margin-bottom: 20px;">Seçdiyiniz istiqamət üzrə test tapşırıqları tezliklə tam yüklənəcək.</p>
+      <a class="go" href="sinif-testleri.html">Digər testlərə bax</a>
     </div>
   </div>
 </section>
 
-<!-- Dinamik olaraq müvafiq sinfin məlumatını və mühərriki qoşuruq -->
+<footer>
+  <div class="wrap">
+    <div>Youdidit.az — tələbələr üçün resurs və imtahan mərkəzi</div>
+    <div>Sual və təkliflər üçün: <a href="mailto:youdiditaz@gmail.com">youdiditaz@gmail.com</a></div>
+  </div>
+</footer>
+
 <script>
   const urlParams = new URLSearchParams(window.location.search);
-  const grade = urlParams.get('grade') || '3';
+  const grade = urlParams.get('grade');
+  const exam = urlParams.get('exam');
 
-  // Scriptləri dinamik yükləyirik
-  const dataScript = document.createElement('script');
-  dataScript.src = `logic-data-${grade}.js`;
-  document.body.appendChild(dataScript);
-
-  dataScript.onload = function() {
-    const engineScript = document.createElement('script');
-    engineScript.src = 'logic-quiz-engine.js';
-    document.body.appendChild(engineScript);
-  };
+  if (grade) {
+    document.getElementById('quiz-title').innerText = grade + '-cü sinif testləri';
+    document.getElementById('quiz-desc').innerText = grade + '-cü sinif üzrə riyazi-məntiq tapşırıqları və suallar.';
+    document.getElementById('quiz-kicker').innerText = 'Sinif testləri';
+  } else if (exam) {
+    document.getElementById('quiz-title').innerText = 'Dil imtahanı: ' + exam.toUpperCase();
+    document.getElementById('quiz-desc').innerText = 'Seçilmiş dil səviyyəsi üzrə qiymətləndirmə testi.';
+    document.getElementById('quiz-kicker').innerText = 'Səviyyə təyinatı';
+  }
 </script>
 </body>
 </html>
