@@ -502,4 +502,10 @@ var QUESTIONS = [
     options: ["Heyvanlar → Buğumayaqlılar → Məməlilər → Primatlar → Homo → Homo", "Heyvanlar → Xordalılar → Məməlilər → Primatlar → Hominidlər → Homo", "Göbələklər → Xordalılar → Məməlilər → Primatlar → Homo → Homo", "Bitkilər → Şöbə → Məməlilər → Primatlar → Homo → Homo sapiens"],
     a: 1
   }
+  var QUIZ_META = {
+  title: "Biologiya 6 — I Fəsil: Bioloji tədqiqat obyektləri (100 sual)"
+};
+
+var QUESTIONS = [
+  // I fəslin 100 sualı
 ];
