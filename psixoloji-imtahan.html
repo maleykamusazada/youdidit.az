@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Psixoloji və Peşə Uyğunluğu İmtahanı — Youdidit.az</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:linear-gradient(135deg,#090b1c,#171033 55%,#08162d);
+  color:#fff;
+  min-height:100vh;
+}
+
+.wrap{
+  max-width:980px;
+  margin:auto;
+  padding:24px 16px 60px;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:24px;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  color:#fff;
+  text-decoration:none;
+}
+
+.back{
+  color:#cfd4ff;
+  text-decoration:none;
+}
+
+.card{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 15px 50px rgba(0,0,0,.25);
+}
+
+h1{
+  font-size:clamp(28px,5vw,46px);
+  margin:0 0 12px;
+}
+
+.lead{
+  color:#c8c9df;
+  line-height:1.6;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:24px;
+}
+
+button,.btn{
+  border:0;
+  border-radius:13px;
+  padding:14px 18px;
+  font-weight:700;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+}
+
+.choose{
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.13);
+  text-align:left;
+}
+
+.choose:hover{
+  background:rgba(255,255,255,.13);
+}
+
+.primary{
+  background:#fff;
+  color:#111;
+}
+
+.muted{
+  color:#aaaed0;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.bar{
+  height:9px;
+  background:#2b2d4a;
+  border-radius:99px;
+  overflow:hidden;
+  margin:15px 0;
+}
+
+.fill{
+  height:100%;
+  background:#8f7cff;
+  width:0;
+  transition:.2s;
+}
+
+.meta{
+  display:flex;
+  justify-content:space-between;
+  color:#bfc4e5;
+  font-size:14px;
+}
+
+.q{
+  font-size:22px;
+  line-height:1.45;
+  margin:24px 0;
+}
+
+.options{
+  display:grid;
+  gap:12px;
+}
+
+.opt{
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.13);
+  text-align:left;
+  font-size:16px;
+}
+
+.opt.selected{
+  outline:2px solid #9a8cff;
+  background:rgba(154,140,255,.15);
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:22px;
+}
+
+.nav button{
+  background:#fff;
+  color:#111;
+}
+
+.nav button:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+.result{
+  text-align:center;
+}
+
+.score{
+  font-size:64px;
+  font-weight:900;
+  margin:10px;
+}
+
+.badge{
+  display:inline-block;
+  padding:10px 16px;
+  border-radius:99px;
+  background:rgba(255,255,255,.1);
+  margin:10px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.note{
+  font-size:13px;
+  color:#9fa4c7;
+  line-height:1.6;
+  margin-top:20px;
+}
+
+@media(max-width:650px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+  .top{
+    align-items:flex-start;
+  }
+
+  .q{
+    font-size:19px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div class="top">
+  <a class="logo" href="index.html">Youdidit.az</a>
+  <a class="back" href="index.html">← Ana səhifə</a>
+</div>
+
+<section id="start" class="card">
+
+<h1>🧠 Psixoloji və Peşə Uyğunluğu İmtahanı</h1>
+
+<p class="lead">
+İş mühitində qərarvermə, ünsiyyət, məsuliyyət,
+problem həlli, etik davranış və peşəkar yanaşmanı
+situasiya əsaslı suallarla yoxla.
+</p>
+
+<div class="grid">
+
+<button class="choose"
+onclick="startExam('HR / Recruiter')">
+👥 HR / Recruiter
+<br>
+<span class="muted">50 sual</span>
+</button>
+
+<button class="choose"
+onclick="startExam('Texniki işçilər')">
+⚙️ Texniki işçilər
+<br>
+<span class="muted">50 sual</span>
+</button>
+
+<button class="choose"
+onclick="startExam('Müəllimlər')">
+🎓 Müəllimlər
+<br>
+<span class="muted">50 sual</span>
+</button>
+
+<button class="choose"
+onclick="startExam('Satış / Müştəri xidməti')">
+💼 Satış / Müştəri xidməti
+<br>
+<span class="muted">50 sual</span>
+</button>
+
+</div>
+
+<p class="note">
+Qeyd: Bu səhifə klinik diaqnostika deyil.
+Nəticə işlə bağlı situasiya və davranış seçimlərinin
+ilkin qiymətləndirilməsidir.
+</p>
+
+</section>
+
+
+<section id="exam" class="card hidden">
+
+<div class="meta">
+  <span id="cat"></span>
+  <span id="count"></span>
+</div>
+
+<div class="bar">
+  <div id="fill" class="fill"></div>
+</div>
+
+<div id="question" class="q"></div>
+
+<div id="options" class="options"></div>
+
+<div class="nav">
+
+<button id="prev" onclick="prevQ()">
+← Geri
+</button>
+
+<button id="next" onclick="nextQ()">
+Növbəti →
+</button>
+
+</div>
+
+</section>
+
+
+<section id="result" class="card hidden result">
+
+<h1>İmtahan tamamlandı 🎉</h1>
+
+<div id="score" class="score"></div>
+
+<div id="badge" class="badge"></div>
+
+<div id="details"></div>
+
+<br>
+
+<button class="primary" onclick="location.reload()">
+Yenidən başla
+</button>
+
+<a
+class="btn"
+href="index.html"
+style="color:#fff;margin-left:8px">
+Ana səhifə
+</a>
+
+<p class="note">
+Bu nəticə peşə uyğunluğu üzrə ilkin özünüqiymətləndirmə üçündür
+və klinik psixoloji diaqnoz və ya elmi validasiya olunmuş
+işə qəbul qərarı kimi təqdim edilməməlidir.
+</p>
+
+</section>
+
+</div>
+
+
+<script>
+
+const QUESTIONS = [
+
+/* =========================
+   HR / RECRUITER
+========================= */
+
+{
+category:"HR / Recruiter",
+q:"Müsahibəyə namizəd əvvəlcədən xəbər vermədən gecikirsə, nə etmək daha düzgündür?",
+options:[
+"Səbəbi soruşmaq və ümumi qiymətləndirmədə nəzərə almaq",
+"Problemi görməməzliyə vurmaq",
+"Şəxsi fikrə əsasən dərhal rədd etmək",
+"Namizədlə emosional şəkildə mübahisə etmək"
+],
+answer:0
+},
+
+{
+category:"HR / Recruiter",
+q:"Menecer zəif namizədi şəxsi münasibətinə görə üstün tutmaq istəyirsə, HR nə etməlidir?",
+options:[
+"Şəxsi münasibəti əsas götürmək",
+"Obyektiv meyar və vəzifəyə uyğunluğu əsas götürmək",
+"Namizədi heç bir qiymətləndirmə aparmadan qəbul etmək",
+"Məsələdən tamamilə uzaq durmaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizəd əvvəlki iş yerini ciddi şəkildə pisləyirsə, nə etmək lazımdır?",
+options:[
+"Namizədin bütün dediklərini dərhal doğru qəbul etmək",
+"Mövzunu dəyişmək",
+"Faktları və namizədin öz rolunu əlavə suallarla araşdırmaq",
+"Namizədi dərhal rədd etmək"
+],
+answer:2
+},
+
+{
+category:"HR / Recruiter",
+q:"Əməkdaş məxfi şikayət edirsə, HR necə davranmalıdır?",
+options:[
+"Şikayəti digər əməkdaşlara danışmaq",
+"Dinləmək, faktları araşdırmaq və prosedura uyğun hərəkət etmək",
+"Şikayəti nəzərə almamaq",
+"Dərhal qarşı tərəfi günahlandırmaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Dostunuz vakansiyaya müraciət edibsə, necə davranmalısınız?",
+options:[
+"Dostunu üstün tutmaq",
+"Maraqlar toqquşmasını bildirmək və obyektiv qiymətləndirmək",
+"Digər namizədlərin nəticələrini ona göstərmək",
+"Heç bir meyar tətbiq etməmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizəd ünsiyyətdə yaxşı, texniki bacarıqda zəif görünürsə, nə etmək lazımdır?",
+options:[
+"Yalnız ünsiyyətinə görə işə qəbul etmək",
+"Namizədi dərhal rədd etmək",
+"Kompetensiyaları sübut edən əlavə qiymətləndirmə aparmaq",
+"Texniki hissəni nəzərə almamaq"
+],
+answer:2
+},
+
+{
+category:"HR / Recruiter",
+q:"Əməkdaşın şəxsi məlumatını həmkarınız soruşur. Nə etməlisiniz?",
+options:[
+"Məlumatı paylaşmaq",
+"Məxfiliyi qorumaq",
+"Məlumatı sosial şəbəkədə paylaşmaq",
+"Hər kəsə göndərmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizəd sualı başa düşmür və cavab vermir. Nə etmək lazımdır?",
+options:[
+"Namizədi dərhal zəif hesab etmək",
+"Sualı aydınlaşdırmaq və yenidən imkan vermək",
+"Müsahibəni dərhal bitirmək",
+"Başqa namizədə keçmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Yeni işçinin nəticələri zəifdirsə, ilk növbədə nə araşdırılmalıdır?",
+options:[
+"Onu dərhal işdən çıxarmaq",
+"Səbəblər, gözləntilər və dəstək ehtiyacı",
+"Digər işçilərlə müqayisə etmək",
+"Problemi gizlətmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Sakit namizəd haqqında necə qərar vermək daha düzgündür?",
+options:[
+"Onu avtomatik zəif hesab etmək",
+"Bir davranışdan nəticə çıxarmamaq və əlavə sübut toplamaq",
+"Yalnız danışqan namizədləri seçmək",
+"Müsahibəni dayandırmaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Emosional əməkdaşla danışarkən necə davranmaq lazımdır?",
+options:[
+"Onu susdurmaq",
+"Sakit dinləmək və vəziyyəti anlamağa çalışmaq",
+"Emosiyasını tənqid etmək",
+"Söhbəti dərhal bitirmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Vaxt çox məhduddursa, HR nəyi qorumalıdır?",
+options:[
+"Qiymətləndirmə meyarlarını və prioritetləri",
+"Yalnız sürəti",
+"Şəxsi münasibətləri",
+"Ən asan namizədi"
+],
+answer:0
+},
+
+{
+category:"HR / Recruiter",
+q:"CV-də göstərilən bacarıq sübut olunmayıbsa, nə etmək düzgündür?",
+options:[
+"Bacarıq varmış kimi qəbul etmək",
+"Əlavə sual və praktik sübut istəmək",
+"CV-ni yoxlamamaq",
+"Namizədi dərhal qəbul etmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Əməkdaş HR qərarı ilə razılaşmırsa, nə etmək lazımdır?",
+options:[
+"Onu dinləməmək",
+"Arqumentlərini dinləmək və qiymətləndirmək",
+"Dərhal mübahisə etmək",
+"Şikayəti gizlətmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"HR işə qəbulda səhv etdiyini anlayırsa, nə etməlidir?",
+options:[
+"Səhvi gizlətmək",
+"Səhvi qəbul edib düzəldici tədbir görmək",
+"Başqasını günahlandırmaq",
+"Heç nə etməmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizəd keçmiş rəhbərin ədalətsiz olduğunu deyirsə, nə araşdırılmalıdır?",
+options:[
+"Yalnız rəhbərin səhv etdiyini qəbul etmək",
+"Namizədin öz davranış və rolunu da araşdırmaq",
+"Mövzunu tamamilə bağlamaq",
+"Namizədi dərhal rədd etmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"İki əməkdaş arasında konflikt yaranıbsa, HR ilk növbədə nə etməlidir?",
+options:[
+"Bir tərəfi dərhal günahlandırmaq",
+"Faktları və hər iki tərəfin mövqeyini anlamaq",
+"Konflikti görməməzlikdən gəlmək",
+"Şayiələrə əsaslanmaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizədin şəxsi həyatı haqqında məlumat ortaya çıxırsa, nə etmək lazımdır?",
+options:[
+"Bu məlumatı qiymətləndirmənin əsasına çevirmək",
+"Mövzunu peşə və iş tələbləri çərçivəsində saxlamaq",
+"Məlumatı digər əməkdaşlara danışmaq",
+"Namizəddən daha çox şəxsi məlumat tələb etmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizəd haqqında mənfi şayiə eşidilibsə, nə etmək lazımdır?",
+options:[
+"Şayiəni fakt kimi qəbul etmək",
+"Mənbəni və faktları araşdırmaq",
+"Şayiəni yaymaq",
+"Namizədi avtomatik rədd etmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Aktiv dinləmənin əsas göstəricisi nədir?",
+options:[
+"Qarşı tərəfin sözünü kəsmək",
+"Dediklərini anlamaq və uyğun suallar vermək",
+"Yalnız öz fikrini izah etmək",
+"Söhbəti tez bitirmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizədin görünüşü şəxsi zövqə uyğun deyil, amma iş tələblərinə uyğundur. Nə etmək lazımdır?",
+options:[
+"Şəxsi zövqü əsas götürmək",
+"Obyektiv iş meyarlarından istifadə etmək",
+"Namizədi görünüşünə görə rədd etmək",
+"Digər namizədlərdən soruşmaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Qərəzin qarşısını almağın yaxşı üsulu hansıdır?",
+options:[
+"Şəxsi təəssürata əsaslanmaq",
+"Standart meyar və strukturlaşdırılmış suallardan istifadə etmək",
+"İlk təəssürata görə qərar vermək",
+"Namizədləri müqayisə etməmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Əməkdaş həmişə gecikirsə, HR nə etməlidir?",
+options:[
+"Dərhal cəza vermək",
+"Səbəbi və təkrarlanma vəziyyətini araşdırmaq",
+"Problemi gizlətmək",
+"Digər işçiləri günahlandırmaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizəd “məni mütləq işə götürəcəksiniz?” deyirsə, necə cavab vermək lazımdır?",
+options:[
+"100% işə qəbul ediləcəyini vəd etmək",
+"Qərarın tələblər və qiymətləndirmə əsasında veriləcəyini bildirmək",
+"Namizədi qorxutmaq",
+"Suala cavab verməmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"HR üçün emosional intellekt nədir?",
+options:[
+"Emosiyaları gizlətmək",
+"Emosiyaları tanımaq və idarə etmək",
+"İnsanlarla heç danışmamaq",
+"Yalnız məntiqi qərar vermək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Menecer işçinin şəxsi məlumatını istəyir, amma məqsəd aydın deyil. Nə etmək lazımdır?",
+options:[
+"Məlumatı dərhal göndərmək",
+"Məqsədi və məlumatın uyğunluğunu dəqiqləşdirmək",
+"Məlumatı bütün komandaya göndərmək",
+"Məsələni sosial mediada paylaşmaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizəd “bilmirəm” deyirsə, nəyi nəzərə almaq lazımdır?",
+options:[
+"Namizədi avtomatik zəif hesab etmək",
+"Cavabın kontekstini və dürüstlüyünü də qiymətləndirmək",
+"Müsahibəni dərhal bitirmək",
+"Namizədi alçaltmaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Əməkdaş ağlayırsa, HR necə davranmalıdır?",
+options:[
+"Onu danlamaq",
+"Sakitləşdirmək və dinləmək",
+"Söhbəti dərhal bitirmək",
+"Başqalarının yanına göndərmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Çoxlu namizədi qiymətləndirərkən hansı üsul effektivdir?",
+options:[
+"Yaddaşa güvənmək",
+"Prioritet, qeydlər və strukturlaşdırılmış izləmə aparmaq",
+"Yalnız ilk namizədi seçmək",
+"Şəxsi simpatiyaya əsaslanmaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Əməkdaşın şikayəti faktlarla dəstəklənirsə, nə etmək lazımdır?",
+options:[
+"Şikayəti gizlətmək",
+"Sənədləşdirmək və araşdırmaq",
+"Dərhal qarşı tərəfi günahlandırmaq",
+"Şikayətçini susdurmaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizəd ölçülə bilən nəticələr göstərirsə, bunun üstünlüyü nədir?",
+options:[
+"Şəxsi təəssüratı artırır",
+"Obyektiv qiymətləndirməyə sübut verir",
+"Qiymətləndirməni lazımsız edir",
+"Namizədə avtomatik iş verir"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Komanda üzvü HR-in səhvini göstərirsə, necə reaksiya vermək lazımdır?",
+options:[
+"Onu susdurmaq",
+"Yoxlamaq və konstruktiv müzakirə etmək",
+"Şəxsi qəbul etmək",
+"Problemi gizlətmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Çoxlu müraciət olduqda necə seçim edilməlidir?",
+options:[
+"İlk gələnləri seçmək",
+"Əvvəlcədən müəyyən edilmiş meyarlardan istifadə etmək",
+"Şəxsi simpatiyaya əsaslanmaq",
+"CV-lərə baxmamaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizədin maaş gözləntisi büdcədən yüksəkdirsə, nə etmək düzgündür?",
+options:[
+"Namizədi alçaltmaq",
+"Açıq şəkildə gözlənti və imkanları müzakirə etmək",
+"Maaşı gizlətmək",
+"Dərhal söhbəti bitirmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"İşə aid olmayan şəxsi məlumatı qiymətləndirmədə necə istifadə etmək lazımdır?",
+options:[
+"Əsas meyar etmək",
+"Qiymətləndirmədən kənarda saxlamaq",
+"Komandaya yaymaq",
+"Namizədə qarşı istifadə etmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Bir neçə təcili HR tapşırığı gəlirsə, nə etmək lazımdır?",
+options:[
+"Hamısını eyni anda etmək",
+"Prioritetləri müəyyənləşdirmək",
+"Ən asanını seçmək",
+"Heç birini etməmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"İş qaydası əməkdaşa ədalətsiz görünürsə, HR nə etməlidir?",
+options:[
+"Əməkdaşı dinləməmək",
+"Səbəbi dinləmək və qaydanın tətbiqini izah etmək",
+"Qaydanı gizlətmək",
+"Dərhal cəza vermək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"İşə qəbul qərarı əsasən nəyə söykənməlidir?",
+options:[
+"Şəxsi simpatiyaya",
+"Faktlar, kompetensiyalar və vəzifə tələblərinə",
+"Namizədin dostlarına",
+"İlk təəssürata"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Əməkdaş həmkarının cəzalandırılmasını istəyirsə, HR nə etməlidir?",
+options:[
+"Dərhal cəza vermək",
+"Hər iki tərəfi araşdırmaq",
+"Yalnız şikayətçiyə inanmaq",
+"Məsələni yaymaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizəd çoxlu sual verirsə, HR nəyi anlamağa çalışmalıdır?",
+options:[
+"Onu problemli hesab etmək",
+"Gözləntilərini və maraqlarını anlamaq",
+"Sual verməsinə mane olmaq",
+"Müsahibəni bitirmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizəd öz səhvini etiraf edirsə, HR nəyi qiymətləndirməlidir?",
+options:[
+"Yalnız səhvi",
+"Kontekst, məsuliyyət və düzəltmə yanaşmasını",
+"Şəxsi həyatını",
+"Namizədin görünüşünü"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Məxfi məlumat kimlə paylaşılmalıdır?",
+options:[
+"Hər kəslə",
+"Lazım olduğu halda səlahiyyətli və uyğun şəxslərlə",
+"Dostlarla",
+"Sosial şəbəkədə"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Həssas işçi məsələsini hamının qarşısında müzakirə etmək istəyən menecerə nə demək düzgündür?",
+options:[
+"Məsələni hamının qarşısında danışmaq",
+"Məsələni məxfi və uyğun şəraitdə müzakirə etməyi təklif etmək",
+"Məlumatı komandaya göndərmək",
+"İşçini hamının qarşısında sorğuya çəkmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Əməkdaş eyni səhvi təkrar edir. Nə araşdırılmalıdır?",
+options:[
+"Dərhal işdən çıxarmaq",
+"Səbəbi, təlimi və iş şəraitini",
+"Yalnız əməkdaşın xarakterini",
+"Digər işçiləri"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Qısa müddətdə qeyri-real nəticə tələb olunur. HR nə etməlidir?",
+options:[
+"Real imkanları, riskləri və prioritetləri müzakirə etmək",
+"Nəticəni saxtalaşdırmaq",
+"İşçiləri günahlandırmaq",
+"Problemi gizlətmək"
+],
+answer:0
+},
+
+{
+category:"HR / Recruiter",
+q:"Namizəd qərarla razılaşmır və mübahisə edir. HR nə etməlidir?",
+options:[
+"Mübahisəni artırmaq",
+"Dinləmək və peşəkar müzakirə aparmaq",
+"Namizədi təhqir etmək",
+"Söhbəti dərhal bitirmək"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Sağlam HR qərar modeli hansıdır?",
+options:[
+"Şəxsi simpatiya",
+"Faktlar, obyektiv meyarlar, kontekst və peşəkar mühakimə",
+"İlk təəssürat",
+"Şayiələr"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Əməkdaş səhv etdiyini deyib kömək istəyirsə, nə etmək lazımdır?",
+options:[
+"Onu günahlandırmaq",
+"Vəziyyəti qiymətləndirib düzəltmək və təkrarlanmanın qarşısını almaq",
+"Səhvi gizlətmək",
+"Başqasını günahlandırmaq"
+],
+answer:1
+},
+
+{
+category:"HR / Recruiter",
+q:"Yaxşı HR mütəxəssisi nəyi balanslaşdırmalıdır?",
+options:[
+"Yalnız biznesi",
+"İnsanları və biznesi obyektiv, etik və peşəkar şəkildə",
+"Yalnız işçini",
+"Yalnız rəhbərin istəyini"
+],
+answer:1
+},
+
+/* =========================
+   TEXNİKİ İŞÇİLƏR
+========================= */
+
+{
+category:"Texniki işçilər",
+q:"Avadanlıqdan qeyri-adi səs gəlirsə, ilk addım nədir?",
+options:[
+"İşi sürətlə davam etdirmək",
+"Təhlükəsiz şəkildə yoxlamaq və bildirmək",
+"Problemi gizlətmək",
+"Avadanlığı nəzarətsiz saxlamaq"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Texniki təlimatı başa düşmürsünüzsə, nə etməlisiniz?",
+options:[
+"Təxmin edib davam etmək",
+"Dəqiqləşdirici sual vermək",
+"Qaydanı dəyişmək",
+"Problemi gizlətmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Təhlükəsizlik qaydası pozulursa, nə etmək lazımdır?",
+options:[
+"İşi sürətləndirmək",
+"Təhlükəsizliyi təmin edib məsələni bildirmək",
+"Heç nə etməmək",
+"Qaydanı görməməzlikdən gəlmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Naməlum texniki nasazlıq yaranıb. Ən düzgün yanaşma hansıdır?",
+options:[
+"Təsadüfi hissələri dəyişmək",
+"Sistemli diaqnostika aparmaq və lazım gəlsə dəstək almaq",
+"Problemi gizlətmək",
+"İşi dayandırmadan risk etmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"İş sürəti ilə təhlükəsizlik arasında seçim varsa, nə üstün tutulmalıdır?",
+options:[
+"Sürət",
+"Təhlükəsizlik",
+"Şəxsi rahatlıq",
+"Rəhbərin əhvalı"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Sürətli iş və dəqiqlik arasında seçimdə nə üstün tutulmalıdır?",
+options:[
+"Sürət",
+"Dəqiqlik",
+"Təxmin",
+"Şəxsi rahatlıq"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Hesabatda kiçik səhv tapmısınız. Nə etməlisiniz?",
+options:[
+"Səhvi gizlətmək",
+"Düzəltmək və bildirmək",
+"Başqasını günahlandırmaq",
+"Hesabatı silmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Avadanlıqda problem təkrar yaranırsa, nə araşdırılmalıdır?",
+options:[
+"Yalnız son nəticə",
+"Kök səbəb",
+"İşçinin şəxsi həyatı",
+"Problemi görməməzlikdən gəlmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Təcili tapşırıq zamanı həmkarınız kömək istəyir. Nə etməlisiniz?",
+options:[
+"Onu tamamilə rədd etmək",
+"Təciliyyəti qiymətləndirib kömək və ya düzgün yönləndirmə etmək",
+"Öz işinizi riskə atmaq",
+"Problemi gizlətmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Menecer qərarınızın səhv olduğunu deyir. Nə etmək düzgündür?",
+options:[
+"Mübahisə etmək",
+"Sakit şəkildə əsaslandırmanı və məlumatları təqdim etmək",
+"Söhbəti tərk etmək",
+"Problemi gizlətmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Vaxt məhdudiyyəti olan gözlənilməz problem yaranıb. Nə etmək lazımdır?",
+options:[
+"Panikaya düşmək",
+"Problemi qiymətləndirib prioritetləşdirmək",
+"Problemi gizlətmək",
+"İşi təsadüfi görmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Fərdi qoruyucu vasitə narahatdırsa, nə etmək lazımdır?",
+options:[
+"İstifadə etməmək",
+"Düzgün istifadə edib narahatlığı bildirmək",
+"Qoruyucu vasitəni dəyişdirmək",
+"Təhlükəni görməməzlikdən gəlmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Həmkarınız səhvini gizlətməyinizi istəyir. Nə etməlisiniz?",
+options:[
+"Səhvi gizlətmək",
+"Müvafiq qaydada bildirmək",
+"Başqasına danışmaq",
+"Səhvi dəyişdirmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Yeni texnologiya tətbiq olunur. Nə etmək daha düzgündür?",
+options:[
+"Öyrənməmək",
+"Öyrənmək və təlim almaq",
+"Əvvəlki üsulu gizlicə davam etdirmək",
+"Yeni sistemi rədd etmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Göstəricilər bir-biri ilə uyğun gəlmir. Nə etmək lazımdır?",
+options:[
+"Təsadüfi rəqəm seçmək",
+"Məlumatı və ölçməni yoxlamaq",
+"Uyğunsuzluğu gizlətmək",
+"İşi dərhal bitmiş saymaq"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Rəhbərin verdiyi müddət real görünmürsə, nə etmək lazımdır?",
+options:[
+"Risk və lazım olan vaxt barədə məlumat vermək",
+"Problemi gizlətmək",
+"İşi keyfiyyətsiz görmək",
+"Heç nə deməmək"
+],
+answer:0
+},
+
+{
+category:"Texniki işçilər",
+q:"Həmkar təhlükəsizlik qaydasını pozursa, nə etmək lazımdır?",
+options:[
+"Susmaq",
+"Riskin qarşısını almaq və qaydaya uyğun bildirmək",
+"Onu ələ salmaq",
+"Qaydanı dəyişmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Dəyişiklik üçün icazə lazımdırsa, nə etmək lazımdır?",
+options:[
+"Özbaşına dəyişiklik etmək",
+"İcazəni gözləmək",
+"Qaydanı pozmaq",
+"Heç kimə deməmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Təkrarlanan və yorucu işdə nə vacibdir?",
+options:[
+"Standartları və uyğun fasilə/iş rejimini qorumaq",
+"Fasiləsiz işləmək",
+"Standartları azaltmaq",
+"Təhlükəsizliyi unutmaq"
+],
+answer:0
+},
+
+{
+category:"Texniki işçilər",
+q:"İlk həll etdiyiniz üsul işləmədi. Nə etməlisiniz?",
+options:[
+"Eyni şeyi sonsuz təkrarlamaq",
+"Səbəbləri araşdırmaq",
+"Problemi gizlətmək",
+"Başqasını günahlandırmaq"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Texniki prosesi başqasına izah edərkən necə danışmaq lazımdır?",
+options:[
+"Qarışıq izah etmək",
+"Addımları və təhlükəsizlik məqamlarını aydın izah etmək",
+"Yalnız terminlərdən istifadə etmək",
+"Heç nə izah etməmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Texniki işdə dəqiqlik niyə vacibdir?",
+options:[
+"Yalnız görünüş üçün",
+"Səhv və risklərin qarşısını almaq üçün",
+"İşi gecikdirmək üçün",
+"Rəhbəri razı salmaq üçün"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Bir neçə tapşırıq təzyiq altında gəlirsə, nə etmək lazımdır?",
+options:[
+"Hamısını təsadüfi etmək",
+"Prioritetləşdirmək",
+"Heç birini etməmək",
+"Yalnız asan tapşırığı seçmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Həmkar texniki qərarınızla razılaşmırsa, nə etmək lazımdır?",
+options:[
+"Mübahisə etmək",
+"Arqument və məlumatları müqayisə etmək",
+"Onu susdurmaq",
+"Problemi gizlətmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Təhlükəli vəziyyət yaranıbsa, işi dayandırmaq lazım gələ bilərmi?",
+options:[
+"Xeyr, sürət daha vacibdir",
+"Bəli, təhlükəsizlik prioritetdir",
+"Yalnız rəhbər yoxdursa",
+"Yalnız iş bitəndən sonra"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Texniki termini bilmirsinizsə, nə etmək lazımdır?",
+options:[
+"Təxmin etmək",
+"Araşdırmaq və yoxlamaq",
+"Termini dəyişmək",
+"Heç nə deməmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Sənəddə uyğunsuzluq varsa, nə etmək lazımdır?",
+options:[
+"Uyğunsuzluğu gizlətmək",
+"Mənbəni və məlumatı yoxlamaq",
+"Rəqəmi təsadüfi dəyişmək",
+"Sənədi silmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Öz səhviniz işin gecikməsinə səbəb olubsa, nə etməlisiniz?",
+options:[
+"Səhvi gizlətmək",
+"Səbəb, nəticə və həll barədə məlumat vermək",
+"Başqasını günahlandırmaq",
+"Problemi unutmaq"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Komandada texniki fikir ayrılığı varsa, necə həll etmək lazımdır?",
+options:[
+"Şəxsi münasibətə görə",
+"Fakt və texniki arqumentlərlə müqayisə etmək",
+"Ən çox danışanı seçmək",
+"Mübahisəni artırmaq"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Qayda məntiqsiz görünürsə, nə etmək lazımdır?",
+options:[
+"Qaydanı gizlicə pozmaq",
+"Səbəbi aydınlaşdırmaq və qaydaya əməl etmək",
+"Qaydanı özbaşına dəyişmək",
+"Heç kimə deməmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Texniki baxım vaxtıdır, amma iş çoxdur. Nə etmək lazımdır?",
+options:[
+"Baxımı təxirə salmaq",
+"Tələb olunan baxımı yerinə yetirmək",
+"Problemi gizlətmək",
+"Avadanlığı nəzarətsiz saxlamaq"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Həmkarınız bilmədiyiniz texniki məsləhəti istəyir. Nə etməlisiniz?",
+options:[
+"Təxmin etmək",
+"Bilmədiyinizi deyib mütəxəssisə yönləndirmək",
+"Yanlış cavab vermək",
+"Məsələni gizlətmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Bir neçə texniki həll arasında seçim edərkən nə nəzərə alınmalıdır?",
+options:[
+"Yalnız sürət",
+"Risk, nəticə, resurs və təhlükəsizlik",
+"Şəxsi rahatlıq",
+"Ən ucuz variant"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Menecerin tənqidi ilə qismən razı deyilsiniz. Nə etməlisiniz?",
+options:[
+"Menecerlə mübahisə etmək",
+"Nümunə və məlumatlarla mövqeyinizi izah etmək",
+"Söhbəti tərk etmək",
+"Tənqidi gizlətmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Yeni təhlükə aşkar olunub. Nə qiymətləndirilməlidir?",
+options:[
+"Yalnız görünüşü",
+"Ehtimal və nəticənin ciddiliyi",
+"Kiminsə şəxsi fikri",
+"İşçinin əhvalı"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Alət nasazdırsa, nə etmək lazımdır?",
+options:[
+"İstifadəyə davam etmək",
+"Təhlükəsiz yoxlamaq, istifadədən çıxarmaq və bildirmək",
+"Problemi gizlətmək",
+"Başqasına vermək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Yeni əməkdaş çətinlik çəkirsə, nə etmək lazımdır?",
+options:[
+"Onu tək buraxmaq",
+"Düzgün və təhlükəsiz üsulu göstərmək",
+"Səhvlərinə gülmək",
+"İşi onun əvəzinə gizlicə görmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Hesabat üçün məlumat çatmırsa, nə etmək lazımdır?",
+options:[
+"Təxmin etmək",
+"Məlumatı əldə etmək və yoxdursa bunu qeyd etmək",
+"Rəqəm uydurmaq",
+"Hesabatı saxtalaşdırmaq"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Şəxsi problem diqqətinizi təhlükəli işdən yayındırırsa, nə etmək lazımdır?",
+options:[
+"İşə davam etmək",
+"Təhlükəsizlik tələb edirsə fasilə/dəstək məsələsini həll etmək",
+"Problemi gizlətmək",
+"Daha sürətli işləmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Yaxşı texniki işçini ən yaxşı xarakterizə edən nədir?",
+options:[
+"Yalnız sürət",
+"Dəqiqlik, təhlükəsizlik, məsuliyyət və problem həlli",
+"Yalnız fiziki güc",
+"Rəhbərə həmişə razı olmaq"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Problem müvəqqəti həllərlə təkrar qayıdırsa, nə etmək lazımdır?",
+options:[
+"Müvəqqəti həlli təkrarlamaq",
+"Kök səbəbi araşdırmaq",
+"Problemi gizlətmək",
+"Avadanlığı dəyişmədən istifadə etmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Riskli tapşırıq verilibsə, nə etmək lazımdır?",
+options:[
+"Səssizcə başlamaq",
+"Riski bildirmək və təhlükəsiz üsulu dəqiqləşdirmək",
+"Riskə məhəl qoymamaq",
+"Qaydanı pozmaq"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Konstruktiv texniki düzəliş necə edilməlidir?",
+options:[
+"İnsanı günahlandırmaqla",
+"Məlumatı yoxlayıb səhvi düzəltməklə",
+"Səhvi gizlətməklə",
+"Problemi başqasına ötürməklə"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Yeni prosedur daha çətindirsə, nə etmək lazımdır?",
+options:[
+"Proseduru pozmaq",
+"Öyrənmək və aydınlaşdırmaq",
+"Əvvəlki qaydanı gizlicə tətbiq etmək",
+"Heç nə etməmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Etibarlı texniki qərar üçün hansı məlumat uyğundur?",
+options:[
+"Təxmin",
+"Yoxlanmış məlumat və prosedurlar",
+"Şayiə",
+"Şəxsi hiss"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Stressli həmkarın səhv etmə ehtimalı varsa, nə etmək lazımdır?",
+options:[
+"Onu tənqid etmək",
+"Dəstək olmaq və təhlükəsizliyi qorumaq",
+"Onu tək buraxmaq",
+"Səhvi gizlətmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"“Biz həmişə belə etmişik” yanaşmasının problemi nədir?",
+options:[
+"Heç bir problemi yoxdur",
+"Yeni riskləri və daha yaxşı üsulları nəzərdən qaçıra bilər",
+"İşi sürətləndirir",
+"Standartları artırır"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Ciddi texniki səhv baş veribsə, nə etmək lazımdır?",
+options:[
+"Səhvi gizlətmək",
+"Təhlükəni dayandırmaq, faktları toplamaq və araşdırmaq",
+"Başqasını günahlandırmaq",
+"İşi daha sürətli davam etdirmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Sizdən təhlükəsizlik qaydasını pozmaq tələb olunursa, nə etməlisiniz?",
+options:[
+"Qaydanı pozmaq",
+"Təhlükəsizliyi qoruyub alternativ həll təklif etmək",
+"Heç nə deməmək",
+"Problemi gizlətmək"
+],
+answer:1
+},
+
+{
+category:"Texniki işçilər",
+q:"Yüksək keyfiyyətli texniki işin əsası nədir?",
+options:[
+"Yalnız sürət",
+"Təhlükəsizlik, dəqiqlik, məsuliyyət və məntiqi problem həlli",
+"Yalnız ucuzluq",
+"Rəhbərin istəyinə kor-koranə əməl etmək"
+],
+answer:1
+},
+
+];
