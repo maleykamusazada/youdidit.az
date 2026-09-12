@@ -1005,5 +1005,4 @@ var QUESTIONS = [
     a: 1
 
   }
-
 ];
