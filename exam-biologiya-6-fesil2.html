@@ -1,74 +1,1197 @@
 <!DOCTYPE html>
+
 <html lang="az">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Biologiya 6 — II Fəsil imtahanı — Youdidit.az</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style.css">
+
 <style>
-.quiz-wrap { max-width: 640px; margin: 0 auto; padding: 34px 20px 60px; }
-.quiz-progress-track { height: 6px; background: var(--sage); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
-.quiz-progress-fill { height: 100%; background: var(--gold); transition: width 0.25s ease; }
-.quiz-count { font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 14px; }
-.quiz-question { font-size: 1.2rem; margin-bottom: 18px; }
-.quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-.quiz-option { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 3px; padding: 12px 14px; cursor: pointer; font-size: 0.98rem; background: var(--white); }
-.quiz-option:has(input:checked) { border-color: var(--gold); background: var(--sage); }
-.quiz-option input { accent-color: var(--forest); width: 17px; height: 17px; flex: 0 0 auto; }
-.quiz-nav { display: flex; justify-content: space-between; gap: 12px; }
-.quiz-result { text-align: center; padding: 30px 0; }
-.quiz-result h2 { font-size: 1.6rem; }
-.quiz-result p.ok { color: var(--forest); }
-.quiz-result p.err { color: #9A3B2E; }
-.quiz-intro-text { color: var(--ink-soft); font-size: 0.92rem; margin-bottom: 18px; }
-.quiz-intro .field { margin-bottom: 14px; }
-.quiz-intro .btn { width: 100%; margin-top: 6px; }
-.quiz-skip { text-align: center; margin-top: 12px; }
-.quiz-skip a { font-size: 0.85rem; color: var(--ink-soft); text-decoration: underline; }
-.quiz-email-status { font-size: 0.85rem; color: var(--ink-soft); margin-top: 10px; }
-.quiz-result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
-@media (min-width: 420px) { .quiz-result-actions { flex-direction: row; justify-content: center; } .quiz-result-actions .btn { flex: 1; } }
-.timer-display { margin-left: auto; font-weight: 600; color: var(--forest); background: var(--sage); padding: 2px 9px; border-radius: 10px; font-variant-numeric: tabular-nums; }
-.timer-display.timer-low { color: #9A3B2E; background: #F7E3E0; }
-.quiz-count { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.quiz-wrap {
+
+  max-width: 640px;
+
+  margin: 0 auto;
+
+  padding: 34px 20px 60px;
+
+}
+
+.card {
+
+  background: #ffffff;
+
+  color: #111111;
+
+  border-radius: 16px;
+
+  padding: 24px;
+
+  box-shadow: 0 4px 20px rgba(0,0,0,.25);
+
+}
+
+.hidden {
+
+  display: none !important;
+
+}
+
+.quiz-intro h2,
+
+.quiz-result h2 {
+
+  color: #111111;
+
+  margin-bottom: 12px;
+
+}
+
+.quiz-intro-text {
+
+  color: #333333;
+
+  font-size: .92rem;
+
+  line-height: 1.5;
+
+  margin-bottom: 18px;
+
+}
+
+.field {
+
+  margin-bottom: 14px;
+
+}
+
+.field label {
+
+  display: block;
+
+  color: #111111;
+
+  font-weight: 600;
+
+  font-size: .9rem;
+
+  margin-bottom: 6px;
+
+}
+
+.input {
+
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border: 1px solid #bbb;
+
+  border-radius: 8px;
+
+  font-size: .95rem;
+
+  color: #111111;
+
+  background: #ffffff;
+
+}
+
+.input:focus {
+
+  outline: none;
+
+  border-color: #6b4fc9;
+
+}
+
+.btn {
+
+  border: 0;
+
+  border-radius: 999px;
+
+  padding: 11px 18px;
+
+  background: #6b4fc9;
+
+  color: #ffffff;
+
+  font-size: .9rem;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+.btn:hover {
+
+  opacity: .9;
+
+}
+
+.btn.secondary {
+
+  background: #eeeeee;
+
+  color: #111111;
+
+}
+
+.error {
+
+  color: #b42318;
+
+  font-size: .85rem;
+
+  margin: 8px 0;
+
+}
+
+.quiz-progress-track {
+
+  height: 7px;
+
+  background: #dddddd;
+
+  border-radius: 5px;
+
+  overflow: hidden;
+
+  margin-bottom: 12px;
+
+}
+
+.quiz-progress-fill {
+
+  height: 100%;
+
+  width: 0%;
+
+  background: #6b4fc9;
+
+  transition: width .25s ease;
+
+}
+
+.quiz-count {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  color: #222222;
+
+  font-size: .85rem;
+
+  margin-bottom: 16px;
+
+}
+
+.timer-display {
+
+  margin-left: auto;
+
+  font-weight: 700;
+
+  color: #111111;
+
+  background: #eeeeee;
+
+  padding: 4px 10px;
+
+  border-radius: 10px;
+
+  font-variant-numeric: tabular-nums;
+
+}
+
+.timer-display.timer-low {
+
+  color: #b42318;
+
+  background: #fde8e8;
+
+}
+
+.quiz-question {
+
+  font-size: 1.2rem;
+
+  line-height: 1.5;
+
+  margin-bottom: 18px;
+
+  color: #111111;
+
+  background: #ffffff;
+
+  padding: 15px;
+
+  border-radius: 8px;
+
+}
+
+.quiz-options {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-bottom: 24px;
+
+}
+
+.quiz-option {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  border: 1px solid #444;
+
+  border-radius: 8px;
+
+  padding: 14px 16px;
+
+  cursor: pointer;
+
+  font-size: .98rem;
+
+  background: #ffffff;
+
+  color: #111111;
+
+  line-height: 1.4;
+
+}
+
+.quiz-option span {
+
+  color: #111111;
+
+}
+
+.quiz-option:has(input:checked) {
+
+  border-color: #6b4fc9;
+
+  background: #eee8ff;
+
+  color: #111111;
+
+}
+
+.quiz-option input {
+
+  accent-color: #6b4fc9;
+
+  width: 17px;
+
+  height: 17px;
+
+  flex: 0 0 auto;
+
+}
+
+.quiz-nav {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+}
+
+.quiz-result {
+
+  text-align: center;
+
+  padding: 20px 0;
+
+  color: #111111;
+
+}
+
+.quiz-result h2 {
+
+  font-size: 1.6rem;
+
+}
+
+.quiz-result p {
+
+  color: #111111;
+
+  line-height: 1.6;
+
+}
+
+.quiz-result-actions {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-top: 18px;
+
+}
+
+@media (min-width: 420px) {
+
+  .quiz-result-actions {
+
+    flex-direction: row;
+
+    justify-content: center;
+
+  }
+
+  .quiz-result-actions .btn {
+
+    flex: 1;
+
+  }
+
+}
+
 </style>
+
 </head>
+
 <body>
+
 <header class="site-header">
-<div class="wrap">
-<a href="index.html" class="brand">Youdidit<span class="dot">.az</span></a>
-<nav class="main-nav" aria-label="Əsas naviqasiya">
-<a href="index.html">Ana səhifə</a>
-<a href="resources.html">Resurslar</a>
-<a href="exams.html">İmtahanlar</a>
-<a href="sinif-testleri.html" aria-current="page">Sinif testləri</a>
-<a href="order.html">Sərbəst iş sifarişi</a>
-</nav>
-<button class="menu-btn" aria-label="Menyunu aç" aria-expanded="false">Menyu</button>
-</div>
-<div class="mobile-nav">
-<a href="index.html">Ana səhifə</a>
-<a href="resources.html">Resurslar</a>
-<a href="exams.html">İmtahanlar</a>
-<a href="sinif-testleri.html">Sinif testləri</a>
-<a href="order.html">Sərbəst iş sifarişi</a>
-</div>
+
+  <div class="wrap">
+
+    <a href="index.html" class="brand">
+
+      Youdidit<span class="dot">.az</span>
+
+    </a>
+
+    <nav class="main-nav" aria-label="Əsas naviqasiya">
+
+      <a href="index.html">Ana səhifə</a>
+
+      <a href="resources.html">Resurslar</a>
+
+      <a href="exams.html">İmtahanlar</a>
+
+      <a href="sinif-testleri.html" aria-current="page">Sinif testləri</a>
+
+      <a href="order.html">Sərbəst iş sifarişi</a>
+
+    </nav>
+
+    <button class="menu-btn"
+
+            aria-label="Menyunu aç"
+
+            aria-expanded="false">
+
+      Menyu
+
+    </button>
+
+  </div>
+
+  <div class="mobile-nav">
+
+    <a href="index.html">Ana səhifə</a>
+
+    <a href="resources.html">Resurslar</a>
+
+    <a href="exams.html">İmtahanlar</a>
+
+    <a href="sinif-testleri.html">Sinif testləri</a>
+
+    <a href="order.html">Sərbəst iş sifarişi</a>
+
+  </div>
+
 </header>
+
 <div class="quiz-wrap">
-<div class="kicker" style="font-family:var(--serif);font-style:italic;color:var(--ink-soft);margin-bottom:6px;">6-cı sinif · Biologiya</div>
-<h1 style="margin-bottom:20px;">II Fəsil — Orqanizmlərin hüceyrəvi quruluşu (100 sual)</h1>
-<div id="quiz-root"></div>
+
+  <div class="kicker"
+
+       style="margin-bottom:6px;">
+
+    6-cı sinif · Biologiya
+
+  </div>
+
+  <h1 style="margin-bottom:20px;">
+
+    II Fəsil — Orqanizmlərin hüceyrəvi quruluşu (100 sual)
+
+  </h1>
+
+  <!-- START -->
+
+  <div class="card" id="startScreen">
+
+    <div class="quiz-intro">
+
+      <h2>Biologiya 6 — II Fəsil</h2>
+
+      <p class="quiz-intro-text">
+
+        Orqanizmlərin hüceyrəvi quruluşu mövzusu üzrə 100 sualdan ibarət test.
+
+        Testi tamamladıqdan sonra nəticənizi görə və sertifikat əldə edə bilərsiniz.
+
+      </p>
+
+      <div class="field">
+
+        <label for="name">Ad və soyad *</label>
+
+        <input
+
+          id="name"
+
+          class="input"
+
+          type="text"
+
+          placeholder="Ad Soyad">
+
+      </div>
+
+      <div class="field">
+
+        <label for="email">E-poçt</label>
+
+        <input
+
+          id="email"
+
+          class="input"
+
+          type="email"
+
+          placeholder="example@email.com">
+
+      </div>
+
+      <div id="formError" class="error"></div>
+
+      <button class="btn" id="startBtn">
+
+        Testə başla
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- QUIZ -->
+
+  <div class="card hidden" id="quizScreen">
+
+    <div class="quiz-progress-track">
+
+      <div class="quiz-progress-fill" id="progressFill"></div>
+
+    </div>
+
+    <div class="quiz-count">
+
+      <span id="counter"></span>
+
+      <span class="timer-display" id="timer">02:00:00</span>
+
+    </div>
+
+    <div class="quiz-question" id="question"></div>
+
+    <div class="quiz-options" id="options"></div>
+
+    <div class="quiz-nav">
+
+      <button class="btn secondary" id="backBtn">
+
+        ← Geri
+
+      </button>
+
+      <button class="btn" id="nextBtn">
+
+        İrəli →
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- RESULT -->
+
+  <div class="card hidden" id="resultScreen">
+
+    <div class="quiz-result">
+
+      <h2>Test tamamlandı 🎉</h2>
+
+      <p id="resultText"></p>
+
+      <div class="quiz-result-actions">
+
+        <button class="btn" id="certificateBtn">
+
+          Sertifikat
+
+        </button>
+
+        <button class="btn secondary" id="restartBtn">
+
+          Yenidən başla
+
+        </button>
+
+      </div>
+
+      <p id="sendStatus" style="margin-top:15px;"></p>
+
+    </div>
+
+  </div>
+
 </div>
+
 <footer>
-<div class="wrap">
-<div>Youdidit.az — tələbələr üçün resurs və imtahan mərkəzi</div>
-<div>Sual və təkliflər üçün: <a href="mailto:youdiditaz@gmail.com">youdiditaz@gmail.com</a></div>
-</div>
+
+  <div class="wrap">
+
+    <div>
+
+      Youdidit.az — tələbələr üçün resurs və imtahan mərkəzi
+
+    </div>
+
+    <div>
+
+      Sual və təkliflər üçün:
+
+      <a href="mailto:youdiditaz@gmail.com">
+
+        youdiditaz@gmail.com
+
+      </a>
+
+    </div>
+
+  </div>
+
 </footer>
+
 <script src="script.js"></script>
-<script src="exam-data-biologiya-6-fesil2.js"></script>
-<script src="quiz-engine.js"></script>
+
+<script>
+
+/* =====================================================
+
+   BIOLOGİYA 6 — II FƏSİL
+
+   ===================================================== */
+
+var FORM_ENDPOINT = "https://formspree.io/f/mqpkglkb";
+
+var TIME_LIMIT = 2 * 60 * 60;
+
+/* =====================================================
+
+   SUALLAR
+
+   ===================================================== */
+
+var QUESTIONS = [
+
+  /* BURAYA SƏNİN GÖNDƏRDİYİN 100 SUALIN
+
+     QUESTIONS ARRAY-I OLDUĞU KİMİ YERLƏŞDİRİLİR */
+
+];
+
+/* =====================================================
+
+   TEST MƏNTİQİ
+
+   ===================================================== */
+
+var current = 0;
+
+var answers = [];
+
+var secondsLeft = TIME_LIMIT;
+
+var timerInterval = null;
+
+var nameInput = document.getElementById("name");
+
+var emailInput = document.getElementById("email");
+
+var startScreen = document.getElementById("startScreen");
+
+var quizScreen = document.getElementById("quizScreen");
+
+var resultScreen = document.getElementById("resultScreen");
+
+var questionEl = document.getElementById("question");
+
+var optionsEl = document.getElementById("options");
+
+var counterEl = document.getElementById("counter");
+
+var timerEl = document.getElementById("timer");
+
+var progressFill = document.getElementById("progressFill");
+
+var backBtn = document.getElementById("backBtn");
+
+var nextBtn = document.getElementById("nextBtn");
+
+var resultText = document.getElementById("resultText");
+
+var formError = document.getElementById("formError");
+
+var sendStatus = document.getElementById("sendStatus");
+
+/* START */
+
+document.getElementById("startBtn").addEventListener("click", function () {
+
+  var name = nameInput.value.trim();
+
+  if (!name) {
+
+    formError.textContent = "Zəhmət olmasa ad və soyadınızı yazın.";
+
+    return;
+
+  }
+
+  formError.textContent = "";
+
+  current = 0;
+
+  answers = new Array(QUESTIONS.length).fill(null);
+
+  secondsLeft = TIME_LIMIT;
+
+  startScreen.classList.add("hidden");
+
+  quizScreen.classList.remove("hidden");
+
+  renderQuestion();
+
+  updateTimer();
+
+  clearInterval(timerInterval);
+
+  timerInterval = setInterval(function () {
+
+    secondsLeft--;
+
+    updateTimer();
+
+    if (secondsLeft <= 0) {
+
+      clearInterval(timerInterval);
+
+      finishQuiz();
+
+    }
+
+  }, 1000);
+
+});
+
+/* QUESTION */
+
+function renderQuestion() {
+
+  var item = QUESTIONS[current];
+
+  counterEl.textContent =
+
+    "Sual " + (current + 1) + " / " + QUESTIONS.length;
+
+  progressFill.style.width =
+
+    ((current + 1) / QUESTIONS.length * 100) + "%";
+
+  questionEl.textContent = item.q;
+
+  optionsEl.innerHTML = "";
+
+  item.options.forEach(function (option, index) {
+
+    var label = document.createElement("label");
+
+    label.className = "quiz-option";
+
+    var input = document.createElement("input");
+
+    input.type = "radio";
+
+    input.name = "answer";
+
+    input.value = index;
+
+    if (answers[current] === index) {
+
+      input.checked = true;
+
+    }
+
+    input.addEventListener("change", function () {
+
+      answers[current] = index;
+
+    });
+
+    var span = document.createElement("span");
+
+    span.textContent = option;
+
+    label.appendChild(input);
+
+    label.appendChild(span);
+
+    optionsEl.appendChild(label);
+
+  });
+
+  backBtn.disabled = current === 0;
+
+  if (current === QUESTIONS.length - 1) {
+
+    nextBtn.textContent = "Testi bitir";
+
+  } else {
+
+    nextBtn.textContent = "İrəli →";
+
+  }
+
+}
+
+/* NEXT */
+
+nextBtn.addEventListener("click", function () {
+
+  if (current < QUESTIONS.length - 1) {
+
+    current++;
+
+    renderQuestion();
+
+  } else {
+
+    finishQuiz();
+
+  }
+
+});
+
+/* BACK */
+
+backBtn.addEventListener("click", function () {
+
+  if (current > 0) {
+
+    current--;
+
+    renderQuestion();
+
+  }
+
+});
+
+/* TIMER */
+
+function updateTimer() {
+
+  var hours = Math.floor(secondsLeft / 3600);
+
+  var minutes = Math.floor((secondsLeft % 3600) / 60);
+
+  var seconds = secondsLeft % 60;
+
+  timerEl.textContent =
+
+    String(hours).padStart(2, "0") + ":" +
+
+    String(minutes).padStart(2, "0") + ":" +
+
+    String(seconds).padStart(2, "0");
+
+  if (secondsLeft <= 300) {
+
+    timerEl.classList.add("timer-low");
+
+  } else {
+
+    timerEl.classList.remove("timer-low");
+
+  }
+
+}
+
+/* FINISH */
+
+function finishQuiz() {
+
+  clearInterval(timerInterval);
+
+  var correct = 0;
+
+  QUESTIONS.forEach(function (item, index) {
+
+    if (answers[index] === item.a) {
+
+      correct++;
+
+    }
+
+  });
+
+  var total = QUESTIONS.length;
+
+  var percent = Math.round((correct / total) * 100);
+
+  quizScreen.classList.add("hidden");
+
+  resultScreen.classList.remove("hidden");
+
+  resultText.innerHTML =
+
+    "<strong>" +
+
+    nameInput.value.trim() +
+
+    "</strong><br><br>" +
+
+    "Düzgün cavablar: <strong>" +
+
+    correct +
+
+    " / " +
+
+    total +
+
+    "</strong><br>" +
+
+    "Nəticə: <strong>" +
+
+    percent +
+
+    "%</strong>";
+
+  sendResult(correct, total, percent);
+
+}
+
+/* FORMSPREE */
+
+function sendResult(correct, total, percent) {
+
+  var data = new FormData();
+
+  data.append("name", nameInput.value.trim());
+
+  data.append("email", emailInput.value.trim());
+
+  data.append("test", "Biologiya 6 — II Fəsil");
+
+  data.append("correct", correct);
+
+  data.append("total", total);
+
+  data.append("percent", percent + "%");
+
+  fetch(FORM_ENDPOINT, {
+
+    method: "POST",
+
+    body: data,
+
+    headers: {
+
+      "Accept": "application/json"
+
+    }
+
+  })
+
+  .then(function (response) {
+
+    if (response.ok) {
+
+      sendStatus.textContent =
+
+        "Nəticəniz uğurla göndərildi.";
+
+      sendStatus.style.color = "#18794e";
+
+    } else {
+
+      throw new Error();
+
+    }
+
+  })
+
+  .catch(function () {
+
+    sendStatus.textContent =
+
+      "Nəticəni göndərmək mümkün olmadı.";
+
+    sendStatus.style.color = "#b42318";
+
+  });
+
+}
+
+/* CERTIFICATE */
+
+document.getElementById("certificateBtn")
+
+.addEventListener("click", function () {
+
+  var correct = 0;
+
+  QUESTIONS.forEach(function (item, index) {
+
+    if (answers[index] === item.a) {
+
+      correct++;
+
+    }
+
+  });
+
+  var percent =
+
+    Math.round((correct / QUESTIONS.length) * 100);
+
+  var student =
+
+    nameInput.value.trim();
+
+  var certificateWindow =
+
+    window.open("", "_blank");
+
+  certificateWindow.document.write(`
+
+<!DOCTYPE html>
+
+<html lang="az">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Sertifikat — Youdidit.az</title>
+
+<style>
+
+body {
+
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+  background: #f5f5f5;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  min-height: 100vh;
+
+}
+
+.certificate {
+
+  width: 850px;
+
+  max-width: 90%;
+
+  padding: 60px;
+
+  background: white;
+
+  border: 8px solid #6b4fc9;
+
+  text-align: center;
+
+  box-sizing: border-box;
+
+}
+
+h1 {
+
+  font-size: 42px;
+
+  color: #111;
+
+  margin-bottom: 20px;
+
+}
+
+h2 {
+
+  font-size: 28px;
+
+  color: #6b4fc9;
+
+}
+
+.name {
+
+  font-size: 30px;
+
+  font-weight: bold;
+
+  margin: 30px 0;
+
+  color: #111;
+
+}
+
+.score {
+
+  font-size: 22px;
+
+  color: #111;
+
+  line-height: 1.7;
+
+}
+
+.site {
+
+  margin-top: 35px;
+
+  color: #555;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="certificate">
+
+  <h1>SERTİFİKAT</h1>
+
+  <h2>Youdidit.az</h2>
+
+  <p>Bu sertifikat təqdim olunur:</p>
+
+  <div class="name">
+
+    ${student}
+
+  </div>
+
+  <p>
+
+    <strong>
+
+      Biologiya 6 — II Fəsil:
+
+      Orqanizmlərin hüceyrəvi quruluşu
+
+    </strong>
+
+  </p>
+
+  <div class="score">
+
+    Düzgün cavablar: ${correct} / ${QUESTIONS.length}<br>
+
+    Nəticə: ${percent}%
+
+  </div>
+
+  <div class="site">
+
+    Youdidit.az
+
+  </div>
+
+</div>
+
 </body>
+
 </html>
+
+`);
+
+  certificateWindow.document.close();
+
+});
+
+/* RESTART */
+
+document.getElementById("restartBtn")
+
+.addEventListener("click", function () {
+
+  clearInterval(timerInterval);
+
+  current = 0;
+
+  answers = [];
+
+  secondsLeft = TIME_LIMIT;
+
+  resultScreen.classList.add("hidden");
+
+  startScreen.classList.remove("hidden");
+
+  sendStatus.textContent = "";
+
+});
+
+</script>
+
+</body>
+
+</html
