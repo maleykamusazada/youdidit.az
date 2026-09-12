@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-
 <html lang="az">
 
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <meta name="google-site-verification" content="H3uDb3n0rWfkuD77p915HGKrGznydb32-FHZRsPiPNw" />
 
 <title>Youdidit.az — Təhsil, İmtahan, Test və Karyera Platforması</title>
 
-<meta name="description" content="Youdidit.az — dil imtahanları, beynəlxalq imtahanlar, 3-cü sinifdən 11-ci sinfə qədər testlər, akademik xidmətlər, beynəlxalq sertifikatlı kurslar və karyera dəstəyi.">
+<meta name="description" content="Youdidit.az — dil imtahanları, beynəlxalq imtahanlar, 3-cü sinifdən 11-ci sinfə qədər testlər, psixoloji və peşə uyğunluğu imtahanları, akademik xidmətlər, beynəlxalq sertifikatlı kurslar və karyera dəstəyi.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -23,1769 +20,1112 @@
 <style>
 
 :root{
-
   --bg:#050713;
-
   --bg2:#090b1d;
-
   --card:#0d1128;
-
   --card2:#111735;
-
   --white:#f8f7ff;
-
   --muted:#a6adcd;
-
   --purple:#7651ff;
-
   --purple2:#a454ff;
-
   --blue:#397cff;
-
   --cyan:#16cfff;
-
   --pink:#f653c5;
-
   --green:#20d3a3;
-
   --orange:#ff8b4d;
-
   --border:rgba(255,255,255,.10);
-
 }
 
 *{
-
   box-sizing:border-box;
-
   margin:0;
-
   padding:0;
-
 }
 
 html{
-
   scroll-behavior:smooth;
-
 }
 
 body{
-
   background:
-
     radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),
-
     radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),
-
     var(--bg);
-
   color:var(--white);
-
   font-family:'Inter',sans-serif;
-
   overflow-x:hidden;
-
 }
 
 body::before{
-
   content:"";
-
   position:fixed;
-
   inset:0;
-
   pointer-events:none;
-
   z-index:-1;
-
   background-image:
-
     radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.5),transparent),
-
     radial-gradient(1px 1px at 25% 70%,rgba(170,140,255,.5),transparent),
-
     radial-gradient(1px 1px at 52% 30%,rgba(255,255,255,.4),transparent),
-
     radial-gradient(1px 1px at 75% 80%,rgba(170,140,255,.45),transparent),
-
     radial-gradient(1px 1px at 92% 40%,rgba(255,255,255,.4),transparent);
-
 }
 
 a{
-
   color:inherit;
-
   text-decoration:none;
-
 }
 
 .container{
-
   width:min(1180px,calc(100% - 32px));
-
   margin:auto;
-
 }
 
 /* =========================
-
    NAVBAR
-
 ========================= */
 
 .navbar{
-
   position:sticky;
-
   top:0;
-
   z-index:1000;
-
   background:rgba(5,7,19,.76);
-
   backdrop-filter:blur(20px);
-
   border-bottom:1px solid rgba(255,255,255,.07);
-
 }
 
 .nav-inner{
-
   min-height:72px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
   gap:20px;
-
 }
 
 .logo{
-
   font-family:'Sora',sans-serif;
-
   font-size:23px;
-
   font-weight:800;
-
   letter-spacing:-1px;
-
 }
 
 .logo span{
-
   color:#9d65ff;
-
 }
 
 .nav-links{
-
   display:flex;
-
   align-items:center;
-
   gap:22px;
-
 }
 
 .nav-links a{
-
   color:#c2c6df;
-
   font-size:12px;
-
   font-weight:600;
-
   transition:.25s;
-
 }
 
 .nav-links a:hover{
-
   color:white;
-
 }
 
 .nav-button{
-
   padding:10px 19px;
-
   border-radius:999px;
-
   background:linear-gradient(135deg,#6b52ff,#a34eff);
-
   font-size:12px;
-
   font-weight:800;
-
   box-shadow:0 8px 25px rgba(118,81,255,.28);
-
 }
 
 /* =========================
-
    BUTTONS
-
 ========================= */
 
 .btn{
-
   display:inline-flex;
-
   align-items:center;
-
   justify-content:center;
-
   gap:9px;
-
   padding:14px 21px;
-
   border-radius:14px;
-
   font-size:13px;
-
   font-weight:800;
-
   transition:.3s;
-
 }
 
 .btn-primary{
-
   background:linear-gradient(135deg,#5d55ff,#a84fff);
-
   box-shadow:0 12px 35px rgba(118,81,255,.32);
-
 }
 
 .btn-primary:hover{
-
   transform:translateY(-3px);
-
   box-shadow:0 18px 45px rgba(118,81,255,.45);
-
 }
 
 .btn-secondary{
-
   background:rgba(255,255,255,.035);
-
   border:1px solid rgba(255,255,255,.13);
-
 }
 
 .btn-secondary:hover{
-
   background:rgba(255,255,255,.08);
-
   transform:translateY(-2px);
-
 }
 
 /* =========================
-
    HERO
-
 ========================= */
 
 .hero{
-
   position:relative;
-
   min-height:650px;
-
   display:flex;
-
   align-items:center;
-
   overflow:hidden;
-
 }
 
 .hero::before{
-
   content:"";
-
   position:absolute;
-
   width:650px;
-
   height:650px;
-
   right:-180px;
-
   top:-180px;
-
   border-radius:50%;
-
   background:radial-gradient(circle,rgba(118,81,255,.28),transparent 68%);
-
   filter:blur(15px);
-
 }
 
 .hero-grid{
-
   position:relative;
-
   z-index:2;
-
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:55px;
-
   align-items:center;
-
 }
 
 .badge{
-
   display:inline-flex;
-
   padding:8px 13px;
-
   border-radius:999px;
-
   background:rgba(118,81,255,.09);
-
   border:1px solid rgba(155,117,255,.24);
-
   color:#cdbbff;
-
   font-size:11px;
-
   font-weight:700;
-
   margin-bottom:22px;
-
 }
 
 .hero h1{
-
   font-family:'Sora',sans-serif;
-
   font-size:clamp(42px,5vw,68px);
-
   line-height:1.05;
-
   letter-spacing:-3px;
-
 }
 
 .gradient{
-
   background:linear-gradient(90deg,#fff,#9a70ff,#c45aff);
-
   -webkit-background-clip:text;
-
   background-clip:text;
-
   color:transparent;
-
 }
 
 .hero-text{
-
   margin-top:23px;
-
   max-width:560px;
-
   color:var(--muted);
-
   font-size:15px;
-
   line-height:1.75;
-
 }
 
 .hero-tags{
-
   display:flex;
-
   flex-wrap:wrap;
-
   gap:9px;
-
   margin-top:23px;
-
 }
 
 .hero-tag{
-
   padding:8px 12px;
-
   border-radius:10px;
-
   background:rgba(255,255,255,.045);
-
   border:1px solid var(--border);
-
   color:#d9dcef;
-
   font-size:11px;
-
   font-weight:600;
-
 }
 
 .hero-actions{
-
   display:flex;
-
   flex-wrap:wrap;
-
   gap:11px;
-
   margin-top:29px;
-
 }
 
 /* =========================
-
    HERO DASHBOARD
-
 ========================= */
 
 .hero-visual{
-
   position:relative;
-
   min-height:460px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
 }
 
 .hero-glow{
-
   position:absolute;
-
   width:370px;
-
   height:370px;
-
   border-radius:50%;
-
   background:radial-gradient(circle,rgba(118,81,255,.40),transparent 68%);
-
   filter:blur(10px);
-
 }
 
 .dashboard{
-
   position:relative;
-
   width:min(500px,100%);
-
   padding:22px;
-
   border-radius:27px;
-
   background:linear-gradient(145deg,rgba(27,32,77,.96),rgba(8,11,31,.97));
-
   border:1px solid rgba(255,255,255,.15);
-
   box-shadow:
-
     0 40px 100px rgba(0,0,0,.55),
-
     0 0 70px rgba(118,81,255,.22);
-
   transform:rotate(-2deg);
-
 }
 
 .dashboard-top{
-
   display:flex;
-
   gap:7px;
-
   margin-bottom:24px;
-
 }
 
 .dashboard-dot{
-
   width:8px;
-
   height:8px;
-
   border-radius:50%;
-
   background:#795aff;
-
 }
 
 .dashboard-title{
-
   font-family:'Sora',sans-serif;
-
   font-size:23px;
-
   font-weight:800;
-
   margin-bottom:6px;
-
 }
 
 .dashboard-sub{
-
   color:#949bbe;
-
   font-size:11px;
-
   margin-bottom:20px;
-
 }
 
 .dashboard-grid{
-
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:11px;
-
 }
 
 .dashboard-card{
-
   padding:17px;
-
   border-radius:17px;
-
   background:rgba(255,255,255,.05);
-
   border:1px solid rgba(255,255,255,.08);
-
 }
 
 .dashboard-icon{
-
   width:39px;
-
   height:39px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   border-radius:12px;
-
   background:linear-gradient(135deg,#7056ff,#a34fff);
-
   margin-bottom:12px;
-
   font-size:18px;
-
 }
 
 .dashboard-card strong{
-
   display:block;
-
   font-size:12px;
-
 }
 
 .dashboard-card span{
-
   display:block;
-
   color:#858cac;
-
   font-size:9px;
-
   margin-top:5px;
-
 }
 
 /* =========================
-
    GENERAL SECTION
-
 ========================= */
 
 .section{
-
   padding:80px 0;
-
 }
 
 .section-head{
-
   display:flex;
-
   align-items:end;
-
   justify-content:space-between;
-
   gap:30px;
-
   margin-bottom:32px;
-
 }
 
 .section-label{
-
   color:#9d76ff;
-
   font-size:10px;
-
   font-weight:800;
-
   letter-spacing:1.6px;
-
   text-transform:uppercase;
-
   margin-bottom:10px;
-
 }
 
 .section-title{
-
   font-family:'Sora',sans-serif;
-
   font-size:clamp(29px,4vw,42px);
-
   letter-spacing:-1.5px;
-
 }
 
 .section-description{
-
   max-width:570px;
-
   color:var(--muted);
-
   font-size:13px;
-
   line-height:1.7;
-
   margin-top:11px;
-
 }
 
 /* ==================================================
-
    EXAMS
-
 ================================================== */
 
 .exam-section{
-
   padding-top:45px;
-
 }
 
 .exam-wrapper{
-
   position:relative;
-
   overflow:hidden;
-
   border-radius:30px;
-
   padding:38px;
-
   background:
-
     radial-gradient(
-
       circle at 90% 10%,
-
       rgba(118,81,255,.22),
-
       transparent 35%
-
     ),
-
     linear-gradient(
-
       135deg,
-
       #0c102b,
-
       #090b1d
-
     );
-
   border:1px solid rgba(255,255,255,.10);
-
 }
 
 .exam-intro{
-
   max-width:700px;
-
   margin-bottom:28px;
-
 }
 
 .exam-intro h2{
-
   font-family:'Sora',sans-serif;
-
   font-size:34px;
-
   line-height:1.15;
-
 }
 
 .exam-intro p{
-
   color:#a5accb;
-
   font-size:13px;
-
   line-height:1.7;
-
   margin-top:12px;
-
 }
 
 .exam-grid{
-
   display:grid;
-
   grid-template-columns:repeat(4,1fr);
-
   gap:13px;
-
 }
 
 .exam-card{
-
   position:relative;
-
   min-height:230px;
-
   padding:21px;
-
   border-radius:20px;
-
   background:
-
     linear-gradient(
-
       145deg,
-
       rgba(255,255,255,.065),
-
       rgba(255,255,255,.018)
-
     );
-
   border:1px solid rgba(255,255,255,.10);
-
   overflow:hidden;
-
   transition:.35s;
-
 }
 
 .exam-card:hover{
-
   transform:translateY(-7px);
-
   border-color:rgba(151,113,255,.45);
-
   box-shadow:0 25px 55px rgba(0,0,0,.35);
-
 }
 
 .exam-card::after{
-
   content:"";
-
   position:absolute;
-
   width:130px;
-
   height:130px;
-
   right:-65px;
-
   bottom:-65px;
-
   border-radius:50%;
-
   background:var(--exam-glow);
-
   filter:blur(8px);
-
 }
 
 .exam-icon{
-
   width:48px;
-
   height:48px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   border-radius:14px;
-
   background:linear-gradient(
-
     135deg,
-
     var(--e1),
-
     var(--e2)
-
   );
-
   font-size:21px;
-
   margin-bottom:18px;
-
 }
 
 .exam-card h3{
-
   font-size:15px;
-
   margin-bottom:8px;
-
 }
 
 .exam-card p{
-
   color:#9299ba;
-
   font-size:10px;
-
   line-height:1.65;
-
 }
 
 .exam-list{
-
   margin-top:15px;
-
   display:flex;
-
   flex-wrap:wrap;
-
   gap:6px;
-
 }
 
 .exam-tag{
-
   padding:6px 8px;
-
   border-radius:7px;
-
   background:rgba(255,255,255,.05);
-
   border:1px solid rgba(255,255,255,.08);
-
   color:#c6cae0;
-
   font-size:9px;
-
   font-weight:700;
-
 }
 
 .exam-link{
-
   display:inline-block;
-
   margin-top:17px;
-
   color:#b99cff;
-
   font-size:10px;
-
   font-weight:800;
-
 }
 
 /* ==================================================
-
    LANGUAGE EXAMS
-
 ================================================== */
 
 .language-section{
-
   padding-top:30px;
-
 }
 
 .language-box{
-
   padding:35px;
-
   border-radius:27px;
-
   background:
-
     radial-gradient(
-
       circle at 10% 100%,
-
       rgba(22,207,255,.11),
-
       transparent 32%
-
     ),
-
     linear-gradient(
-
       135deg,
-
       #0c122d,
-
       #090b1e
-
     );
-
   border:1px solid rgba(255,255,255,.09);
-
 }
 
 .language-grid{
-
   display:grid;
-
   grid-template-columns:repeat(6,1fr);
-
   gap:10px;
-
   margin-top:25px;
-
 }
 
 .language-card{
-
   min-height:130px;
-
   display:flex;
-
   flex-direction:column;
-
   align-items:center;
-
   justify-content:center;
-
   text-align:center;
-
   padding:14px;
-
   border-radius:17px;
-
   background:rgba(255,255,255,.045);
-
   border:1px solid rgba(255,255,255,.09);
-
   transition:.3s;
-
 }
 
 .language-card:hover{
-
   transform:translateY(-5px);
-
   background:rgba(118,81,255,.11);
-
   border-color:rgba(155,119,255,.38);
-
 }
 
 .language-flag{
-
   font-size:30px;
-
   margin-bottom:9px;
-
 }
 
 .language-card strong{
-
   font-size:11px;
-
 }
 
 .language-card span{
-
   color:#7f87a8;
-
   font-size:9px;
-
   margin-top:5px;
-
 }
 
 .levels{
-
   display:flex;
-
   flex-wrap:wrap;
-
   gap:7px;
-
   margin-top:20px;
-
 }
 
 .level{
-
   padding:8px 11px;
-
   border-radius:9px;
-
   background:rgba(118,81,255,.10);
-
   border:1px solid rgba(118,81,255,.20);
-
   color:#c9bbff;
-
   font-size:10px;
-
   font-weight:800;
-
 }
 
 /* ==================================================
-
    SERVICES
-
 ================================================== */
 
 .services-grid{
-
   display:grid;
-
   grid-template-columns:repeat(4,1fr);
-
   gap:15px;
-
 }
 
 .service-card{
-
   position:relative;
-
   min-height:205px;
-
   padding:22px;
-
   overflow:hidden;
-
   border-radius:21px;
-
   border:1px solid var(--border);
-
   background:
-
     linear-gradient(
-
       145deg,
-
       rgba(255,255,255,.055),
-
       rgba(255,255,255,.015)
-
     ),
-
     var(--card);
-
   transition:.35s;
-
 }
 
 .service-card:hover{
-
   transform:translateY(-8px);
-
   border-color:rgba(151,113,255,.45);
-
   box-shadow:
-
     0 25px 60px rgba(0,0,0,.35),
-
     0 0 35px rgba(118,81,255,.13);
-
 }
 
 .service-icon{
-
   width:47px;
-
   height:47px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   border-radius:14px;
-
   background:linear-gradient(
-
     135deg,
-
     var(--i1),
-
     var(--i2)
-
   );
-
   font-size:21px;
-
   margin-bottom:20px;
-
 }
 
 .service-card h3{
-
   font-size:15px;
-
   margin-bottom:8px;
-
 }
 
 .service-card p{
-
   color:#9299ba;
-
   font-size:11px;
-
   line-height:1.65;
-
 }
 
 .service-arrow{
-
   position:absolute;
-
   right:18px;
-
   bottom:17px;
-
   width:30px;
-
   height:30px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   border-radius:50%;
-
   background:rgba(255,255,255,.07);
-
 }
 
 /* ==================================================
-
    INTERNATIONAL COURSES
-
 ================================================== */
 
 .course-box{
-
   position:relative;
-
   overflow:hidden;
-
   border-radius:28px;
-
   padding:42px;
-
   border:1px solid rgba(144,108,255,.27);
-
   background:
-
     radial-gradient(
-
       circle at 88% 20%,
-
       rgba(164,92,255,.34),
-
       transparent 34%
-
     ),
-
     radial-gradient(
-
       circle at 10% 100%,
-
       rgba(57,124,255,.16),
-
       transparent 35%
-
     ),
-
     linear-gradient(
-
       135deg,
-
       #101438,
-
       #190d37
-
     );
-
 }
 
 .course-content{
-
   max-width:700px;
-
 }
 
 .course-content h2{
-
   font-family:'Sora',sans-serif;
-
   font-size:34px;
-
   line-height:1.15;
-
   margin-bottom:14px;
-
 }
 
 .course-content p{
-
   color:#b1b7d1;
-
   font-size:13px;
-
   line-height:1.75;
-
 }
 
 .platforms{
-
   display:flex;
-
   flex-wrap:wrap;
-
   gap:8px;
-
   margin:20px 0;
-
 }
 
 .platform{
-
   padding:9px 12px;
-
   border-radius:10px;
-
   background:rgba(255,255,255,.055);
-
   border:1px solid rgba(255,255,255,.10);
-
   font-size:11px;
-
   font-weight:700;
-
 }
 
 /* ==================================================
-
    SCHOOL TESTS
-
 ================================================== */
 
 .tests-box{
-
   position:relative;
-
   overflow:hidden;
-
   border-radius:30px;
-
   padding:40px;
-
   background:
-
     radial-gradient(
-
       circle at 90% 20%,
-
       rgba(164,92,255,.20),
-
       transparent 34%
-
     ),
-
     linear-gradient(
-
       135deg,
-
       #0d1230,
-
       #080b1d
-
     );
-
   border:1px solid rgba(255,255,255,.10);
-
 }
 
 .tests-layout{
-
   display:grid;
-
   grid-template-columns:.8fr 1.4fr;
-
   gap:45px;
-
   align-items:center;
-
 }
 
 .tests-copy h2{
-
   font-family:'Sora',sans-serif;
-
   font-size:34px;
-
   line-height:1.15;
-
 }
 
 .tests-copy p{
-
   color:#9fa6c6;
-
   font-size:13px;
-
   line-height:1.7;
-
   margin-top:14px;
-
 }
 
 .grades{
-
   display:flex;
-
   flex-wrap:wrap;
-
   gap:8px;
-
   margin-top:20px;
-
 }
 
 .grade{
-
   padding:10px 12px;
-
   border-radius:11px;
-
   background:
-
     linear-gradient(
-
       135deg,
-
       rgba(93,85,255,.23),
-
       rgba(164,79,255,.12)
-
     );
-
   border:1px solid rgba(131,105,255,.22);
-
   font-size:10px;
-
   font-weight:800;
-
   transition:.25s;
-
 }
 
 .grade:hover{
-
   transform:translateY(-4px);
-
   background:linear-gradient(135deg,#5d55ff,#a84fff);
-
 }
 
 .subject-grid{
-
   display:grid;
-
   grid-template-columns:repeat(5,1fr);
-
   gap:10px;
-
 }
 
 .subject{
-
   min-height:88px;
-
   display:flex;
-
   flex-direction:column;
-
   align-items:center;
-
   justify-content:center;
-
   gap:8px;
-
   text-align:center;
-
   border-radius:17px;
-
   background:rgba(255,255,255,.045);
-
   border:1px solid rgba(255,255,255,.09);
-
   transition:.3s;
-
 }
 
 .subject:hover{
-
   transform:translateY(-5px);
-
   background:rgba(118,81,255,.12);
-
   border-color:rgba(155,119,255,.4);
-
 }
 
 .subject-icon{
-
   font-size:23px;
-
 }
 
 .subject span{
-
   font-size:10px;
-
   font-weight:700;
-
 }
 
 /* ==================================================
+   PSYCHOLOGICAL EXAM
+================================================== */
 
+.psychology-box{
+  position:relative;
+  overflow:hidden;
+  border-radius:30px;
+  padding:42px;
+  border:1px solid rgba(118,81,255,.28);
+  background:
+    radial-gradient(
+      circle at 88% 15%,
+      rgba(118,81,255,.28),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(22,207,255,.10),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #101438,
+      #090b1e
+    );
+}
+
+.psychology-layout{
+  display:grid;
+  grid-template-columns:.9fr 1.4fr;
+  gap:45px;
+  align-items:center;
+}
+
+.psychology-copy h2{
+  font-family:'Sora',sans-serif;
+  font-size:34px;
+  line-height:1.15;
+  margin-bottom:14px;
+}
+
+.psychology-copy p{
+  color:#aeb5d0;
+  font-size:13px;
+  line-height:1.75;
+}
+
+.psychology-cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.psychology-card{
+  padding:20px;
+  border-radius:18px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.09);
+  transition:.3s;
+}
+
+.psychology-card:hover{
+  transform:translateY(-5px);
+  background:rgba(118,81,255,.10);
+  border-color:rgba(155,119,255,.35);
+}
+
+.psychology-icon{
+  font-size:25px;
+  margin-bottom:12px;
+}
+
+.psychology-card h3{
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.psychology-card p{
+  color:#858cac;
+  font-size:10px;
+  line-height:1.6;
+}
+
+/* ==================================================
    WHY
-
 ================================================== */
 
 .why-grid{
-
   display:grid;
-
   grid-template-columns:repeat(5,1fr);
-
   gap:1px;
-
   overflow:hidden;
-
   border-radius:24px;
-
   border:1px solid rgba(255,255,255,.08);
-
   background:rgba(255,255,255,.08);
-
 }
 
 .why-item{
-
   padding:27px 20px;
-
   background:#090b1d;
-
 }
 
 .why-icon{
-
   width:41px;
-
   height:41px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   border-radius:13px;
-
   background:linear-gradient(135deg,#624cff,#a253ff);
-
   margin-bottom:15px;
-
 }
 
 .why-item h3{
-
   font-size:13px;
-
   margin-bottom:7px;
-
 }
 
 .why-item p{
-
   color:#858cab;
-
   font-size:10px;
-
   line-height:1.65;
-
 }
 
 /* ==================================================
-
    CTA
-
 ================================================== */
 
 .cta{
-
   position:relative;
-
   overflow:hidden;
-
   border-radius:28px;
-
   padding:42px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
   gap:30px;
-
   background:
-
     radial-gradient(
-
       circle at 80% 40%,
-
       rgba(198,70,255,.36),
-
       transparent 35%
-
     ),
-
     linear-gradient(
-
       110deg,
-
       #382087,
-
       #5b249f 55%,
-
       #29175d
-
     );
-
   border:1px solid rgba(255,255,255,.15);
-
 }
 
 .cta h2{
-
   font-family:'Sora',sans-serif;
-
   font-size:30px;
-
   margin-bottom:8px;
-
 }
 
 .cta p{
-
   color:#ddd5ed;
-
   font-size:12px;
-
 }
 
 /* ==================================================
-
    FOOTER
-
 ================================================== */
 
 footer{
-
   padding:32px 0;
-
   border-top:1px solid rgba(255,255,255,.07);
-
   margin-top:20px;
-
 }
 
 .footer-inner{
-
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
   gap:25px;
-
 }
 
 .footer-brand{
-
   font-family:'Sora',sans-serif;
-
   font-weight:800;
-
 }
 
 .footer-brand span{
-
   color:#9b68ff;
-
 }
 
 .footer-description{
-
   color:#7f86a8;
-
   font-size:10px;
-
   margin-top:5px;
-
 }
 
 .footer-links{
-
   display:flex;
-
   flex-wrap:wrap;
-
   justify-content:center;
-
   gap:17px;
-
 }
 
 .footer-links a{
-
   color:#9299b9;
-
   font-size:10px;
-
 }
 
 .footer-links a:hover{
-
   color:white;
-
 }
 
 /* ==================================================
-
    RESPONSIVE
-
 ================================================== */
 
 @media(max-width:1000px){
 
   .nav-links{
-
     display:none;
-
   }
 
   .hero{
-
     padding:70px 0;
-
   }
 
   .hero-grid{
-
     grid-template-columns:1fr;
-
     text-align:center;
-
   }
 
   .hero-text{
-
     margin-left:auto;
-
     margin-right:auto;
-
   }
 
   .hero-tags,
-
   .hero-actions{
-
     justify-content:center;
-
   }
 
   .exam-grid{
-
     grid-template-columns:repeat(2,1fr);
-
   }
 
   .language-grid{
-
     grid-template-columns:repeat(3,1fr);
-
   }
 
   .services-grid{
-
     grid-template-columns:repeat(2,1fr);
-
   }
 
   .tests-layout{
-
     grid-template-columns:1fr;
+  }
 
+  .psychology-layout{
+    grid-template-columns:1fr;
   }
 
   .why-grid{
-
     grid-template-columns:repeat(3,1fr);
-
   }
 
 }
@@ -1793,137 +1133,95 @@ footer{
 @media(max-width:650px){
 
   .container{
-
     width:calc(100% - 24px);
-
   }
 
   .nav-inner{
-
     min-height:64px;
-
   }
 
   .logo{
-
     font-size:20px;
-
   }
 
   .nav-button{
-
     padding:9px 14px;
-
   }
 
   .hero{
-
     min-height:auto;
-
     padding:65px 0 50px;
-
   }
 
   .hero h1{
-
     font-size:39px;
-
     letter-spacing:-2px;
-
   }
 
   .hero-text{
-
     font-size:13px;
-
   }
 
   .hero-visual{
-
     min-height:350px;
-
   }
 
   .section{
-
     padding:60px 0;
-
   }
 
   .section-head{
-
     display:block;
-
   }
 
   .section-head .btn{
-
     margin-top:18px;
-
   }
 
   .exam-wrapper,
-
   .language-box,
-
   .course-box,
-
   .tests-box,
-
+  .psychology-box,
   .cta{
-
     padding:25px 18px;
-
   }
 
   .exam-grid{
-
     grid-template-columns:1fr;
-
   }
 
   .language-grid{
-
     grid-template-columns:repeat(2,1fr);
-
   }
 
   .services-grid{
-
     grid-template-columns:1fr;
-
   }
 
   .subject-grid{
-
     grid-template-columns:repeat(2,1fr);
+  }
 
+  .psychology-cards{
+    grid-template-columns:1fr;
   }
 
   .why-grid{
-
     grid-template-columns:1fr 1fr;
-
   }
 
   .cta{
-
     display:block;
-
   }
 
   .cta .btn{
-
     margin-top:20px;
-
   }
 
   .footer-inner{
-
     flex-direction:column;
-
     text-align:center;
-
   }
 
 }
@@ -1935,9 +1233,7 @@ footer{
 <body>
 
 <!-- ==================================================
-
      NAVIGATION
-
 ================================================== -->
 
 <nav class="navbar">
@@ -1945,49 +1241,39 @@ footer{
   <div class="container nav-inner">
 
     <a href="index.html" class="logo">
-
       Youdidit<span>.az</span>
-
     </a>
 
     <div class="nav-links">
 
       <a href="index.html">
-
         Ana səhifə
-
       </a>
 
       <a href="#exams">
-
         İmtahanlar
-
       </a>
 
       <a href="resources.html">
-
         Resurslar
-
       </a>
 
       <a href="sinif-testleri.html">
-
         Sinif testləri
+      </a>
 
+      <a href="psixoloji-imtahan.html">
+        🧠 Psixoloji imtahan
       </a>
 
       <a href="#services">
-
         Xidmətlər
-
       </a>
 
     </div>
 
     <a href="order.html" class="nav-button">
-
       Sifariş et →
-
     </a>
 
   </div>
@@ -1995,9 +1281,7 @@ footer{
 </nav>
 
 <!-- ==================================================
-
      HERO
-
 ================================================== -->
 
 <section class="hero">
@@ -2007,59 +1291,39 @@ footer{
     <div>
 
       <div class="badge">
-
         ✦ Təhsil • İmtahan • Karyera • İnkişaf
-
       </div>
 
       <h1>
-
         Öz gələcəyini
-
         <span class="gradient">
-
           bu gündən qur.
-
         </span>
-
       </h1>
 
       <p class="hero-text">
-
         Youdidit.az — imtahanlara hazırlaşmaq,
-
         biliklərini yoxlamaq, beynəlxalq kurslar
-
         tapmaq və akademik-karyera inkişafında
-
         dəstək almaq üçün vahid platformadır.
-
       </p>
 
       <div class="hero-tags">
 
         <span class="hero-tag">
-
           ✓ Dil imtahanları
-
         </span>
 
         <span class="hero-tag">
-
           ✓ Beynəlxalq imtahanlar
-
         </span>
 
         <span class="hero-tag">
-
           ✓ 3–11-ci sinif
-
         </span>
 
         <span class="hero-tag">
-
-          ✓ Bütün fənlər
-
+          ✓ Psixoloji və peşə uyğunluğu
         </span>
 
       </div>
@@ -2067,15 +1331,11 @@ footer{
       <div class="hero-actions">
 
         <a href="#exams" class="btn btn-primary">
-
           İmtahanlara bax →
-
         </a>
 
-        <a href="sinif-testleri.html" class="btn btn-secondary">
-
-          Testlərə başla
-
+        <a href="psixoloji-imtahan.html" class="btn btn-secondary">
+          🧠 Psixoloji imtahan
         </a>
 
       </div>
@@ -2091,23 +1351,17 @@ footer{
         <div class="dashboard-top">
 
           <div class="dashboard-dot"></div>
-
           <div class="dashboard-dot"></div>
-
           <div class="dashboard-dot"></div>
 
         </div>
 
         <div class="dashboard-title">
-
           Uğur səninlə başlayır.
-
         </div>
 
         <div class="dashboard-sub">
-
           Hazırlaş • Yoxla • Sertifikat qazan • İnkişaf et
-
         </div>
 
         <div class="dashboard-grid">
@@ -2115,21 +1369,15 @@ footer{
           <div class="dashboard-card">
 
             <div class="dashboard-icon">
-
               🗣️
-
             </div>
 
             <strong>
-
               Dil imtahanları
-
             </strong>
 
             <span>
-
               IELTS • TOEFL • Cambridge
-
             </span>
 
           </div>
@@ -2137,21 +1385,15 @@ footer{
           <div class="dashboard-card">
 
             <div class="dashboard-icon">
-
               🌍
-
             </div>
 
             <strong>
-
               Beynəlxalq imtahanlar
-
             </strong>
 
             <span>
-
               SAT • GMAT • GRE və s.
-
             </span>
 
           </div>
@@ -2159,21 +1401,15 @@ footer{
           <div class="dashboard-card">
 
             <div class="dashboard-icon">
-
               🎓
-
             </div>
 
             <strong>
-
               Sinif testləri
-
             </strong>
 
             <span>
-
               3-cü → 11-ci sinif
-
             </span>
 
           </div>
@@ -2181,21 +1417,15 @@ footer{
           <div class="dashboard-card">
 
             <div class="dashboard-icon">
-
-              💼
-
+              🧠
             </div>
 
             <strong>
-
-              Karyera
-
+              Psixoloji imtahan
             </strong>
 
             <span>
-
-              CV • LinkedIn • GitHub
-
+              İş davranışı • Peşə uyğunluğu
             </span>
 
           </div>
@@ -2211,9 +1441,7 @@ footer{
 </section>
 
 <!-- ==================================================
-
      EXAMS
-
 ================================================== -->
 
 <section class="section exam-section" id="exams">
@@ -2225,27 +1453,18 @@ footer{
       <div class="exam-intro">
 
         <div class="section-label">
-
           İMTAHAN MƏRKƏZİ
-
         </div>
 
         <h2>
-
           Hansı imtahana hazırlaşırsan?
-
         </h2>
 
         <p>
-
           Dil biliklərindən beynəlxalq sertifikatlara,
-
           məktəb və abituriyent imtahanlarından
-
           səviyyə yoxlamalarına qədər müxtəlif
-
           istiqamətlər üzrə seçimlər.
-
         </p>
 
       </div>
@@ -2253,181 +1472,119 @@ footer{
       <div class="exam-grid">
 
         <a href="exams.html"
-
            class="exam-card"
-
            style="--e1:#5d55ff;--e2:#a84fff;--exam-glow:rgba(118,81,255,.22);">
 
           <div class="exam-icon">
-
             🗣️
-
           </div>
 
           <h3>
-
             Dil imtahanları
-
           </h3>
 
           <p>
-
             Xarici dil səviyyəni yoxla və
-
             beynəlxalq dil imtahanlarına hazırlaş.
-
           </p>
 
           <div class="exam-list">
-
             <span class="exam-tag">IELTS</span>
-
             <span class="exam-tag">TOEFL</span>
-
             <span class="exam-tag">Cambridge</span>
-
             <span class="exam-tag">A1–C2</span>
-
           </div>
 
           <span class="exam-link">
-
             Dil imtahanlarına bax →
-
           </span>
 
         </a>
 
         <a href="exams.html"
-
            class="exam-card"
-
            style="--e1:#287cff;--e2:#18cfff;--exam-glow:rgba(22,207,255,.18);">
 
           <div class="exam-icon">
-
             🌍
-
           </div>
 
           <h3>
-
             Beynəlxalq imtahanlar
-
           </h3>
 
           <p>
-
             Xaricdə təhsil, magistratura,
-
             biznes və akademik məqsədlər üçün.
-
           </p>
 
           <div class="exam-list">
-
             <span class="exam-tag">SAT</span>
-
             <span class="exam-tag">GRE</span>
-
             <span class="exam-tag">GMAT</span>
-
             <span class="exam-tag">Digərləri</span>
-
           </div>
 
           <span class="exam-link">
-
             İmtahanlara bax →
-
           </span>
 
         </a>
 
         <a href="exams.html"
-
            class="exam-card"
-
            style="--e1:#18b88e;--e2:#29d8a9;--exam-glow:rgba(32,211,163,.18);">
 
           <div class="exam-icon">
-
             🎓
-
           </div>
 
           <h3>
-
             Məktəb və qəbul
-
           </h3>
 
           <p>
-
             Məktəb proqramı, buraxılış və
-
             ali məktəbə qəbul istiqamətində hazırlıq.
-
           </p>
 
           <div class="exam-list">
-
             <span class="exam-tag">Buraxılış</span>
-
             <span class="exam-tag">Qəbul</span>
-
             <span class="exam-tag">Fənn testləri</span>
-
           </div>
 
           <span class="exam-link">
-
             Hazırlığa başla →
-
           </span>
 
         </a>
 
         <a href="exams.html"
-
            class="exam-card"
-
            style="--e1:#ff6f51;--e2:#ffb04d;--exam-glow:rgba(255,139,77,.18);">
 
           <div class="exam-icon">
-
             🧠
-
           </div>
 
           <h3>
-
             Səviyyə testləri
-
           </h3>
 
           <p>
-
             Hazırkı bilik səviyyəni müəyyən et,
-
             zəif və güclü tərəflərini kəşf et.
-
           </p>
 
           <div class="exam-list">
-
             <span class="exam-tag">Placement</span>
-
             <span class="exam-tag">Level Test</span>
-
             <span class="exam-tag">Practice</span>
-
           </div>
 
           <span class="exam-link">
-
             Səviyyəni yoxla →
-
           </span>
 
         </a>
@@ -2441,9 +1598,7 @@ footer{
 </section>
 
 <!-- ==================================================
-
      LANGUAGE EXAMS
-
 ================================================== -->
 
 <section class="section language-section">
@@ -2453,89 +1608,56 @@ footer{
     <div class="language-box">
 
       <div class="section-label">
-
         DİL İMTAHANLARI
-
       </div>
 
       <h2 class="section-title">
-
         Dilini yoxla, dünyaya açıl.
-
       </h2>
 
       <p class="section-description">
-
         İngilis, alman, fransız, ispan, rus və digər
-
         dillər üzrə səviyyə testləri və gələcəkdə
-
         müxtəlif beynəlxalq dil imtahanlarına
-
         hazırlıq istiqamətləri.
-
       </p>
 
       <div class="language-grid">
 
         <a href="exams.html" class="language-card">
-
           <div class="language-flag">🇬🇧</div>
-
           <strong>İngilis dili</strong>
-
           <span>IELTS • TOEFL • Cambridge</span>
-
         </a>
 
         <a href="exams.html" class="language-card">
-
           <div class="language-flag">🇩🇪</div>
-
           <strong>Alman dili</strong>
-
           <span>Goethe • TELC</span>
-
         </a>
 
         <a href="exams.html" class="language-card">
-
           <div class="language-flag">🇫🇷</div>
-
           <strong>Fransız dili</strong>
-
           <span>DELF • DALF</span>
-
         </a>
 
         <a href="exams.html" class="language-card">
-
           <div class="language-flag">🇪🇸</div>
-
           <strong>İspan dili</strong>
-
           <span>DELE • SIELE</span>
-
         </a>
 
         <a href="exams.html" class="language-card">
-
           <div class="language-flag">🇷🇺</div>
-
           <strong>Rus dili</strong>
-
           <span>Səviyyə testləri</span>
-
         </a>
 
         <a href="exams.html" class="language-card">
-
           <div class="language-flag">🌐</div>
-
           <strong>Digər dillər</strong>
-
           <span>Yeni dillər əlavə olunur</span>
-
         </a>
 
       </div>
@@ -2543,17 +1665,11 @@ footer{
       <div class="levels">
 
         <span class="level">A1</span>
-
         <span class="level">A2</span>
-
         <span class="level">B1</span>
-
         <span class="level">B2</span>
-
         <span class="level">C1</span>
-
         <span class="level">C2</span>
-
         <span class="level">Level Test</span>
 
       </div>
@@ -2565,9 +1681,7 @@ footer{
 </section>
 
 <!-- ==================================================
-
      SERVICES
-
 ================================================== -->
 
 <section class="section" id="services">
@@ -2579,31 +1693,22 @@ footer{
       <div>
 
         <div class="section-label">
-
           XİDMƏTLƏRİMİZ
-
         </div>
 
         <h2 class="section-title">
-
           Təhsil və karyera üçün dəstək.
-
         </h2>
 
         <p class="section-description">
-
           Akademik işlərdən rəqəmsal bacarıqlara,
-
           şəxsi brenddən beynəlxalq kurslara qədər.
-
         </p>
 
       </div>
 
       <a href="order.html" class="btn btn-secondary">
-
         Bütün xidmətlər →
-
       </a>
 
     </div>
@@ -2611,9 +1716,7 @@ footer{
     <div class="services-grid">
 
       <a href="order.html"
-
          class="service-card"
-
          style="--i1:#7656ff;--i2:#b452ff;">
 
         <div class="service-icon">🎓</div>
@@ -2621,11 +1724,8 @@ footer{
         <h3>Akademik işlər</h3>
 
         <p>
-
           Sərbəst iş, referat, kurs işi,
-
           məqalə və digər akademik layihələr.
-
         </p>
 
         <div class="service-arrow">→</div>
@@ -2633,9 +1733,7 @@ footer{
       </a>
 
       <a href="order.html"
-
          class="service-card"
-
          style="--i1:#0cbd91;--i2:#28d9aa;">
 
         <div class="service-icon">📊</div>
@@ -2643,11 +1741,8 @@ footer{
         <h3>Excel</h3>
 
         <p>
-
           Cədvəllər, formulalar, analizlər,
-
           hesabatlar və dashboardlar.
-
         </p>
 
         <div class="service-arrow">→</div>
@@ -2655,9 +1750,7 @@ footer{
       </a>
 
       <a href="order.html"
-
          class="service-card"
-
          style="--i1:#ff793f;--i2:#ffad54;">
 
         <div class="service-icon">📑</div>
@@ -2665,11 +1758,8 @@ footer{
         <h3>Slayd / Təqdimat</h3>
 
         <p>
-
           PowerPoint, layihə, dərs və
-
           peşəkar təqdimat hazırlanması.
-
         </p>
 
         <div class="service-arrow">→</div>
@@ -2677,9 +1767,7 @@ footer{
       </a>
 
       <a href="order.html"
-
          class="service-card"
-
          style="--i1:#e94fc6;--i2:#9e52ff;">
 
         <div class="service-icon">🎨</div>
@@ -2687,11 +1775,8 @@ footer{
         <h3>Logo və dizayn</h3>
 
         <p>
-
           Logo, poster, sosial media və
-
           digər vizual dizaynlar.
-
         </p>
 
         <div class="service-arrow">→</div>
@@ -2699,9 +1784,7 @@ footer{
       </a>
 
       <a href="order.html"
-
          class="service-card"
-
          style="--i1:#685cff;--i2:#397cff;">
 
         <div class="service-icon">▶</div>
@@ -2709,11 +1792,8 @@ footer{
         <h3>Video dərslər</h3>
 
         <p>
-
           Mövzuya uyğun fərdi izah,
-
           video dərs və tədris materialı.
-
         </p>
 
         <div class="service-arrow">→</div>
@@ -2721,9 +1801,7 @@ footer{
       </a>
 
       <a href="order.html"
-
          class="service-card"
-
          style="--i1:#168cff;--i2:#19cffb;">
 
         <div class="service-icon">💼</div>
@@ -2731,11 +1809,8 @@ footer{
         <h3>CV • LinkedIn • GitHub</h3>
 
         <p>
-
           Professional CV, LinkedIn və
-
           GitHub profilinin yaradılması və optimizasiyası.
-
         </p>
 
         <div class="service-arrow">→</div>
@@ -2743,9 +1818,7 @@ footer{
       </a>
 
       <a href="order.html"
-
          class="service-card"
-
          style="--i1:#9d55ff;--i2:#e85cff;">
 
         <div class="service-icon">📝</div>
@@ -2753,11 +1826,8 @@ footer{
         <h3>Məqalə / Dissertasiya</h3>
 
         <p>
-
           Akademik mətnlərin hazırlanması,
-
           strukturlaşdırılması və redaktəsi.
-
         </p>
 
         <div class="service-arrow">→</div>
@@ -2765,9 +1835,7 @@ footer{
       </a>
 
       <a href="order.html"
-
          class="service-card"
-
          style="--i1:#5368ff;--i2:#7651ff;">
 
         <div class="service-icon">🚀</div>
@@ -2775,11 +1843,8 @@ footer{
         <h3>Karyera planlaması</h3>
 
         <p>
-
           Bacarıqlarını müəyyən et,
-
           məqsədini seç və karyera yolunu qur.
-
         </p>
 
         <div class="service-arrow">→</div>
@@ -2793,9 +1858,7 @@ footer{
 </section>
 
 <!-- ==================================================
-
      INTERNATIONAL COURSES
-
 ================================================== -->
 
 <section class="section">
@@ -2807,49 +1870,33 @@ footer{
       <div class="course-content">
 
         <div class="section-label">
-
           BEYNƏLXALQ SERTİFİKATLI KURSLAR
-
         </div>
 
         <h2>
-
           Dünyanın ən yaxşı təhsil
-
           platformalarından öyrən.
-
         </h2>
 
         <p>
-
           Coursera, edX və digər beynəlxalq platformalarda
-
           uyğun kursları tapmaq, seçim etmək və mövcud
-
           maliyyə yardımı və digər imkanlarla müraciət
-
           prosesində dəstək almaq üçün bizə müraciət edə bilərsən.
-
         </p>
 
         <div class="platforms">
 
           <span class="platform">🌍 Coursera</span>
-
           <span class="platform">🎓 edX</span>
-
           <span class="platform">🏆 Sertifikatlı kurslar</span>
-
           <span class="platform">💡 Yeni bacarıqlar</span>
-
           <span class="platform">📈 Karyera inkişafı</span>
 
         </div>
 
         <a href="order.html" class="btn btn-primary">
-
           Kurs üçün müraciət et →
-
         </a>
 
       </div>
@@ -2861,9 +1908,7 @@ footer{
 </section>
 
 <!-- ==================================================
-
      SCHOOL TESTS
-
 ================================================== -->
 
 <section class="section">
@@ -2877,63 +1922,40 @@ footer{
         <div class="tests-copy">
 
           <div class="section-label">
-
             SİNİF TESTLƏRİ
-
           </div>
 
           <h2>
-
             3-cü sinifdən
-
             11-ci sinfə qədər.
-
           </h2>
 
           <p>
-
             Müxtəlif fənlər üzrə testlər.
-
             Yeni fənlər və yeni testlər
-
             mütəmadi olaraq əlavə edilə bilər.
-
           </p>
 
           <div class="grades">
 
             <a href="quiz.html?grade=3" class="grade">3-cü</a>
-
             <a href="quiz.html?grade=4" class="grade">4-cü</a>
-
             <a href="quiz.html?grade=5" class="grade">5-ci</a>
-
             <a href="quiz.html?grade=6" class="grade">6-cı</a>
-
             <a href="quiz.html?grade=7" class="grade">7-ci</a>
-
             <a href="quiz.html?grade=8" class="grade">8-ci</a>
-
             <a href="quiz.html?grade=9" class="grade">9-cu</a>
-
             <a href="quiz.html?grade=10" class="grade">10-cu</a>
-
             <a href="quiz.html?grade=11" class="grade">11-ci</a>
 
           </div>
 
           <a
-
             href="sinif-testleri.html"
-
             class="btn btn-primary"
-
             style="margin-top:22px;"
-
           >
-
             Bütün testlərə bax →
-
           </a>
 
         </div>
@@ -2941,83 +1963,53 @@ footer{
         <div class="subject-grid">
 
           <a href="sinif-testleri.html" class="subject">
-
             <div class="subject-icon">📖</div>
-
             <span>Azərbaycan dili</span>
-
           </a>
 
           <a href="sinif-testleri.html" class="subject">
-
             <div class="subject-icon">🔢</div>
-
             <span>Riyaziyyat</span>
-
           </a>
 
           <a href="sinif-testleri.html" class="subject">
-
             <div class="subject-icon">🇬🇧</div>
-
             <span>İngilis dili</span>
-
           </a>
 
           <a href="sinif-testleri.html" class="subject">
-
             <div class="subject-icon">🏛️</div>
-
             <span>Tarix</span>
-
           </a>
 
           <a href="sinif-testleri.html" class="subject">
-
             <div class="subject-icon">🌍</div>
-
             <span>Coğrafiya</span>
-
           </a>
 
           <a href="sinif-testleri.html" class="subject">
-
             <div class="subject-icon">🌿</div>
-
             <span>Biologiya</span>
-
           </a>
 
           <a href="sinif-testleri.html" class="subject">
-
             <div class="subject-icon">⚗️</div>
-
             <span>Kimya</span>
-
           </a>
 
           <a href="sinif-testleri.html" class="subject">
-
             <div class="subject-icon">⚛️</div>
-
             <span>Fizika</span>
-
           </a>
 
           <a href="sinif-testleri.html" class="subject">
-
             <div class="subject-icon">💻</div>
-
             <span>İnformatika</span>
-
           </a>
 
           <a href="sinif-testleri.html" class="subject">
-
             <div class="subject-icon">✦</div>
-
             <span>Digər fənlər</span>
-
           </a>
 
         </div>
@@ -3031,9 +2023,130 @@ footer{
 </section>
 
 <!-- ==================================================
+     PSYCHOLOGICAL / CAREER ASSESSMENT
+================================================== -->
 
+<section class="section">
+
+  <div class="container">
+
+    <div class="psychology-box">
+
+      <div class="psychology-layout">
+
+        <div class="psychology-copy">
+
+          <div class="section-label">
+            İŞ VƏ KARYERA
+          </div>
+
+          <h2>
+            🧠 Psixoloji və peşə uyğunluğu imtahanı
+          </h2>
+
+          <p>
+            İş mühitində davranış, qərarvermə, ünsiyyət,
+            məsuliyyət, problem həll etmə və peşəkar
+            yanaşmanı situasiya əsaslı suallarla yoxla.
+          </p>
+
+          <p style="margin-top:12px;">
+            Müxtəlif peşə istiqamətləri üçün hazırlanmış
+            200 suallıq test sistemi.
+          </p>
+
+          <a
+            href="psixoloji-imtahan.html"
+            class="btn btn-primary"
+            style="margin-top:22px;"
+          >
+            İmtahana başla →
+          </a>
+
+        </div>
+
+        <div class="psychology-cards">
+
+          <div class="psychology-card">
+
+            <div class="psychology-icon">
+              👥
+            </div>
+
+            <h3>
+              HR / Recruiter
+            </h3>
+
+            <p>
+              İşə qəbul, obyektivlik,
+              etik davranış və insanlarla ünsiyyət.
+            </p>
+
+          </div>
+
+          <div class="psychology-card">
+
+            <div class="psychology-icon">
+              ⚙️
+            </div>
+
+            <h3>
+              Texniki işçilər
+            </h3>
+
+            <p>
+              Təhlükəsizlik, dəqiqlik,
+              məsuliyyət və problem həlli.
+            </p>
+
+          </div>
+
+          <div class="psychology-card">
+
+            <div class="psychology-icon">
+              🎓
+            </div>
+
+            <h3>
+              Müəllimlər
+            </h3>
+
+            <p>
+              Empatiya, sinif idarəetməsi,
+              ədalətli qiymətləndirmə və ünsiyyət.
+            </p>
+
+          </div>
+
+          <div class="psychology-card">
+
+            <div class="psychology-icon">
+              💼
+            </div>
+
+            <h3>
+              Satış və müştəri xidməti
+            </h3>
+
+            <p>
+              Müştəri yönümlülük, ünsiyyət,
+              etik satış və konfliktlərin idarəsi.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ==================================================
      WHY
-
 ================================================== -->
 
 <section class="section">
@@ -3045,15 +2158,11 @@ footer{
       <div>
 
         <div class="section-label">
-
           NİYƏ YOUDIDIT.AZ?
-
         </div>
 
         <h2 class="section-title">
-
           Bir platformadan daha çoxu.
-
         </h2>
 
       </div>
@@ -3067,17 +2176,12 @@ footer{
         <div class="why-icon">★</div>
 
         <h3>
-
           Çoxşaxəli
-
         </h3>
 
         <p>
-
           İmtahan, test, kurs,
-
           akademik iş və karyera.
-
         </p>
 
       </div>
@@ -3087,17 +2191,12 @@ footer{
         <div class="why-icon">⚡</div>
 
         <h3>
-
           Sürətli
-
         </h3>
 
         <p>
-
           Sifarişlər mümkün qədər
-
           operativ hazırlanır.
-
         </p>
 
       </div>
@@ -3107,17 +2206,12 @@ footer{
         <div class="why-icon">🛡</div>
 
         <h3>
-
           Peşəkar
-
         </h3>
 
         <p>
-
           Hər ehtiyaca uyğun
-
           fərdi yanaşma.
-
         </p>
 
       </div>
@@ -3127,17 +2221,12 @@ footer{
         <div class="why-icon">🌍</div>
 
         <h3>
-
           Beynəlxalq
-
         </h3>
 
         <p>
-
           Qlobal kurs və imtahan
-
           imkanlarına çıxış.
-
         </p>
 
       </div>
@@ -3147,17 +2236,12 @@ footer{
         <div class="why-icon">🚀</div>
 
         <h3>
-
           İnkişaf yönümlü
-
         </h3>
 
         <p>
-
           Təhsildən karyeraya qədər
-
           növbəti addımına dəstək.
-
         </p>
 
       </div>
@@ -3169,9 +2253,7 @@ footer{
 </section>
 
 <!-- ==================================================
-
      CTA
-
 ================================================== -->
 
 <section class="section">
@@ -3183,31 +2265,22 @@ footer{
       <div>
 
         <div class="section-label" style="color:#dacaff;">
-
           SİZİN ÜÇÜN
-
         </div>
 
         <h2>
-
           Ehtiyacın olanı tapmadın?
-
         </h2>
 
         <p>
-
           İmtahan, test, kurs və ya xüsusi xidmət
-
           barədə bizə yaz — birlikdə həll edək.
-
         </p>
 
       </div>
 
       <a href="order.html" class="btn btn-primary">
-
         Müraciət et →
-
       </a>
 
     </div>
@@ -3217,9 +2290,7 @@ footer{
 </section>
 
 <!-- ==================================================
-
      FOOTER
-
 ================================================== -->
 
 <footer>
@@ -3229,15 +2300,11 @@ footer{
     <div>
 
       <div class="footer-brand">
-
         Youdidit<span>.az</span>
-
       </div>
 
       <div class="footer-description">
-
         Təhsil • İmtahan • Karyera • İnkişaf
-
       </div>
 
     </div>
@@ -3245,47 +2312,35 @@ footer{
     <div class="footer-links">
 
       <a href="exams.html">
-
         İmtahanlar
-
       </a>
 
       <a href="resources.html">
-
         Resurslar
-
       </a>
 
       <a href="sinif-testleri.html">
-
         Testlər
+      </a>
 
+      <a href="psixoloji-imtahan.html">
+        🧠 Psixoloji imtahan
       </a>
 
       <a href="order.html">
-
         Sifariş
-
       </a>
 
       <a href="mailto:youdidit.az@gmail.com">
-
         ✉ youdidit.az@gmail.com
-
       </a>
 
       <a
-
         href="https://www.instagram.com/youdidit.az/"
-
         target="_blank"
-
         rel="noopener"
-
       >
-
         ◎ @youdidit.az
-
       </a>
 
     </div>
@@ -3295,5 +2350,4 @@ footer{
 </footer>
 
 </body>
-
-</html
+</html>
