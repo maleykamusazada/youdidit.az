@@ -12,367 +12,329 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 
 <style>
 
-.quiz-wrap {
+.quiz-wrap{
 
-  max-width: 640px;
+  max-width:640px;
 
-  margin: 0 auto;
+  margin:0 auto;
 
-  padding: 34px 20px 60px;
-
-}
-
-.card {
-
-  background: #ffffff;
-
-  color: #111111;
-
-  border-radius: 16px;
-
-  padding: 24px;
-
-  box-shadow: 0 4px 20px rgba(0,0,0,.25);
+  padding:34px 20px 60px;
 
 }
 
-.hidden {
+.quiz-card{
 
-  display: none !important;
+  background:#fff;
 
-}
+  border-radius:12px;
 
-.quiz-intro h2,
+  padding:24px;
 
-.quiz-result h2 {
-
-  color: #111111;
-
-  margin-bottom: 12px;
+  box-shadow:0 8px 30px rgba(0,0,0,.18);
 
 }
 
-.quiz-intro-text {
+.quiz-card h2{
 
-  color: #333333;
+  color:#111;
 
-  font-size: .92rem;
-
-  line-height: 1.5;
-
-  margin-bottom: 18px;
+  margin-bottom:10px;
 
 }
 
-.field {
+.quiz-intro-text{
 
-  margin-bottom: 14px;
+  color:#444;
 
-}
+  font-size:.92rem;
 
-.field label {
+  line-height:1.5;
 
-  display: block;
-
-  color: #111111;
-
-  font-weight: 600;
-
-  font-size: .9rem;
-
-  margin-bottom: 6px;
+  margin-bottom:20px;
 
 }
 
-.input {
+.field{
 
-  width: 100%;
-
-  padding: 12px 14px;
-
-  border: 1px solid #bbb;
-
-  border-radius: 8px;
-
-  font-size: .95rem;
-
-  color: #111111;
-
-  background: #ffffff;
+  margin-bottom:14px;
 
 }
 
-.input:focus {
+.field label{
 
-  outline: none;
+  display:block;
 
-  border-color: #6b4fc9;
+  color:#111;
 
-}
+  font-size:.9rem;
 
-.btn {
+  font-weight:600;
 
-  border: 0;
-
-  border-radius: 999px;
-
-  padding: 11px 18px;
-
-  background: #6b4fc9;
-
-  color: #ffffff;
-
-  font-size: .9rem;
-
-  font-weight: 600;
-
-  cursor: pointer;
+  margin-bottom:6px;
 
 }
 
-.btn:hover {
+.field input{
 
-  opacity: .9;
+  width:100%;
 
-}
+  padding:12px;
 
-.btn.secondary {
+  border:1px solid #ccc;
 
-  background: #eeeeee;
+  border-radius:6px;
 
-  color: #111111;
+  font-size:1rem;
 
-}
+  color:#111;
 
-.error {
-
-  color: #b42318;
-
-  font-size: .85rem;
-
-  margin: 8px 0;
+  background:#fff;
 
 }
 
-.quiz-progress-track {
+.btn{
 
-  height: 7px;
+  border:0;
 
-  background: #dddddd;
+  border-radius:7px;
 
-  border-radius: 5px;
+  padding:12px 18px;
 
-  overflow: hidden;
+  cursor:pointer;
 
-  margin-bottom: 12px;
+  font-weight:700;
 
-}
+  background:#6b4fc9;
 
-.quiz-progress-fill {
-
-  height: 100%;
-
-  width: 0%;
-
-  background: #6b4fc9;
-
-  transition: width .25s ease;
+  color:#fff;
 
 }
 
-.quiz-count {
+.btn:hover{
 
-  display: flex;
-
-  align-items: center;
-
-  gap: 8px;
-
-  flex-wrap: wrap;
-
-  color: #222222;
-
-  font-size: .85rem;
-
-  margin-bottom: 16px;
+  opacity:.9;
 
 }
 
-.timer-display {
+.quiz-progress-track{
 
-  margin-left: auto;
+  height:6px;
 
-  font-weight: 700;
+  background:#ddd;
 
-  color: #111111;
+  border-radius:3px;
 
-  background: #eeeeee;
+  overflow:hidden;
 
-  padding: 4px 10px;
-
-  border-radius: 10px;
-
-  font-variant-numeric: tabular-nums;
+  margin-bottom:10px;
 
 }
 
-.timer-display.timer-low {
+.quiz-progress-fill{
 
-  color: #b42318;
+  height:100%;
 
-  background: #fde8e8;
+  background:#6b4fc9;
 
-}
-
-.quiz-question {
-
-  font-size: 1.2rem;
-
-  line-height: 1.5;
-
-  margin-bottom: 18px;
-
-  color: #111111;
-
-  background: #ffffff;
-
-  padding: 15px;
-
-  border-radius: 8px;
+  transition:width .25s ease;
 
 }
 
-.quiz-options {
+.quiz-count{
 
-  display: flex;
+  display:flex;
 
-  flex-direction: column;
+  align-items:center;
 
-  gap: 10px;
+  gap:8px;
 
-  margin-bottom: 24px;
+  flex-wrap:wrap;
 
-}
+  color:#444;
 
-.quiz-option {
+  font-size:.82rem;
 
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  border: 1px solid #444;
-
-  border-radius: 8px;
-
-  padding: 14px 16px;
-
-  cursor: pointer;
-
-  font-size: .98rem;
-
-  background: #ffffff;
-
-  color: #111111;
-
-  line-height: 1.4;
+  margin-bottom:14px;
 
 }
 
-.quiz-option span {
+.timer-display{
 
-  color: #111111;
+  margin-left:auto;
 
-}
+  font-weight:700;
 
-.quiz-option:has(input:checked) {
+  color:#333;
 
-  border-color: #6b4fc9;
+  background:#eee8ff;
 
-  background: #eee8ff;
+  padding:3px 9px;
 
-  color: #111111;
+  border-radius:10px;
 
-}
-
-.quiz-option input {
-
-  accent-color: #6b4fc9;
-
-  width: 17px;
-
-  height: 17px;
-
-  flex: 0 0 auto;
+  font-variant-numeric:tabular-nums;
 
 }
 
-.quiz-nav {
+.timer-display.timer-low{
 
-  display: flex;
+  color:#9A3B2E;
 
-  justify-content: space-between;
-
-  gap: 12px;
+  background:#F7E3E0;
 
 }
 
-.quiz-result {
+.quiz-question{
 
-  text-align: center;
+  font-size:1.2rem;
 
-  padding: 20px 0;
+  margin-bottom:18px;
 
-  color: #111111;
+  color:#111;
 
-}
+  background:#fff;
 
-.quiz-result h2 {
+  padding:15px;
 
-  font-size: 1.6rem;
+  border-radius:8px;
 
-}
-
-.quiz-result p {
-
-  color: #111111;
-
-  line-height: 1.6;
+  line-height:1.5;
 
 }
 
-.quiz-result-actions {
+.quiz-options{
 
-  display: flex;
+  display:flex;
 
-  flex-direction: column;
+  flex-direction:column;
 
-  gap: 10px;
+  gap:10px;
 
-  margin-top: 18px;
+  margin-bottom:24px;
 
 }
 
-@media (min-width: 420px) {
+.quiz-option{
 
-  .quiz-result-actions {
+  display:flex;
 
-    flex-direction: row;
+  align-items:center;
 
-    justify-content: center;
+  gap:10px;
+
+  border:1px solid #444;
+
+  border-radius:4px;
+
+  padding:12px 14px;
+
+  cursor:pointer;
+
+  font-size:.98rem;
+
+  background:#fff;
+
+  color:#111;
+
+  line-height:1.4;
+
+}
+
+.quiz-option:has(input:checked){
+
+  border-color:#6b4fc9;
+
+  background:#eee8ff;
+
+  color:#111;
+
+}
+
+.quiz-option input{
+
+  width:17px;
+
+  height:17px;
+
+  flex:0 0 auto;
+
+}
+
+.quiz-nav{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+}
+
+.quiz-result{
+
+  text-align:center;
+
+  padding:30px 0;
+
+}
+
+.quiz-result h2{
+
+  color:#111;
+
+  font-size:1.6rem;
+
+}
+
+.quiz-result p{
+
+  color:#111;
+
+  margin:10px 0;
+
+}
+
+.quiz-result-actions{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:10px;
+
+  margin-top:18px;
+
+}
+
+.error{
+
+  color:#b00020;
+
+  font-size:.85rem;
+
+  margin:8px 0;
+
+}
+
+@media(min-width:420px){
+
+  .quiz-result-actions{
+
+    flex-direction:row;
+
+    justify-content:center;
 
   }
 
-  .quiz-result-actions .btn {
+  .quiz-result-actions .btn{
 
-    flex: 1;
+    flex:1;
 
   }
 
@@ -388,11 +350,7 @@
 
   <div class="wrap">
 
-    <a href="index.html" class="brand">
-
-      Youdidit<span class="dot">.az</span>
-
-    </a>
+    <a href="index.html" class="brand">Youdidit<span class="dot">.az</span></a>
 
     <nav class="main-nav" aria-label="Əsas naviqasiya">
 
@@ -408,11 +366,7 @@
 
     </nav>
 
-    <button class="menu-btn"
-
-            aria-label="Menyunu aç"
-
-            aria-expanded="false">
+    <button class="menu-btn" aria-label="Menyunu aç" aria-expanded="false">
 
       Menyu
 
@@ -440,7 +394,7 @@
 
   <div class="kicker"
 
-       style="margin-bottom:6px;">
+       style="font-family:var(--serif);font-style:italic;color:var(--ink-soft);margin-bottom:6px;">
 
     6-cı sinif · Biologiya
 
@@ -452,137 +406,7 @@
 
   </h1>
 
-  <!-- START -->
-
-  <div class="card" id="startScreen">
-
-    <div class="quiz-intro">
-
-      <h2>Biologiya 6 — II Fəsil</h2>
-
-      <p class="quiz-intro-text">
-
-        Orqanizmlərin hüceyrəvi quruluşu mövzusu üzrə 100 sualdan ibarət test.
-
-        Testi tamamladıqdan sonra nəticənizi görə və sertifikat əldə edə bilərsiniz.
-
-      </p>
-
-      <div class="field">
-
-        <label for="name">Ad və soyad *</label>
-
-        <input
-
-          id="name"
-
-          class="input"
-
-          type="text"
-
-          placeholder="Ad Soyad">
-
-      </div>
-
-      <div class="field">
-
-        <label for="email">E-poçt</label>
-
-        <input
-
-          id="email"
-
-          class="input"
-
-          type="email"
-
-          placeholder="example@email.com">
-
-      </div>
-
-      <div id="formError" class="error"></div>
-
-      <button class="btn" id="startBtn">
-
-        Testə başla
-
-      </button>
-
-    </div>
-
-  </div>
-
-  <!-- QUIZ -->
-
-  <div class="card hidden" id="quizScreen">
-
-    <div class="quiz-progress-track">
-
-      <div class="quiz-progress-fill" id="progressFill"></div>
-
-    </div>
-
-    <div class="quiz-count">
-
-      <span id="counter"></span>
-
-      <span class="timer-display" id="timer">02:00:00</span>
-
-    </div>
-
-    <div class="quiz-question" id="question"></div>
-
-    <div class="quiz-options" id="options"></div>
-
-    <div class="quiz-nav">
-
-      <button class="btn secondary" id="backBtn">
-
-        ← Geri
-
-      </button>
-
-      <button class="btn" id="nextBtn">
-
-        İrəli →
-
-      </button>
-
-    </div>
-
-  </div>
-
-  <!-- RESULT -->
-
-  <div class="card hidden" id="resultScreen">
-
-    <div class="quiz-result">
-
-      <h2>Test tamamlandı 🎉</h2>
-
-      <p id="resultText"></p>
-
-      <div class="quiz-result-actions">
-
-        <button class="btn" id="certificateBtn">
-
-          Sertifikat
-
-        </button>
-
-        <button class="btn secondary" id="restartBtn">
-
-          Yenidən başla
-
-        </button>
-
-      </div>
-
-      <p id="sendStatus" style="margin-top:15px;"></p>
-
-    </div>
-
-  </div>
+  <div id="quiz-root"></div>
 
 </div>
 
@@ -590,21 +414,13 @@
 
   <div class="wrap">
 
-    <div>
-
-      Youdidit.az — tələbələr üçün resurs və imtahan mərkəzi
-
-    </div>
+    <div>Youdidit.az — tələbələr üçün resurs və imtahan mərkəzi</div>
 
     <div>
 
       Sual və təkliflər üçün:
 
-      <a href="mailto:youdiditaz@gmail.com">
-
-        youdiditaz@gmail.com
-
-      </a>
+      <a href="mailto:youdiditaz@gmail.com">youdiditaz@gmail.com</a>
 
     </div>
 
@@ -616,89 +432,961 @@
 
 <script>
 
-/* =====================================================
+var QUIZ_META = {
 
-   BIOLOGİYA 6 — II FƏSİL
+  title: "Biologiya 6 — II Fəsil: Orqanizmlərin hüceyrəvi quruluşu (100 sual)"
 
-   ===================================================== */
+};
+
+var QUESTIONS = [
+
+{
+
+q:"Laboratoriyada mayenin həcmini ölçmək üçün hansı alətdən istifadə edilir?",
+
+options:["Pinset","Mikroskop","Menzurka","Əşya şüşəsi"],a:2
+
+},
+
+{
+
+q:"Mikroskopun əsas vəzifəsi nədir?",
+
+options:["Mayenin kütləsini ölçmək","Maddəni qızdırmaq","Kiçik obyektləri böyüdərək müşahidə etmək","Temperaturu ölçmək"],a:2
+
+},
+
+{
+
+q:"Əşya şüşəsi nə üçün istifadə olunur?",
+
+options:["Həcmi ölçmək üçün","Nümunəni mikroskop altında yerləşdirmək üçün","Mayeni qızdırmaq üçün","Maddəni süzmək üçün"],a:1
+
+},
+
+{
+
+q:"Örtük şüşəsinin əsas məqsədi nədir?",
+
+options:["Preparatı örtmək və qorumaq","Mayeni qarışdırmaq","Temperaturu ölçmək","Mikroskopu böyütmək"],a:0
+
+},
+
+{
+
+q:"Spirt lampası laboratoriyada əsasən nə üçün istifadə edilir?",
+
+options:["Nümunəni böyütmək üçün","Maddələri qızdırmaq üçün","Həcmi ölçmək üçün","Preparatı örtmək üçün"],a:1
+
+},
+
+{
+
+q:"Mikroskopun gözlə baxılan hissəsi necə adlanır?",
+
+options:["Ştativ","Predmet stolu","Okulyar","Diafraqma"],a:2
+
+},
+
+{
+
+q:"Nümunəni şüşə üzərinə götürmək üçün hansı alət əlverişlidir?",
+
+options:["Spirt lampası","Termometr","Menzurka","Pinset"],a:3
+
+},
+
+{
+
+q:"Mikroskop linzalarını necə təmizləmək düzgündür?",
+
+options:["Qumla","Barmaqla","Metal alətlə","Xüsusi linza kağızı ilə"],a:3
+
+},
+
+{
+
+q:"Mikroskopla işləyərkən ilk növbədə nəyə riayət etmək lazımdır?",
+
+options:["Alətləri icazəsiz qızdırmağa","Bütün maddələri qarışdırmağa","Təhlükəsizlik qaydalarına","Linzaya toxunmağa"],a:2
+
+},
+
+{
+
+q:"Laboratoriya işində müşahidə nəticələri harada qeyd edilə bilər?",
+
+options:["Pinsetin üzərində","Mikroskopun linzasında","Qeyd dəftərində","Spirt lampasında"],a:2
+
+},
+
+{
+
+q:"Canlı orqanizmlərin əsas quruluş vahidi nədir?",
+
+options:["Orqanlar sistemi","Orqan","Toxuma","Hüceyrə"],a:3
+
+},
+
+{
+
+q:"Hüceyrənin idarəedici mərkəzi hesab olunan hissə hansıdır?",
+
+options:["Nüvə","Hüceyrə divarı","Ribosom","Vakuol"],a:0
+
+},
+
+{
+
+q:"Sitoplazma nədir?",
+
+options:["Yalnız xloroplast","Hüceyrənin xarici divarı","Hüceyrənin daxili mayevari mühiti","Yalnız nüvənin içi"],a:2
+
+},
+
+{
+
+q:"Hüceyrə membranının əsas funksiyalarından biri hansıdır?",
+
+options:["Maddələrin hüceyrəyə daxil olub-çıxmasını tənzimləmək","İrsi məlumatı təkbaşına yaratmaq","Sümükləri hərəkət etdirmək","Hüceyrəni yalnız rəngləndirmək"],a:0
+
+},
+
+{
+
+q:"Bitki hüceyrəsini heyvan hüceyrəsindən fərqləndirən quruluşlardan biri hansıdır?",
+
+options:["Sitoplazma","Ribosom","Hüceyrə divarı","Nüvə"],a:2
+
+},
+
+{
+
+q:"Fotosintezin baş verdiyi əsas orqanoid hansıdır?",
+
+options:["Xloroplast","Ribosom","Mitoxondri","Nüvə"],a:0
+
+},
+
+{
+
+q:"Mitoxondrinin əsas funksiyası nə ilə bağlıdır?",
+
+options:["Fotosintezin aparılması ilə","Enerjinin ayrılması ilə","Hüceyrə divarının yaranması ilə","İrsi məlumatın saxlanması ilə"],a:1
+
+},
+
+{
+
+q:"Ribosomların əsas rolu nədir?",
+
+options:["Zülal sintezində iştirak etmək","Hüceyrə şirəsi toplamaq","Hüceyrəni qorumaq","İşığı udmaq"],a:0
+
+},
+
+{
+
+q:"Bitki hüceyrəsində iri vakuolun əsas funksiyalarından biri nədir?",
+
+options:["Hüceyrə şirəsini toplamaq","İrsi məlumatı saxlamaq","İmpuls ötürmək","Zülal sintez etmək"],a:0
+
+},
+
+{
+
+q:"Bitki hüceyrə divarının əsas maddəsi hansıdır?",
+
+options:["Yağ","Sellüloza","Nişasta","Hemoglobin"],a:1
+
+},
+
+{
+
+q:"Nüvənin mühüm funksiyası hansıdır?",
+
+options:["Yalnız hərəkət etdirmək","İrsi məlumatı saxlamaq və hüceyrəni idarə etmək","Yalnız su toplamaq","Yalnız fotosintez etmək"],a:1
+
+},
+
+{
+
+q:"Hansı quruluş bitki hüceyrəsində fotosintezlə əlaqəlidir?",
+
+options:["Ribosom","Nüvə","Xloroplast","Vakuol"],a:2
+
+},
+
+{
+
+q:"Hüceyrə divarı bitki hüceyrəsinə əsasən nə verir?",
+
+options:["Həzm","İmpuls ötürmə","Qan dövranı","Möhkəmlik və forma"],a:3
+
+},
+
+{
+
+q:"Eyni quruluş və funksiyaya malik hüceyrələr birləşərək nə əmələ gətirir?",
+
+options:["Orqan","Toxuma","Orqanizm","Orqanlar sistemi"],a:1
+
+},
+
+{
+
+q:"Bir neçə toxumanın birləşməsindən əsasən nə yaranır?",
+
+options:["Hüceyrə","Bakteriya","Virus","Orqan"],a:3
+
+},
+
+{
+
+q:"Bir neçə orqanın birlikdə müəyyən funksiyanı yerinə yetirməsi nə yaradır?",
+
+options:["Hüceyrə divarı","Toxuma","Orqanlar sistemi","Xromosom"],a:2
+
+},
+
+{
+
+q:"Hüceyrənin əsas hissələrindən biri hansıdır?",
+
+options:["Toxuma","Orqan","Sitoplazma","Sistem"],a:2
+
+},
+
+{
+
+q:"Hansı quruluş həm bitki, həm də heyvan hüceyrəsində olur?",
+
+options:["Nüvə","İri mərkəzi vakuol","Hüceyrə divarı","Xloroplast"],a:0
+
+},
+
+{
+
+q:"Bitki hüceyrəsinin formasının saxlanmasına daha çox hansı quruluş kömək edir?",
+
+options:["Hüceyrə divarı","Ribosom","Nüvə","Xromosom"],a:0
+
+},
+
+{
+
+q:"Hüceyrənin canlılığını təmin edən proseslərin çoxu harada gedir?",
+
+options:["Yalnız örtük toxumasında","Yalnız hüceyrə divarında","Sitoplazmada","Yalnız vakuolun xaricində"],a:2
+
+},
+
+{
+
+q:"Prokariot orqanizmlərin əsas xüsusiyyəti hansıdır?",
+
+options:["Mütləq çoxhüceyrəli olması","Orqanlar sisteminin olması","Xloroplastlarının olması","Formalaşmış nüvələrinin olmaması"],a:3
+
+},
+
+{
+
+q:"Bakteriyalar hansı hüceyrə tipinə aiddir?",
+
+options:["Prokariot","Toxuma","Virus","Eukariot"],a:0
+
+},
+
+{
+
+q:"Eukariot hüceyrələri prokariotlardan əsasən nə ilə fərqlənir?",
+
+options:["DNT daşımamaları ilə","Formalaşmış nüvəyə malik olmaları ilə","Hüceyrə membranının olmaması ilə","Həmişə təkhüceyrəli olmaları ilə"],a:1
+
+},
+
+{
+
+q:"Aşağıdakılardan hansı prokariotdur?",
+
+options:["Göbələk","Bakteriya","Amöb","Palıd"],a:1
+
+},
+
+{
+
+q:"Bakteriya hüceyrəsində hansı quruluş olmur?",
+
+options:["Formalaşmış nüvə","Ribosom","Sitoplazma","Hüceyrə membranı"],a:0
+
+},
+
+{
+
+q:"Bakteriyaların əksəriyyəti hansı quruluşa malikdir?",
+
+options:["Toxumalı","Orqanlar sistemli","Təkhüceyrəli","Mütləq çoxhüceyrəli"],a:2
+
+},
+
+{
+
+q:"Prokariotlarda irsi material harada yerləşir?",
+
+options:["Xloroplastda","Vakuolda","Nukleoid sahəsində","Mitoxondridə"],a:2
+
+},
+
+{
+
+q:"Bakteriya hüceyrəsində hansı quruluş ola bilər?",
+
+options:["Ribosom","Xloroplast","Formalaşmış nüvə","Mitoz bölünən nüvə"],a:0
+
+},
+
+{
+
+q:"Prokariot və eukariot hüceyrələrin ortaq xüsusiyyəti hansıdır?",
+
+options:["Hər ikisi çoxhüceyrəlidir","Hər ikisində hüceyrə membranı və sitoplazma vardır","Hər ikisində xloroplast vardır","Hər ikisində formalaşmış nüvə vardır"],a:1
+
+},
+
+{
+
+q:"Prokariot sözündəki əsas fərqləndirici xüsusiyyət nədir?",
+
+options:["Orqanlar sisteminin olması","Çoxlu toxumaların olması","Yalnız bitki olması","Həqiqi nüvənin olmaması"],a:3
+
+},
+
+{
+
+q:"Bakteriyaların yayılmasına hansı şərait əlverişli ola bilər?",
+
+options:["Mütləq tam quruluq","Tamamilə qidasız mühit","Uyğun temperatur və qida mühiti","Həmişə çox aşağı temperatur"],a:2
+
+},
+
+{
+
+q:"Xəstəliktörədən bakteriya nədir?",
+
+options:["Xəstəlik yarada bilən bakteriya","Yalnız faydalı bakteriya","Virusun başqa adı","Yalnız torpaq hissəciyi"],a:0
+
+},
+
+{
+
+q:"Bakteriyaların təbiətdə faydalı roluna nümunə hansıdır?",
+
+options:["Bütün xəstəlikləri müalicə etmək","Üzvi qalıqların parçalanmasında iştirak","Torpağı yox etməsi","Hamısının fotosintez etməsi"],a:1
+
+},
+
+{
+
+q:"Antibiotiklər əsasən nəyə qarşı istifadə olunur?",
+
+options:["Bütün viruslara qarşı","Yalnız göbələklərə qarşı","Bakteriyalara qarşı","Yalnız bitkilərə qarşı"],a:2
+
+},
+
+{
+
+q:"Viruslar hüceyrə quruluşuna malikdirmi?",
+
+options:["Yalnız bakteriya hüceyrəsinə malikdir","Bəli, tam hüceyrədir","Yalnız bitki hüceyrəsinə malikdir","Xeyr"],a:3
+
+},
+
+{
+
+q:"Virusların çoxalması üçün nə lazımdır?",
+
+options:["Distillə olunmuş su","Torpaq hissəcikləri","Ölü toxuma","Canlı hüceyrə"],a:3
+
+},
+
+{
+
+q:"Viruslar canlı hüceyrədə əsasən nə edir?",
+
+options:["Hüceyrə divarı yaradır","Çoxalaraq hüceyrənin fəaliyyətini poza bilir","Sümük əmələ gətirir","Fotosintez edir"],a:1
+
+},
+
+{
+
+q:"Qripin törədicisi hansı qrupa aiddir?",
+
+options:["Bakteriyalara","Göbələklərə","Bitkilərə","Viruslara"],a:3
+
+},
+
+{
+
+q:"Bakteriyaların insan üçün faydalı fəaliyyətlərindən biri hansıdır?",
+
+options:["İnsanda sümük yaratmaq","Bəzi qida məhsullarının hazırlanmasında iştirak","Xloroplast yaratmaq","Bütün virusları məhv etmək"],a:1
+
+},
+
+{
+
+q:"Bakteriyaların yayılmasının qarşısını almağa hansı tədbir kömək edir?",
+
+options:["Xəstə ilə təması artırmaq","Qidaları açıq saxlamaq","Əlləri yumamaq","Gigiyena qaydalarına əməl etmək"],a:3
+
+},
+
+{
+
+q:"Hüceyrə bölünməsinin əsas əhəmiyyəti nədir?",
+
+options:["Bütün hüceyrələri məhv etmək","Yalnız temperaturu dəyişmək","Yalnız suyu buxarlandırmaq","Böyümə, inkişaf və yeni hüceyrələrin yaranması"],a:3
+
+},
+
+{
+
+q:"Hüceyrə bölünməsi nəticəsində nə yaranır?",
+
+options:["Yalnız viruslar","Yalnız hüceyrə divarı","Yeni hüceyrələr","Yalnız toxumlar"],a:2
+
+},
+
+{
+
+q:"Bölünmədən əvvəl irsi materialla bağlı hansı proses baş verir?",
+
+options:["Xlorofilin tam parçalanması","DNT-nin ikiqatlaşması","Hüceyrə divarının yox olması","Vakuolun mütləq itməsi"],a:1
+
+},
+
+{
+
+q:"Çoxhüceyrəli orqanizmin böyüməsində hansı proses mühümdür?",
+
+options:["Buxarlanma","Hüceyrə bölünməsi","Virus infeksiyası","Fotosintezin dayanması"],a:1
+
+},
+
+{
+
+q:"İnkişaf anlayışına hansı fikir uyğundur?",
+
+options:["Quruluş və funksiyaların formalaşması və dəyişməsi","Yalnız temperatur artımı","Yalnız su itkisi","Yalnız kütlənin azalması"],a:0
+
+},
+
+{
+
+q:"Bölünmə yeni hüceyrələrə nə ötürməlidir?",
+
+options:["Yalnız işıq","İrsi məlumat","Yalnız oksigen","Yalnız su"],a:1
+
+},
+
+{
+
+q:"Zədələnmiş toxumanın bərpasında hansı proses mühüm rol oynayır?",
+
+options:["Virusların yayılması","Buxarlanma","Qidanın quruması","Hüceyrə bölünməsi"],a:3
+
+},
+
+{
+
+q:"Hüceyrə bölünməsi orqanizmin hansı xüsusiyyətinə xidmət edir?",
+
+options:["Yalnız səs çıxarmasına","Böyümə və inkişafa","Yalnız qoxuya","Yalnız rəng dəyişməsinə"],a:1
+
+},
+
+{
+
+q:"Yeni hüceyrələrin yaranması hansı proseslə əlaqəlidir?",
+
+options:["Buxarlanma","Bölünmə","Süzülmə","Tənəffüsün dayanması"],a:1
+
+},
+
+{
+
+q:"Hüceyrə bölünməsində irsi məlumatın qorunması nə üçün vacibdir?",
+
+options:["Yeni hüceyrələrin oxşar irsi xüsusiyyətləri alması üçün","Hüceyrənin rəngini dəyişmək üçün","Mayeni qızdırmaq üçün","Mikroskopu böyütmək üçün"],a:0
+
+},
+
+{
+
+q:"Birhüceyrəli orqanizm nədir?",
+
+options:["Yalnız bir orqandan ibarət canlı","Yalnız nüvədən ibarət canlı","Çoxlu toxumadan ibarət canlı","Bədəni bir hüceyrədən ibarət olan orqanizm"],a:3
+
+},
+
+{
+
+q:"Aşağıdakılardan hansı birhüceyrəlidir?",
+
+options:["Amöb","Palıd","Pişik","İnsan"],a:0
+
+},
+
+{
+
+q:"Aşağıdakılardan hansı çoxhüceyrəlidir?",
+
+options:["Bakteriya","Paramecium","Amöb","İnsan"],a:3
+
+},
+
+{
+
+q:"Birhüceyrəli canlıda bir hüceyrə nəyi yerinə yetirir?",
+
+options:["Yalnız çoxalmanı","Yalnız qidalanmanı","Həyat fəaliyyəti üçün əsas funksiyaları","Heç bir funksiyanı"],a:2
+
+},
+
+{
+
+q:"Çoxhüceyrəli orqanizmlərdə hüceyrələr niyə ixtisaslaşır?",
+
+options:["Canlını cansızlaşdırmaq üçün","Hamısının eyni olması üçün","Müxtəlif funksiyaları yerinə yetirmək üçün","Nüvəni itirmək üçün"],a:2
+
+},
+
+{
+
+q:"Çoxhüceyrəli orqanizmdə əmək bölgüsü nə ilə bağlıdır?",
+
+options:["Hüceyrələrin hamısının eyni olması ilə","Suyun yox olması ilə","Virusların artması ilə","Hüceyrə və toxumaların ixtisaslaşması ilə"],a:3
+
+},
+
+{
+
+q:"Birhüceyrəli və çoxhüceyrəli orqanizmlərin ortaq cəhəti nədir?",
+
+options:["Hər ikisi yalnız bakteriyadır","Hər ikisi orqanlar sisteminə malikdir","Hər ikisi yalnız heyvandır","Hər ikisi hüceyrələrdən təşkil olunub"],a:3
+
+},
+
+{
+
+q:"Çoxhüceyrəli orqanizmdə toxuma necə yaranır?",
+
+options:["Ölü maddədən","Oxşar ixtisaslaşmış hüceyrələrin birləşməsindən","Yalnız sudan","Virusların birləşməsindən"],a:1
+
+},
+
+{
+
+q:"Birhüceyrəli canlıda orqan və toxuma olmamasının əsas səbəbi nədir?",
+
+options:["Onun həmişə virus olması","Onun çoxnüvəli olması","Onun canlı olmaması","Orqanizmin bir hüceyrədən ibarət olması"],a:3
+
+},
+
+{
+
+q:"Hüceyrə → toxuma → orqan ardıcıllığı nəyi göstərir?",
+
+options:["Canlının cansızlaşmasını","Yalnız qidalanmanı","Viruslaşmanı","Quruluşun mürəkkəbləşməsini"],a:3
+
+},
+
+{
+
+q:"Bitkinin törədici toxumasının əsas funksiyası nədir?",
+
+options:["Yeni hüceyrələr əmələ gətirmək","Su itkisinin qarşısını almaq","Yalnız maddə daşımaq","Yalnız mexaniki dayaq"],a:0
+
+},
+
+{
+
+q:"Törədici toxumanın hüceyrələri necə olur?",
+
+options:["Həmişə nüvəsiz olur","Bölünmə qabiliyyəti yüksək olur","Həmişə çox iri olur","Tamamilə ölü olur"],a:1
+
+},
+
+{
+
+q:"Örtük toxumasının əsas funksiyası nədir?",
+
+options:["Yalnız su daşımaq","Yalnız toxum yaratmaq","Yalnız hüceyrə bölmək","Bitkini xarici təsirlərdən qorumaq"],a:3
+
+},
+
+{
+
+q:"Mexaniki toxumanın əsas funksiyası nədir?",
+
+options:["Yalnız su buxarlandırmaq","Fotosintez etmək","Dayaq və möhkəmlik vermək","Xəstəlik törətmək"],a:2
+
+},
+
+{
+
+q:"Bitkinin böyüməsində hansı toxuma mühümdür?",
+
+options:["Törədici toxuma","Virus toxuması","Mexaniki toxuma","Örtük toxuması"],a:0
+
+},
+
+{
+
+q:"Epidermis hansı toxuma qrupuna aiddir?",
+
+options:["Törədici toxumaya","Ötürücü toxumaya","Örtük toxumasına","Mexaniki toxumaya"],a:2
+
+},
+
+{
+
+q:"Mexaniki toxumanın inkişafı bitkidə nəyi artırır?",
+
+options:["Virusların sayını","Möhkəmliyi","Yalnız rəng dəyişməsini","Həmişə çoxalmanı"],a:1
+
+},
+
+{
+
+q:"Örtük toxuması zədələnsə, hansı funksiya zəifləyər?",
+
+options:["Zülal sintezi","İmpuls ötürülməsi","Qoruyucu funksiya","İrsi məlumatın saxlanması"],a:2
+
+},
+
+{
+
+q:"Törədici və mexaniki toxumanın fərqi nədir?",
+
+options:["Biri yeni hüceyrələr yaradır, digəri dayaq verir","Hər ikisi yalnız su daşıyır","Biri virus, digəri bakteriyadır","Hər ikisi yalnız heyvanlarda olur"],a:0
+
+},
+
+{
+
+q:"Bitkinin gövdəsinə dayaq verən toxuma hansıdır?",
+
+options:["İfrazat toxuması","Örtük toxuması","Törədici toxuma","Mexaniki toxuma"],a:3
+
+},
+
+{
+
+q:"Ötürücü toxumanın əsas funksiyası nədir?",
+
+options:["Yalnız qorumaq","Yalnız dayaq vermək","Yalnız bölünmək","Maddələrin bitki daxilində daşınması"],a:3
+
+},
+
+{
+
+q:"Ksilem əsasən nə daşıyır?",
+
+options:["Su və mineral maddələri","Hazır üzvi maddələri","Yalnız zülalı","Yalnız oksigeni"],a:0
+
+},
+
+{
+
+q:"Floem əsasən nə ilə bağlıdır?",
+
+options:["Yalnız bölünmə ilə","Yalnız qoruma ilə","Yalnız suyun daşınması ilə","Üzvi maddələrin daşınması ilə"],a:3
+
+},
+
+{
+
+q:"Əsas toxumanın funksiyalarından biri hansıdır?",
+
+options:["Yalnız mexaniki dayaq","Yalnız xarici qoruma","Yalnız hüceyrə bölünməsi","Fotosintez və ehtiyat maddələrin toplanması"],a:3
+
+},
+
+{
+
+q:"İfrazat toxuması nə ilə əlaqəlidir?",
+
+options:["Müxtəlif maddələrin ifrazı və toplanması ilə","Yalnız bölünmə ilə","Yalnız su daşımaqla","Yalnız dayaqla"],a:0
+
+},
+
+{
+
+q:"Heyvanlarda epitel toxumasının əsas funksiyası nədir?",
+
+options:["Yalnız impuls ötürmək","Yalnız qan yaratmaq","Örtmə və qoruma","Sümükləri hərəkət etdirmək"],a:2
+
+},
+
+{
+
+q:"Əzələ toxumasının əsas xüsusiyyəti nədir?",
+
+options:["Yığılmaq qabiliyyəti","Yalnız maddə daşımaq","Yalnız örtük yaratmaq","İrsi məlumat saxlamaq"],a:0
+
+},
+
+{
+
+q:"Sinir toxumasının əsas funksiyası nədir?",
+
+options:["Yalnız dayaq vermək","Qıcıqları qəbul etmək və impulsları ötürmək","Yalnız qida toplamaq","Yalnız örtmək"],a:1
+
+},
+
+{
+
+q:"Birləşdirici toxumanın funksiyalarından biri hansıdır?",
+
+options:["Dayaq və birləşdirmə","Yalnız örtük yaratmaq","Yalnız əzələ yığılması","Yalnız impuls ötürmək"],a:0
+
+},
+
+{
+
+q:"Qan hansı toxuma qrupuna daxildir?",
+
+options:["Epitel toxumasına","Əzələ toxumasına","Birləşdirici toxumaya","Sinir toxumasına"],a:2
+
+},
+
+{
+
+q:"Bir neçə toxumanın birləşməsindən nə yaranır?",
+
+options:["Hüceyrə","Orqan","Növ","Virus"],a:1
+
+},
+
+{
+
+q:"Qidanın həzm olunması hansı sistemlə əsasən əlaqəlidir?",
+
+options:["Həzm sistemi","Dayaq-hərəkət sistemi","Tənəffüs sistemi","Sinir sistemi"],a:0
+
+},
+
+{
+
+q:"Tənəffüs sisteminin əsas vəzifəsi nədir?",
+
+options:["Qaz mübadiləsini təmin etmək","Qidanı həzm etmək","Sümükləri birləşdirmək","İrsi məlumatı saxlamaq"],a:0
+
+},
+
+{
+
+q:"Dayaq-hərəkət sisteminə nə daxildir?",
+
+options:["Mədə və bağırsaqlar","Ağciyərlər və bronxlar","Sümüklər və əzələlər","Beyin və onurğa beyni"],a:2
+
+},
+
+{
+
+q:"Sinir sistemi əsasən nə edir?",
+
+options:["Orqanizmin fəaliyyətini idarə və əlaqələndirir","Qanı süzür","Oksigeni yalnız daşıyır","Qidanı həzm edir"],a:0
+
+},
+
+{
+
+q:"Orqanlar sisteminin üstünlüyü nədir?",
+
+options:["Bütün orqanların eyni olması","Canlının birhüceyrəli olması","Hüceyrələrin yox olması","Orqanların birlikdə müəyyən funksiyanı yerinə yetirməsi"],a:3
+
+},
+
+{
+
+q:"Ürək hansı sistemin əsas orqanlarından biridir?",
+
+options:["Həzm sisteminin","Qan-damar sisteminin","Sinir sisteminin","Tənəffüs sisteminin"],a:1
+
+},
+
+{
+
+q:"Ağciyərlər hansı sistemə aiddir?",
+
+options:["Həzm sisteminə","Tənəffüs sisteminə","Sinir sisteminə","Dayaq-hərəkət sisteminə"],a:1
+
+},
+
+{
+
+q:"Mədə hansı sistemə daxildir?",
+
+options:["Sinir sisteminə","Dayaq-hərəkət sisteminə","Həzm sisteminə","Tənəffüs sisteminə"],a:2
+
+},
+
+{
+
+q:"Beyin hansı sistemin əsas orqanıdır?",
+
+options:["Tənəffüs sisteminin","Sinir sisteminin","Qan-damar sisteminin","Həzm sisteminin"],a:1
+
+},
+
+{
+
+q:"Bitki hüceyrəsində fotosintez prosesinin baş verməsi üçün əsas hansı orqanoid lazımdır?",
+
+options:["Mitoxondri","Xloroplast","Ribosom","Vakuol"],a:1
+
+},
+
+{
+
+q:"Hüceyrənin xarici mühitlə maddələr mübadiləsini əsasən hansı quruluş tənzimləyir?",
+
+options:["Nüvə","Xloroplast","Hüceyrə membranı","Ribosom"],a:2
+
+},
+
+{
+
+q:"Aşağıdakılardan hansı heyvan hüceyrəsində olur, lakin bitki hüceyrəsinə xas deyil?",
+
+options:["Nüvə","Sitoplazma","Hüceyrə membranı","Xloroplast"],a:3
+
+},
+
+{
+
+q:"Hüceyrədə zülalların yaranmasında hansı quruluş iştirak edir?",
+
+options:["Ribosom","Vakuol","Hüceyrə divarı","Xloroplast"],a:0
+
+},
+
+{
+
+q:"Bitki hüceyrəsində hüceyrə şirəsinin toplandığı əsas quruluş hansıdır?",
+
+options:["Nüvə","Vakuol","Ribosom","Mitoxondri"],a:1
+
+},
+
+{
+
+q:"Orqanizmdə hüceyrələr, toxumalar və orqanların birlikdə fəaliyyət göstərməsi nəyi təmin edir?",
+
+options:["Orqanizmin həyat fəaliyyətini","Yalnız fotosintezi","Yalnız hüceyrə bölünməsini","Yalnız suyun buxarlanmasını"],a:0
+
+},
+
+{
+
+q:"Aşağıdakılardan hansı hüceyrə → toxuma → orqan → orqanlar sistemi ardıcıllığına uyğundur?",
+
+options:["Sinir hüceyrəsi → sinir toxuması → beyin → sinir sistemi","Beyin → sinir sistemi → hüceyrə → toxuma","Toxuma → hüceyrə → orqan → sistem","Orqan → toxuma → hüceyrə → sistem"],a:0
+
+},
+
+{
+
+q:"Mikroskop altında preparat hazırlayarkən örtük şüşəsindən istifadə edilməsinin səbəblərindən biri hansıdır?",
+
+options:["Nümunəni qızdırmaq","Preparatı qorumaq və nümunəni sabit saxlamaq","Mayenin həcmini ölçmək","Mikroskopun böyütməsini artırmaq"],a:1
+
+}
+
+];
 
 var FORM_ENDPOINT = "https://formspree.io/f/mqpkglkb";
 
 var TIME_LIMIT = 2 * 60 * 60;
 
-/* =====================================================
-
-   SUALLAR
-
-   ===================================================== */
-
-var QUESTIONS = [
-
-  /* BURAYA SƏNİN GÖNDƏRDİYİN 100 SUALIN
-
-     QUESTIONS ARRAY-I OLDUĞU KİMİ YERLƏŞDİRİLİR */
-
-];
-
-/* =====================================================
-
-   TEST MƏNTİQİ
-
-   ===================================================== */
+var root = document.getElementById("quiz-root");
 
 var current = 0;
 
-var answers = [];
+var answers = new Array(QUESTIONS.length).fill(null);
 
 var secondsLeft = TIME_LIMIT;
 
-var timerInterval = null;
+var timer = null;
 
-var nameInput = document.getElementById("name");
+var studentName = "";
 
-var emailInput = document.getElementById("email");
+var studentEmail = "";
 
-var startScreen = document.getElementById("startScreen");
+function startScreen(){
 
-var quizScreen = document.getElementById("quizScreen");
+  root.innerHTML = `
 
-var resultScreen = document.getElementById("resultScreen");
+    <div class="quiz-card">
 
-var questionEl = document.getElementById("question");
+      <h2>II Fəsil — Orqanizmlərin hüceyrəvi quruluşu</h2>
 
-var optionsEl = document.getElementById("options");
+      <div class="quiz-intro-text">
 
-var counterEl = document.getElementById("counter");
+        Test 100 sualdan ibarətdir. Hər sual üçün yalnız bir cavab seçin.
 
-var timerEl = document.getElementById("timer");
+        Testi başlatmaq üçün ad və soyadınızı daxil edin.
 
-var progressFill = document.getElementById("progressFill");
+      </div>
 
-var backBtn = document.getElementById("backBtn");
+      <div class="field">
 
-var nextBtn = document.getElementById("nextBtn");
+        <label for="studentName">Ad və soyad</label>
 
-var resultText = document.getElementById("resultText");
+        <input id="studentName" type="text" placeholder="Ad və soyad">
 
-var formError = document.getElementById("formError");
+      </div>
 
-var sendStatus = document.getElementById("sendStatus");
+      <div class="field">
 
-/* START */
+        <label for="studentEmail">E-mail</label>
 
-document.getElementById("startBtn").addEventListener("click", function () {
+        <input id="studentEmail" type="email" placeholder="E-mail">
 
-  var name = nameInput.value.trim();
+      </div>
 
-  if (!name) {
+      <div id="startError" class="error"></div>
 
-    formError.textContent = "Zəhmət olmasa ad və soyadınızı yazın.";
+      <button class="btn" id="startBtn">
+
+        Testə başla
+
+      </button>
+
+    </div>
+
+  `;
+
+  document.getElementById("startBtn").onclick = startQuiz;
+
+}
+
+function startQuiz(){
+
+  studentName = document.getElementById("studentName").value.trim();
+
+  studentEmail = document.getElementById("studentEmail").value.trim();
+
+  var error = document.getElementById("startError");
+
+  if(!studentName){
+
+    error.textContent = "Zəhmət olmasa ad və soyadınızı daxil edin.";
 
     return;
 
   }
-
-  formError.textContent = "";
 
   current = 0;
 
@@ -706,177 +1394,211 @@ document.getElementById("startBtn").addEventListener("click", function () {
 
   secondsLeft = TIME_LIMIT;
 
-  startScreen.classList.add("hidden");
+  renderQuiz();
 
-  quizScreen.classList.remove("hidden");
+  startTimer();
 
-  renderQuestion();
+}
 
-  updateTimer();
+function startTimer(){
 
-  clearInterval(timerInterval);
+  clearInterval(timer);
 
-  timerInterval = setInterval(function () {
+  timer = setInterval(function(){
 
     secondsLeft--;
 
-    updateTimer();
+    var timerEl = document.getElementById("timer");
 
-    if (secondsLeft <= 0) {
+    if(timerEl){
 
-      clearInterval(timerInterval);
+      timerEl.textContent = formatTime(secondsLeft);
+
+      if(secondsLeft <= 300){
+
+        timerEl.classList.add("timer-low");
+
+      }
+
+    }
+
+    if(secondsLeft <= 0){
+
+      clearInterval(timer);
 
       finishQuiz();
 
     }
 
-  }, 1000);
+  },1000);
 
-});
+}
 
-/* QUESTION */
+function formatTime(total){
 
-function renderQuestion() {
+  var h = Math.floor(total / 3600);
 
-  var item = QUESTIONS[current];
+  var m = Math.floor((total % 3600) / 60);
 
-  counterEl.textContent =
+  var s = total % 60;
 
-    "Sual " + (current + 1) + " / " + QUESTIONS.length;
+  return String(h).padStart(2,"0") + ":" +
 
-  progressFill.style.width =
+         String(m).padStart(2,"0") + ":" +
 
-    ((current + 1) / QUESTIONS.length * 100) + "%";
+         String(s).padStart(2,"0");
 
-  questionEl.textContent = item.q;
+}
 
-  optionsEl.innerHTML = "";
+function renderQuiz(){
 
-  item.options.forEach(function (option, index) {
+  var q = QUESTIONS[current];
 
-    var label = document.createElement("label");
+  var progress = ((current + 1) / QUESTIONS.length) * 100;
 
-    label.className = "quiz-option";
+  var optionsHTML = "";
 
-    var input = document.createElement("input");
+  q.options.forEach(function(option,index){
 
-    input.type = "radio";
+    optionsHTML += `
 
-    input.name = "answer";
+      <label class="quiz-option">
 
-    input.value = index;
+        <input
 
-    if (answers[current] === index) {
+          type="radio"
 
-      input.checked = true;
+          name="answer"
 
-    }
+          value="${index}"
 
-    input.addEventListener("change", function () {
+          ${answers[current] === index ? "checked" : ""}
 
-      answers[current] = index;
+        >
 
-    });
+        <span>${option}</span>
 
-    var span = document.createElement("span");
+      </label>
 
-    span.textContent = option;
-
-    label.appendChild(input);
-
-    label.appendChild(span);
-
-    optionsEl.appendChild(label);
+    `;
 
   });
 
-  backBtn.disabled = current === 0;
+  root.innerHTML = `
 
-  if (current === QUESTIONS.length - 1) {
+    <div class="quiz-card">
 
-    nextBtn.textContent = "Testi bitir";
+      <div class="quiz-progress-track">
 
-  } else {
+        <div
 
-    nextBtn.textContent = "İrəli →";
+          class="quiz-progress-fill"
 
-  }
+          style="width:${progress}%">
+
+        </div>
+
+      </div>
+
+      <div class="quiz-count">
+
+        <span>${current + 1} / ${QUESTIONS.length}</span>
+
+        <span id="timer" class="timer-display">
+
+          ${formatTime(secondsLeft)}
+
+        </span>
+
+      </div>
+
+      <div class="quiz-question">
+
+        ${q.q}
+
+      </div>
+
+      <div class="quiz-options">
+
+        ${optionsHTML}
+
+      </div>
+
+      <div class="quiz-nav">
+
+        <button
+
+          class="btn"
+
+          id="prevBtn"
+
+          ${current === 0 ? "disabled" : ""}>
+
+          Geri
+
+        </button>
+
+        <button class="btn" id="nextBtn">
+
+          ${current === QUESTIONS.length - 1 ? "Testi bitir" : "Növbəti"}
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.querySelectorAll('input[name="answer"]').forEach(function(input){
+
+    input.addEventListener("change",function(){
+
+      answers[current] = Number(this.value);
+
+    });
+
+  });
+
+  document.getElementById("prevBtn").onclick = function(){
+
+    if(current > 0){
+
+      current--;
+
+      renderQuiz();
+
+    }
+
+  };
+
+  document.getElementById("nextBtn").onclick = function(){
+
+    if(current === QUESTIONS.length - 1){
+
+      finishQuiz();
+
+    }else{
+
+      current++;
+
+      renderQuiz();
+
+    }
+
+  };
 
 }
 
-/* NEXT */
+function finishQuiz(){
 
-nextBtn.addEventListener("click", function () {
-
-  if (current < QUESTIONS.length - 1) {
-
-    current++;
-
-    renderQuestion();
-
-  } else {
-
-    finishQuiz();
-
-  }
-
-});
-
-/* BACK */
-
-backBtn.addEventListener("click", function () {
-
-  if (current > 0) {
-
-    current--;
-
-    renderQuestion();
-
-  }
-
-});
-
-/* TIMER */
-
-function updateTimer() {
-
-  var hours = Math.floor(secondsLeft / 3600);
-
-  var minutes = Math.floor((secondsLeft % 3600) / 60);
-
-  var seconds = secondsLeft % 60;
-
-  timerEl.textContent =
-
-    String(hours).padStart(2, "0") + ":" +
-
-    String(minutes).padStart(2, "0") + ":" +
-
-    String(seconds).padStart(2, "0");
-
-  if (secondsLeft <= 300) {
-
-    timerEl.classList.add("timer-low");
-
-  } else {
-
-    timerEl.classList.remove("timer-low");
-
-  }
-
-}
-
-/* FINISH */
-
-function finishQuiz() {
-
-  clearInterval(timerInterval);
+  clearInterval(timer);
 
   var correct = 0;
 
-  QUESTIONS.forEach(function (item, index) {
+  QUESTIONS.forEach(function(q,index){
 
-    if (answers[index] === item.a) {
+    if(answers[index] === q.a){
 
       correct++;
 
@@ -888,310 +1610,312 @@ function finishQuiz() {
 
   var percent = Math.round((correct / total) * 100);
 
-  quizScreen.classList.add("hidden");
+  showResult(correct,total,percent);
 
-  resultScreen.classList.remove("hidden");
-
-  resultText.innerHTML =
-
-    "<strong>" +
-
-    nameInput.value.trim() +
-
-    "</strong><br><br>" +
-
-    "Düzgün cavablar: <strong>" +
-
-    correct +
-
-    " / " +
-
-    total +
-
-    "</strong><br>" +
-
-    "Nəticə: <strong>" +
-
-    percent +
-
-    "%</strong>";
-
-  sendResult(correct, total, percent);
+  sendResult(correct,total,percent);
 
 }
 
-/* FORMSPREE */
+function showResult(correct,total,percent){
 
-function sendResult(correct, total, percent) {
+  root.innerHTML = `
+
+    <div class="quiz-card quiz-result">
+
+      <h2>Test tamamlandı</h2>
+
+      <p>
+
+        <strong>${studentName}</strong>
+
+      </p>
+
+      <p>
+
+        Düzgün cavablar:
+
+        <strong>${correct} / ${total}</strong>
+
+      </p>
+
+      <p>
+
+        Nəticə:
+
+        <strong>${percent}%</strong>
+
+      </p>
+
+      <div id="emailStatus"></div>
+
+      <div class="quiz-result-actions">
+
+        <button class="btn" id="certificateBtn">
+
+          Sertifikat
+
+        </button>
+
+        <button class="btn" id="restartBtn">
+
+          Yenidən başla
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.getElementById("certificateBtn").onclick = function(){
+
+    openCertificate(correct,total,percent);
+
+  };
+
+  document.getElementById("restartBtn").onclick = function(){
+
+    clearInterval(timer);
+
+    startScreen();
+
+  };
+
+}
+
+function sendResult(correct,total,percent){
 
   var data = new FormData();
 
-  data.append("name", nameInput.value.trim());
+  data.append("name",studentName);
 
-  data.append("email", emailInput.value.trim());
+  data.append("email",studentEmail);
 
-  data.append("test", "Biologiya 6 — II Fəsil");
+  data.append("test",QUIZ_META.title);
 
-  data.append("correct", correct);
+  data.append("correct",correct);
 
-  data.append("total", total);
+  data.append("total",total);
 
-  data.append("percent", percent + "%");
+  data.append("percentage",percent + "%");
 
-  fetch(FORM_ENDPOINT, {
+  fetch(FORM_ENDPOINT,{
 
-    method: "POST",
+    method:"POST",
 
-    body: data,
+    body:data,
 
-    headers: {
+    headers:{
 
-      "Accept": "application/json"
-
-    }
-
-  })
-
-  .then(function (response) {
-
-    if (response.ok) {
-
-      sendStatus.textContent =
-
-        "Nəticəniz uğurla göndərildi.";
-
-      sendStatus.style.color = "#18794e";
-
-    } else {
-
-      throw new Error();
+      "Accept":"application/json"
 
     }
 
   })
 
-  .catch(function () {
+  .then(function(response){
 
-    sendStatus.textContent =
+    var status = document.getElementById("emailStatus");
 
-      "Nəticəni göndərmək mümkün olmadı.";
+    if(!status) return;
 
-    sendStatus.style.color = "#b42318";
+    if(response.ok){
 
-  });
+      status.innerHTML =
 
-}
+        '<p style="color:green;">Nəticəniz uğurla göndərildi.</p>';
 
-/* CERTIFICATE */
+    }else{
 
-document.getElementById("certificateBtn")
+      status.innerHTML =
 
-.addEventListener("click", function () {
+        '<p style="color:#9A3B2E;">Nəticənin göndərilməsi mümkün olmadı.</p>';
 
-  var correct = 0;
+    }
 
-  QUESTIONS.forEach(function (item, index) {
+  })
 
-    if (answers[index] === item.a) {
+  .catch(function(){
 
-      correct++;
+    var status = document.getElementById("emailStatus");
+
+    if(status){
+
+      status.innerHTML =
+
+        '<p style="color:#9A3B2E;">Nəticənin göndərilməsi mümkün olmadı.</p>';
 
     }
 
   });
 
-  var percent =
+}
 
-    Math.round((correct / QUESTIONS.length) * 100);
+function openCertificate(correct,total,percent){
 
-  var student =
+  var win = window.open("","_blank");
 
-    nameInput.value.trim();
+  if(!win){
 
-  var certificateWindow =
+    alert("Sertifikat üçün yeni pəncərəni açmağa icazə verin.");
 
-    window.open("", "_blank");
+    return;
 
-  certificateWindow.document.write(`
+  }
 
-<!DOCTYPE html>
+  win.document.write(`
 
-<html lang="az">
+    <!DOCTYPE html>
 
-<head>
+    <html lang="az">
 
-<meta charset="UTF-8">
+    <head>
 
-<title>Sertifikat — Youdidit.az</title>
+      <meta charset="UTF-8">
 
-<style>
+      <title>Youdidit.az Sertifikat</title>
 
-body {
+      <style>
 
-  margin: 0;
+        body{
 
-  font-family: Arial, sans-serif;
+          margin:0;
 
-  background: #f5f5f5;
+          padding:40px;
 
-  display: flex;
+          font-family:Arial,sans-serif;
 
-  justify-content: center;
+          background:#f5f5f5;
 
-  align-items: center;
+        }
 
-  min-height: 100vh;
+        .certificate{
+
+          max-width:850px;
+
+          margin:30px auto;
+
+          padding:70px 50px;
+
+          background:white;
+
+          border:8px double #6b4fc9;
+
+          text-align:center;
+
+        }
+
+        h1{
+
+          font-size:42px;
+
+          margin-bottom:15px;
+
+          color:#222;
+
+        }
+
+        h2{
+
+          font-size:25px;
+
+          color:#6b4fc9;
+
+        }
+
+        .name{
+
+          font-size:32px;
+
+          font-weight:bold;
+
+          margin:30px 0;
+
+          color:#111;
+
+        }
+
+        .score{
+
+          font-size:22px;
+
+          margin:20px;
+
+          color:#111;
+
+        }
+
+        .site{
+
+          margin-top:40px;
+
+          font-weight:bold;
+
+        }
+
+      </style>
+
+    </head>
+
+    <body>
+
+      <div class="certificate">
+
+        <h1>SERTİFİKAT</h1>
+
+        <h2>Youdidit.az</h2>
+
+        <p>Bu sertifikat</p>
+
+        <div class="name">
+
+          ${studentName}
+
+        </div>
+
+        <p>
+
+          “Biologiya 6 — II Fəsil:
+
+          Orqanizmlərin hüceyrəvi quruluşu”
+
+          testini tamamladığını təsdiq edir.
+
+        </p>
+
+        <div class="score">
+
+          Nəticə: ${correct} / ${total}
+
+          <br>
+
+          Faiz: ${percent}%
+
+        </div>
+
+        <div class="site">
+
+          Youdidit.az
+
+        </div>
+
+      </div>
+
+    </body>
+
+    </html>
+
+  `);
+
+  win.document.close();
 
 }
 
-.certificate {
-
-  width: 850px;
-
-  max-width: 90%;
-
-  padding: 60px;
-
-  background: white;
-
-  border: 8px solid #6b4fc9;
-
-  text-align: center;
-
-  box-sizing: border-box;
-
-}
-
-h1 {
-
-  font-size: 42px;
-
-  color: #111;
-
-  margin-bottom: 20px;
-
-}
-
-h2 {
-
-  font-size: 28px;
-
-  color: #6b4fc9;
-
-}
-
-.name {
-
-  font-size: 30px;
-
-  font-weight: bold;
-
-  margin: 30px 0;
-
-  color: #111;
-
-}
-
-.score {
-
-  font-size: 22px;
-
-  color: #111;
-
-  line-height: 1.7;
-
-}
-
-.site {
-
-  margin-top: 35px;
-
-  color: #555;
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="certificate">
-
-  <h1>SERTİFİKAT</h1>
-
-  <h2>Youdidit.az</h2>
-
-  <p>Bu sertifikat təqdim olunur:</p>
-
-  <div class="name">
-
-    ${student}
-
-  </div>
-
-  <p>
-
-    <strong>
-
-      Biologiya 6 — II Fəsil:
-
-      Orqanizmlərin hüceyrəvi quruluşu
-
-    </strong>
-
-  </p>
-
-  <div class="score">
-
-    Düzgün cavablar: ${correct} / ${QUESTIONS.length}<br>
-
-    Nəticə: ${percent}%
-
-  </div>
-
-  <div class="site">
-
-    Youdidit.az
-
-  </div>
-
-</div>
-
-</body>
-
-</html>
-
-`);
-
-  certificateWindow.document.close();
-
-});
-
-/* RESTART */
-
-document.getElementById("restartBtn")
-
-.addEventListener("click", function () {
-
-  clearInterval(timerInterval);
-
-  current = 0;
-
-  answers = [];
-
-  secondsLeft = TIME_LIMIT;
-
-  resultScreen.classList.add("hidden");
-
-  startScreen.classList.remove("hidden");
-
-  sendStatus.textContent = "";
-
-});
+startScreen();
 
 </script>
 
 </body>
 
-</html
+</html>
