@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Beynəlxalq imtahanlar — Youdidit.az</title>
+
+<meta name="description" content="Youdidit.az — SAT, GRE, GMAT, PMP, ACT və digər beynəlxalq imtahanlara hazırlıq və sınaq testləri.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --bg:#050713;
+  --card:#0d1128;
+  --white:#f8f7ff;
+  --muted:#a6adcd;
+  --purple:#7651ff;
+  --purple2:#a454ff;
+  --blue:#397cff;
+  --cyan:#16cfff;
+  --green:#20d3a3;
+  --orange:#ff8b4d;
+  --pink:#f653c5;
+  --border:rgba(255,255,255,.10);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),
+    radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),
+    var(--bg);
+  color:var(--white);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.5),transparent),
+    radial-gradient(1px 1px at 25% 70%,rgba(170,140,255,.5),transparent),
+    radial-gradient(1px 1px at 52% 30%,rgba(255,255,255,.4),transparent),
+    radial-gradient(1px 1px at 75% 80%,rgba(170,140,255,.45),transparent),
+    radial-gradient(1px 1px at 92% 40%,rgba(255,255,255,.4),transparent);
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.container{
+  width:min(1180px,calc(100% - 32px));
+  margin:auto;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(5,7,19,.78);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.nav-inner{
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  font-family:'Sora',sans-serif;
+  font-size:23px;
+  font-weight:800;
+  letter-spacing:-1px;
+}
+
+.logo span{
+  color:#9d65ff;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:22px;
+}
+
+.nav-links a{
+  color:#c2c6df;
+  font-size:12px;
+  font-weight:600;
+  transition:.25s;
+}
+
+.nav-links a:hover{
+  color:white;
+}
+
+.nav-button{
+  padding:10px 19px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#6b52ff,#a34eff);
+  font-size:12px;
+  font-weight:800;
+  box-shadow:0 8px 25px rgba(118,81,255,.28);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  padding:90px 0 55px;
+  text-align:center;
+}
+
+.badge{
+  display:inline-flex;
+  padding:8px 13px;
+  border-radius:999px;
+  background:rgba(118,81,255,.09);
+  border:1px solid rgba(155,117,255,.24);
+  color:#cdbbff;
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(38px,5vw,60px);
+  line-height:1.05;
+  letter-spacing:-2.5px;
+}
+
+.gradient{
+  background:linear-gradient(90deg,#fff,#9a70ff,#c45aff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:700px;
+  margin:20px auto 0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.75;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+  padding:30px 0 80px;
+}
+
+.exam-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.exam-card{
+  position:relative;
+  min-height:270px;
+  padding:25px;
+  border-radius:22px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.065),
+      rgba(255,255,255,.018)
+    );
+  border:1px solid rgba(255,255,255,.10);
+  overflow:hidden;
+  transition:.35s;
+}
+
+.exam-card:hover{
+  transform:translateY(-7px);
+  border-color:rgba(151,113,255,.48);
+  box-shadow:0 25px 60px rgba(0,0,0,.38);
+}
+
+.exam-card::after{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  right:-75px;
+  bottom:-75px;
+  border-radius:50%;
+  background:var(--glow);
+  filter:blur(8px);
+}
+
+.exam-icon{
+  width:52px;
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:15px;
+  background:linear-gradient(135deg,var(--e1),var(--e2));
+  font-size:23px;
+  margin-bottom:20px;
+}
+
+.exam-card h2{
+  font-family:'Sora',sans-serif;
+  font-size:20px;
+  margin-bottom:9px;
+}
+
+.exam-card p{
+  color:#9299ba;
+  font-size:11px;
+  line-height:1.7;
+  max-width:330px;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:17px;
+}
+
+.tag{
+  padding:7px 9px;
+  border-radius:8px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:#c9cde2;
+  font-size:9px;
+  font-weight:800;
+}
+
+.card-button{
+  display:inline-flex;
+  margin-top:19px;
+  padding:10px 13px;
+  border-radius:10px;
+  background:rgba(118,81,255,.13);
+  border:1px solid rgba(118,81,255,.25);
+  color:#c7b7ff;
+  font-size:10px;
+  font-weight:800;
+  transition:.25s;
+}
+
+.card-button:hover{
+  background:linear-gradient(135deg,#5d55ff,#a84fff);
+  color:white;
+  transform:translateY(-2px);
+}
+
+/* =========================
+   PMP SPECIAL CARD
+========================= */
+
+.pmp-card{
+  grid-column:span 3;
+  min-height:290px;
+  padding:30px;
+  border-color:rgba(118,81,255,.30);
+  background:
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(164,92,255,.22),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #101438,
+      #170d32
+    );
+}
+
+.pmp-layout{
+  display:grid;
+  grid-template-columns:1.5fr .7fr;
+  gap:30px;
+  align-items:center;
+}
+
+.pmp-card h2{
+  font-size:25px;
+}
+
+.pmp-badge{
+  display:inline-block;
+  padding:7px 10px;
+  border-radius:8px;
+  background:rgba(118,81,255,.16);
+  border:1px solid rgba(155,119,255,.30);
+  color:#cbbcff;
+  font-size:9px;
+  font-weight:800;
+  margin-bottom:13px;
+}
+
+.pmp-info{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.info-box{
+  padding:15px 12px;
+  border-radius:13px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.08);
+  text-align:center;
+}
+
+.info-box strong{
+  display:block;
+  font-size:18px;
+  font-family:'Sora',sans-serif;
+}
+
+.info-box span{
+  display:block;
+  margin-top:5px;
+  color:#858cac;
+  font-size:8px;
+}
+
+/* =========================
+   NOTICE
+========================= */
+
+.notice{
+  margin-top:18px;
+  padding:17px 20px;
+  border-radius:15px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.08);
+  color:#9299ba;
+  font-size:10px;
+  line-height:1.7;
+}
+
+.notice strong{
+  color:#c9c0e9;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  padding:32px 0;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+
+.footer-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+}
+
+.footer-brand{
+  font-family:'Sora',sans-serif;
+  font-weight:800;
+}
+
+.footer-brand span{
+  color:#9b68ff;
+}
+
+.footer-description{
+  color:#7f86a8;
+  font-size:10px;
+  margin-top:5px;
+}
+
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:17px;
+}
+
+.footer-links a{
+  color:#9299b9;
+  font-size:10px;
+}
+
+.footer-links a:hover{
+  color:white;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .exam-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .pmp-card{
+    grid-column:span 2;
+  }
+
+  .pmp-layout{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .container{
+    width:calc(100% - 24px);
+  }
+
+  .hero{
+    padding:65px 0 40px;
+  }
+
+  .hero h1{
+    font-size:39px;
+  }
+
+  .exam-grid{
+    grid-template-columns:1fr;
+  }
+
+  .pmp-card{
+    grid-column:span 1;
+  }
+
+  .pmp-info{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav class="navbar">
+
+  <div class="container nav-inner">
+
+    <a href="index.html" class="logo">
+      Youdidit<span>.az</span>
+    </a>
+
+    <div class="nav-links">
+
+      <a href="index.html">
+        Ana səhifə
+      </a>
+
+      <a href="exams.html">
+        Dil imtahanları
+      </a>
+
+      <a href="international-exams.html">
+        Beynəlxalq imtahanlar
+      </a>
+
+      <a href="resources.html">
+        Resurslar
+      </a>
+
+      <a href="sinif-testleri.html">
+        Sinif testləri
+      </a>
+
+      <a href="psixoloji-imtahan.html">
+        🧠 Psixoloji imtahan
+      </a>
+
+    </div>
+
+    <a href="order.html" class="nav-button">
+      Sifariş et →
+    </a>
+
+  </div>
+
+</nav>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="container">
+
+    <div class="badge">
+      🌍 BEYNƏLXALQ İMTAHAN MƏRKƏZİ
+    </div>
+
+    <h1>
+      Beynəlxalq imtahanlara
+      <span class="gradient">
+        hazırlaş.
+      </span>
+    </h1>
+
+    <p>
+      Akademik qəbul, magistratura, biznes,
+      peşəkar sertifikasiya və beynəlxalq
+      karyera üçün əsas imtahanlar.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     EXAMS
+========================= -->
+
+<section class="section">
+
+  <div class="container">
+
+    <div class="exam-grid">
+
+      <!-- SAT -->
+
+      <div
+        class="exam-card"
+        style="--e1:#7651ff;--e2:#a454ff;--glow:rgba(118,81,255,.20);"
+      >
+
+        <div class="exam-icon">
+          🎓
+        </div>
+
+        <h2>
+          SAT
+        </h2>
+
+        <p>
+          ABŞ və digər ölkələrdə universitet
+          qəbulunda istifadə olunan akademik
+          qəbul imtahanı.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Reading</span>
+          <span class="tag">Writing</span>
+          <span class="tag">Math</span>
+        </div>
+
+        <a href="order.html" class="card-button">
+          Hazırlıq haqqında →
+        </a>
+
+      </div>
+
+      <!-- GRE -->
+
+      <div
+        class="exam-card"
+        style="--e1:#287cff;--e2:#18cfff;--glow:rgba(22,207,255,.16);"
+      >
+
+        <div class="exam-icon">
+          📚
+        </div>
+
+        <h2>
+          GRE
+        </h2>
+
+        <p>
+          Magistratura və doktorantura
+          proqramlarına müraciət edənlər
+          üçün geniş istifadə olunan imtahan.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Verbal</span>
+          <span class="tag">Quantitative</span>
+          <span class="tag">Writing</span>
+        </div>
+
+        <a href="order.html" class="card-button">
+          Hazırlıq haqqında →
+        </a>
+
+      </div>
+
+      <!-- GMAT -->
+
+      <div
+        class="exam-card"
+        style="--e1:#20b997;--e2:#20d3a3;--glow:rgba(32,211,163,.15);"
+      >
+
+        <div class="exam-icon">
+          📈
+        </div>
+
+        <h2>
+          GMAT
+        </h2>
+
+        <p>
+          Biznes məktəbləri və MBA proqramlarına
+          qəbul üçün istifadə olunan beynəlxalq
+          qəbul imtahanı.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Quantitative</span>
+          <span class="tag">Verbal</span>
+          <span class="tag">Data Insights</span>
+        </div>
+
+        <a href="order.html" class="card-button">
+          Hazırlıq haqqında →
+        </a>
+
+      </div>
+
+      <!-- PMP -->
+
+      <div
+        class="exam-card pmp-card"
+        style="--e1:#a454ff;--e2:#397cff;--glow:rgba(164,84,255,.24);"
+      >
+
+        <div class="pmp-layout">
+
+          <div>
+
+            <div class="pmp-badge">
+              ⭐ PROFESSIONAL CERTIFICATION
+            </div>
+
+            <div class="exam-icon">
+              📋
+            </div>
+
+            <h2>
+              PMP — Project Management Professional
+            </h2>
+
+            <p>
+              Layihələrin idarə edilməsi üzrə dünyanın
+              ən tanınmış peşəkar sertifikatlarından biri.
+              Youdidit.az-da PMP üçün situasiya əsaslı
+              hazırlıq sualları və tam sınaq imtahanı.
+            </p>
+
+            <div class="tags">
+
+              <span class="tag">
+                People
+              </span>
+
+              <span class="tag">
+                Process
+              </span>
+
+              <span class="tag">
+                Business Environment
+              </span>
+
+              <span class="tag">
+                Agile / Hybrid
+              </span>
+
+            </div>
+
+            <a
+              href="pmp-100-sualli-tam-sinaq-youdidit.html"
+              class="card-button"
+            >
+              PMP sınaq imtahanına başla →
+            </a>
+
+            <a
+              href="PMP_100_Sualli_Tam_Sinaq_Youdidit.docx"
+              class="card-button"
+              download
+              style="margin-left:7px;"
+            >
+              📄 Word faylı →
+            </a>
+
+          </div>
+
+          <div class="pmp-info">
+
+            <div class="info-box">
+              <strong>100</strong>
+              <span>Sınaq sualı</span>
+            </div>
+
+            <div class="info-box">
+              <strong>3</strong>
+              <span>Əsas domain</span>
+            </div>
+
+            <div class="info-box">
+              <strong>2026</strong>
+              <span>PMP formatı</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ACT -->
+
+      <div
+        class="exam-card"
+        style="--e1:#ff704f;--e2:#ffb04d;--glow:rgba(255,139,77,.17);"
+      >
+
+        <div class="exam-icon">
+          📝
+        </div>
+
+        <h2>
+          ACT
+        </h2>
+
+        <p>
+          ABŞ universitetlərinə qəbul üçün
+          istifadə olunan standartlaşdırılmış
+          akademik qəbul imtahanı.
+        </p>
+
+        <div class="tags">
+          <span class="tag">English</span>
+          <span class="tag">Math</span>
+          <span class="tag">Reading</span>
+          <span class="tag">Science</span>
+        </div>
+
+        <a href="order.html" class="card-button">
+          Hazırlıq haqqında →
+        </a>
+
+      </div>
+
+      <!-- CFA -->
+
+      <div
+        class="exam-card"
+        style="--e1:#397cff;--e2:#7651ff;--glow:rgba(57,124,255,.18);"
+      >
+
+        <div class="exam-icon">
+          💼
+        </div>
+
+        <h2>
+          CFA
+        </h2>
+
+        <p>
+          Maliyyə və investisiya sahəsində
+          beynəlxalq peşəkar sertifikasiya
+          proqramı.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Finance</span>
+          <span class="tag">Investment</span>
+          <span class="tag">Ethics</span>
+        </div>
+
+        <a href="order.html" class="card-button">
+          Hazırlıq haqqında →
+        </a>
+
+      </div>
+
+      <!-- SHRM -->
+
+      <div
+        class="exam-card"
+        style="--e1:#e94fc6;--e2:#9e52ff;--glow:rgba(233,79,198,.18);"
+      >
+
+        <div class="exam-icon">
+          👥
+        </div>
+
+        <h2>
+          SHRM
+        </h2>
+
+        <p>
+          İnsan resurslarının idarə edilməsi
+          sahəsində beynəlxalq peşəkar
+          sertifikasiya istiqaməti.
+        </p>
+
+        <div class="tags">
+          <span class="tag">HR</span>
+          <span class="tag">People</span>
+          <span class="tag">Strategy</span>
+        </div>
+
+        <a href="order.html" class="card-button">
+          Hazırlıq haqqında →
+        </a>
+
+      </div>
+
+      <!-- CAPM -->
+
+      <div
+        class="exam-card"
+        style="--e1:#20b997;--e2:#397cff;--glow:rgba(32,211,163,.16);"
+      >
+
+        <div class="exam-icon">
+          🚀
+        </div>
+
+        <h2>
+          CAPM
+        </h2>
+
+        <p>
+          Layihə idarəçiliyinə yeni başlayanlar
+          üçün giriş səviyyəli beynəlxalq
+          peşəkar sertifikasiya.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Project Management</span>
+          <span class="tag">Fundamentals</span>
+        </div>
+
+        <a href="order.html" class="card-button">
+          Hazırlıq haqqında →
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="notice">
+
+      <strong>Qeyd:</strong>
+      Buradakı materiallar hazırlıq və sınaq məqsədlidir.
+      PMI, College Board, ETS, GMAC, ACT, CFA Institute,
+      SHRM və digər imtahan təşkilatlarının real/proprietary
+      sualları təqdim edilmir.
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <div class="container footer-inner">
+
+    <div>
+
+      <div class="footer-brand">
+        Youdidit<span>.az</span>
+      </div>
+
+      <div class="footer-description">
+        Təhsil • İmtahan • Karyera • İnkişaf
+      </div>
+
+    </div>
+
+    <div class="footer-links">
+
+      <a href="index.html">
+        Ana səhifə
+      </a>
+
+      <a href="exams.html">
+        Dil imtahanları
+      </a>
+
+      <a href="international-exams.html">
+        Beynəlxalq imtahanlar
+      </a>
+
+      <a href="resources.html">
+        Resurslar
+      </a>
+
+      <a href="sinif-testleri.html">
+        Testlər
+      </a>
+
+      <a href="psixoloji-imtahan.html">
+        🧠 Psixoloji imtahan
+      </a>
+
+      <a href="mailto:youdidit.az@gmail.com">
+        ✉ youdidit.az@gmail.com
+      </a>
+
+    </div>
+
+  </div>
+
+</footer>
+
+</body>
+</html>
