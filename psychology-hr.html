@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>HR / Recruiter — Psixoloji və Peşə Uyğunluğu | Youdidit.az</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+
+  margin: 0;
+
+  min-height: 100vh;
+
+  font-family: Arial, sans-serif;
+
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(126, 87, 255, 0.25),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(185, 76, 255, 0.20),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #080611 0%,
+      #11091d 45%,
+      #080611 100%
+    );
+
+  overflow-x: hidden;
+}
+
+
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+
+.container {
+
+  width: 100%;
+
+  max-width: 820px;
+
+  margin: 0 auto;
+
+  padding: 35px 18px 70px;
+
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 25px;
+
+}
+
+
+.logo {
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 21px;
+
+  font-weight: 800;
+
+}
+
+
+.logo span {
+
+  color: #a477ff;
+
+}
+
+
+.back {
+
+  color: rgba(255,255,255,.7);
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+}
+
+
+.back:hover {
+
+  color: #ffffff;
+
+}
+
+
+/* =====================================================
+   QUIZ CARD
+   ===================================================== */
+
+.quiz-card {
+
+  padding: 25px;
+
+  border-radius: 24px;
+
+  border:
+    1px solid rgba(255,255,255,.10);
+
+  background:
+    rgba(255,255,255,.045);
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.30);
+
+}
+
+
+/* =====================================================
+   QUIZ ENGINE
+   ===================================================== */
+
+#quiz-root {
+
+  width: 100%;
+
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+  .container {
+
+    padding:
+      20px 12px 50px;
+
+  }
+
+  .quiz-card {
+
+    padding: 18px;
+
+    border-radius: 19px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <div class="header">
+
+    <a
+      href="psixoloji-imtahan.html"
+      class="logo"
+    >
+      Youdidit<span>.az</span>
+    </a>
+
+
+    <a
+      href="psixoloji-imtahan.html"
+      class="back"
+    >
+      ← Geri
+    </a>
+
+  </div>
+
+
+  <div class="quiz-card">
+
+    <div id="quiz-root"></div>
+
+  </div>
+
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   QUIZ META
+   ===================================================== */
+
+var QUIZ_META = {
+
+  title:
+    "HR / Recruiter — Psixoloji və Peşə Uyğunluğu İmtahanı"
+
+};
+
+
+/* =====================================================
+   HR / RECRUITER — 50 SUAL
+   ===================================================== */
+
+var QUESTIONS = [
+
+  {
+    q: "Namizəd müsahibə zamanı əvvəlki işəgötürəni haqqında ciddi mənfi fikirlər bildirir. Ən düzgün yanaşma hansıdır?",
+    options: [
+      "Namizədi dərhal prosesdən çıxarmaq.",
+      "Mövzunu dəyişib müsahibəni davam etdirmək.",
+      "Konkret faktları və namizədin həmin vəziyyətdə necə davrandığını soruşmaq.",
+      "Əvvəlki işəgötürən haqqında mümkün qədər çox məlumat tələb etmək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Rəhbər sizdən meyarlara tam uyğun olmayan tanış namizədi digər namizədlərdən üstün tutmağınızı istəyir. Ən peşəkar addım hansıdır?",
+    options: [
+      "Rəhbərin istəyini olduğu kimi yerinə yetirmək.",
+      "Namizədi heç bir sənədləşdirmə olmadan seçmək.",
+      "Obyektiv seçim meyarlarını rəhbərlə müzakirə edib qərarı həmin meyarlara əsaslandırmaq.",
+      "Digər namizədlərə rəhbərin istəyindən danışmaq."
+    ],
+    a: 2
+  },
+
+  {
+    q: "İki namizəd eyni səviyyədə texniki bacarıqlara malikdir. Birinin komanda ilə əməkdaşlıq nümunələri daha güclüdür. Nə etmək daha düzgündür?",
+    options: [
+      "Yalnız təhsilinə əsasən seçim etmək.",
+      "Təsadüfi seçim etmək.",
+      "Vəzifənin tələblərinə uyğun davranış və əməkdaşlıq meyarlarını strukturlaşdırılmış şəkildə qiymətləndirmək.",
+      "Daha çox danışan namizədi seçmək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Namizəd müsahibədə çox həyəcanlıdır və cavablarını tam ifadə edə bilmir. HR mütəxəssisinin ən düzgün davranışı hansıdır?",
+    options: [
+      "Namizədi zəif kommunikasiya bacarığına görə dərhal rədd etmək.",
+      "Namizədə cavabları özü demək.",
+      "Sakit mühit yaradaraq sualı yenidən aydın formada vermək və namizədə düşünmək üçün vaxt vermək.",
+      "Müsahibəni dayandırmaq."
+    ],
+    a: 2
+  },
+
+  {
+    q: "CV-də namizədin iş təcrübəsi ilə bağlı ziddiyyətli məlumat görürsünüz. Nə etmək daha düzgündür?",
+    options: [
+      "Namizədi avtomatik rədd etmək.",
+      "Məlumatı nəzərə almamaq.",
+      "Müsahibədə məlumatı neytral şəkildə dəqiqləşdirmək.",
+      "Digər namizədlərə bu barədə danışmaq."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Namizəd yüksək nəticələr göstərdiyini deyir, lakin konkret nümunə təqdim edə bilmir. Ən yaxşı yanaşma hansıdır?",
+    options: [
+      "Onu dərhal yalançı hesab etmək.",
+      "İddianı olduğu kimi qəbul etmək.",
+      "Konkret vəziyyət, fəaliyyət və nəticə barədə əlavə suallar vermək.",
+      "Müsahibəni dərhal bitirmək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Rəhbər vakansiyanın tələblərini son anda dəyişir. HR olaraq ilk addımınız nə olmalıdır?",
+    options: [
+      "Dərhal bütün namizədləri yenidən qiymətləndirmək.",
+      "Yeni tələbləri dəqiqləşdirib onların vəzifə ilə əlaqəsini razılaşdırmaq.",
+      "Vakansiyanı bağlamaq.",
+      "Namizədlərdən birini seçmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Bir namizəd çox xarizmatikdir, amma iş üçün əsas meyarların bir neçəsinə cavab vermir. Ən düzgün qərar hansıdır?",
+    options: [
+      "Xarizmasına görə onu seçmək.",
+      "Şəxsi simpatiyaya əsaslanmaq.",
+      "Qiymətləndirməni əvvəlcədən müəyyən edilmiş iş meyarlarına əsaslandırmaq.",
+      "Digər namizədlərin hamısını prosesdən çıxarmaq."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Müsahibə zamanı namizəd sizə şəxsi və həssas məlumat verir. HR mütəxəssisi necə davranmalıdır?",
+    options: [
+      "Məlumatı həmkarları ilə müzakirə etmək.",
+      "Məlumatı yalnız işə qəbul qərarı üçün zəruri olduğu halda və uyğun qaydalara əsasən nəzərə almaq.",
+      "Məlumatı sosial şəbəkədə paylaşmaq.",
+      "Namizədi həmin məlumat əsasında avtomatik rədd etmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Komandada iki əməkdaş arasında konflikt yaranıb. HR mütəxəssisinin ilk məqsədi nə olmalıdır?",
+    options: [
+      "Kimin günahkar olduğunu dərhal elan etmək.",
+      "Tərəflərdən yalnız birini dinləmək.",
+      "Hər iki tərəfin mövqeyini faktlara əsasən dinləmək və problemin səbəbini müəyyənləşdirmək.",
+      "Heç bir müdaxilə etməmək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "İşə qəbul prosesində şəxsi qərəzin qarşısını almağın ən yaxşı yollarından biri hansıdır?",
+    options: [
+      "Namizədə ilk təəssürata əsasən qiymət vermək.",
+      "Strukturlaşdırılmış meyarlardan və eyni sual formatından istifadə etmək.",
+      "Yalnız intuisiya ilə qərar vermək.",
+      "Ən çox danışan namizədi seçmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Namizəd maaş gözləntisini şirkətin büdcəsindən xeyli yüksək bildirir. Ən düzgün yanaşma hansıdır?",
+    options: [
+      "Namizədi dərhal rədd etmək.",
+      "Maaş mövzusunu ümumiyyətlə müzakirə etməmək.",
+      "Gözləntini, vəzifənin imkanlarını və ümumi kompensasiya çərçivəsini dəqiqləşdirmək.",
+      "Namizədə öz maaşınızı demək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Yeni işçi ilk həftələrdə gözləniləndən daha yavaş adaptasiya olur. Ən düzgün HR yanaşması hansıdır?",
+    options: [
+      "Dərhal işdən çıxarmaq.",
+      "Heç nə etməmək.",
+      "Onboarding prosesini və işçinin ehtiyaclarını qiymətləndirib dəstək vermək.",
+      "Komandaya onun bacarıqsız olduğunu bildirmək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "İşçi rəhbərinin ona ədalətsiz davrandığını bildirir. HR olaraq ilk addımınız nə olmalıdır?",
+    options: [
+      "Rəhbəri dərhal günahlandırmaq.",
+      "İşçini şikayətindən vaz keçirməyə çalışmaq.",
+      "İddianı dinləmək, faktları toplamaq və tərəfləri obyektiv şəkildə qiymətləndirmək.",
+      "Məsələni sosial şəbəkədə paylaşmaq."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Bir vakansiyaya çox sayda müraciət daxil olub. Namizədləri səmərəli qiymətləndirmək üçün nə etmək daha məqsədəuyğundur?",
+    options: [
+      "CV-ləri təsadüfi seçmək.",
+      "Əvvəlcədən müəyyən edilmiş əsas meyarlar üzrə ilkin screening aparmaq.",
+      "Yalnız ən uzun CV-ləri seçmək.",
+      "Bütün namizədləri eyni vaxtda müsahibəyə çağırmaq."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Namizəd müsahibədə öz səhvindən danışır və bu səhvdən nə öyrəndiyini izah edir. HR bunu necə qiymətləndirməlidir?",
+    options: [
+      "Səhv etdiyinə görə avtomatik mənfi qiymətləndirmək.",
+      "Yalnız səhvin özünə baxmaq.",
+      "Səhvə reaksiyasını, məsuliyyət götürməsini və öyrənmə davranışını qiymətləndirmək.",
+      "Müsahibəni dayandırmaq."
+    ],
+    a: 2
+  },
+
+  {
+    q: "İş elanında tələb olunan bir bacarıq vəzifə üçün əslində vacib deyil. HR nə etməlidir?",
+    options: [
+      "Tələbi olduğu kimi saxlamaq.",
+      "Tələbi əsaslandırılmış şəkildə yenidən nəzərdən keçirmək.",
+      "Bütün namizədləri rədd etmək.",
+      "Tələbi gizlətmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Namizəd müsahibədə əvvəlki komandasında bütün uğurları öz adına çıxır, uğursuzluqlarda isə başqalarını günahlandırır. Hansı davranış daha məqsədəuyğundur?",
+    options: [
+      "Bu davranışı nəzərə almamaq.",
+      "Əlavə davranış nümunələri və komanda daxilində məsuliyyəti barədə suallar vermək.",
+      "Namizədi dərhal işə qəbul etmək.",
+      "Müsahibəni dərhal bitirmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Bir namizəd texniki baxımdan güclüdür, lakin komandada əməkdaşlıq etməkdə çətinlik çəkdiyini özü etiraf edir. HR nə etməlidir?",
+    options: [
+      "Texniki bacarığına görə avtomatik seçmək.",
+      "Əməkdaşlıq tələbinin həmin vəzifə üçün əhəmiyyətini qiymətləndirmək.",
+      "Məlumatı gizlətmək.",
+      "Digər namizədləri nəzərə almamaq."
+    ],
+    a: 1
+  },
+
+  {
+    q: "İşə qəbul zamanı namizədin şəxsi tanışınız olması qərara necə təsir etməlidir?",
+    options: [
+      "Namizədə üstünlük verməlidir.",
+      "Namizədi avtomatik rədd etmək lazımdır.",
+      "Şəxsi münasibətdən asılı olmayaraq eyni peşəkar meyarlar tətbiq edilməlidir.",
+      "Namizədə əvvəlcədən test suallarını vermək olar."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Rəhbər müsahibə zamanı namizədə tez-tez müdaxilə edir. HR mütəxəssisi nə etməlidir?",
+    options: [
+      "Müdaxilə etməməlidir.",
+      "Müsahibənin strukturunu və bütün namizədlərə bərabər imkan prinsipini qorumağa çalışmalıdır.",
+      "Namizədi müdafiə etmək üçün rəhbərlə mübahisə etməlidir.",
+      "Müsahibəni dərhal bitirməlidir."
+    ],
+    a: 1
+  },
+
+  {
+    q: "İşçi şirkətdə motivasiyasının azaldığını bildirir. HR üçün ən faydalı ilk addım hansıdır?",
+    options: [
+      "İşçiyə daha çox tapşırıq vermək.",
+      "Səbəbləri açıq suallarla araşdırmaq və işçinin təcrübəsini anlamaq.",
+      "İşçini günahlandırmaq.",
+      "Maaşını dərhal azaltmaq."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Bir əməkdaşın performansı uzun müddət aşağıdır. HR və rəhbər üçün ən düzgün yanaşma hansıdır?",
+    options: [
+      "Heç bir izahat vermədən işdən çıxarmaq.",
+      "Problemi sənədləşdirilmiş meyarlarla qiymətləndirib inkişaf və dəstək imkanlarını müzakirə etmək.",
+      "Digər əməkdaşların yanında onu tənqid etmək.",
+      "Problemi gizlətmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Namizəd bir suala cavab verərkən mövzudan yayınır. Ən yaxşı yanaşma hansıdır?",
+    options: [
+      "Onu dərhal dayandırmaq.",
+      "Növbəti suala keçmək.",
+      "Sualı qısa və aydın formada yenidən yönləndirmək.",
+      "Namizədin əvəzinə cavab vermək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "HR məlumatlarının məxfiliyini qorumaq üçün ən vacib prinsip hansıdır?",
+    options: [
+      "Məlumatı yalnız maraqlı olan əməkdaşlarla bölüşmək.",
+      "Məlumata çıxışı yalnız zəruri və səlahiyyətli şəxslərlə məhdudlaşdırmaq.",
+      "Bütün məlumatları açıq saxlamaq.",
+      "Namizədlərin məlumatlarını şəxsi cihazlarda paylaşmaq."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Müsahibə komandasının üzvləri namizəd haqqında fərqli fikirlər bildirirlər. Ən düzgün yanaşma hansıdır?",
+    options: [
+      "Ən yüksək vəzifəli şəxsin fikrini avtomatik qəbul etmək.",
+      "Ən çox danışanın fikrini seçmək.",
+      "Əvvəlcədən müəyyən edilmiş meyarlar üzrə əsaslandırılmış müşahidələri müqayisə etmək.",
+      "Təsadüfi qərar vermək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Namizəd müsahibədə bilmədiyi suala 'bilmirəm, amma bunu öyrənə bilərəm' cavabını verir. Bu cavab necə qiymətləndirilə bilər?",
+    options: [
+      "Mütləq mənfi.",
+      "Dürüstlük və öyrənmə yanaşması baxımından əlavə araşdırıla bilər.",
+      "Namizədi dərhal seçmək lazımdır.",
+      "Cavabı nəzərə almamaq lazımdır."
+    ],
+    a: 1
+  },
+
+  {
+    q: "İşçi rəhbərinin ona verdiyi geribildirimi qəbul etmir. HR hansı yanaşmanı dəstəkləməlidir?",
+    options: [
+      "İşçini cəzalandırmaq.",
+      "Geribildirimin konkret, davranış və nəticələrə əsaslanan formada müzakirəsini təşviq etmək.",
+      "Rəhbərin hər dediyini avtomatik doğru qəbul etmək.",
+      "Məsələni görməzdən gəlmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Namizəd iş dəyişməsinin səbəbini 'inkişaf etmək istəyirdim' kimi izah edir. HR hansı əlavə sualı verməlidir?",
+    options: [
+      "Bu cavabı kifayət hesab etmək.",
+      "İnkişafın onun üçün nə demək olduğunu və əvvəlki işdə hansı addımları atdığını soruşmaq.",
+      "Namizədi dərhal seçmək.",
+      "Maaşını soruşmadan müsahibəni bitirmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Yeni vakansiyanın elanını hazırlayarkən ən vacib məsələlərdən biri hansıdır?",
+    options: [
+      "Elanı mümkün qədər uzun etmək.",
+      "Vəzifənin real məsuliyyətlərini və əsas tələblərini aydın göstərmək.",
+      "Namizədləri cəlb etmək üçün şişirdilmiş vədlər vermək.",
+      "Bütün mümkün bacarıqları tələb kimi yazmaq."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Namizəd iş yerində konflikt zamanı necə davrandığını izah edir. HR üçün ən informativ yanaşma hansıdır?",
+    options: [
+      "Yalnız nəticəni soruşmaq.",
+      "Konkret vəziyyət, etdiyi hərəkət və nəticə barədə suallar vermək.",
+      "Namizədin emosiyasına əsasən qərar vermək.",
+      "Bu mövzunu keçmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "İşçi həmkarının etik olmayan davranış etdiyini bildirir, lakin sübut təqdim etmir. HR nə etməlidir?",
+    options: [
+      "İttihamı dərhal təsdiqləmək.",
+      "İttihamı dərhal rədd etmək.",
+      "Məsələni məxfi və obyektiv şəkildə araşdırmaq.",
+      "Məlumatı bütün komandaya yaymaq."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Rəhbər sizdən zəif performans göstərən işçiyə qarşı sərt tədbir görməyinizi tələb edir. Ən düzgün addım hansıdır?",
+    options: [
+      "Tələbi dərhal yerinə yetirmək.",
+      "Performans faktlarını, əvvəlki geribildirimləri və tətbiq olunan prosedurları nəzərdən keçirmək.",
+      "İşçini hamının qarşısında tənqid etmək.",
+      "İşçiyə heç nə deməmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Müsahibə zamanı namizəd şirkət haqqında sizdən mənfi rəylər soruşur. HR necə cavab verməlidir?",
+    options: [
+      "Şirkət haqqında bütün daxili məlumatları paylaşmaq.",
+      "Yalan danışmaq.",
+      "Peşəkar və faktlara əsaslanan məlumat vermək, məxfi məlumatları qorumaq.",
+      "Sualı təhqiramiz formada cavablamaq."
+    ],
+    a: 2
+  },
+
+  {
+    q: "İşə qəbul qərarında 'bu namizəd mənə xoş təsir bağışladı' arqumenti niyə kifayət deyil?",
+    options: [
+      "Çünki HR heç vaxt şəxsi təəssürat yaşamamalıdır.",
+      "Çünki qərar işlə əlaqəli və ölçülə bilən meyarlarla əsaslandırılmalıdır.",
+      "Çünki bütün namizədlər eyni olmalıdır.",
+      "Çünki yalnız CV-yə baxmaq lazımdır."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Bir işçi yeni məsuliyyət götürmək istəyir, lakin rəhbəri onun hazır olmadığını düşünür. HR nə edə bilər?",
+    options: [
+      "İşçinin istəyini avtomatik rədd etmək.",
+      "İşçiyə və rəhbərə inkişaf ehtiyaclarını və mümkün inkişaf planını müzakirə etməyə kömək etmək.",
+      "Rəhbəri məcbur etmək.",
+      "Məsələni görməzdən gəlmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Namizəd əvvəlki iş yerində tez-tez vəzifə dəyişib. Bu faktı necə qiymətləndirmək daha düzgündür?",
+    options: [
+      "Avtomatik olaraq qeyri-sabit insan hesab etmək.",
+      "Heç nəzərə almamaq.",
+      "Dəyişikliklərin səbəblərini və karyera məntiqini araşdırmaq.",
+      "Namizədi digər namizədlərə şikayət etmək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Bir əməkdaş komanda daxilində daim münaqişə yaradır. HR üçün ilk düzgün addım hansıdır?",
+    options: [
+      "Onu dərhal işdən çıxarmaq.",
+      "Davranışın konkret nümunələrini və səbəblərini müəyyənləşdirmək.",
+      "Bütün komandanı günahlandırmaq.",
+      "Problemi gizlətmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Müsahibə zamanı namizəd əvvəlcədən verilmiş cavabları əzbərləmiş kimi görünür. HR nə etməlidir?",
+    options: [
+      "Müsahibəni dərhal bitirmək.",
+      "Daha konkret və situasiyaya əsaslanan əlavə suallar vermək.",
+      "Namizədə düzgün cavabı demək.",
+      "Cavabları olduğu kimi qəbul etmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "HR analitikası hansı məqsədə daha çox xidmət edir?",
+    options: [
+      "İşçilər haqqında şəxsi fikir formalaşdırmağa.",
+      "Məlumatlara əsaslanaraq HR qərarlarını daha əsaslandırılmış etmək.",
+      "İşçiləri izləməyə.",
+      "Yalnız hesabatların sayını artırmağa."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Şirkətdə işçi dövriyyəsi kəskin artıb. HR üçün ən yaxşı ilk yanaşma hansıdır?",
+    options: [
+      "Bütün işçilərin maaşını artırmaq.",
+      "Heç bir araşdırma aparmadan rəhbərliyi günahlandırmaq.",
+      "Dövriyyənin səbəblərini məlumatlar və əməkdaşların geribildirimi əsasında araşdırmaq.",
+      "İşə qəbulu dayandırmaq."
+    ],
+    a: 2
+  },
+
+  {
+    q: "İşçi HR-dan rəhbəri haqqında şikayət edir və məlumatın məxfi qalmasını xahiş edir. HR nə etməlidir?",
+    options: [
+      "Məlumatı bütün rəhbərlərə göndərmək.",
+      "Məxfiliyi qorumaq və tətbiq olunan prosedurlar çərçivəsində məsələni idarə etmək.",
+      "Şikayəti dərhal rədd etmək.",
+      "İşçini rəhbərlə üzləşdirmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Namizəd iş təcrübəsindəki boşluğu izah edərkən şəxsi səbəblərdən danışmaq istəmir. HR necə davranmalıdır?",
+    options: [
+      "Səbəbi mütləq tələb etmək.",
+      "Namizədi buna görə rədd etmək.",
+      "İş üçün zəruri olan məlumatlara fokuslanmaq və şəxsi məlumatı məcburən tələb etməmək.",
+      "Məlumatı başqalarından öyrənmək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "İşçi yeni prosesin səmərəsiz olduğunu düşünür və alternativ təklif edir. HR bunu necə qiymətləndirməlidir?",
+    options: [
+      "Təklifi avtomatik rədd etmək.",
+      "Təklifin əsaslandırılmasını və mümkün nəticələrini qiymətləndirməyə imkan yaratmaq.",
+      "İşçini susdurmaq.",
+      "Təklifi dərhal bütün şirkətə tətbiq etmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Müsahibə zamanı namizəd bir suala cavab verərkən əvvəlki şirkətinin məxfi məlumatını açıqlayır. Bu nəyi göstərə bilər?",
+    options: [
+      "Mütləq üstünlükdür.",
+      "Məxfilik və peşə etikası baxımından risk yarada bilər.",
+      "Namizədin yüksək səviyyəli olduğunu göstərir.",
+      "Heç bir əhəmiyyəti yoxdur."
+    ],
+    a: 1
+  },
+
+  {
+    q: "İşə qəbul prosesinin daha ədalətli olması üçün hansı yanaşma daha uyğundur?",
+    options: [
+      "Hər namizədə tamamilə fərqli meyar tətbiq etmək.",
+      "Strukturlaşdırılmış və vəzifə ilə əlaqəli qiymətləndirmə meyarlarından istifadə etmək.",
+      "Yalnız CV dizaynına baxmaq.",
+      "İlk təəssüratı əsas meyar etmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Rəhbər bir namizəd haqqında 'məncə, bu adam bizə uyğun deyil' deyir, lakin konkret səbəb göstərmir. HR nə etməlidir?",
+    options: [
+      "Bu fikri avtomatik qəbul etmək.",
+      "Namizədi rədd etmək.",
+      "Qiymətləndirməni konkret və vəzifə ilə əlaqəli müşahidələrə əsaslandırmağı xahiş etmək.",
+      "Rəhbərin fikrini digər namizədlərə bildirmək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Bir əməkdaş iş yükünün həddindən artıq olduğunu bildirir. HR hansı məlumatı toplamalıdır?",
+    options: [
+      "Yalnız əməkdaşın şəxsi fikrini.",
+      "İş yükü, iş saatları, prioritetlər, komanda resursları və rəhbərliklə bağlı faktları.",
+      "Digər əməkdaşların şəxsi problemlərini.",
+      "Heç bir məlumat toplamamalıdır."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Namizəd müsahibədə əvvəlki rəhbəri ilə fikir ayrılığı yaşadığını bildirir. Ən faydalı əlavə sual hansıdır?",
+    options: [
+      "Rəhbəriniz pis insan idi?",
+      "Sizcə rəhbəriniz niyə səhv idi?",
+      "Fikir ayrılığı zamanı konkret olaraq nə etdiniz və nəticə necə oldu?",
+      "Rəhbərinizi sevmirdiniz?"
+    ],
+    a: 2
+  },
+
+  {
+    q: "HR mütəxəssisi bir namizədi şəxsən bəyənir, lakin digər namizəd vəzifə meyarlarına daha yaxşı cavab verir. Nə edilməlidir?",
+    options: [
+      "Şəxsi simpatiyaya əsasən bəyəndiyi namizədi seçmək.",
+      "Daha uyğun namizədi obyektiv meyarlara əsasən qiymətləndirmək.",
+      "İki namizədin adını təsadüfi seçmək.",
+      "Hər ikisini rədd etmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "İşçinin inkişaf planı hazırlanarkən ən faydalı yanaşma hansıdır?",
+    options: [
+      "Ümumi və ölçülməyən məqsədlər yazmaq.",
+      "Konkret, ölçülə bilən və vəzifə ilə əlaqəli inkişaf məqsədləri müəyyənləşdirmək.",
+      "Yalnız rəhbərin fikrini nəzərə almaq.",
+      "İşçinin fikrini soruşmamaq."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Müsahibədə namizəd bir suala 'bu barədə heç düşünməmişəm' deyir. Ən yaxşı HR reaksiyası hansıdır?",
+    options: [
+      "Namizədi dərhal rədd etmək.",
+      "Cavabı özü demək.",
+      "Namizədə düşünmək üçün vaxt verib əlavə kontekst və ya konkret nümunə istəmək.",
+      "Müsahibəni bitirmək."
+    ],
+    a: 2
+  },
+
+  {
+    q: "Bir komanda üzvü digər əməkdaşın uğurlarını daim öz adına çıxır. HR nə etməlidir?",
+    options: [
+      "Dərhal həmin işçini işdən çıxarmaq.",
+      "Konkret nümunələri araşdırmaq və komanda daxilində məsuliyyət və əməkdaşlıq gözləntilərini aydınlaşdırmaq.",
+      "Problemi görməzdən gəlmək.",
+      "Bütün komandanı cəzalandırmaq."
+    ],
+    a: 1
+  },
+
+  {
+    q: "HR mütəxəssisinin peşəkar etibarlılığını ən çox hansı davranış gücləndirir?",
+    options: [
+      "Hamıya eyni cavabı vermək.",
+      "Məxfilik, obyektivlik, ardıcıllıq və faktlara əsaslanan qərarvermə.",
+      "Rəhbərin bütün fikirlərini qəbul etmək.",
+      "İşçilərlə şəxsi münasibətlərə əsaslanmaq."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Bir namizəd bütün texniki tələblərə cavab verir, lakin vəzifənin əsas iş şəraitini qəbul etmir. Nə etmək daha düzgündür?",
+    options: [
+      "Texniki bacarıqlarına görə onu yenə də işə götürmək.",
+      "İş şəraiti ilə namizədin gözləntilərinin uyğunluğunu qiymətləndirmək.",
+      "İş şərtlərini gizlətmək.",
+      "Namizədi digər namizədlərdən üstün tutmaq."
+    ],
+    a: 1
+  },
+
+  {
+    q: "İşə qəbul prosesində namizədə verilən sualların əsas hissəsinin bütün namizədlər üçün eyni olması nə üçün faydalıdır?",
+    options: [
+      "Müsahibəni daha uzun etmək üçün.",
+      "Namizədlərin daha ardıcıl və müqayisə edilə bilən şəkildə qiymətləndirilməsi üçün.",
+      "Namizədləri qorxutmaq üçün.",
+      "HR mütəxəssisinin işini çətinləşdirmək üçün."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Namizəd müsahibədə əvvəlki iş yerindəki konfliktin həllində öz rolunu konkret nümunə ilə izah edir. HR əsasən nəyi qiymətləndirə bilər?",
+    options: [
+      "Yalnız danışıq sürətini.",
+      "Problemi necə analiz etdiyini, hansı addımları atdığını və nəticəni.",
+      "Əvvəlki şirkətin reputasiyasını.",
+      "Namizədin geyimini."
+    ],
+    a: 1
+  },
+
+  {
+    q: "İşçi şirkətin daxili qaydalarından biri ilə razı olmadığını bildirir. HR üçün ən düzgün yanaşma hansıdır?",
+    options: [
+      "İşçini dərhal cəzalandırmaq.",
+      "İşçinin narahatlığını dinləmək və qaydanın məqsədini və tətbiqini izah etmək.",
+      "Qaydanı dərhal ləğv etmək.",
+      "Şikayəti gizlətmək."
+    ],
+    a: 1
+  },
+
+  {
+    q: "Bir namizəd müsahibədə digər namizədlər haqqında məlumat tələb edir. HR nə etməlidir?",
+    options: [
+      "Digər namizədlərin adlarını və nəticələrini demək.",
+      "Digər namizədlərin məxfiliyini qoruyaraq yalnız proses haqqında ümumi məlumat vermək.",
+      "Namizədə bütün CV-ləri göstərmək.",
+      "Digər namizədlərin şəxsi məlumatlarını paylaşmaq."
+    ],
+    a: 1
+  },
+
+  {
+    q: "HR komandasının qərarlarında məlumat və analitikadan istifadə etməsinin əsas üstünlüyü nədir?",
+    options: [
+      "İntuisiyanı tamamilə aradan qaldırmaq.",
+      "Qərarları daha çox fakt və sübutla əsaslandırmaq.",
+      "İşçiləri daha çox nəzarətdə saxlamaq.",
+      "Bütün qərarları avtomatlaşdırmaq."
+    ],
+    a: 1
+  }
+
+];
+
+
+/* =====================================================
+   QEYD
+   =====================================================
+
+   quiz-engine.js bu səhifədən sonra yüklənir.
+   O:
+   - 50 sualı oxuyur
+   - 60 dəqiqəlik timer verir
+   - nəticəni hesablayır
+   - sertifikat yaradır
+   - Formspree-yə nəticəni göndərir
+
+   ===================================================== */
+
+</script>
+
+
+<script src="quiz-engine.js"></script>
+
+
+</body>
+
+</html>
