@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Müəllimlər — Psixoloji və Peşə Uyğunluğu | Youdidit.az</title>
+
+<meta name="description"
+content="Müəllimlər üçün 50 suallıq psixoloji və peşə uyğunluğu imtahanı.">
+
+<style>
+
+:root{
+  --bg:#070812;
+  --card:#111426;
+  --text:#f4f4f8;
+  --muted:#a8acc2;
+  --purple:#8b5cf6;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(139,92,246,.20),transparent 35%),
+    radial-gradient(circle at 90% 20%,rgba(168,85,247,.15),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+header{
+  padding:22px 6%;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(15px);
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(7,8,18,.82);
+}
+
+.nav{
+  max-width:1150px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  text-decoration:none;
+  color:white;
+}
+
+.logo span{
+  color:var(--purple);
+}
+
+.back{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+}
+
+.back:hover{
+  color:white;
+}
+
+.hero{
+  max-width:850px;
+  margin:0 auto;
+  padding:55px 20px 20px;
+  text-align:center;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 15px;
+  border-radius:30px;
+  background:rgba(139,92,246,.12);
+  border:1px solid rgba(139,92,246,.3);
+  color:#c4b5fd;
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:clamp(30px,5vw,52px);
+  line-height:1.08;
+  margin:0 0 16px;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  margin:0 auto;
+  max-width:700px;
+}
+
+.info{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:24px;
+}
+
+.info div{
+  padding:10px 15px;
+  border-radius:12px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:#d8d9e4;
+  font-size:14px;
+}
+
+.quiz-area{
+  max-width:760px;
+  margin:30px auto 80px;
+  padding:0 20px;
+}
+
+#quiz-root{
+  width:100%;
+}
+
+footer{
+  text-align:center;
+  padding:35px 20px;
+  border-top:1px solid rgba(255,255,255,.08);
+  color:#85899f;
+  font-size:13px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="nav">
+
+    <a href="index.html" class="logo">
+      youdidit<span>.az</span>
+    </a>
+
+    <a href="psixoloji-imtahan.html" class="back">
+      ← Psixoloji imtahanlara qayıt
+    </a>
+
+  </div>
+
+</header>
+
+
+<section class="hero">
+
+  <div class="badge">
+    PSİXOLOJİ VƏ PEŞƏ UYĞUNLUĞU
+  </div>
+
+  <h1>
+    Müəllimlər
+  </h1>
+
+  <p>
+    Bu imtahan müəllimin sinif idarəetməsi,
+    şagird davranışlarına yanaşması, empatiya,
+    ədalətli qərarvermə, ünsiyyət, konfliktlərin
+    həlli və təzyiq altında peşəkar davranışını
+    situativ suallar vasitəsilə qiymətləndirir.
+  </p>
+
+  <div class="info">
+    <div>50 sual</div>
+    <div>60 dəqiqə</div>
+    <div>4 cavab variantı</div>
+    <div>1 ən düzgün cavab</div>
+  </div>
+
+</section>
+
+
+<div class="quiz-area">
+
+  <div id="quiz-root"></div>
+
+</div>
+
+
+<footer>
+
+  <div>
+    © Youdidit.az
+  </div>
+
+  <div style="margin-top:8px;">
+    Təhsil • İmtahan • Karyera • İnkişaf
+  </div>
+
+</footer>
+
+
+<script>
+
+var QUIZ_META = {
+
+  title: "Müəllimlər — Psixoloji və Peşə Uyğunluğu İmtahanı"
+
+};
+
+
+var QUESTIONS = [
+
+{
+q:"Dərs zamanı bir şagird davamlı olaraq danışır və digər şagirdlərin diqqətini yayındırır. Ən effektiv ilk yanaşma hansıdır?",
+options:[
+"Şagirdi dərhal sinifdən çıxarmaq",
+"Şagirdi bütün sinfin qarşısında sərt şəkildə danlamaq",
+"Davranışın səbəbini nəzərə alaraq sakit və aydın şəkildə müdaxilə etmək",
+"Şagirdə ümumiyyətlə reaksiya verməmək"
+],
+a:2
+},
+
+{
+q:"Şagird tapşırığı yerinə yetirməyib və bunun səbəbini evdə yaşadığı problemlərlə izah edir. Müəllim necə davranmalıdır?",
+options:[
+"Şagirdin bəhanəsini qəbul edib qiymət verməmək",
+"Problemi digər şagirdlərin yanında müzakirə etmək",
+"Şagirdin vəziyyətini nəzərə alaraq dəstək göstərmək və akademik məsuliyyəti də qorumaq",
+"Tapşırığı həmişə onun əvəzinə etmək"
+],
+a:2
+},
+
+{
+q:"İki şagird arasında konflikt yaranıb və hər ikisi digərini günahlandırır. İlk addım nə olmalıdır?",
+options:[
+"Daha inandırıcı görünən şagirdi cəzalandırmaq",
+"Hər ikisini dərhal cəzalandırmaq",
+"Faktları dinləyib vəziyyəti tərəfsiz qiymətləndirmək",
+"Konfliktə qarışmamaq"
+],
+a:2
+},
+
+{
+q:"Şagird dərsdə sual verəndə digər uşaqlar gülür. Müəllimin ən düzgün reaksiyası hansıdır?",
+options:[
+"Sualı cavabsız qoymaq",
+"Gülən şagirdləri dərhal cəzalandırmaq",
+"Sual verməyin normal və dəyərli olduğunu göstərən təhlükəsiz sinif mühiti yaratmaq",
+"Şagirdə daha sonra sual verməsini demək"
+],
+a:2
+},
+
+{
+q:"Sinifdə akademik səviyyələri ciddi fərqlənən şagirdlər var. Ən effektiv yanaşma hansıdır?",
+options:[
+"Bütün şagirdlərə tam eyni çətinlikdə tapşırıq vermək",
+"Yalnız güclü şagirdlərə diqqət yetirmək",
+"Təlimi şagirdlərin ehtiyac və səviyyələrinə uyğun diferensiallaşdırmaq",
+"Zəif şagirdlərə daha az tapşırıq verməklə kifayətlənmək"
+],
+a:2
+},
+
+{
+q:"Şagird imtahanda yüksək nəticə göstərməyib və motivasiyasını itirib. Müəllim nə etməlidir?",
+options:[
+"Onu digər şagirdlərlə müqayisə etmək",
+"Nəticəni onun qabiliyyətsizliyi kimi təqdim etmək",
+"Səhvləri təhlil edib inkişaf edə biləcəyi konkret istiqamətlər göstərmək",
+"Qiymətini dəyişmək"
+],
+a:2
+},
+
+{
+q:"Valideyn müəllimə əsəbi şəkildə övladının aşağı qiymətindən şikayət edir. Müəllimin ən peşəkar davranışı hansıdır?",
+options:[
+"Eyni emosional tonda cavab vermək",
+"Valideyni günahlandırmaq",
+"Sakit qalaraq qiymətləndirmə meyarlarını və konkret faktları izah etmək",
+"Mübahisədən qaçmaq üçün qiyməti dəyişmək"
+],
+a:2
+},
+
+{
+q:"Şagird sizə müəllim kimi səhv etdiyinizi göstərir və haqlı olduğu məlum olur. Nə edərsiniz?",
+options:[
+"Səlahiyyətinizi qorumaq üçün səhvi inkar edərsiniz",
+"Mövzunu dəyişərsiniz",
+"Səhvi qəbul edib düzəldərsiniz",
+"Şagirdə dərsdən sonra irad bildirərsiniz"
+],
+a:2
+},
+
+{
+q:"Dərs zamanı bir şagird ağlamağa başlayır. Ən uyğun ilkin yanaşma hansıdır?",
+options:[
+"Dərsi dayandırmadan davam etmək",
+"Şagirdi dərhal sinifdən çıxarmaq",
+"Vəziyyəti sakitcə qiymətləndirib şagirdin ehtiyacına uyğun dəstək göstərmək",
+"Digər şagirdlərdən səbəbi soruşmaq"
+],
+a:2
+},
+
+{
+q:"Müəllim şagirdlərin qarşısında öz nüfuzunu ən yaxşı necə formalaşdırır?",
+options:[
+"Sərt cəzalar tətbiq etməklə",
+"Heç vaxt səhvini qəbul etməməklə",
+"Ardıcıl, ədalətli, kompetent və hörmətli davranmaqla",
+"Şagirdlərdən qorxu yaratmaqla"
+],
+a:2
+},
+
+{
+q:"Bir şagird dərs materialını digərlərindən daha tez mənimsəyir və daim əlavə iş istəyir. Nə etmək daha düzgündür?",
+options:[
+"Onu gözlətmək",
+"Digər şagirdlərin qarşısında üstün göstərmək",
+"Onun səviyyəsinə uyğun əlavə və düşündürücü tapşırıqlar vermək",
+"Onu digər şagirdlərə müəllim etmək"
+],
+a:2
+},
+
+{
+q:"Şagirdin davranışı sizi əsəbiləşdirir. Peşəkar müəllim necə davranmalıdır?",
+options:[
+"Emosiyasını dərhal şagirdə yönəltmək",
+"Sərt cəza vermək",
+"Öz emosiyasını idarə edib davranışa, səbəbə və uyğun müdaxiləyə fokuslanmaq",
+"Şagirdi dərsdən uzaqlaşdırmaq"
+],
+a:2
+},
+
+{
+q:"Sinifdə bir neçə şagird dərsdə iştirak etmir. Ən düzgün yanaşma hansıdır?",
+options:[
+"Onları tənbəl adlandırmaq",
+"Yalnız fəal şagirdlərlə işləmək",
+"İştirak etməməyin səbəblərini araşdırıb təlim metodunu uyğunlaşdırmaq",
+"Onlara avtomatik aşağı qiymət vermək"
+],
+a:2
+},
+
+{
+q:"Şagird sizdən şəxsi problemini gizli saxlamağınızı xahiş edir, lakin məlumat onun təhlükəsizliyi ilə bağlı ciddi risk göstərir. Nə etmək lazımdır?",
+options:[
+"Heç kimə deməmək",
+"Sinifdə bütün şagirdlərə danışmaq",
+"Məxfilik prinsipini nəzərə alaraq təhlükəsizlik üçün uyğun məsul şəxslərə məlumat vermək",
+"Problemi unutmaq"
+],
+a:2
+},
+
+{
+q:"Müəllim sinifdə favoritizm göstərməkdə ittiham olunur. Ən düzgün yanaşma hansıdır?",
+options:[
+"İttihamı dərhal rədd etmək",
+"Şagirdləri günahlandırmaq",
+"Qiymətləndirmə və davranış meyarlarını obyektiv və ardıcıl tətbiq etmək",
+"Favoritizm göstərilən şagirdi cəzalandırmaq"
+],
+a:2
+},
+
+{
+q:"Bir şagird daim səhv cavab verir, lakin suallara cavab verməkdən çəkinmir. Müəllim nə etməlidir?",
+options:[
+"Onu daha çox sual verməyə məcbur etmək",
+"Səhvlərinə görə sinif qarşısında tənqid etmək",
+"Səhvləri öyrənmə prosesinin hissəsi kimi istifadə edib düzgün istiqamət vermək",
+"Onu cavablandırmamaq"
+],
+a:2
+},
+
+{
+q:"Sinifdə müzakirə zamanı bir şagird daim digər şagirdlərin sözünü kəsir. Ən yaxşı müdaxilə hansıdır?",
+options:[
+"Şagirdi dərhal cəzalandırmaq",
+"Onu tamamilə susdurmaq",
+"Müzakirə qaydalarını xatırladıb hər kəsin danışmaq imkanını qorumaq",
+"Digər şagirdlərə onu görməzdən gəlməyi demək"
+],
+a:2
+},
+
+{
+q:"Müəllim şagirdlərin dərsə marağının azaldığını görür. İlk olaraq nəyi araşdırmalıdır?",
+options:[
+"Şagirdlərin tənbəlliyini",
+"Yalnız dərslikdəki mövzunu",
+"Təlim metodunun, tapşırıqların və şagird ehtiyaclarının uyğunluğunu",
+"Şagirdlərin qiymətlərini"
+],
+a:2
+},
+
+{
+q:"Valideyn müəllimdən övladına digər şagirdlərdən daha yüksək qiymət verməsini xahiş edir. Nə edilməlidir?",
+options:[
+"Valideynin istəyini yerinə yetirmək",
+"Valideynlə münasibəti qorumaq üçün razılaşmaq",
+"Qiymətləndirmə meyarlarını bütün şagirdlərə eyni şəkildə tətbiq etmək",
+"Şagirdə əlavə bal vermək"
+],
+a:2
+},
+
+{
+q:"Şagird müəllimin verdiyi tapşırığın məqsədini anlamadığını deyir. Müəllim nə etməlidir?",
+options:[
+"Tapşırığı yerinə yetirməsini tələb etmək",
+"Şagirdi diqqətsizlikdə günahlandırmaq",
+"Məqsədi və gözlənilən nəticəni aydınlaşdırmaq",
+"Tapşırığı ləğv etmək"
+],
+a:2
+},
+
+{
+q:"Sinifdə bir şagird digərinə qarşı davamlı istehza edir. Müəllim nə etməlidir?",
+options:[
+"Şagirdlərin öz aralarında həll etməsini gözləmək",
+"İstehza edilən şagirdi daha həssas olmaqda günahlandırmaq",
+"Davranışı dayandırıb təhlükəsiz və hörmətli mühitin qorunmasını təmin etmək",
+"İstehza edən şagirdi sinif qarşısında alçaltmaq"
+],
+a:2
+},
+
+{
+q:"Müəllim bir mövzunu izah edir, lakin şagirdlərin əksəriyyəti anlamadığını göstərir. Nə etməlidir?",
+options:[
+"Eyni izahı daha yüksək səslə təkrarlamaq",
+"Mövzunu keçib növbəti dərsə keçmək",
+"İzah üsulunu dəyişmək və anlayışı yoxlamaq",
+"Şagirdləri diqqətsizlikdə günahlandırmaq"
+],
+a:2
+},
+
+{
+q:"Şagirdin valideyni müəllim haqqında sosial şəbəkədə mənfi paylaşım edir. Ən peşəkar yanaşma hansıdır?",
+options:[
+"Sosial şəbəkədə cavab yazmaq",
+"Valideyn haqqında paylaşım etmək",
+"Məsələni emosional şəkildə deyil, uyğun peşəkar kanalla həll etməyə çalışmaq",
+"Digər valideynlərdən dəstək toplamaq"
+],
+a:2
+},
+
+{
+q:"Müəllim şagirdin dərsdə daim susduğunu müşahidə edir. Nə etmək daha məqsədəuyğundur?",
+options:[
+"Onu məcburən bütün sinif qarşısında danışdırmaq",
+"Onu dərsdən kənarlaşdırmaq",
+"Səbəbi araşdırıb şagirdin özünü təhlükəsiz hiss etdiyi iştirak imkanları yaratmaq",
+"Susmasını problem hesab etməmək"
+],
+a:2
+},
+
+{
+q:"Şagird müəllimin verdiyi qiymətlə razılaşmır və qiymətləndirmənin ədalətsiz olduğunu deyir. Müəllim nə etməlidir?",
+options:[
+"Şagirdə etiraz etməməyi demək",
+"Qiyməti avtomatik dəyişmək",
+"Qiymətləndirmə meyarlarını və şagirdin işini birlikdə nəzərdən keçirmək",
+"Şagirdi digər şagirdlərin yanında danlamaq"
+],
+a:2
+},
+
+{
+q:"Dərs planı hazırlanıb, lakin dərs zamanı gözlənilməz vəziyyət yaranır. Yaxşı müəllim nə etməlidir?",
+options:[
+"Planı nə olursa olsun dəyişməmək",
+"Dərsi tamamilə dayandırmaq",
+"Məqsədi qoruyaraq vəziyyətə uyğun çevik dəyişiklik etmək",
+"Şagirdləri günahlandırmaq"
+],
+a:2
+},
+
+{
+q:"Şagirdlərdən biri çox yüksək nəticə göstərir, digərləri isə geridə qalır. Müəllim necə davranmalıdır?",
+options:[
+"Yalnız yüksək nəticəli şagirdə fokuslanmaq",
+"Yüksək nəticəli şagirdi yavaşlatmaq",
+"Həm irəlidə olanlara inkişaf imkanı, həm də ehtiyacı olanlara dəstək yaratmaq",
+"Zəif nəticəlilərə daha asan qiymət vermək"
+],
+a:2
+},
+
+{
+q:"Müəllim öz metodunun effektiv olmadığını müşahidə edir. Ən peşəkar reaksiya hansıdır?",
+options:[
+"Metodu dəyişməmək",
+"Şagirdləri günahlandırmaq",
+"Nəticələri təhlil edib alternativ metodları sınaqdan keçirmək",
+"Problemi gizlətmək"
+],
+a:2
+},
+
+{
+q:"Şagird müəllimə kobud şəkildə cavab verir. Ən düzgün yanaşma hansıdır?",
+options:[
+"Eyni tonda cavab vermək",
+"Şagirdi təhqir etmək",
+"Sakitliyi qoruyaraq davranışın qəbuledilməz olduğunu və gözlənilən davranışı aydın bildirmək",
+"Dərhal şagirdi sinifdən çıxarmaq"
+],
+a:2
+},
+
+{
+q:"Müəllim həmkarının dərsində ciddi pedaqoji problem müşahidə edir. Nə etmək daha düzgündür?",
+options:[
+"Problemi digər müəllimlərlə müzakirə etmək",
+"Sosial şəbəkədə paylaşmaq",
+"Münasib peşəkar kanalla və hörmətli şəkildə məsələni müzakirə etmək",
+"Heç nə etməmək"
+],
+a:2
+},
+
+{
+q:"Şagirdin nəticəsi aşağıdır, amma dərsdə böyük səy göstərir. Müəllim hansı yanaşmanı seçməlidir?",
+options:[
+"Yalnız nəticəyə baxmaq",
+"Səyi nəzərə almamaq",
+"Nəticəni obyektiv qiymətləndirərkən inkişaf üçün konkret geribildirim və dəstək vermək",
+"Şagirdə avtomatik yüksək qiymət vermək"
+],
+a:2
+},
+
+{
+q:"Sinifdə mübahisə yaranıb və müəllim hansı tərəfin haqlı olduğunu hələ bilmir. Nə etməlidir?",
+options:[
+"İlk danışanı haqlı qəbul etmək",
+"Ən sakit şagirdi günahlandırmaq",
+"Məlumatları toplayıb tərəfsiz qərar vermək",
+"Ən yüksək nəticəli şagirdin sözünə inanmaq"
+],
+a:2
+},
+
+{
+q:"Şagird tapşırığı çox fərqli üsulla həll edir və nəticəsi doğrudur. Müəllim necə reaksiya verməlidir?",
+options:[
+"Yalnız dərsdə öyrədilən üsulu qəbul etmək",
+"Şagirdə səhv etdiyini demək",
+"Düzgün nəticəni və məntiqi əsaslandırmanı qiymətləndirib alternativ yanaşmanı müzakirə etmək",
+"Digər şagirdlərə həmin üsuldan istifadə etməyi qadağan etmək"
+],
+a:2
+},
+
+{
+q:"Müəllim sinifdə qaydaları müəyyənləşdirir. Qaydaların effektiv olması üçün nə vacibdir?",
+options:[
+"Çox sayda cəza tətbiq etmək",
+"Qaydaları tez-tez dəyişmək",
+"Qaydaların aydın, ardıcıl, başadüşülən və tətbiqinin ədalətli olması",
+"Yalnız müəllimin bilməsi"
+],
+a:2
+},
+
+{
+q:"Bir şagird dərsdə iştirak etmir, lakin təkbətək danışanda mövzuya maraq göstərir. Bu nəyi göstərə bilər?",
+options:[
+"Şagirdin mütləq tənbəl olduğunu",
+"Şagirdin mövzunu bilmədiyini",
+"Sinif mühitinin və ya iştirak formasının onun davranışına təsir edə biləcəyini",
+"Şagirdin müəllimə hörmətsiz olduğunu"
+],
+a:2
+},
+
+{
+q:"Müəllim dərs zamanı özünün emosional olaraq həddən artıq gərgin olduğunu hiss edir. Nə etmək daha peşəkardır?",
+options:[
+"Emosiyanı şagirdlərə yönəltmək",
+"Daha sərt davranmaq",
+"Özünü tənzimləyib dərsin təhlükəsiz və peşəkar mühitini qorumaq",
+"Şagirdlərdən üzr istəmədən dərsi tərk etmək"
+],
+a:2
+},
+
+{
+q:"Şagirdin davranış problemi haqqında valideynlə danışarkən hansı yanaşma daha konstruktivdir?",
+options:[
+"Şagirdi etiketləmək",
+"Valideyni günahlandırmaq",
+"Konkret davranışları, müşahidələri və mümkün dəstək yollarını müzakirə etmək",
+"Yalnız mənfi tərəfləri sadalamaq"
+],
+a:2
+},
+
+{
+q:"Müəllim dərsdə bir şagirdin digərindən köçürdüyünü görür. Ən düzgün yanaşma hansıdır?",
+options:[
+"Heç nə görməmiş kimi davranmaq",
+"Şagirdi hamının qarşısında alçaltmaq",
+"Akademik dürüstlük qaydalarına uyğun, faktlara əsaslanan və ölçülü müdaxilə etmək",
+"Bütün sinfə avtomatik sıfır vermək"
+],
+a:2
+},
+
+{
+q:"Şagird müəllimə 'Bu mövzunu həyatda heç vaxt istifadə etməyəcəyəm' deyir. Ən faydalı reaksiya hansıdır?",
+options:[
+"Onu danlamaq",
+"Sualı görməzdən gəlmək",
+"Mövzunun mümkün tətbiqlərini və öyrənmə məqsədini onun perspektivi ilə əlaqələndirmək",
+"Şagirdə dərsdə danışmağı qadağan etmək"
+],
+a:2
+},
+
+{
+q:"Sinifdə bir qrup şagird daim fəaldır, digər qrup isə passivdir. Müəllim nə edə bilər?",
+options:[
+"Yalnız fəal qrupla işləmək",
+"Passiv şagirdlərə aşağı qiymət vermək",
+"İştirak formalarını dəyişdirərək daha çox şagirdə söz və fəaliyyət imkanı yaratmaq",
+"Fəal şagirdlərin cavab verməsini qadağan etmək"
+],
+a:2
+},
+
+{
+q:"Müəllim verdiyi tapşırığın şagirdlər üçün həddən artıq asan olduğunu görür. Nə etmək daha düzgündür?",
+options:[
+"Tapşırığı olduğu kimi davam etdirmək",
+"Dərsi bitirmək",
+"Düşünmə səviyyəsini artıran əlavə problem və ya tətbiq tapşırığı əlavə etmək",
+"Şagirdləri daha sürətli işləməyə məcbur etmək"
+],
+a:2
+},
+
+{
+q:"Bir şagird digərindən davamlı olaraq kömək istəyir və müstəqil işləməyə çalışmır. Müəllim nə etməlidir?",
+options:[
+"Onun bütün tapşırıqlarını özü həll etmək",
+"Yardımı tamamilə dayandırmaq",
+"Dəstəyi tədricən azaltmaq və şagirdin müstəqil problem həll etməsini təşviq etmək",
+"Şagirdi sinifdən çıxarmaq"
+],
+a:2
+},
+
+{
+q:"Müəllim dərs zamanı verdiyi məlumatın səhv ola biləcəyindən şübhələnir. Ən düzgün davranış hansıdır?",
+options:[
+"Əmin görünmək üçün məlumatı dəyişdirmək",
+"Mövzunu gizlətmək",
+"Məlumatı yoxlamaq və lazım gəlsə səhvi açıq şəkildə düzəltmək",
+"Şagirdlərin bunu bilməyəcəyini düşünmək"
+],
+a:2
+},
+
+{
+q:"Şagirdlərin biri müəllimə qarşı şəxsi hörmətsizlik edir, lakin akademik nəticələri yüksəkdir. Müəllim necə davranmalıdır?",
+options:[
+"Yüksək nəticəsinə görə davranışı görməzdən gəlmək",
+"Daha aşağı qiymət verməklə cəzalandırmaq",
+"Akademik qiymətləndirməni davranışdan ayıraraq hər iki məsələyə uyğun prosedurla yanaşmaq",
+"Şagirdi digər şagirdlər qarşısında tənqid etmək"
+],
+a:2
+},
+
+{
+q:"Müəllim üçün konstruktiv geribildirimin əsas xüsusiyyəti hansıdır?",
+options:[
+"Şəxsin xarakterini tənqid etmək",
+"Yalnız səhvləri sadalamaq",
+"Konkret davranış və nəticəyə əsaslanaraq inkişaf üçün istiqamət göstərmək",
+"Şagirdi digər şəxslərlə müqayisə etmək"
+],
+a:2
+},
+
+{
+q:"Sinifdə emosional gərginlik yüksəlib və münaqişə böyümək üzrədir. Müəllimin prioriteti nə olmalıdır?",
+options:[
+"Kimin haqlı olduğunu dərhal müəyyən etmək",
+"Ən sərt cəzanı seçmək",
+"Təhlükəsizliyi və emosional sabitliyi təmin edib vəziyyəti nəzarətə almaq",
+"Dərsi heç nə olmamış kimi davam etdirmək"
+],
+a:2
+},
+
+{
+q:"Müəllim bir şagirdin müəyyən mövzuda davamlı çətinlik çəkdiyini görür. Ən yaxşı yanaşma hansıdır?",
+options:[
+"Şagirdi həmin mövzudan azad etmək",
+"Çətinliyi qabiliyyətsizlik kimi qəbul etmək",
+"Səhvin və çətinliyin mənbəyini müəyyən edib məqsədli dəstək göstərmək",
+"Şagirdə yalnız daha çox tapşırıq vermək"
+],
+a:2
+},
+
+{
+q:"Müəllim üçün empatiyanın peşəkar baxımdan ən düzgün izahı hansıdır?",
+options:[
+"Şagirdin bütün davranışlarını qəbul etmək",
+"Şagirdə heç vaxt irad bildirməmək",
+"Şagirdin perspektivini anlamağa çalışaraq uyğun və peşəkar reaksiya vermək",
+"Şagirdə bütün qaydalardan güzəşt etmək"
+],
+a:2
+},
+
+{
+q:"Müəllim bir şagird haqqında həmkarından eşitdiyi mənfi məlumatı təsdiqlənməmiş halda nəzərə almalıdırmı?",
+options:[
+"Bəli, çünki həmkar müəllimdir",
+"Bəli, əgər məlumat inandırıcı səslənirsə",
+"Xeyr, qərarları öz müşahidələri və etibarlı məlumatlar əsasında formalaşdırmalıdır",
+"Bəli, şagirdin qiymətini əvvəlcədən azaltmalıdır"
+],
+a:2
+},
+
+{
+q:"Müəllim sinifdə yüksək nəticə almaq istəyir, lakin bunun üçün şagirdlərdə həddindən artıq stress yaranır. Nə etməlidir?",
+options:[
+"Stressin nəticəni artırdığını düşünmək",
+"Yalnız yüksək nəticəyə fokuslanmaq",
+"Nəticə ilə yanaşı şagirdlərin davamlı öyrənməsi və psixoloji təhlükəsizliyini də nəzərə almaq",
+"İmtahanları tamamilə ləğv etmək"
+],
+a:2
+},
+
+{
+q:"Yaxşı müəllim öz peşəkar inkişafına necə yanaşmalıdır?",
+options:[
+"Təcrübəsi olduğu üçün yeni heç nə öyrənməməlidir",
+"Yalnız problem yarananda öyrənməlidir",
+"Geribildirim, nəticələr və yeni metodlar əsasında davamlı inkişaf etməlidir",
+"Yalnız rəhbərin məcbur etdiyi təlimlərə qatılmalıdır"
+],
+a:2
+},
+
+{
+q:"Müəllim üçün ən güclü peşəkar qərar hansı xüsusiyyətə malikdir?",
+options:[
+"Ən sərt qərar olması",
+"Şagirdin müəllimdən qorxmasını təmin etməsi",
+"Faktlara, pedaqoji məqsədə, ədalətə və şagirdin inkişafına əsaslanması",
+"Ən tez verilən qərar olması"
+],
+a:2
+}
+
+];
+
+</script>
+
+<script src="quiz-engine.js"></script>
+
+</body>
+
+</html>
