@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Satış / Müştəri xidməti — Psixoloji və Peşə Uyğunluğu | Youdidit.az</title>
+
+<meta name="description"
+content="Satış və müştəri xidməti əməkdaşları üçün 50 suallıq psixoloji və peşə uyğunluğu imtahanı.">
+
+<style>
+
+:root{
+  --bg:#070812;
+  --text:#f4f4f8;
+  --muted:#a8acc2;
+  --purple:#8b5cf6;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(139,92,246,.20),transparent 35%),
+    radial-gradient(circle at 90% 20%,rgba(168,85,247,.15),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+header{
+  padding:22px 6%;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(15px);
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(7,8,18,.82);
+}
+
+.nav{
+  max-width:1150px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  text-decoration:none;
+  color:white;
+}
+
+.logo span{
+  color:var(--purple);
+}
+
+.back{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+}
+
+.back:hover{
+  color:white;
+}
+
+.hero{
+  max-width:850px;
+  margin:0 auto;
+  padding:55px 20px 20px;
+  text-align:center;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 15px;
+  border-radius:30px;
+  background:rgba(139,92,246,.12);
+  border:1px solid rgba(139,92,246,.3);
+  color:#c4b5fd;
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:clamp(30px,5vw,52px);
+  line-height:1.08;
+  margin:0 0 16px;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  margin:0 auto;
+  max-width:700px;
+}
+
+.info{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:24px;
+}
+
+.info div{
+  padding:10px 15px;
+  border-radius:12px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  color:#d8d9e4;
+  font-size:14px;
+}
+
+.quiz-area{
+  max-width:760px;
+  margin:30px auto 80px;
+  padding:0 20px;
+}
+
+#quiz-root{
+  width:100%;
+}
+
+footer{
+  text-align:center;
+  padding:35px 20px;
+  border-top:1px solid rgba(255,255,255,.08);
+  color:#85899f;
+  font-size:13px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="nav">
+
+    <a href="index.html" class="logo">
+      youdidit<span>.az</span>
+    </a>
+
+    <a href="psixoloji-imtahan.html" class="back">
+      ← Psixoloji imtahanlara qayıt
+    </a>
+
+  </div>
+
+</header>
+
+
+<section class="hero">
+
+  <div class="badge">
+    PSİXOLOJİ VƏ PEŞƏ UYĞUNLUĞU
+  </div>
+
+  <h1>
+    Satış / Müştəri xidməti
+  </h1>
+
+  <p>
+    Bu imtahan satış və müştəri xidməti sahəsində
+    ünsiyyət, aktiv dinləmə, empatiya, etirazların
+    idarə edilməsi, problem həlli, emosional nəzarət,
+    etik davranış və müştəriyönümlü qərarverməni
+    situativ suallar vasitəsilə qiymətləndirir.
+  </p>
+
+  <div class="info">
+    <div>50 sual</div>
+    <div>60 dəqiqə</div>
+    <div>4 cavab variantı</div>
+    <div>1 ən düzgün cavab</div>
+  </div>
+
+</section>
+
+
+<div class="quiz-area">
+
+  <div id="quiz-root"></div>
+
+</div>
+
+
+<footer>
+
+  <div>
+    © Youdidit.az
+  </div>
+
+  <div style="margin-top:8px;">
+    Təhsil • İmtahan • Karyera • İnkişaf
+  </div>
+
+</footer>
+
+
+<script>
+
+var QUIZ_META = {
+
+  title: "Satış / Müştəri xidməti — Psixoloji və Peşə Uyğunluğu İmtahanı"
+
+};
+
+
+var QUESTIONS = [
+
+{
+q:"Müştəri əsəbi şəkildə danışır və problemin dərhal həll edilməsini tələb edir. İlk reaksiyanız necə olmalıdır?",
+options:[
+"Müştərinin səsini yüksəltdiyini əsas gətirib söhbəti dayandırmaq",
+"Eyni tonda cavab vermək",
+"Sakit qalaraq problemi dinləmək və həll üçün konkret məlumat toplamaq",
+"Müştərini başqa əməkdaşa yönləndirmək"
+],
+a:2
+},
+
+{
+q:"Müştəri məhsuldan narazıdır, lakin şikayətinin səbəbini tam izah etmir. Nə etmək daha düzgündür?",
+options:[
+"Dərhal məhsulun günahkar olduğunu qəbul etmək",
+"Müştərinin fikrini kəsmədən dəqiqləşdirici suallar vermək",
+"Standart cavabı oxumaq",
+"Müştəriyə problemi özü həll etməsini demək"
+],
+a:1
+},
+
+{
+q:"Müştəri qiymətin rəqib şirkətdən daha yüksək olduğunu deyir. Satış əməkdaşının ən yaxşı yanaşması hansıdır?",
+options:[
+"Rəqibi pis təqdim etmək",
+"Dərhal qiyməti endirmək",
+"Məhsulun dəyərini və müştərinin ehtiyacına uyğun üstünlüklərini izah etmək",
+"Müştərinin qiyməti anlamadığını söyləmək"
+],
+a:2
+},
+
+{
+q:"Müştəri 'Mən sadəcə baxıram' deyir. Satış əməkdaşı nə etməlidir?",
+options:[
+"Müştərini dərhal alışa yönəltmək",
+"Müştərini rahat buraxaraq ehtiyac yarandıqda kömək təklif etmək",
+"Müştəriyə çoxlu məhsul göstərmək",
+"Söhbəti məcburi şəkildə davam etdirmək"
+],
+a:1
+},
+
+{
+q:"Müştəri qərar verməkdə tərəddüd edir. Ən faydalı yanaşma hansıdır?",
+options:[
+"Tələsdirmək",
+"Qərarı onun əvəzinə vermək",
+"Tərəddüdün səbəbini müəyyən edib uyğun məlumat təqdim etmək",
+"Müştərini başqa satış əməkdaşına vermək"
+],
+a:2
+},
+
+{
+q:"Müştəri məhsul haqqında sizin bilmədiyiniz texniki sual verir. Nə etməlisiniz?",
+options:[
+"Təxmin edib cavab vermək",
+"Əmin görünmək üçün yanlış məlumat vermək",
+"Məlumatı yoxlamaq və dəqiq cavab vermək",
+"Sualı görməzdən gəlmək"
+],
+a:2
+},
+
+{
+q:"Müştəri xidmət qaydasına uyğun olmayan tələb irəli sürür və israr edir. Nə etmək daha düzgündür?",
+options:[
+"Qaydanı pozub müştərini razı salmaq",
+"Müştəriyə sərt cavab vermək",
+"Qaydanı nəzakətlə izah edib mümkün alternativ təklif etmək",
+"Müştəri ilə mübahisə etmək"
+],
+a:2
+},
+
+{
+q:"Müştəri sizin təklif etdiyiniz məhsula ehtiyacının olmadığını bildirir. Ən peşəkar davranış hansıdır?",
+options:[
+"Nə olursa olsun satmağa davam etmək",
+"Müştərinin ehtiyacını qəbul edib uyğun alternativ və ya gələcək yardım təklif etmək",
+"Müştərinin qərarını səhv adlandırmaq",
+"Söhbəti kobud şəkildə bitirmək"
+],
+a:1
+},
+
+{
+q:"Müştəri danışarkən satış əməkdaşı artıq cavabı bildiyini düşünür. Nə etməlidir?",
+options:[
+"Müştərinin sözünü kəsmək",
+"Dinləməyi davam etdirib problemin tam başa düşüldüyünə əmin olmaq",
+"Cavabı dərhal demək",
+"Söhbəti qısaltmaq"
+],
+a:1
+},
+
+{
+q:"Müştəri əvvəlki əməkdaşın ona yanlış məlumat verdiyini bildirir. Ən düzgün reaksiya hansıdır?",
+options:[
+"Əvvəlki əməkdaşı günahlandırmaq",
+"Müştərinin səhv başa düşdüyünü demək",
+"Vəziyyəti yoxlayıb düzgün məlumat və həll yolu təqdim etmək",
+"Problemi əvvəlki əməkdaşın üzərinə atmaq"
+],
+a:2
+},
+
+{
+q:"Müştəri uzun müddət gözlədikdən sonra sizə yaxınlaşır və narazıdır. Nə etmək daha düzgündür?",
+options:[
+"Gözləmənin sizin günahınız olmadığını demək",
+"Narazılığı qəbul edib üzr istəmək və mümkün qədər tez konkret həll təqdim etmək",
+"Müştərinin növbəsini gözləməsini tələb etmək",
+"Onu başqa şöbəyə göndərmək"
+],
+a:1
+},
+
+{
+q:"Satış hədəfiniz yüksəkdir, lakin müştərinin ehtiyacına uyğun olmayan məhsulu satmaq imkanınız var. Nə edərsiniz?",
+options:[
+"Hədəfi doldurmaq üçün məhsulu satarsınız",
+"Məhsulun mənfi tərəflərini gizlədərsiniz",
+"Müştərinin ehtiyacına uyğun olmayan satışı etməzsiniz",
+"Müştəriyə qərar verməsi üçün təzyiq göstərərsiniz"
+],
+a:2
+},
+
+{
+q:"Müştəri məhsulu almağa hazırdır, lakin son anda əlavə sual verir. Nə etmək lazımdır?",
+options:[
+"Satışı itirməmək üçün sualı keçmək",
+"Sualları cavablandırmaq və müştərinin qərarını məlumatlı şəkildə verməsinə imkan yaratmaq",
+"Müştəriyə artıq qərar verdiyini xatırlatmaq",
+"Söhbəti dərhal bağlamaq"
+],
+a:1
+},
+
+{
+q:"Müştəri məhsulun keyfiyyəti ilə bağlı emosional danışır. Satış əməkdaşı hansı bacarığı ilk növbədə nümayiş etdirməlidir?",
+options:[
+"Özünü müdafiə etməyi",
+"Aktiv dinləməni və emosional nəzarəti",
+"Mübahisə etməyi",
+"Söhbəti tez bitirməyi"
+],
+a:1
+},
+
+{
+q:"Müştəri sizdən rəqib məhsulu haqqında mənfi fikir bildirməyinizi istəyir. Nə etmək daha peşəkardır?",
+options:[
+"Rəqib haqqında mənfi məlumat uydurmaq",
+"Rəqibi təhqir etmək",
+"Öz məhsulunuzun real üstünlüklərini faktlarla izah etmək",
+"Müştəriyə rəqibin pis olduğunu demək"
+],
+a:2
+},
+
+{
+q:"Müştəri sizdən digər müştərinin şəxsi məlumatlarını soruşur. Nə etməlisiniz?",
+options:[
+"Müştəri razıdırsa məlumat vermək",
+"Şəxsi məlumatı paylaşmamaq və məxfilik qaydalarına əməl etmək",
+"Məlumatın bir hissəsini vermək",
+"Məlumatı həmkar vasitəsilə ötürmək"
+],
+a:1
+},
+
+{
+q:"Müştəri eyni problemi üçün üçüncü dəfə müraciət edir. Ən düzgün yanaşma hansıdır?",
+options:[
+"Problemin onun diqqətsizliyindən yarandığını demək",
+"Yenə standart cavabı vermək",
+"Problemin niyə təkrarlandığını araşdırıb kök səbəbi həll etməyə çalışmaq",
+"Müştərini başqa kanala göndərmək"
+],
+a:2
+},
+
+{
+q:"Müştəri sizə qarşı şəxsi təhqir işlətməyə başlayır. Nə etmək daha düzgündür?",
+options:[
+"Eyni şəkildə cavab vermək",
+"Emosional reaksiya göstərmək",
+"Sakit qalaraq peşəkar sərhədləri qorumaq və zəruri halda xidmət qaydalarına uyğun müdaxilə etmək",
+"Müştəriyə təhqirlə cavab vermək"
+],
+a:2
+},
+
+{
+q:"Müştərinin problemini dərhal həll edə bilmirsiniz. Ən yaxşı yanaşma hansıdır?",
+options:[
+"Problemin həll olunacağını vəd etmək",
+"Müştəriyə heç nə deyə bilməyəcəyinizi bildirmək",
+"Real vəziyyəti izah edib mümkün növbəti addımı və vaxt çərçivəsini bildirmək",
+"Problemi gizlətmək"
+],
+a:2
+},
+
+{
+q:"Müştəri məhsulu qaytarmaq istəyir, lakin qaytarma müddəti bitib. Nə etməlisiniz?",
+options:[
+"Qaydanı gizlətmək",
+"Müştərini kobud şəkildə rədd etmək",
+"Qaydanı izah edib mümkün istisna və ya alternativ həll imkanlarını yoxlamaq",
+"Müştəriyə başqa şirkətə müraciət etməsini demək"
+],
+a:2
+},
+
+{
+q:"Satış zamanı müştərinin ehtiyacını müəyyənləşdirmək üçün ən faydalı üsul hansıdır?",
+options:[
+"Ən bahalı məhsulu göstərmək",
+"Çox danışmaq",
+"Açıq və məqsədli suallar vermək və cavabları diqqətlə dinləmək",
+"Standart məhsul təqdimatı etmək"
+],
+a:2
+},
+
+{
+q:"Müştəri 'Bu məhsul mənə nə qazandıracaq?' deyə soruşur. Ən yaxşı cavab hansıdır?",
+options:[
+"Məhsulun bütün texniki xüsusiyyətlərini sadalamaq",
+"Məhsulun müştərinin konkret ehtiyacına necə dəyər qatacağını izah etmək",
+"Digər məhsulları pisləmək",
+"Qiyməti təkrar demək"
+],
+a:1
+},
+
+{
+q:"Müştəri satış prosesində bir neçə dəfə fikrini dəyişir. Satış əməkdaşı necə davranmalıdır?",
+options:[
+"Səbrsizliyini göstərmək",
+"Müştərini qərarsızlıqda günahlandırmaq",
+"Səbəbi müəyyənləşdirib seçim meyarlarını aydınlaşdırmağa kömək etmək",
+"Müştəriyə son qərar verməsini əmr etmək"
+],
+a:2
+},
+
+{
+q:"Müştəri məhsul haqqında internetdə ziddiyyətli məlumat oxuduğunu deyir. Nə etmək lazımdır?",
+options:[
+"İnternetdəki bütün məlumatları yalan adlandırmaq",
+"Məhsulun rəsmi və etibarlı məlumatlarını təqdim etmək",
+"Mövzunu dəyişmək",
+"Müştərinin oxuduğu məlumatı təsdiqləmədən qəbul etmək"
+],
+a:1
+},
+
+{
+q:"Satış əməkdaşı müştərinin büdcəsinin məhdud olduğunu anlayır. Ən düzgün yanaşma hansıdır?",
+options:[
+"Onu daha bahalı məhsula yönəltmək",
+"Büdcəni nəzərə alaraq real ehtiyacına uyğun variantlar təklif etmək",
+"Müştəriyə büdcəsinin az olduğunu demək",
+"Satışı dayandırmaq"
+],
+a:1
+},
+
+{
+q:"Müştəri məhsuldan istifadə etməyi bacarmadığını deyir. Nə etmək daha faydalıdır?",
+options:[
+"Müştərinin diqqətsiz olduğunu demək",
+"Problemi onun yerinə həmişə özünüz həll etmək",
+"Sadə və aydın şəkildə izah edib müştərinin özü tətbiq etməsinə imkan yaratmaq",
+"Müştərini texniki şöbəyə göndərmək və izah verməmək"
+],
+a:2
+},
+
+{
+q:"Müştəri xidmətində empatiya nə deməkdir?",
+options:[
+"Müştərinin bütün tələblərini qəbul etmək",
+"Müştərinin emosiyasını və perspektivini anlayaraq peşəkar şəkildə cavab vermək",
+"Müştərinin hər dediyini doğru hesab etmək",
+"Problemi şəxsi qəbul etmək"
+],
+a:1
+},
+
+{
+q:"Müştəri səhv etdiyini qəbul etmir, lakin sistemdə məlumatlar bunun əksini göstərir. Nə etməlisiniz?",
+options:[
+"Müştərini yalan danışmaqda ittiham etmək",
+"Sistemdəki məlumatı onun üzünə vurmaq",
+"Faktları sakit və neytral şəkildə izah edib həll variantına fokuslanmaq",
+"Söhbəti dayandırmaq"
+],
+a:2
+},
+
+{
+q:"Müştəri çoxlu sual verir və söhbət uzanır. Satış əməkdaşı nə etməlidir?",
+options:[
+"Sualları cavabsız qoymaq",
+"Müştərinin danışığını dayandırmaq",
+"Sualları prioritetləşdirib əsas ehtiyacı müəyyənləşdirərək strukturlaşdırılmış cavab vermək",
+"Müştəriyə daha çox məhsul satmağa çalışmaq"
+],
+a:2
+},
+
+{
+q:"Müştəri məhsulu almaq istəyir, amma onun üçün uyğun olmadığını düşünürsünüz. Nə etməlisiniz?",
+options:[
+"Satışı bağlamaq üçün yenə də məhsulu tövsiyə etmək",
+"Məhsulun uyğun olmadığını əsaslandıraraq alternativ təklif etmək",
+"Müştərinin seçiminə qarışmamaq",
+"Məhsulun bütün mənfi tərəflərini gizlətmək"
+],
+a:1
+},
+
+{
+q:"Satış əməkdaşı gün ərzində çoxlu rədd cavabı alır. Peşəkar yanaşma hansıdır?",
+options:[
+"Hər rədd cavabını şəxsi uğursuzluq kimi qəbul etmək",
+"Müştərilərlə daha sərt danışmaq",
+"Nəticələri təhlil edib öyrənərək motivasiyanı və peşəkarlığı qorumaq",
+"Satış prosesini dayandırmaq"
+],
+a:2
+},
+
+{
+q:"Müştəri 'Sizin şirkətiniz mənim problemimi həll edə bilməz' deyir. Ən yaxşı ilk reaksiya hansıdır?",
+options:[
+"Müştərinin səhv düşündüyünü demək",
+"Şirkətin bütün üstünlüklərini uzun-uzadı sadalamaq",
+"Problemi dəqiqləşdirib onun gözləntisini və ehtiyacını anlamağa çalışmaq",
+"Söhbəti bitirmək"
+],
+a:2
+},
+
+{
+q:"Müştəri sizdən dərhal nəticə tələb edir, lakin bunun üçün real imkan yoxdur. Nə etməlisiniz?",
+options:[
+"Real olmayan vəd vermək",
+"Müştərinin narazı qalacağından qorxub yalan danışmaq",
+"Real imkanları açıq şəkildə izah edib mümkün alternativ təqdim etmək",
+"Problemi gizlətmək"
+],
+a:2
+},
+
+{
+q:"Satış əməkdaşı üçün aktiv dinləmənin göstəricisi hansıdır?",
+options:[
+"Müştərinin sözünü kəsməmək və sonra eşitdiklərini dəqiqləşdirmək",
+"Yalnız cavab vermək üçün qulaq asmaq",
+"Müştərinin sözlərini təxmin etmək",
+"Söhbəti mümkün qədər tez bitirmək"
+],
+a:0
+},
+
+{
+q:"Müştəri bir məhsul haqqında mənfi rəy bildirir, lakin bu rəy faktlara əsaslanmır. Nə etmək daha düzgündür?",
+options:[
+"Müştərini məsxərəyə qoymaq",
+"Rəyi dərhal rədd etmək",
+"Məlumatı nəzakətlə dəqiqləşdirib faktiki məlumat təqdim etmək",
+"Müştəri ilə mübahisə etmək"
+],
+a:2
+},
+
+{
+q:"Müştəriyə təqdim etdiyiniz məhsulun müəyyən məhdudiyyəti var. Satış prosesində bunu necə təqdim etməlisiniz?",
+options:[
+"Gizlətmək",
+"Yalnız müştəri soruşsa demək",
+"Məhdudiyyəti şəffaf şəkildə izah edib müştərinin qərar verməsinə imkan yaratmaq",
+"Məhdudiyyəti üstünlük kimi göstərmək"
+],
+a:2
+},
+
+{
+q:"Müştəri sizdən şirkət siyasətinə zidd bir güzəşt istəyir. Nə etmək daha düzgündür?",
+options:[
+"Gizli şəkildə güzəşt etmək",
+"Şəxsi qərarla qaydanı dəyişmək",
+"Siyasəti izah edib səlahiyyət daxilində mümkün alternativləri araşdırmaq",
+"Müştəriyə heç nə izah etmədən rədd etmək"
+],
+a:2
+},
+
+{
+q:"Müştəri məhsulu aldıqdan sonra əlavə dəstəyə ehtiyac duyur. Yaxşı müştəri xidməti nəyi hədəfləməlidir?",
+options:[
+"Satış başa çatdığı üçün məsuliyyəti dayandırmaq",
+"Problemi mümkün qədər tez başqa şöbəyə ötürmək",
+"Müştərinin probleminin həllini izləmək və uyğun dəstəyi təmin etmək",
+"Müştəriyə yenidən satış etməyə çalışmaq"
+],
+a:2
+},
+
+{
+q:"Müştəri ilə danışarkən onun emosional vəziyyətini düzgün qiymətləndirmək niyə vacibdir?",
+options:[
+"Müştərini manipulyasiya etmək üçün",
+"Cavabın tonunu və ünsiyyət üsulunu vəziyyətə uyğun seçmək üçün",
+"Daha çox məhsul satmaq üçün",
+"Müştərini susdurmaq üçün"
+],
+a:1
+},
+
+{
+q:"Müştəri sizin səhviniz səbəbindən əlavə vaxt itirib. Ən düzgün reaksiya hansıdır?",
+options:[
+"Səhvi gizlətmək",
+"Başqasını günahlandırmaq",
+"Məsuliyyəti qəbul edib üzr istəmək və problemin həlli üçün konkret addım atmaq",
+"Müştərinin də səhv etdiyini demək"
+],
+a:2
+},
+
+{
+q:"Satış əməkdaşı müştərinin qərar verməsi üçün hansı ünsiyyət formasından daha çox istifadə etməlidir?",
+options:[
+"Təzyiq və qorxutma",
+"Manipulyasiya",
+"Ehtiyacı anlamağa əsaslanan məsləhətçi yanaşması",
+"Yalnız endirim təklifi"
+],
+a:2
+},
+
+{
+q:"Müştəri danışarkən telefonunuza bildiriş gəlir. Peşəkar davranış hansıdır?",
+options:[
+"Dərhal telefona baxmaq",
+"Bildirişi müştərinin yanında cavablamaq",
+"Müştəriyə fokuslanmağa davam etmək və şəxsi diqqəti bölməmək",
+"Müştərinin danışmasını dayandırmaq"
+],
+a:2
+},
+
+{
+q:"Müştəri sizə 'Mənə nə satmağa çalışırsınız?' deyə şübhə ilə yanaşır. Ən yaxşı cavab hansıdır?",
+options:[
+"Onun şübhəsini lağa qoymaq",
+"Satış etmədiyinizi demək",
+"Ehtiyacını anlamaq və yalnız uyğun məhsul barədə məlumat vermək niyyətində olduğunuzu göstərmək",
+"Daha çox məhsul təqdim etmək"
+],
+a:2
+},
+
+{
+q:"Bir müştəriyə verilmiş məlumat başqa müştərinin məlumatı ilə ziddiyyət təşkil edir. Nə etmək lazımdır?",
+options:[
+"İlk məlumatı avtomatik doğru qəbul etmək",
+"Sonuncu məlumatı avtomatik doğru qəbul etmək",
+"Məlumatın mənbəyini və aktual qaydanı yoxlamaq",
+"Müştərilərdən birinin səhv etdiyini söyləmək"
+],
+a:2
+},
+
+{
+q:"Satış göstəriciniz aşağı düşüb. Ən konstruktiv yanaşma hansıdır?",
+options:[
+"Yalnız bazarı günahlandırmaq",
+"Müştərilərin heç nə almaq istəmədiyini düşünmək",
+"Məlumatları təhlil edib satış mərhələlərində zəif nöqtəni müəyyənləşdirmək",
+"Daha çox müştəriyə təsadüfi zəng etmək"
+],
+a:2
+},
+
+{
+q:"Müştəri məhsulun qiymətindən narazıdır, lakin məhsulun xüsusiyyətlərini bəyənir. Nə etmək daha düzgündür?",
+options:[
+"Dərhal böyük endirim vermək",
+"Qiyməti müdafiə edib müştərini günahlandırmaq",
+"Müştərinin əsas dəyər gözləntisini müəyyənləşdirib uyğun seçim və ya paket təqdim etmək",
+"Satışı bağlamağa məcbur etmək"
+],
+a:2
+},
+
+{
+q:"Müştəri əvvəlki mənfi təcrübəyə görə şirkətə güvənmir. Etimadı bərpa etmək üçün ən yaxşı yanaşma hansıdır?",
+options:[
+"Şirkətin heç vaxt səhv etmədiyini demək",
+"Müştərinin təcrübəsini kiçiltmək",
+"Onun narahatlığını dinləyib şəffaf məlumat və konkret həll təqdim etmək",
+"Daha çox reklam göstərmək"
+],
+a:2
+},
+
+{
+q:"Müştəri bir neçə alternativ arasında seçim edə bilmir. Satış əməkdaşı nə etməlidir?",
+options:[
+"Ən bahalı variantı seçmək",
+"Öz zövqünə əsasən seçim etmək",
+"Müştərinin prioritetlərini müəyyənləşdirib variantları həmin meyarlara görə müqayisə etmək",
+"Müştərini tez qərar verməyə məcbur etmək"
+],
+a:2
+},
+
+{
+q:"Müştəri xidmətində emosional nəzarətin əsas üstünlüyü nədir?",
+options:[
+"Müştəriyə qalib gəlmək",
+"Çətin situasiyada qərar və ünsiyyət keyfiyyətini qorumaq",
+"Müştərinin emosiyalarını dəyişmək",
+"Problemi gizlətmək"
+],
+a:1
+},
+
+{
+q:"Müştəri sizdən şirkətin daxili qərarvermə prosesi haqqında məxfi məlumat istəyir. Nə etməlisiniz?",
+options:[
+"Müştəri razıdırsa məlumat vermək",
+"Məlumatın bir hissəsini paylaşmaq",
+"Məxfi məlumatı paylaşmamaq və yalnız icazə verilən məlumatı təqdim etmək",
+"Məlumatı başqa əməkdaşdan öyrənmək"
+],
+a:2
+},
+
+{
+q:"Satış zamanı müştərinin ehtiyacını səhv başa düşdüyünüzü sonradan anlayırsınız. Nə etməlisiniz?",
+options:[
+"Səhvi gizlətmək",
+"Məhsulu yenə də satmağa çalışmaq",
+"Yanlış anlaşmanı düzəldib ehtiyacı yenidən dəqiqləşdirmək",
+"Müştərini günahlandırmaq"
+],
+a:2
+},
+
+{
+q:"Çətin müştəri ilə ünsiyyətdən sonra növbəti müştəriyə münasibətiniz necə olmalıdır?",
+options:[
+"Əvvəlki müştərinin emosiyasını yeni müştəriyə əks etdirmək",
+"Daha sərt davranmaq",
+"Əvvəlki situasiyanı peşəkar şəkildə geridə qoyub yeni müştəriyə obyektiv yanaşmaq",
+"Növbəti müştəridən üzr istəmək"
+],
+a:2
+},
+
+{
+q:"Müştəri xidmətində uğurlu nəticənin ən güclü göstəricilərindən biri hansıdır?",
+options:[
+"Müştərinin mübahisəni uduzması",
+"Əməkdaşın söhbəti ən tez bitirməsi",
+"Müştərinin ehtiyacının düzgün anlaşılması və real problemin həll edilməsi",
+"Müştəriyə ən bahalı məhsulun satılması"
+],
+a:2
+}
+
+];
+
+</script>
+
+<script src="quiz-engine.js"></script>
+
+</body>
+
+</html>
