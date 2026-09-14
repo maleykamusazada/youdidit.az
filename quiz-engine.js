@@ -73,24 +73,11 @@
   */
 
   function getTimeLimit(questionCount) {
-
-    if (questionCount <= 50) {
-
-      return 60 * 60;
-
-    }
-
-    if (questionCount <= 60) {
-
-      return 75 * 60;
-
-    }
-
-    if (questionCount <= 100) {
-
-      return 120 * 60;
-
-    }
+  if (questionCount <= 50) return 60 * 60;
+  if (questionCount <= 60) return 75 * 60;
+  if (questionCount <= 100) return 120 * 60;
+  return 120 * 60;
+}
 
     /*
 
