@@ -75,6 +75,10 @@ a{
   text-decoration:none;
 }
 
+button{
+  font-family:inherit;
+}
+
 .container{
   width:min(1180px,calc(100% - 32px));
   margin:auto;
@@ -136,6 +140,67 @@ a{
   font-size:12px;
   font-weight:800;
   box-shadow:0 8px 25px rgba(118,81,255,.28);
+  white-space:nowrap;
+}
+
+/* MOBILE MENU BUTTON */
+
+.menu-toggle{
+  display:none;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  background:rgba(255,255,255,.05);
+  color:white;
+  font-size:21px;
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  transition:.25s;
+}
+
+.menu-toggle:hover{
+  background:rgba(118,81,255,.15);
+  border-color:rgba(155,117,255,.35);
+}
+
+/* MOBILE MENU */
+
+.mobile-menu{
+  display:none;
+  padding:10px 0 18px;
+}
+
+.mobile-menu.active{
+  display:block;
+}
+
+.mobile-menu a{
+  display:block;
+  padding:13px 15px;
+  margin-top:5px;
+  border-radius:12px;
+  color:#c2c6df;
+  font-size:13px;
+  font-weight:600;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.06);
+  transition:.25s;
+}
+
+.mobile-menu a:hover{
+  color:white;
+  background:rgba(118,81,255,.12);
+  border-color:rgba(155,117,255,.25);
+}
+
+.mobile-menu .mobile-order{
+  margin-top:10px;
+  text-align:center;
+  color:white;
+  background:linear-gradient(135deg,#6b52ff,#a34eff);
+  border-color:transparent;
 }
 
 /* =========================
@@ -1085,6 +1150,14 @@ footer{
     display:none;
   }
 
+  .nav-button{
+    display:none;
+  }
+
+  .menu-toggle{
+    display:flex;
+  }
+
   .hero{
     padding:70px 0;
   }
@@ -1144,8 +1217,9 @@ footer{
     font-size:20px;
   }
 
-  .nav-button{
-    padding:9px 14px;
+  .menu-toggle{
+    width:40px;
+    height:40px;
   }
 
   .hero{
@@ -1261,10 +1335,10 @@ footer{
       <a href="sinif-testleri.html">
         Sinif testləri
       </a>
-      
+
       <a href="lavazimatlar.html">
         Ləvazimatlar
-        </a>
+      </a>
 
       <a href="psixoloji-imtahan.html">
         🧠 Psixoloji imtahan
@@ -1277,6 +1351,54 @@ footer{
     </div>
 
     <a href="order.html" class="nav-button">
+      Sifariş et →
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Menyu"
+      aria-expanded="false"
+      type="button"
+    >
+      ☰
+    </button>
+
+  </div>
+
+  <!-- MOBILE MENU -->
+
+  <div class="container mobile-menu" id="mobileMenu">
+
+    <a href="index.html">
+      Ana səhifə
+    </a>
+
+    <a href="#exams">
+      İmtahanlar
+    </a>
+
+    <a href="resources.html">
+      Resurslar
+    </a>
+
+    <a href="sinif-testleri.html">
+      Sinif testləri
+    </a>
+
+    <a href="lavazimatlar.html">
+      🛍️ Ləvazimatlar
+    </a>
+
+    <a href="psixoloji-imtahan.html">
+      🧠 Psixoloji imtahan
+    </a>
+
+    <a href="#services">
+      Xidmətlər
+    </a>
+
+    <a href="order.html" class="mobile-order">
       Sifariş et →
     </a>
 
@@ -1475,8 +1597,6 @@ footer{
 
       <div class="exam-grid">
 
-        <!-- 1. BEYNƏLXALQ İMTAHANLAR -->
-
         <a
           href="international-exams.html"
           class="exam-card"
@@ -1508,9 +1628,6 @@ footer{
           </span>
 
         </a>
-
-
-        <!-- 2. DİL İMTAHANLARI -->
 
         <a
           href="exams.html"
@@ -1544,9 +1661,6 @@ footer{
 
         </a>
 
-
-        <!-- 3. MƏKTƏB VƏ QƏBUL -->
-
         <a
           href="exams.html"
           class="exam-card"
@@ -1577,9 +1691,6 @@ footer{
           </span>
 
         </a>
-
-
-        <!-- 4. SƏVİYYƏ TESTLƏRİ -->
 
         <a
           href="exams.html"
@@ -2346,6 +2457,10 @@ footer{
         Testlər
       </a>
 
+      <a href="lavazimatlar.html">
+        Ləvazimatlar
+      </a>
+
       <a href="psixoloji-imtahan.html">
         🧠 Psixoloji imtahan
       </a>
@@ -2372,5 +2487,41 @@ footer{
 
 </footer>
 
+<!-- ==================================================
+     MOBILE MENU SCRIPT
+================================================== -->
+
+<script>
+
+const menuToggle = document.getElementById("menuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+
+menuToggle.addEventListener("click", function(){
+
+  const isOpen = mobileMenu.classList.toggle("active");
+
+  menuToggle.textContent = isOpen ? "✕" : "☰";
+
+  menuToggle.setAttribute("aria-expanded", isOpen);
+
+});
+
+document.querySelectorAll("#mobileMenu a").forEach(function(link){
+
+  link.addEventListener("click", function(){
+
+    mobileMenu.classList.remove("active");
+
+    menuToggle.textContent = "☰";
+
+    menuToggle.setAttribute("aria-expanded", "false");
+
+  });
+
+});
+
+</script>
+
 </body>
+
 </html>
