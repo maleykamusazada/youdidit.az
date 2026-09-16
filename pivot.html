@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pivot Dəftəri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root {
+    --bg: #F5F3EC;
+    --surface: #FFFFFF;
+    --surface-2: #EEEBE0;
+    --ink: #1B241E;
+    --ink-muted: #62685F;
+    --accent: #2F5233;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #E3EBDE;
+    --brass: #A6813E;
+    --line: #D9D3C2;
+    --line-strong: #B9B2A0;
+    --danger: #9C3B34;
+    --shadow: rgba(27, 36, 30, 0.08);
+    --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14170F;
+      --surface: #1D2118;
+      --surface-2: #262B20;
+      --ink: #E9E7DA;
+      --ink-muted: #9CA495;
+      --accent: #7FAE7C;
+      --accent-ink: #10160F;
+      --accent-soft: #263426;
+      --brass: #D3B36A;
+      --line: #333A2C;
+      --line-strong: #454E3A;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14170F;
+    --surface: #1D2118;
+    --surface-2: #262B20;
+    --ink: #E9E7DA;
+    --ink-muted: #9CA495;
+    --accent: #7FAE7C;
+    --accent-ink: #10160F;
+    --accent-soft: #263426;
+    --brass: #D3B36A;
+    --line: #333A2C;
+    --line-strong: #454E3A;
+    --shadow: rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+  }
+
+  header.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 16px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  header.top .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  header.top h1 {
+    font-size: 1.55rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  header.top .tag {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+  }
+  header.top .rule {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    text-align: right;
+  }
+
+  section { margin-bottom: 26px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+  }
+
+  .step-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--brass);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  h2.section-title {
+    font-size: 1.05rem;
+    margin: 0 0 14px;
+    font-weight: 600;
+  }
+
+  /* --- upload zone --- */
+  .upload-card {
+    padding: 22px;
+  }
+  .drop {
+    border: 1.5px dashed var(--line-strong);
+    border-radius: 3px;
+    padding: 28px 20px;
+    text-align: center;
+    background: var(--surface-2);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .drop:hover, .drop.drag {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .drop input { display: none; }
+  .drop .icon { font-size: 1.6rem; margin-bottom: 6px; }
+  .drop .main-txt { font-weight: 600; margin-bottom: 4px; }
+  .drop .sub-txt { font-size: 0.85rem; color: var(--ink-muted); }
+
+  .file-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    flex-wrap: wrap;
+  }
+  .file-info .name { color: var(--ink); font-weight: 500; }
+
+  .sample-link {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  select.sheet-select {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 5px 8px;
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  /* --- config grid --- */
+  .config-card { padding: 22px; }
+  .field-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  .field-table th {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    border-bottom: 1px solid var(--line);
+    padding: 6px 8px;
+  }
+  .field-table td {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+  .field-table tr:last-child td { border-bottom: none; }
+  .field-name {
+    font-weight: 500;
+  }
+  .field-name .sample {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    font-weight: 400;
+  }
+  select.role-select, select.agg-select {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    padding: 5px 7px;
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    background: var(--surface);
+    color: var(--ink);
+    width: 100%;
+  }
+  .agg-cell { width: 130px; }
+  .agg-cell.hidden-cell { visibility: hidden; }
+
+  .config-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18px;
+    gap: 10px;
+  }
+  button.primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  button.primary:hover { opacity: 0.92; }
+  button.primary:disabled { opacity: 0.45; cursor: not-allowed; }
+  button.ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    padding: 10px 16px;
+    border-radius: 3px;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  button.ghost:hover { background: var(--surface-2); }
+
+  .hint {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    margin-top: 10px;
+  }
+
+  /* --- result --- */
+  .result-card { padding: 22px; }
+  .result-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .result-meta {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+  }
+  .table-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+  }
+  table.pivot {
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+    min-width: 100%;
+    white-space: nowrap;
+  }
+  table.pivot th, table.pivot td {
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+  table.pivot th {
+    background: var(--surface-2);
+    font-weight: 600;
+    text-align: center;
+  }
+  table.pivot td.rowhead {
+    background: var(--surface-2);
+    font-weight: 500;
+    text-align: left;
+    font-family: var(--font-sans);
+  }
+  table.pivot td.num { text-align: right; }
+  table.pivot tr.total-row td, table.pivot tr.total-row th {
+    background: var(--accent-soft);
+    font-weight: 700;
+    border-top: 2px solid var(--ink-muted);
+  }
+  table.pivot td.total-col, table.pivot th.total-col {
+    background: var(--accent-soft);
+    font-weight: 700;
+  }
+  table.pivot th:last-child, table.pivot td:last-child { border-right: none; }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--ink-muted);
+  }
+  .empty-state .icon { font-size: 1.8rem; margin-bottom: 8px; }
+
+  footer.foot {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    margin-top: 30px;
+  }
+
+  @media (max-width: 640px) {
+    header.top { flex-direction: column; align-items: flex-start; }
+    header.top .rule { text-align: left; }
+    .field-table { font-size: 0.82rem; }
+    .agg-cell { width: 110px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <h1>Pivot Dəftəri</h1>
+      <span class="tag">— cədvəl analiz aləti</span>
+    </div>
+    <div class="rule">Excel / CSV → sxem seçin → pivot cədvəl</div>
+  </header>
+
+  <section id="upload-section">
+    <div class="step-label">01 — MƏNBƏ</div>
+    <div class="card upload-card">
+      <h2 class="section-title">Faylı yükləyin</h2>
+      <label class="drop" id="dropZone">
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv">
+        <div class="icon">⤒</div>
+        <div class="main-txt">Excel və ya CSV faylını buraya sürükləyin</div>
+        <div class="sub-txt">və ya klikləyib seçin — .xlsx, .xls, .csv</div>
+      </label>
+      <div class="file-info" id="fileInfo" style="display:none;">
+        <span>Fayl: <span class="name" id="fileName"></span></span>
+        <span id="sheetPickerWrap" style="display:none;">
+          Vərəq: <select class="sheet-select" id="sheetSelect"></select>
+        </span>
+        <span id="rowCountInfo"></span>
+      </div>
+      <div class="hint">Fayl brauzerinizdən kənara çıxmır — hər şey bu səhifədə, sizin cihazınızda hesablanır.<br>
+      Sınamaq istəyirsinizsə: <button class="sample-link" id="loadSample">nümunə məlumatı yüklə</button></div>
+    </div>
+  </section>
+
+  <section id="config-section" style="display:none;">
+    <div class="step-label">02 — SXEM</div>
+    <div class="card config-card">
+      <h2 class="section-title">Sahələri təyin edin</h2>
+      <table class="field-table">
+        <thead>
+          <tr>
+            <th style="width:38%">Sütun adı</th>
+            <th style="width:22%">Rolu</th>
+            <th>Cəmləmə üsulu</th>
+          </tr>
+        </thead>
+        <tbody id="fieldTableBody"></tbody>
+      </table>
+      <div class="hint">
+        <b>Sətir</b> və <b>Sütun</b> — cədvəli qruplaşdıran kateqoriyalardır (bir neçə sahəni "Sətir" edə bilərsiniz, iyerarxiya yaranır; "Sütun" üçün yalnız bir sahə seçilir).<br>
+        <b>Dəyər</b> — hesablanacaq ədədi göstəricidir (bir neçə dəyər sahəsi ola bilər, hər birinin öz üsulu ilə).
+      </div>
+      <div class="config-actions">
+        <button class="ghost" id="resetBtn">Sıfırla</button>
+        <button class="primary" id="buildBtn">Pivot cədvəl qur</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="result-section" style="display:none;">
+    <div class="step-label">03 — NƏTİCƏ</div>
+    <div class="card result-card">
+      <div class="result-head">
+        <h2 class="section-title" style="margin:0;">Pivot Cədvəl</h2>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <span class="result-meta" id="resultMeta"></span>
+          <button class="ghost" id="exportBtn">CSV kimi yüklə</button>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="pivot" id="pivotTable"></table>
+      </div>
+    </div>
+  </section>
+
+  <section id="waiting-section">
+    <div class="card">
+      <div class="empty-state" id="emptyState">
+        <div class="icon">▦</div>
+        Fayl yükləyəndən sonra pivot cədvəl burada görünəcək.
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">Bütün emal lokal olaraq brauzerdə aparılır — heç bir məlumat serverə göndərilmir.</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  let rawData = [];      // array of row objects
+  let columns = [];      // array of column names
+  let workbook = null;
+
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+  const fileInfo = document.getElementById('fileInfo');
+  const fileNameEl = document.getElementById('fileName');
+  const rowCountInfo = document.getElementById('rowCountInfo');
+  const sheetPickerWrap = document.getElementById('sheetPickerWrap');
+  const sheetSelect = document.getElementById('sheetSelect');
+  const configSection = document.getElementById('config-section');
+  const resultSection = document.getElementById('result-section');
+  const waitingSection = document.getElementById('waiting-section');
+  const fieldTableBody = document.getElementById('fieldTableBody');
+  const buildBtn = document.getElementById('buildBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const exportBtn = document.getElementById('exportBtn');
+  const pivotTable = document.getElementById('pivotTable');
+  const resultMeta = document.getElementById('resultMeta');
+  const loadSampleBtn = document.getElementById('loadSample');
+
+  let lastPivotCSV = "";
+
+  const AGG_LABELS = { sum: 'Cəm', count: 'Say', avg: 'Orta', min: 'Min', max: 'Maks' };
+
+  // ---------- file handling ----------
+
+  ['dragover','dragenter'].forEach(evt => {
+    dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.add('drag'); });
+  });
+  ['dragleave','drop'].forEach(evt => {
+    dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.remove('drag'); });
+  });
+  dropZone.addEventListener('drop', e => {
+    const f = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f) handleFile(f);
+  });
+  fileInput.addEventListener('change', e => {
+    const f = e.target.files && e.target.files[0];
+    if (f) handleFile(f);
+  });
+
+  function handleFile(file) {
+    fileNameEl.textContent = file.name;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const data = new Uint8Array(e.target.result);
+        workbook = XLSX.read(data, { type: 'array', cellDates: true });
+        if (workbook.SheetNames.length > 1) {
+          sheetPickerWrap.style.display = 'inline';
+          sheetSelect.innerHTML = workbook.SheetNames.map(n => `<option value="${escapeHtml(n)}">${escapeHtml(n)}</option>`).join('');
+        } else {
+          sheetPickerWrap.style.display = 'none';
+        }
+        loadSheet(workbook.SheetNames[0]);
+        fileInfo.style.display = 'flex';
+      } catch (err) {
+        alert('Fayl oxunmadı. Zəhmət olmasa .xlsx, .xls və ya .csv formatında fayl seçin.');
+        console.error(err);
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  sheetSelect.addEventListener('change', () => loadSheet(sheetSelect.value));
+
+  function loadSheet(sheetName) {
+    const ws = workbook.Sheets[sheetName];
+    const json = XLSX.utils.sheet_to_json(ws, { defval: '' });
+    if (!json.length) {
+      alert('Bu vərəqdə məlumat tapılmadı.');
+      return;
+    }
+    rawData = json;
+    columns = Object.keys(json[0]);
+    rowCountInfo.textContent = `${json.length} sətir, ${columns.length} sütun`;
+    buildFieldTable();
+    configSection.style.display = 'block';
+    resultSection.style.display = 'none';
+    waitingSection.style.display = 'block';
+  }
+
+  loadSampleBtn.addEventListener('click', () => {
+    rawData = SAMPLE_DATA;
+    columns = Object.keys(SAMPLE_DATA[0]);
+    fileNameEl.textContent = 'nümunə-satışlar.csv (daxili nümunə)';
+    rowCountInfo.textContent = `${rawData.length} sətir, ${columns.length} sütun`;
+    sheetPickerWrap.style.display = 'none';
+    fileInfo.style.display = 'flex';
+    buildFieldTable();
+    configSection.style.display = 'block';
+    resultSection.style.display = 'none';
+    waitingSection.style.display = 'block';
+  });
+
+  const SAMPLE_DATA = [
+    { Bölgə: 'Bakı', Şəhər: 'Bakı', Məhsul: 'Noutbuk', Ay: 'Yanvar', Satış: 4200, Ədəd: 3 },
+    { Bölgə: 'Bakı', Şəhər: 'Bakı', Məhsul: 'Telefon', Ay: 'Yanvar', Satış: 2100, Ədəd: 5 },
+    { Bölgə: 'Bakı', Şəhər: 'Sumqayıt', Məhsul: 'Noutbuk', Ay: 'Yanvar', Satış: 1400, Ədəd: 1 },
+    { Bölgə: 'Gəncə', Şəhər: 'Gəncə', Məhsul: 'Telefon', Ay: 'Yanvar', Satış: 3300, Ədəd: 7 },
+    { Bölgə: 'Gəncə', Şəhər: 'Gəncə', Məhsul: 'Noutbuk', Ay: 'Fevral', Satış: 2800, Ədəd: 2 },
+    { Bölgə: 'Bakı', Şəhər: 'Bakı', Məhsul: 'Noutbuk', Ay: 'Fevral', Satış: 5100, Ədəd: 4 },
+    { Bölgə: 'Bakı', Şəhər: 'Bakı', Məhsul: 'Telefon', Ay: 'Fevral', Satış: 1800, Ədəd: 3 },
+    { Bölgə: 'Bakı', Şəhər: 'Sumqayıt', Məhsul: 'Telefon', Ay: 'Fevral', Satış: 900, Ədəd: 2 },
+    { Bölgə: 'Gəncə', Şəhər: 'Gəncə', Məhsul: 'Noutbuk', Ay: 'Mart', Satış: 3600, Ədəd: 3 },
+    { Bölgə: 'Gəncə', Şəhər: 'Gəncə', Məhsul: 'Telefon', Ay: 'Mart', Satış: 2200, Ədəd: 4 },
+    { Bölgə: 'Bakı', Şəhər: 'Bakı', Məhsul: 'Noutbuk', Ay: 'Mart', Satış: 4700, Ədəd: 3 },
+    { Bölgə: 'Bakı', Şəhər: 'Sumqayıt', Məhsul: 'Noutbuk', Ay: 'Mart', Satış: 1600, Ədəd: 1 }
+  ];
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  }
+
+  // ---------- config table ----------
+
+  function buildFieldTable() {
+    fieldTableBody.innerHTML = columns.map((col, idx) => {
+      const sampleVal = rawData[0] ? String(rawData[0][col]) : '';
+      const isNumeric = rawData.some(r => r[col] !== '' && !isNaN(parseFloat(r[col])));
+      return `
+        <tr data-field="${escapeHtml(col)}">
+          <td class="field-name">${escapeHtml(col)}<span class="sample">məs: ${escapeHtml(sampleVal).slice(0,28)}</span></td>
+          <td>
+            <select class="role-select" data-idx="${idx}">
+              <option value="none">— seçilməyib —</option>
+              <option value="row">Sətir</option>
+              <option value="col">Sütun</option>
+              <option value="value" ${isNumeric ? 'selected' : ''}>${isNumeric ? '' : ''}Dəyər</option>
+            </select>
+          </td>
+          <td class="agg-cell ${isNumeric ? '' : 'hidden-cell'}">
+            <select class="agg-select" data-idx="${idx}">
+              <option value="sum">Cəm</option>
+              <option value="count">Say</option>
+              <option value="avg">Orta</option>
+              <option value="min">Min</option>
+              <option value="max">Maks</option>
+            </select>
+          </td>
+        </tr>`;
+    }).join('');
+
+    // default: first non-numeric column -> row, second non-numeric -> col
+    const rows = fieldTableBody.querySelectorAll('tr');
+    let rowsAssigned = 0, colAssigned = false;
+    rows.forEach(tr => {
+      const roleSel = tr.querySelector('.role-select');
+      const isNumeric = tr.querySelector('.agg-select').closest('td').classList.contains('hidden-cell') === false && roleSel.value === 'value';
+      if (!isNumeric && rowsAssigned < 1) {
+        roleSel.value = 'row'; rowsAssigned++;
+      } else if (!isNumeric && !colAssigned && roleSel.value !== 'row') {
+        roleSel.value = 'col'; colAssigned = true;
+      } else if (!isNumeric && roleSel.value === 'none') {
+        roleSel.value = 'none';
+      }
+    });
+
+    fieldTableBody.querySelectorAll('.role-select').forEach(sel => {
+      sel.addEventListener('change', onRoleChange);
+    });
+  }
+
+  function onRoleChange(e) {
+    const sel = e.target;
+    const tr = sel.closest('tr');
+    const aggCell = tr.querySelector('.agg-cell');
+    if (sel.value === 'value') {
+      aggCell.classList.remove('hidden-cell');
+    } else {
+      aggCell.classList.add('hidden-cell');
+    }
+    if (sel.value === 'col') {
+      // enforce single column field
+      fieldTableBody.querySelectorAll('.role-select').forEach(other => {
+        if (other !== sel && other.value === 'col') other.value = 'none';
+      });
+    }
+  }
+
+  resetBtn.addEventListener('click', () => {
+    buildFieldTable();
+    resultSection.style.display = 'none';
+    waitingSection.style.display = 'block';
+  });
+
+  // ---------- pivot computation ----------
+
+  buildBtn.addEventListener('click', () => {
+    const config = readConfig();
+    if (!config) return;
+    const pivot = computePivot(rawData, config);
+    renderPivot(pivot, config);
+    resultSection.style.display = 'block';
+    waitingSection.style.display = 'none';
+  });
+
+  function readConfig() {
+    const rowFields = [];
+    let colField = null;
+    const valueFields = [];
+    fieldTableBody.querySelectorAll('tr').forEach(tr => {
+      const field = tr.getAttribute('data-field');
+      const role = tr.querySelector('.role-select').value;
+      const agg = tr.querySelector('.agg-select').value;
+      if (role === 'row') rowFields.push(field);
+      else if (role === 'col') colField = field;
+      else if (role === 'value') valueFields.push({ field, agg });
+    });
+    if (rowFields.length === 0) {
+      alert('Ən azı bir sahəni "Sətir" olaraq seçin.');
+      return null;
+    }
+    if (valueFields.length === 0) {
+      valueFields.push({ field: null, agg: 'count' });
+    }
+    return { rowFields, colField, valueFields };
+  }
+
+  function aggregate(values, agg) {
+    if (agg === 'count') return values.length;
+    const nums = values.map(Number).filter(n => !isNaN(n));
+    if (agg === 'sum') return nums.reduce((a,b) => a+b, 0);
+    if (agg === 'avg') return nums.length ? nums.reduce((a,b) => a+b, 0) / nums.length : 0;
+    if (agg === 'min') return nums.length ? Math.min(...nums) : 0;
+    if (agg === 'max') return nums.length ? Math.max(...nums) : 0;
+    return 0;
+  }
+
+  function fmtNum(n) {
+    if (n === null || n === undefined || isNaN(n)) return '';
+    const rounded = Math.round(n * 100) / 100;
+    return rounded.toLocaleString('az-AZ');
+  }
+
+  function computePivot(data, config) {
+    const { rowFields, colField, valueFields } = config;
+
+    const rowKeySet = new Set();
+    const rowKeyList = [];
+    const recordsByRowKey = new Map();
+    const recordsByColVal = new Map();
+    const buckets = new Map();
+
+    const colValSet = new Set();
+
+    data.forEach(rec => {
+      const rowKeyArr = rowFields.map(f => String(rec[f] ?? '(boş)'));
+      const rowKeyStr = rowKeyArr.join('\u0001');
+      const cv = colField ? String(rec[colField] ?? '(boş)') : '__ALL__';
+
+      if (!rowKeySet.has(rowKeyStr)) {
+        rowKeySet.add(rowKeyStr);
+        rowKeyList.push(rowKeyArr);
+      }
+      if (colField) colValSet.add(cv);
+
+      if (!recordsByRowKey.has(rowKeyStr)) recordsByRowKey.set(rowKeyStr, []);
+      recordsByRowKey.get(rowKeyStr).push(rec);
+
+      if (!recordsByColVal.has(cv)) recordsByColVal.set(cv, []);
+      recordsByColVal.get(cv).push(rec);
+
+      const bKey = rowKeyStr + '\u0002' + cv;
+      if (!buckets.has(bKey)) buckets.set(bKey, []);
+      buckets.get(bKey).push(rec);
+    });
+
+    // sort rows
+    rowKeyList.sort((a, b) => {
+      for (let i = 0; i < a.length; i++) {
+        const cmp = collator.compare(a[i], b[i]);
+        if (cmp !== 0) return cmp;
+      }
+      return 0;
+    });
+
+    const colVals = colField ? Array.from(colValSet).sort((a,b) => collator.compare(a,b)) : ['__ALL__'];
+
+    // compute row spans for merged headers
+    const spans = rowFields.map(() => new Array(rowKeyList.length).fill(1));
+    for (let level = 0; level < rowFields.length; level++) {
+      let i = 0;
+      while (i < rowKeyList.length) {
+        let j = i + 1;
+        while (j < rowKeyList.length && sameUpTo(rowKeyList[i], rowKeyList[j], level)) j++;
+        spans[level][i] = j - i;
+        for (let k = i + 1; k < j; k++) spans[level][k] = 0;
+        i = j;
+      }
+    }
+
+    function sameUpTo(a, b, level) {
+      for (let l = 0; l <= level; l++) if (a[l] !== b[l]) return false;
+      return true;
+    }
+
+    // cell values
+    const cellData = rowKeyList.map(rowKeyArr => {
+      const rowKeyStr = rowKeyArr.join('\u0001');
+      const perCol = colVals.map(cv => {
+        const bKey = rowKeyStr + '\u0002' + cv;
+        const records = buckets.get(bKey) || [];
+        return valueFields.map(vf => aggregate(records.map(r => r[vf.field]), vf.agg));
+      });
+      const rowTotal = valueFields.map(vf => {
+        const records = recordsByRowKey.get(rowKeyStr) || [];
+        return aggregate(records.map(r => r[vf.field]), vf.agg);
+      });
+      return { rowKeyArr, perCol, rowTotal };
+    });
+
+    const colTotals = colVals.map(cv => {
+      const records = recordsByColVal.get(cv) || [];
+      return valueFields.map(vf => aggregate(records.map(r => r[vf.field]), vf.agg));
+    });
+
+    const grandTotal = valueFields.map(vf => aggregate(data.map(r => r[vf.field]), vf.agg));
+
+    return { rowFields, colField, valueFields, colVals, rowKeyList, spans, cellData, colTotals, grandTotal, rowCount: data.length };
+  }
+
+  const collator = new Intl.Collator('az', { numeric: true, sensitivity: 'base' });
+
+  // ---------- rendering ----------
+
+  function renderPivot(pivot, config) {
+    const { rowFields, colField, valueFields, colVals, cellData, spans, colTotals, grandTotal } = pivot;
+    const multiVal = valueFields.length > 1;
+    const showColHeader = !!colField;
+
+    let thead = '<thead>';
+
+    // header row 1: rowFields blanks + colVal groups + total
+    thead += '<tr>';
+    rowFields.forEach(f => { thead += `<th>${escapeHtml(f)}</th>`; });
+    if (showColHeader) {
+      colVals.forEach(cv => {
+        thead += `<th colspan="${valueFields.length}">${escapeHtml(cv)}</th>`;
+      });
+      thead += `<th colspan="${valueFields.length}" class="total-col">Ümumi</th>`;
+    } else {
+      valueFields.forEach(() => {}); // handled in row2
+      thead += `<th colspan="${valueFields.length}">Dəyər</th>`;
+    }
+    thead += '</tr>';
+
+    // header row 2: value field labels
+    thead += '<tr>';
+    rowFields.forEach(() => { thead += `<th></th>`; });
+    if (showColHeader) {
+      colVals.forEach(() => {
+        valueFields.forEach(vf => {
+          thead += `<th>${AGG_LABELS[vf.agg]}(${escapeHtml(vf.field || 'qeyd')})</th>`;
+        });
+      });
+      valueFields.forEach(vf => {
+        thead += `<th class="total-col">${AGG_LABELS[vf.agg]}(${escapeHtml(vf.field || 'qeyd')})</th>`;
+      });
+    } else {
+      valueFields.forEach(vf => {
+        thead += `<th>${AGG_LABELS[vf.agg]}(${escapeHtml(vf.field || 'qeyd')})</th>`;
+      });
+    }
+    thead += '</tr></thead>';
+
+    let tbody = '<tbody>';
+    cellData.forEach((row, rIdx) => {
+      tbody += '<tr>';
+      rowFields.forEach((f, level) => {
+        const span = spans[level][rIdx];
+        if (span === 0) return;
+        tbody += `<td class="rowhead" rowspan="${span}">${escapeHtml(row.rowKeyArr[level])}</td>`;
+      });
+      row.perCol.forEach(vals => {
+        vals.forEach(v => { tbody += `<td class="num">${fmtNum(v)}</td>`; });
+      });
+      row.rowTotal.forEach(v => { tbody += `<td class="num total-col">${fmtNum(v)}</td>`; });
+      tbody += '</tr>';
+    });
+    tbody += '</tbody>';
+
+    let tfoot = '<tfoot><tr class="total-row">';
+    tfoot += `<th colspan="${rowFields.length}">Ümumi</th>`;
+    colTotals.forEach(vals => {
+      vals.forEach(v => { tfoot += `<td class="num">${fmtNum(v)}</td>`; });
+    });
+    grandTotal.forEach(v => { tfoot += `<td class="num total-col">${fmtNum(v)}</td>`; });
+    tfoot += '</tr></tfoot>';
+
+    pivotTable.innerHTML = thead + tbody + tfoot;
+    resultMeta.textContent = `${pivot.rowCount} qeyddən hesablandı · ${pivot.rowKeyList.length} sətir`;
+
+    lastPivotCSV = buildCSV(pivot);
+  }
+
+  function buildCSV(pivot) {
+    const { rowFields, colField, valueFields, colVals, cellData, colTotals, grandTotal } = pivot;
+    const showColHeader = !!colField;
+    const rows = [];
+
+    const header1 = [...rowFields.map(() => '')];
+    const header2 = [...rowFields.map((f) => f)];
+    if (showColHeader) {
+      colVals.forEach(cv => {
+        valueFields.forEach((vf, i) => {
+          header1.push(i === 0 ? cv : '');
+          header2.push(`${AGG_LABELS[vf.agg]}(${vf.field || 'qeyd'})`);
+        });
+      });
+      valueFields.forEach((vf, i) => {
+        header1.push(i === 0 ? 'Ümumi' : '');
+        header2.push(`${AGG_LABELS[vf.agg]}(${vf.field || 'qeyd'})`);
+      });
+    } else {
+      valueFields.forEach(vf => {
+        header1.push('Dəyər');
+        header2.push(`${AGG_LABELS[vf.agg]}(${vf.field || 'qeyd'})`);
+      });
+    }
+    rows.push(header1);
+    rows.push(header2);
+
+    cellData.forEach(row => {
+      const line = [...row.rowKeyArr];
+      row.perCol.forEach(vals => vals.forEach(v => line.push(v)));
+      row.rowTotal.forEach(v => line.push(v));
+      rows.push(line);
+    });
+
+    const totalLine = ['Ümumi', ...rowFields.slice(1).map(() => '')];
+    colTotals.forEach(vals => vals.forEach(v => totalLine.push(v)));
+    grandTotal.forEach(v => totalLine.push(v));
+    rows.push(totalLine);
+
+    return rows.map(r => r.map(csvEscape).join(',')).join('\r\n');
+  }
+
+  function csvEscape(v) {
+    const s = String(v ?? '');
+    if (/[",\r\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
+
+  exportBtn.addEventListener('click', async () => {
+    if (!lastPivotCSV) return;
+    const blob = new Blob(["\uFEFF" + lastPivotCSV], { type: 'text/csv;charset=utf-8;' });
+    let saved = false;
+    try {
+      const downloads = await claude.use('downloads');
+      if (downloads) {
+        const buf = await blob.arrayBuffer();
+        await downloads.save({ filename: 'pivot-cedvel.csv', data: buf });
+        saved = true;
+      }
+    } catch (e) { /* fall through to manual link */ }
+    if (!saved) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'pivot-cedvel.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  });
+
+})();
+</script>
+</body>
+</html>
