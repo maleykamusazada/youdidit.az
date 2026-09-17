@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GRE — 50-Question Practice Test | Youdidit.az</title>
+
+<meta name="description" content="GRE 50-Question Practice Test — Verbal Reasoning and Quantitative Reasoning. Practice test by Youdidit.az.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#070711;
+    --card:#11111d;
+    --purple:#7651ff;
+    --purple2:#a454ff;
+    --text:#f7f7fb;
+    --muted:#a7a7ba;
+    --border:rgba(255,255,255,.09);
+    --green:#45d483;
+    --red:#ff5d73;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 10% 5%,rgba(118,81,255,.18),transparent 28%),
+        radial-gradient(circle at 90% 10%,rgba(164,84,255,.15),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    font-family:Inter,Arial,sans-serif;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(7,7,17,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav{
+    max-width:1150px;
+    margin:auto;
+    padding:17px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:#fff;
+    text-decoration:none;
+    font-family:Sora,sans-serif;
+    font-size:21px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#9b7cff;
+}
+
+.back{
+    color:var(--muted);
+    text-decoration:none;
+    font-size:14px;
+}
+
+.back:hover{
+    color:#fff;
+}
+
+.hero{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+    padding:55px 20px 30px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:999px;
+    border:1px solid rgba(118,81,255,.4);
+    background:rgba(118,81,255,.1);
+    color:#c9bdff;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.08em;
+    margin-bottom:18px;
+}
+
+h1{
+    margin:0 0 16px;
+    font-family:Sora,sans-serif;
+    font-size:clamp(30px,5vw,52px);
+    line-height:1.1;
+}
+
+.hero p{
+    max-width:720px;
+    margin:auto;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.quiz-wrap{
+    max-width:800px;
+    margin:20px auto 70px;
+    padding:0 18px;
+}
+
+.timer{
+    position:sticky;
+    top:74px;
+    z-index:50;
+    margin-bottom:18px;
+    padding:13px 18px;
+    border-radius:15px;
+    text-align:center;
+    background:rgba(17,17,29,.96);
+    border:1px solid var(--border);
+    color:#cfc4ff;
+    font-weight:800;
+}
+
+.timer.warning{
+    color:#ffcc66;
+    border-color:rgba(255,204,102,.35);
+}
+
+.timer.danger{
+    color:#ff6479;
+    border-color:rgba(255,93,115,.4);
+}
+
+#quiz{
+    background:rgba(17,17,29,.92);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:28px;
+    box-shadow:0 25px 80px rgba(0,0,0,.28);
+}
+
+.section-title{
+    margin:10px 0 26px;
+    padding:15px 17px;
+    border-left:3px solid var(--purple);
+    border-radius:11px;
+    background:rgba(118,81,255,.09);
+    font-family:Sora,sans-serif;
+    font-size:18px;
+}
+
+.question{
+    margin-bottom:36px;
+}
+
+.question-number{
+    color:#a98cff;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin-bottom:9px;
+}
+
+.question-text{
+    font-size:16px;
+    line-height:1.7;
+    font-weight:600;
+    white-space:pre-line;
+    margin-bottom:15px;
+}
+
+.options{
+    display:grid;
+    gap:9px;
+}
+
+.option{
+    display:flex;
+    align-items:flex-start;
+    gap:11px;
+    padding:14px 15px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:rgba(255,255,255,.025);
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.option:hover{
+    background:rgba(118,81,255,.08);
+    border-color:rgba(118,81,255,.5);
+}
+
+.option.selected{
+    background:rgba(118,81,255,.13);
+    border-color:rgba(118,81,255,.7);
+}
+
+.option input{
+    margin-top:4px;
+    accent-color:var(--purple);
+    cursor:pointer;
+}
+
+.option-text{
+    color:#ededf5;
+    line-height:1.55;
+}
+
+.submit-btn{
+    width:100%;
+    border:0;
+    border-radius:15px;
+    padding:17px 20px;
+    margin-top:18px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--purple),var(--purple2));
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.submit-btn:hover{
+    filter:brightness(1.08);
+    transform:translateY(-1px);
+}
+
+.submit-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+}
+
+#result{
+    display:none;
+    margin-top:22px;
+    padding:25px;
+    border-radius:18px;
+    background:rgba(118,81,255,.09);
+    border:1px solid rgba(118,81,255,.3);
+    line-height:1.7;
+}
+
+.result-score{
+    font-family:Sora,sans-serif;
+    font-size:32px;
+    font-weight:800;
+}
+
+.result-percent{
+    color:#cfc4ff;
+    margin-top:5px;
+}
+
+.review{
+    margin-top:25px;
+}
+
+.review h3{
+    font-family:Sora,sans-serif;
+}
+
+.review-item{
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:12px;
+    background:rgba(255,255,255,.025);
+    border:1px solid var(--border);
+}
+
+.review-item.correct{
+    border-color:rgba(69,212,131,.3);
+}
+
+.review-item.incorrect{
+    border-color:rgba(255,93,115,.3);
+}
+
+.review-title{
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.correct-text{
+    color:var(--green);
+}
+
+.incorrect-text{
+    color:var(--red);
+}
+
+footer{
+    text-align:center;
+    color:#77778c;
+    padding:30px 20px 45px;
+    font-size:13px;
+}
+
+@media(max-width:600px){
+
+    .nav{
+        padding:15px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .back{
+        font-size:12px;
+    }
+
+    .hero{
+        padding:38px 18px 25px;
+    }
+
+    #quiz{
+        padding:18px;
+        border-radius:18px;
+    }
+
+    .question-text{
+        font-size:15px;
+    }
+
+    .option{
+        padding:12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="nav">
+
+        <a class="logo" href="index.html">
+            youdidit<span>.az</span>
+        </a>
+
+        <a class="back" href="international-exams.html">
+            ← International Exams
+        </a>
+
+    </div>
+</header>
+
+
+<section class="hero">
+
+    <div class="badge">
+        GRE PRACTICE TEST
+    </div>
+
+    <h1>GRE — 50-Question Practice Test</h1>
+
+    <p>
+        Verbal Reasoning and Quantitative Reasoning practice test.
+        Designed for GRE preparation and practice purposes.
+    </p>
+
+</section>
+
+
+<main class="quiz-wrap">
+
+    <div class="timer" id="timer">
+        Time remaining: 60:00
+    </div>
+
+    <div id="quiz"></div>
+
+    <button
+        type="button"
+        class="submit-btn"
+        id="submitBtn"
+        onclick="submitQuiz()"
+    >
+        Submit Test
+    </button>
+
+    <div id="result"></div>
+
+</main>
+
+
+<footer>
+    Youdidit.az — Təhsil • İmtahan • Karyera • İnkişaf
+</footer>
+
+
+<script>
+
+const QUIZ_META = {
+    title: "GRE — 50-Question Practice Test"
+};
+
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
+
+const QUESTIONS = [
+
+/* =========================
+   VERBAL REASONING
+   1–25
+========================= */
+
+{
+q:`Although the researcher was initially ___ by the unexpected results, she eventually recognized that they provided valuable evidence against her original hypothesis.`,
+options:[
+`reassured`,
+`perplexed`,
+`encouraged`,
+`indifferent`,
+`gratified`
+],
+a:1
+},
+
+{
+q:`The author does not reject the conventional interpretation entirely; rather, she argues that it is ___ and therefore cannot account for several important observations.`,
+options:[
+`redundant`,
+`exhaustive`,
+`incomplete`,
+`impartial`,
+`definitive`
+],
+a:2
+},
+
+{
+q:`The committee’s decision was hardly ___: members had spent several months examining the proposal and considering its potential consequences.`,
+options:[
+`arbitrary`,
+`deliberate`,
+`cautious`,
+`systematic`,
+`predictable`
+],
+a:0
+},
+
+{
+q:`Far from being ___, the scientist’s explanation was remarkably accessible, even to readers with little technical knowledge.`,
+options:[
+`concise`,
+`rigorous`,
+`opaque`,
+`tentative`,
+`coherent`
+],
+a:2
+},
+
+{
+q:`The historian’s account is valuable precisely because it is not entirely ___; she acknowledges contradictory evidence rather than attempting to construct an artificially consistent narrative.`,
+options:[
+`nuanced`,
+`selective`,
+`comprehensive`,
+`dogmatic`,
+`chronological`
+],
+a:3
+},
+
+{
+q:`Urban planners often assume that increasing the number of public parks will necessarily improve residents’ quality of life. Yet studies suggest that the effect depends not merely on the amount of green space but also on its accessibility, maintenance, and integration into surrounding neighborhoods.
+
+Which statement is best supported by the passage?`,
+options:[
+`Public parks generally have little effect on quality of life.`,
+`The benefits of public parks depend on factors beyond their total quantity.`,
+`Urban neighborhoods with fewer parks are necessarily less healthy.`,
+`Maintaining parks is more important than increasing their number.`,
+`Most urban-planning studies underestimate the value of green space.`
+],
+a:1
+},
+
+{
+q:`The manager’s criticism was not intended to be ___; despite its severity, it was directed at improving the proposal rather than disparaging its author.`,
+options:[
+`constructive`,
+`substantive`,
+`personal`,
+`precise`,
+`impartial`
+],
+a:2
+},
+
+{
+q:`The discovery initially appeared to ___ the prevailing theory, but subsequent experiments revealed that the apparent contradiction resulted from an error in measurement.`,
+options:[
+`corroborate`,
+`undermine`,
+`formulate`,
+`replicate`,
+`refine`
+],
+a:1
+},
+
+{
+q:`The politician’s speech was so ___ that listeners could interpret it as supporting either side of the controversial issue; its very ___ made it difficult to determine her actual position.`,
+options:[
+`emphatic — certainty`,
+`equivocal — ambiguity`,
+`provocative — originality`,
+`conciliatory — neutrality`,
+`elaborate — precision`
+],
+a:1
+},
+
+{
+q:`The museum’s decision to display the controversial painting was criticized as provocative, but the director maintained that the institution’s role was not to ___ difficult questions but to encourage visitors to confront them.`,
+options:[
+`evade`,
+`amplify`,
+`substantiate`,
+`institutionalize`,
+`reconcile`
+],
+a:0
+},
+
+{
+q:`A researcher observes that students who regularly participate in classroom discussions tend to receive higher examination scores than students who rarely participate. She concludes that classroom participation improves examination performance.
+
+Which of the following, if true, would most weaken the researcher’s conclusion?`,
+options:[
+`Some students participate frequently but receive average examination scores.`,
+`Students who participate frequently tend to have studied the subject before taking the course.`,
+`Examination scores vary considerably between different courses.`,
+`Some students prefer written assignments to classroom discussions.`,
+`Students who participate frequently report enjoying their courses more.`
+],
+a:1
+},
+
+{
+q:`A company introduced a four-day workweek. After six months, employee productivity increased by 8 percent. The company therefore concluded that the shorter workweek caused the increase.
+
+Which additional information would most seriously challenge this conclusion?`,
+options:[
+`Employees reported greater satisfaction with their schedules.`,
+`Several employees worked longer hours on the days they were in the office.`,
+`The company hired additional employees during the six-month period.`,
+`Productivity had increased substantially in similar companies using five-day schedules.`,
+`Some employees preferred the previous schedule.`
+],
+a:3
+},
+
+{
+q:`The critic praised the novel’s prose as ___, noting that the author’s economical style conveyed complex emotions without unnecessary description.`,
+options:[
+`florid`,
+`austere`,
+`derivative`,
+`digressive`,
+`ornamental`
+],
+a:1
+},
+
+{
+q:`The scientist’s claim initially seemed ___ because it contradicted several established findings; however, later evidence demonstrated that those findings had been based on an overly narrow sample.`,
+options:[
+`untenable`,
+`plausible`,
+`orthodox`,
+`derivative`,
+`redundant`
+],
+a:0
+},
+
+{
+q:`Some economists argue that technological innovation inevitably reduces employment because machines replace human labor. Others point out that technological change can create new industries and occupations. Historical evidence suggests that both processes can occur simultaneously, although their relative importance varies across periods and sectors.
+
+Which claim would the author most likely endorse?`,
+options:[
+`Technological innovation always increases employment in the long term.`,
+`Technological innovation has historically had a uniform effect on employment.`,
+`The employment effects of technological innovation cannot be reduced to a single general pattern.`,
+`Machines have generally replaced more workers than new industries have employed.`,
+`Economic historians have failed to establish any relationship between technology and employment.`
+],
+a:2
+},
+
+{
+q:`The professor’s response was deliberately ___: rather than accepting or rejecting the student’s interpretation, she identified several assumptions on which it depended.`,
+options:[
+`categorical`,
+`equivocal`,
+`dismissive`,
+`conciliatory`,
+`prescriptive`
+],
+a:1
+},
+
+{
+q:`The architect’s design was initially dismissed as impractical, but its apparent ___ became an advantage when the building had to accommodate several unexpected uses.`,
+options:[
+`rigidity`,
+`versatility`,
+`austerity`,
+`symmetry`,
+`fragility`
+],
+a:1
+},
+
+{
+q:`The report was criticized for being both ___ and ___: it contained numerous statistics, yet provided little explanation of what those statistics actually demonstrated.`,
+options:[
+`concise — illuminating`,
+`detailed — superficial`,
+`speculative — rigorous`,
+`balanced — selective`,
+`tentative — conclusive`
+],
+a:1
+},
+
+{
+q:`A university claims that introducing additional online courses will increase enrollment because students will have greater flexibility.
+
+Which finding would most strengthen the claim?`,
+options:[
+`Students enrolled in online courses tend to be older than students in traditional courses.`,
+`Several online courses have recently received positive evaluations.`,
+`A survey finds that many prospective students who did not enroll cited inflexible class schedules as a major reason.`,
+`Online courses require fewer classrooms than traditional courses.`,
+`Some faculty members prefer teaching online.`
+],
+a:2
+},
+
+{
+q:`The author’s treatment of the issue is unusually ___; instead of presenting a single explanation, she considers several competing interpretations and identifies the evidence supporting each.`,
+options:[
+`dogmatic`,
+`polemical`,
+`comprehensive`,
+`reductive`,
+`speculative`
+],
+a:2
+},
+
+{
+q:`In the sentence below, mitigate most nearly means:
+
+The new regulations were introduced to mitigate the environmental damage caused by industrial activity.`,
+options:[
+`measure`,
+`intensify`,
+`reduce`,
+`conceal`,
+`relocate`
+],
+a:2
+},
+
+{
+q:`The entrepreneur’s optimism was not ___: she had examined the financial data carefully and had identified several independent reasons for expecting the project to succeed.`,
+options:[
+`gratuitous`,
+`calculated`,
+`unfounded`,
+`premature`,
+`restrained`
+],
+a:2
+},
+
+{
+q:`A species may survive environmental change not because every individual can adapt, but because populations contain enough variation that some individuals possess traits suited to the new conditions. Those individuals may then reproduce more successfully than others.
+
+The passage primarily emphasizes:`,
+options:[
+`the inability of individual organisms to respond to environmental change`,
+`the role of population-level variation in evolutionary adaptation`,
+`the importance of environmental stability for reproduction`,
+`the tendency of all individuals in a population to adapt equally`,
+`the superiority of inherited traits over acquired characteristics`
+],
+a:1
+},
+
+{
+q:`The board’s decision to postpone the merger was ___ rather than definitive; members stated that they would reconsider the proposal once additional financial information became available.`,
+options:[
+`irrevocable`,
+`provisional`,
+`unanimous`,
+`retrospective`,
+`ceremonial`
+],
+a:1
+},
+
+{
+q:`A study finds that people who consume more coffee report higher levels of concentration. The researchers conclude that coffee improves concentration.
+
+Which fact would provide the strongest alternative explanation?`,
+options:[
+`Some participants drank coffee only in the morning.`,
+`Coffee consumption varied considerably among participants.`,
+`People with demanding jobs were both more likely to drink coffee and more likely to report concentrating intensely.`,
+`Participants were asked to estimate their own concentration levels.`,
+`Some participants preferred tea to coffee.`
+],
+a:2
+},
+
+
+/* =========================
+   QUANTITATIVE REASONING
+   26–50
+========================= */
+
+{
+q:`If x > 0 and
+
+x/3 + x/4 = 14,
+
+what is the value of x?`,
+options:[
+`18`,
+`21`,
+`24`,
+`28`,
+`32`
+],
+a:2
+},
+
+{
+q:`A quantity is increased by 20% and then decreased by 20%. Compared with the original quantity, the resulting quantity is:`,
+options:[
+`4% greater`,
+`4% smaller`,
+`unchanged`,
+`8% smaller`,
+`8% greater`
+],
+a:1
+},
+
+{
+q:`If
+
+2^(x+1) = 32,
+
+then x =`,
+options:[
+`3`,
+`4`,
+`5`,
+`6`,
+`7`
+],
+a:1
+},
+
+{
+q:`The average of five consecutive integers is 42. What is the largest of the five integers?`,
+options:[
+`43`,
+`44`,
+`45`,
+`46`,
+`47`
+],
+a:1
+},
+
+{
+q:`A rectangle has area 96 square units, and its length is 4 units greater than its width. What is its perimeter?`,
+options:[
+`32`,
+`36`,
+`40`,
+`44`,
+`48`
+],
+a:2
+},
+
+{
+q:`If a:b = 3:5 and b:c = 10:7, then a:c =`,
+options:[
+`3:7`,
+`6:7`,
+`5:7`,
+`7:6`,
+`10:21`
+],
+a:1
+},
+
+{
+q:`A car travels the first half of a journey at 60 km/h and the second half at 40 km/h. What is the car’s average speed for the entire journey?`,
+options:[
+`46 km/h`,
+`48 km/h`,
+`50 km/h`,
+`52 km/h`,
+`54 km/h`
+],
+a:1
+},
+
+{
+q:`If
+
+x² − 5x + 6 = 0,
+
+what is the sum of the reciprocals of the two roots?`,
+options:[
+`1/6`,
+`5/6`,
+`6/5`,
+`5/2`,
+`2`
+],
+a:1
+},
+
+{
+q:`A bag contains 4 red, 5 blue, and 3 green balls. If one ball is selected at random, what is the probability that it is not blue?`,
+options:[
+`5/12`,
+`7/12`,
+`1/2`,
+`3/7`,
+`2/3`
+],
+a:1
+},
+
+{
+q:`For positive x, if
+
+x + 1/x = 5,
+
+what is
+
+x² + 1/x²?`,
+options:[
+`21`,
+`23`,
+`25`,
+`27`,
+`29`
+],
+a:1
+},
+
+{
+q:`A store marks an item up by 25% and then offers a 20% discount on the marked price. The final price is what percentage of the original price?`,
+options:[
+`90%`,
+`95%`,
+`100%`,
+`105%`,
+`110%`
+],
+a:2
+},
+
+{
+q:`The sequence is defined by
+
+a₁ = 3,
+aₙ₊₁ = 2aₙ − 1.
+
+What is a₄?`,
+options:[
+`13`,
+`15`,
+`17`,
+`19`,
+`21`
+],
+a:2
+},
+
+{
+q:`If x and y are positive integers and xy = 36, which of the following could NOT be the value of x + y?`,
+options:[
+`9`,
+`10`,
+`12`,
+`13`,
+`20`
+],
+a:0
+},
+
+{
+q:`A circle has circumference 12π. What is its area?`,
+options:[
+`12π`,
+`18π`,
+`24π`,
+`30π`,
+`36π`
+],
+a:4
+},
+
+{
+q:`If
+
+3x − 2y = 7
+
+and
+
+x + y = 8,
+
+what is x?`,
+options:[
+`19/5`,
+`21/5`,
+`23/5`,
+`5`,
+`27/5`
+],
+a:2
+},
+
+{
+q:`A population increases from 8,000 to 10,000. What is the percentage increase?`,
+options:[
+`20%`,
+`22.5%`,
+`24%`,
+`25%`,
+`28%`
+],
+a:3
+},
+
+{
+q:`If n is an integer and
+
+|n − 4| < 3,
+
+how many possible values can n have?`,
+options:[
+`4`,
+`5`,
+`6`,
+`7`,
+`8`
+],
+a:1
+},
+
+{
+q:`A right triangle has legs of lengths 9 and 12. What is the radius of its inscribed circle?`,
+options:[
+`2`,
+`5/2`,
+`3`,
+`7/2`,
+`4`
+],
+a:2
+},
+
+{
+q:`In a group, the ratio of men to women is 3:4. If 6 men and 2 women join the group, the ratio becomes 3:2. How many women were originally in the group?`,
+options:[
+`3`,
+`4`,
+`6`,
+`8`,
+`12`
+],
+a:1
+},
+
+{
+q:`For x ≠ 3,
+
+(x² − 9)/(x − 3)
+
+is equal to:`,
+options:[
+`x − 3`,
+`x + 3`,
+`x² + 3`,
+`x² − 3`,
+`3x + 3`
+],
+a:1
+},
+
+{
+q:`A class has 30 students whose mean score is 72. If the student who scored 100 is removed, what is the new mean?`,
+options:[
+`2040/29`,
+`2060/29`,
+`2070/29`,
+`2080/29`,
+`2100/29`
+],
+a:1
+},
+
+{
+q:`If x is positive and
+
+√x = 3√2,
+
+then x =`,
+options:[
+`6`,
+`9`,
+`12`,
+`18`,
+`27`
+],
+a:2
+},
+
+{
+q:`A tank can be filled by Pipe A in 6 hours and by Pipe B in 4 hours. If both pipes operate simultaneously, how long will it take to fill the tank?`,
+options:[
+`2 hours`,
+`2 hours 12 minutes`,
+`2 hours 24 minutes`,
+`2 hours 30 minutes`,
+`3 hours`
+],
+a:2
+},
+
+{
+q:`Five numbers are 2, 5, 7, 8, and x. If their mean is 6, what is x?`,
+options:[
+`6`,
+`7`,
+`8`,
+`9`,
+`10`
+],
+a:2
+},
+
+{
+q:`A company has five departments with 12, 18, 20, 25, and x employees, respectively. If the average number of employees per department is 21, what is x?`,
+options:[
+`28`,
+`29`,
+`30`,
+`31`,
+`32`
+],
+a:2
+}
+
+];
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+const TIME_LIMIT = 60 * 60;
+
+let remainingTime = TIME_LIMIT;
+let timerInterval = null;
+let submitted = false;
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderQuiz(){
+
+    const quiz = document.getElementById("quiz");
+
+    let html = "";
+
+    QUESTIONS.forEach((question,index)=>{
+
+        if(index === 0){
+
+            html += `
+                <div class="section-title">
+                    Verbal Reasoning — Questions 1–25
+                </div>
+            `;
+
+        }
+
+        if(index === 25){
+
+            html += `
+                <div class="section-title">
+                    Quantitative Reasoning — Questions 26–50
+                </div>
+            `;
+
+        }
+
+        html += `
+            <div class="question">
+
+                <div class="question-number">
+                    Question ${index + 1}
+                </div>
+
+                <div class="question-text">
+                    ${question.q}
+                </div>
+
+                <div class="options">
+        `;
+
+        question.options.forEach((option,optIndex)=>{
+
+            const letter = String.fromCharCode(65 + optIndex);
+
+            html += `
+                <label
+                    class="option"
+                    id="option-${index}-${optIndex}"
+                >
+
+                    <input
+                        type="radio"
+                        name="question-${index}"
+                        value="${optIndex}"
+                        onchange="selectOption(${index},${optIndex})"
+                    >
+
+                    <span class="option-text">
+                        <strong>${letter})</strong> ${option}
+                    </span>
+
+                </label>
+            `;
+
+        });
+
+        html += `
+                </div>
+            </div>
+        `;
+
+    });
+
+    quiz.innerHTML = html;
+}
+
+
+/* =========================================================
+   SELECT OPTION
+========================================================= */
+
+function selectOption(questionIndex,optionIndex){
+
+    QUESTIONS[questionIndex].options.forEach((_,i)=>{
+
+        const element = document.getElementById(
+            `option-${questionIndex}-${i}`
+        );
+
+        if(element){
+            element.classList.remove("selected");
+        }
+
+    });
+
+    const selected = document.getElementById(
+        `option-${questionIndex}-${optionIndex}`
+    );
+
+    if(selected){
+        selected.classList.add("selected");
+    }
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+function startTimer(){
+
+    updateTimer();
+
+    timerInterval = setInterval(()=>{
+
+        remainingTime--;
+
+        updateTimer();
+
+        if(remainingTime <= 0){
+
+            clearInterval(timerInterval);
+
+            submitQuiz(true);
+
+        }
+
+    },1000);
+}
+
+
+function updateTimer(){
+
+    const timer = document.getElementById("timer");
+
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
+
+    timer.textContent =
+        "Time remaining: " +
+        String(minutes).padStart(2,"0") +
+        ":" +
+        String(seconds).padStart(2,"0");
+
+    timer.classList.remove("warning","danger");
+
+    if(remainingTime <= 300){
+
+        timer.classList.add("danger");
+
+    }else if(remainingTime <= 600){
+
+        timer.classList.add("warning");
+
+    }
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+function submitQuiz(autoSubmit = false){
+
+    if(submitted){
+        return;
+    }
+
+    const unanswered = [];
+
+    QUESTIONS.forEach((question,index)=>{
+
+        const selected = document.querySelector(
+            `input[name="question-${index}"]:checked`
+        );
+
+        if(!selected){
+            unanswered.push(index + 1);
+        }
+
+    });
+
+
+    if(!autoSubmit && unanswered.length > 0){
+
+        const proceed = confirm(
+            "You have " +
+            unanswered.length +
+            " unanswered question(s).\n\n" +
+            "Do you want to submit the test anyway?"
+        );
+
+        if(!proceed){
+            return;
+        }
+
+    }
+
+
+    submitted = true;
+
+    clearInterval(timerInterval);
+
+    document.getElementById("submitBtn").disabled = true;
+
+
+    let score = 0;
+
+    const review = [];
+
+
+    QUESTIONS.forEach((question,index)=>{
+
+        const selected = document.querySelector(
+            `input[name="question-${index}"]:checked`
+        );
+
+        const selectedAnswer = selected
+            ? Number(selected.value)
+            : null;
+
+        const correct =
+            selectedAnswer === question.a;
+
+        if(correct){
+            score++;
+        }
+
+        review.push({
+            number:index + 1,
+            selected:selectedAnswer,
+            correct:question.a,
+            options:question.options
+        });
+
+    });
+
+
+    showResult(score,review,autoSubmit);
+
+    window.scrollTo({
+        top:document.getElementById("result").offsetTop - 100,
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+function showResult(score,review,autoSubmit){
+
+    const result = document.getElementById("result");
+
+    const percentage = Math.round(
+        score / QUESTIONS.length * 100
+    );
+
+
+    let html = `
+
+        <div class="result-score">
+            ${score} / ${QUESTIONS.length}
+        </div>
+
+        <div class="result-percent">
+            Score: ${percentage}%
+        </div>
+
+        <div class="review">
+
+            <h3>Answer Review</h3>
+
+    `;
+
+
+    review.forEach(item=>{
+
+        const correctLetter =
+            String.fromCharCode(65 + item.correct);
+
+
+        if(item.selected === item.correct){
+
+            html += `
+
+                <div class="review-item correct">
+
+                    <div class="review-title">
+                        Question ${item.number}
+                    </div>
+
+                    <div class="correct-text">
+                        ✓ Correct
+                    </div>
+
+                </div>
+
+            `;
+
+        }else{
+
+            let selectedText = "Not answered";
+
+            if(item.selected !== null){
+
+                selectedText =
+                    String.fromCharCode(65 + item.selected) +
+                    ") " +
+                    item.options[item.selected];
+
+            }
+
+
+            html += `
+
+                <div class="review-item incorrect">
+
+                    <div class="review-title">
+                        Question ${item.number}
+                    </div>
+
+                    <div class="incorrect-text">
+                        ✗ Your answer: ${selectedText}
+                    </div>
+
+                    <div class="correct-text">
+                        ✓ Correct answer:
+                        ${correctLetter}) ${item.options[item.correct]}
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+    });
+
+
+    html += `
+        </div>
+    `;
+
+
+    result.innerHTML = html;
+
+    result.style.display = "block";
+}
+
+
+/* =========================================================
+   START TEST
+========================================================= */
+
+renderQuiz();
+startTimer();
+
+</script>
+
+</body>
+</html>
