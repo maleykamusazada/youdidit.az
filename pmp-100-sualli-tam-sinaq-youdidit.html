@@ -1,3 +1,2310 @@
-<!doctype html><html lang="az"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PMP — 100 suallıq tam sınaq | Youdidit.az</title><style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}.wrap{max-width:900px;margin:auto;padding:18px}.hero{background:#102a43;color:#fff;border-radius:16px;padding:24px;margin-bottom:16px}.hero h1{margin:0 0 8px;font-size:25px}.hero p{margin:6px 0;color:#d9e7f5}.note{background:#fff8e6;border-left:4px solid #e5a100;padding:13px;border-radius:8px;margin:12px 0;color:#5b4700}.top{position:sticky;top:0;background:#f4f7fb;padding:10px 0;z-index:5}.bar{height:9px;background:#dce5ef;border-radius:20px;overflow:hidden}.fill{height:100%;width:0;background:#1976d2;transition:.2s}.stats{display:flex;justify-content:space-between;font-size:14px;margin:6px 0}.q{background:#fff;border-radius:14px;padding:18px;margin:14px 0;box-shadow:0 2px 10px #0000000b}.domain{font-size:12px;font-weight:bold;color:#1976d2;margin-bottom:8px}.q h3{font-size:17px;line-height:1.45;margin:0 0 13px}.opt{display:block;border:1px solid #d7dee8;border-radius:10px;padding:11px 12px;margin:8px 0;cursor:pointer}.opt:hover{background:#f3f7fb}.opt input{margin-right:9px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.btn{border:0;border-radius:10px;padding:13px 18px;font-weight:bold;cursor:pointer;background:#1976d2;color:white}.btn.secondary{background:#64748b}.result{display:none;background:#eaf5ff;border-radius:14px;padding:20px;margin:20px 0;text-align:center}.result strong{font-size:32px}.foot{text-align:center;color:#6b7280;padding:25px}.error{outline:2px solid #d33;background:#fff7f7}</style></head><body><div class="wrap"><section class="hero"><h1>PMP — 100 SUALLIQ TAM SINAQ İMTAHANI</h1><p>Youdidit.az | PMP 2026 məntiqinə uyğun orijinal hazırlıq sualları</p><div class="note">Bu test PMI-nin real/proprietary imtahan sualları deyil. Cari PMP imtahanının situasiya əsaslı məntiqinə uyğun hazırlanmış orijinal hazırlıq testidir. Real PMP imtahanı 180 sual və 240 dəqiqədir; bu sınaq 100 sualdır.</div></section><div class="top"><div class="stats"><span id="count">0/100 cavablandırılıb</span><span id="pct">0%</span></div><div class="bar"><div class="fill" id="fill"></div></div></div><main id="quiz"></main><div class="actions"><button class="btn" onclick="submitQuiz()">Nəticəni göstər</button><button class="btn secondary" onclick="resetQuiz()">Yenidən başla</button></div><div class="result" id="result"></div><div class="foot">Youdidit.az — PMP hazırlıq sınağı</div></div><script>const QUESTIONS=[{"q":"HR layihə komandasında iki üzv arasında ciddi fikir ayrılığı yaranıb. Layihə rəhbəri ilk növbədə nə etməlidir?","options":["Bir üzvü komandadan çıxarmaq","Problemi görməməzlikdən gəlmək","Münaqişəni sponsorun üzərinə göndərmək","Tərəfləri dinləyib münaqişənin səbəbini müəyyənləşdirmək"],"answer":3,"domain":"PEOPLE"},{"q":"Virtual komandada iştirak azalır. Layihə rəhbəri ən uyğun ilk addımı nədir?","options":["Ünsiyyət və əməkdaşlıq maneələrini komanda ilə araşdırmaq","Komandanı cərimələmək","Layihəni dayandırmaq","Bütün iclasları ləğv etmək"],"answer":0,"domain":"PEOPLE"},{"q":"Komanda üzvü yeni tapşırığı yerinə yetirməkdə çətinlik çəkir. Ən yaxşı yanaşma hansıdır?","options":["Onu layihədən çıxarmaq","Səbəbi müəyyən edib uyğun dəstək və kouçinq vermək","Tapşırığı dərhal başqa şəxsə vermək","Problemi sənədləşdirmədən bağlamaq"],"answer":1,"domain":"PEOPLE"},{"q":"Stakeholder layihə nəticəsindən narazıdır. Layihə rəhbəri nə etməlidir?","options":["Tələbi avtomatik qəbul etmək","Narazılığın səbəbini və gözləntiləri dəqiqləşdirmək","Stakeholderi layihədən uzaqlaşdırmaq","Komandanı günahlandırmaq"],"answer":1,"domain":"PEOPLE"},{"q":"Komanda üzvləri qərarların yalnız rəhbər tərəfindən verilməsindən şikayət edir. Nə etmək daha uyğundur?","options":["Sponsorun bütün qərarları verməsini istəmək","Komandanı uyğun qərarlara cəlb etmək və səlahiyyətləndirmək","Komandanın rəyini dayandırmaq","Bütün qərarları yenə rəhbərin verməsi"],"answer":1,"domain":"PEOPLE"},{"q":"Komandada psixoloji təhlükəsizlik zəifdir. İlk addım nədir?","options":["Komandanı dəyişmək","Yalnız rəhbərin danışmasına icazə vermək","Səhvləri ictimai şəkildə cəzalandırmaq","Açıq fikir bildirməyi və hörmətli müzakirəni təşviq etmək"],"answer":3,"domain":"PEOPLE"},{"q":"İki stakeholder layihənin prioritetləri barədə razılaşmır. Layihə rəhbəri nə etməlidir?","options":["Ortaq məqsədləri və qərar meyarlarını aydınlaşdırmaq","Məsələni gizlətmək","Layihəni dayandırmaq","Bir stakeholderi seçib digərini kənarlaşdırmaq"],"answer":0,"domain":"PEOPLE"},{"q":"Komanda üzvünün motivasiyası azalıb. Ən uyğun yanaşma hansıdır?","options":["İş yükünü artırmaq","Əlavə nəzarət tətbiq etmək","Motivasiyanın səbəbini öyrənmək və uyğun dəstək vermək","Onu dərhal əvəz etmək"],"answer":2,"domain":"PEOPLE"},{"q":"Sponsor tez-tez prioritetləri dəyişir. Layihə rəhbəri nə etməlidir?","options":["Sponsorla əlaqəni kəsmək","Bütün dəyişiklikləri rədd etmək","Komandaya məlumat verməmək","Prioritet dəyişikliklərinin təsirini və qərar mexanizmini razılaşdırmaq"],"answer":3,"domain":"PEOPLE"},{"q":"Komandada müxtəlif mədəniyyətlərə malik şəxslər var. Ən yaxşı yanaşma hansıdır?","options":["Bütün üzvlərdən eyni ünsiyyət tərzini tələb etmək","Müxtəlifliyi nəzərə alan aydın əməkdaşlıq qaydaları yaratmaq","Yalnız bir mədəniyyətin qaydalarını tətbiq etmək","Fərqləri görməməzlikdən gəlmək"],"answer":1,"domain":"PEOPLE"},{"q":"Layihə rəhbəri komandanın inkişaf ehtiyaclarını necə müəyyən etməlidir?","options":["Təsadüfi kurslar seçməklə","Yalnız illik qiymətləndirməyə baxmaqla","Bacarıq boşluqlarını və layihə ehtiyaclarını qiymətləndirməklə","Heç bir qiymətləndirmə aparmamaqla"],"answer":2,"domain":"PEOPLE"},{"q":"Komanda üzvü səhv etdiyini etiraf edir. Lider ən yaxşı nə etməlidir?","options":["Səbəbi araşdırıb öyrənilmiş dərsi və düzəlişi müzakirə etmək","Komandadan uzaqlaşdırmaq","Onu cəzalandırmaq","Səhvi gizlətmək"],"answer":0,"domain":"PEOPLE"},{"q":"Stakeholderlər məlumatın gecikməsindən şikayət edir. İlk addım nədir?","options":["Kommunikasiya ehtiyaclarını yenidən qiymətləndirmək","Stakeholderləri dəyişmək","Daha çox e-poçt göndərmək","Məlumat paylaşımını dayandırmaq"],"answer":0,"domain":"PEOPLE"},{"q":"Komanda üzvü digər üzvlərlə əməkdaşlıq etmir. Nə etmək lazımdır?","options":["Onu dərhal işdən çıxarmaq","Problemi sənədləşdirməmək","Digər üzvləri günahlandırmaq","Davranışın səbəbini onunla müzakirə edib əməkdaşlıq gözləntilərini dəqiqləşdirmək"],"answer":3,"domain":"PEOPLE"},{"q":"Layihədə yüksək performans göstərən komanda var. Lider nə etməlidir?","options":["Mikromenecmenti artırmaq","Komandanın özünüidarəsini və davamlı təkmilləşməsini dəstəkləmək","Komandanı əlavə nəzarətə almaq","Bütün qərarları özü vermək"],"answer":1,"domain":"PEOPLE"},{"q":"Komanda üzvü etik olmayan təlimat aldığını bildirir. Layihə rəhbəri nə etməlidir?","options":["Şikayəti silmək","Məsələni təşkilatın etik və idarəetmə qaydalarına uyğun araşdırmaq","Təlimatı gizlicə icra etmək","Şəxsi fikrinə görə qərar vermək"],"answer":1,"domain":"PEOPLE"},{"q":"Stakeholder çox yüksək təsirə malikdir, amma marağı aşağıdır. Nə etmək daha uyğundur?","options":["Gündəlik iclaslara məcbur etmək","Layihədən çıxarmaq","Onu məmnun saxlamaq üçün uyğun səviyyədə idarə etmək","Tamamilə görməməzlikdən gəlmək"],"answer":2,"domain":"PEOPLE"},{"q":"Komandada konflikt şəxsi müstəviyə keçir. İlk addım nədir?","options":["Konflikti uzatmaq","Komandanı dağıtmaq","Məsələyə peşəkar şəkildə müdaxilə edib faktları və maraqları ayırmaq","Bir tərəfi dərhal cəzalandırmaq"],"answer":2,"domain":"PEOPLE"},{"q":"Layihə rəhbəri komandanın qərar qəbul etməsini gücləndirmək istəyir. Nə etməlidir?","options":["Aydın məqsəd və sərhədlər verib uyğun səlahiyyət ötürmək","Heç bir məlumat verməmək","Yalnız sponsorun qərar verməsini istəmək","Bütün qərarları təsdiqləmək"],"answer":0,"domain":"PEOPLE"},{"q":"Yeni stakeholder layihəyə qoşulur. Ən uyğun ilk hərəkət hansıdır?","options":["Onun maraq, təsir və gözləntilərini qiymətləndirmək","Komandanı dəyişmək","Layihənin bütün planını dəyişmək","Onu məlumatlardan kənarda saxlamaq"],"answer":0,"domain":"PEOPLE"},{"q":"Komanda üzvü AI alətindən istifadə edib nəticə təqdim edir. Layihə rəhbəri nə etməlidir?","options":["Bütün işi AI-yə həvalə etmək","AI istifadəsini gizlətmək","AI nəticəsini avtomatik doğru qəbul etmək","Nəticəni uyğun insan nəzarəti və keyfiyyət meyarları ilə yoxlamaq"],"answer":3,"domain":"PEOPLE"},{"q":"Komanda qərar barədə konsensusa gələ bilmir. Nə etmək lazımdır?","options":["Təsadüfi seçim etmək","Ən yüksək vəzifəli şəxsin şəxsi fikrini qəbul etmək","Müzakirəni dayandırmaq","Qərar meyarlarını və mövcud məlumatları yenidən nəzərdən keçirmək"],"answer":3,"domain":"PEOPLE"},{"q":"Komanda yorğunluq əlamətləri göstərir. Lider nə etməlidir?","options":["Daha çox iclas planlaşdırmaq","Problemi görməməzlikdən gəlmək","İş yükünü, prioritetləri və davamlılıq risklərini qiymətləndirmək","İş saatlarını artırmaq"],"answer":2,"domain":"PEOPLE"},{"q":"Stakeholder layihənin məqsədini səhv başa düşüb. Nə etmək lazımdır?","options":["Məqsədi dəyişmək","Layihənin məqsəd və nəticələrini onunla yenidən dəqiqləşdirmək","Onu günahlandırmaq","Əlaqəni kəsmək"],"answer":1,"domain":"PEOPLE"},{"q":"Komanda üzvü yeni metodologiyaya müqavimət göstərir. İlk addım nədir?","options":["Heç bir izah verməmək","Müqavimətin səbəbini və narahatlıqları anlamaq","Komandadan çıxarmaq","Onu məcburi şəkildə cəzalandırmaq"],"answer":1,"domain":"PEOPLE"},{"q":"Layihə rəhbəri komanda performansını artırmaq istəyir. Ən yaxşı yanaşma hansıdır?","options":["Komanda görüşlərini ləğv etmək","Mikromenecment tətbiq etmək","Yalnız səhvləri qeyd etmək","Aydın məqsədlər, geribildirim və davamlı inkişaf mühiti yaratmaq"],"answer":3,"domain":"PEOPLE"},{"q":"İki departament arasında resurs mübahisəsi yaranıb. Nə etmək lazımdır?","options":["Bir departamenti avtomatik üstün tutmaq","Mübahisəni gizlətmək","Prioritetləri və resurs ehtiyaclarını obyektiv meyarlarla müzakirə etmək","Resursları təsadüfi bölmək"],"answer":2,"domain":"PEOPLE"},{"q":"Komanda üzvü layihə riskini erkən bildirir. Lider nə etməlidir?","options":["Riskin sənədləşdirilməsini qadağan etmək","Onu susdurmaq","Məlumatı təşviq edib riski qiymətləndirmək və uyğun tədbir görmək","Riski avtomatik bağlamaq"],"answer":2,"domain":"PEOPLE"},{"q":"Layihə rəhbəri stakeholderlərə müxtəlif səviyyələrdə məlumat verməlidir. Nə etmək lazımdır?","options":["Yalnız sponsorla danışmaq","Hamıya eyni uzun hesabat göndərmək","Məlumatı stakeholderin ehtiyacına və təsirinə uyğunlaşdırmaq","Heç kimə məlumat verməmək"],"answer":2,"domain":"PEOPLE"},{"q":"Komandada yeni üzv layihəyə gec qoşulub. İlk addım nədir?","options":["Onu dərhal mürəkkəb tapşırığa salmaq","Heç bir məlumat verməmək","Komandanın işini dayandırmaq","Kontekst, məqsədlər, rol və iş qaydaları barədə onboarding vermək"],"answer":3,"domain":"PEOPLE"},{"q":"Komanda retrospektivdə proses problemini bildirir. Lider nə etməlidir?","options":["Rəyləri rədd etmək","Problemi başqa komandaya ötürmək","Retrospektivi ləğv etmək","Problemi araşdırıb ölçülə bilən təkmilləşdirmə tədbiri seçmək"],"answer":3,"domain":"PEOPLE"},{"q":"Stakeholderdən ziddiyyətli tələblər gəlir. İlk addım nədir?","options":["Tələbləri silmək","Birini təsadüfi seçmək","Tələblərin məqsədini və prioritetlərini dəqiqləşdirmək","Hər ikisini eyni anda icra etmək"],"answer":2,"domain":"PEOPLE"},{"q":"Komanda üzvü layihə məqsədinə inanmır. Nə etmək daha uyğundur?","options":["Onu dərhal əvəz etmək","Mövzunu bağlamaq","Onu məcbur etmək","Layihənin biznes dəyərini və məqsədini onunla müzakirə etmək"],"answer":3,"domain":"PEOPLE"},{"q":"Layihə üçün yanaşma seçilməlidir. Ən uyğun ilk addım nədir?","options":["Sponsorun şəxsi üstünlüyünü əsas götürmək","Tələblərin sabitliyi, qeyri-müəyyənlik və mühitə əsasən yanaşmanı qiymətləndirmək","Həmişə agile seçmək","Həmişə waterfall seçmək"],"answer":1,"domain":"PROCESS"},{"q":"Agile layihədə məhsul backlogunun prioritetini kim əsasən idarə edir?","options":["Product Owner","Maliyyə meneceri","Team Lead yalnız","Project Sponsor"],"answer":0,"domain":"PROCESS"},{"q":"Sprint zamanı yeni tələb daxil olur. Ən uyğun yanaşma nədir?","options":["Komandanı dəyişmək","Tələbi gizlicə sprintə daxil etmək","Sprinti dərhal dayandırmaq","Tələbi backloga əlavə edib prioritetləşdirmək"],"answer":3,"domain":"PROCESS"},{"q":"Predictive layihədə stakeholder yeni böyük xüsusiyyət istəyir. İlk addım nədir?","options":["Dərhal icra etmək","Avtomatik rədd etmək","Dəyişikliyi müəyyən olunmuş change control prosesi ilə qiymətləndirmək","Komandaya demədən əlavə etmək"],"answer":2,"domain":"PROCESS"},{"q":"Məhsulun qəbul meyarları aydın deyil. Nə etmək lazımdır?","options":["Testi ləğv etmək","Tələbi silmək","Acceptance criteria-ni stakeholderlərlə dəqiqləşdirmək","İşi tamamlanmış hesab etmək"],"answer":2,"domain":"PROCESS"},{"q":"EVM-də CPI 0.8-dir. Bu nəyi göstərir?","options":["Xərc performansı planlaşdırılandan zəifdir","Əhatə dairəsi dəyişməyib","Layihə vaxtından qabaqdır","Layihə büdcədən aşağıdır"],"answer":0,"domain":"PROCESS"},{"q":"EVM-də SPI 0.75-dir. Nə deməkdir?","options":["İş qrafikdən geri qalır","Layihə büdcədən aşağıdır","Xərclər çox aşağıdır","Risk yoxdur"],"answer":0,"domain":"PROCESS"},{"q":"Risk baş verib və layihəyə təsir edir. İndi nə edilməlidir?","options":["Heç nə etməmək","Layihəni dərhal bağlamaq","Məsələni issue kimi idarə edib uyğun cavabı tətbiq etmək","Riski risk reyestrində gizlətmək"],"answer":2,"domain":"PROCESS"},{"q":"Mənfi riskin ehtimalını azaltmaq üçün tədbir görülür. Bu hansı cavabdır?","options":["Mitigate","Accept","Share","Exploit"],"answer":0,"domain":"PROCESS"},{"q":"Mənfi riskin təsirini başqa tərəfə ötürmək üçün sığorta alınır. Bu hansı cavabdır?","options":["Accept","Transfer","Enhance","Avoid"],"answer":1,"domain":"PROCESS"},{"q":"Müsbət riskdən tam istifadə etmək üçün resurs ayrılır. Bu hansı cavabdır?","options":["Transfer","Exploit","Avoid","Mitigate"],"answer":1,"domain":"PROCESS"},{"q":"Layihədə keyfiyyət problemi təkrarlanır. Ən yaxşı yanaşma nədir?","options":["Keyfiyyət yoxlamasını dayandırmaq","Kök səbəbi müəyyən edib prosesdə düzəliş etmək","Hər dəfə son məhsulu yenidən işləmək","Problemi gizlətmək"],"answer":1,"domain":"PROCESS"},{"q":"Agile komandada burndown qrafiki planlaşdırılandan geri qalır. İlk addım nədir?","options":["Sprinti avtomatik ləğv etmək","Scope-u gizlicə azaltmaq","İnsanları günahlandırmaq","Komanda ilə səbəbləri araşdırmaq və planı uyğunlaşdırmaq"],"answer":3,"domain":"PROCESS"},{"q":"Hybrid layihədə predictive və agile komandalar arasında inteqrasiya problemi yaranır. Nə etmək lazımdır?","options":["Problemi son mərhələyə saxlamaq","Bir yanaşmanı səbəbsiz ləğv etmək","İnteqrasiya nöqtələrini və asılılıqları aydınlaşdırmaq","Komandaları ayırmaq"],"answer":2,"domain":"PROCESS"},{"q":"Layihənin scope-u qeyri-müəyyəndir və tələblər tez dəyişir. Hansı yanaşma daha uyğun ola bilər?","options":["Heç bir plan olmadan işləmək","Tamamilə sabit predictive plan","Adaptive/agile yanaşma","Layihəni dayandırmaq"],"answer":2,"domain":"PROCESS"},{"q":"Layihənin tələbləri qanunla ciddi şəkildə əvvəlcədən müəyyən olunub. Hansı yanaşma uyğun ola bilər?","options":["Predictive yanaşma","Plansız agile","Heç bir idarəetmə olmadan","Yalnız eksperimentlər"],"answer":0,"domain":"PROCESS"},{"q":"Backlog item çox böyükdür və sprintə sığmır. Nə edilməlidir?","options":["Itemi silmək","Onu daha kiçik, dəyərli hissələrə bölmək","Daha çox saat işləmək","Sprinti ikiqat uzatmaq"],"answer":1,"domain":"PROCESS"},{"q":"Definition of Done nə üçün istifadə olunur?","options":["Sponsor seçmək","Riskləri silmək","İşin tamamlanmış sayılması üçün ümumi meyar yaratmaq","Büdcəni hesablamaq"],"answer":2,"domain":"PROCESS"},{"q":"Stakeholder demo zamanı məhsulu qəbul etmir. Nə etmək lazımdır?","options":["Stakeholderi dəyişmək","Məhsulu zorla qəbul etdirmək","Acceptance criteria və gözləntiləri yoxlamaq","Problemi bağlamaq"],"answer":2,"domain":"PROCESS"},{"q":"Layihədə kritik yol üzərində fəaliyyət gecikir. İlk addım nədir?","options":["Komandanı günahlandırmaq","Gecikmənin ümumi qrafikə təsirini təhlil etmək","Riskləri silmək","Bütün layihəni dayandırmaq"],"answer":1,"domain":"PROCESS"},{"q":"Scope creep müşahidə olunur. Ən yaxşı yanaşma nədir?","options":["Bütün yeni tələbləri qəbul etmək","Tələblərin rəsmi idarə olunmasını və prioritetləşdirməni gücləndirmək","Heç bir tələb qəbul etməmək","Scope sənədini silmək"],"answer":1,"domain":"PROCESS"},{"q":"Layihədə bir neçə risk eyni səbəbdən yaranır. Nə etmək faydalıdır?","options":["Bütün riskləri silmək","Riskləri ayrı-ayrılıqda gizlətmək","Heç bir tədbir görməmək","Ümumi kök səbəbi və risk əlaqələrini təhlil etmək"],"answer":3,"domain":"PROCESS"},{"q":"Vendor müqavilədə göstərilən keyfiyyəti təmin etmir. İlk addım nədir?","options":["Müqavilə tələblərini və performans sübutlarını nəzərdən keçirmək","Problemi gizlətmək","Müqaviləni dərhal pozmaq","Vendoru ictimai şəkildə günahlandırmaq"],"answer":0,"domain":"PROCESS"},{"q":"AI aləti layihə üçün risk proqnozu verir. Layihə rəhbəri nə etməlidir?","options":["Nəticəni avtomatik doğru qəbul etmək","AI nəticəsini məlumat keyfiyyəti və insan mühakiməsi ilə yoxlamaq","AI-ni tamamilə qadağan etmək","Nəticəni sənədləşdirməmək"],"answer":1,"domain":"PROCESS"},{"q":"Layihə planında əsas asılılıq müəyyən edilir. Nə edilməlidir?","options":["Asılılığı planlaşdırmaq, sahibini və izləmə üsulunu müəyyənləşdirmək","Onu gizlətmək","Asılılığı görməməzlikdən gəlmək","Layihənin sonunda yoxlamaq"],"answer":0,"domain":"PROCESS"},{"q":"Məhsulun biznes dəyəri gözləniləndən aşağıdır. Nə edilməlidir?","options":["Layihəni avtomatik davam etdirmək","Dəyər hipotezini və prioritetləri yenidən qiymətləndirmək","İstifadəçini günahlandırmaq","Daha çox xüsusiyyət əlavə etmək"],"answer":1,"domain":"PROCESS"},{"q":"Retrospektivdə komanda prosesdə israf olduğunu müəyyən edir. Nə etmək lazımdır?","options":["Rəyi rədd etmək","Problemi gizlətmək","Kiçik ölçülə bilən təkmilləşdirmə tədbiri seçmək","Bütün prosesi dəyişmək"],"answer":2,"domain":"PROCESS"},{"q":"Layihə üçün yeni compliance tələbi yaranıb. İlk addım nədir?","options":["Tələbin layihəyə təsirini qiymətləndirmək","Layihəni dərhal bağlamaq","Tələbi görməməzlikdən gəlmək","Komandanı dəyişmək"],"answer":0,"domain":"PROCESS"},{"q":"Məhsulun istifadəçiləri prioritetlərin dəyişdirilməsini istəyir. Agile komandada nə edilməlidir?","options":["Feedback-i backlog prioritetləşdirməsinə daxil etmək","Sprintdə gizli dəyişiklik etmək","Feedback-i rədd etmək","Məhsulu bağlamaq"],"answer":0,"domain":"PROCESS"},{"q":"Layihə üçün əsas ölçü göstəricisi müəyyən edilməlidir. Nə əsas götürülməlidir?","options":["Layihə məqsədi və gözlənilən nəticə","Rəhbərin şəxsi üstünlüyü","Ofis xərci","Yalnız komanda ölçüsü"],"answer":0,"domain":"PROCESS"},{"q":"Planlaşdırılmış dəyər 100, qazanılmış dəyər 80-dir. SPI hansı göstəriciyə əsaslanır?","options":["PV/AC","AC/EV","EV/PV","EV/AC"],"answer":2,"domain":"PROCESS"},{"q":"EV=80, AC=100 olduqda CPI nədir?","options":["1.00","0.80","1.25","0.20"],"answer":1,"domain":"PROCESS"},{"q":"Layihədə dəyişikliklərin sayı artır. Nə etmək lazımdır?","options":["Planı silmək","Dəyişikliklərin səbəblərini və nümunələrini təhlil etmək","Bütün dəyişiklikləri qəbul etmək","Bütün dəyişiklikləri qadağan etmək"],"answer":1,"domain":"PROCESS"},{"q":"Acceptance test uğursuz oldu. Nə etmək lazımdır?","options":["Nəticəni dəyişmək","Testi ləğv etmək","Uyğunsuzluğun səbəbini araşdırıb düzəliş və yenidən test etmək","Stakeholderi günahlandırmaq"],"answer":2,"domain":"PROCESS"},{"q":"Layihə məhsulu istifadəçilər tərəfindən istifadə olunmur. Nəyi əvvəlcə araşdırmaq lazımdır?","options":["İstifadəçi ehtiyacı və gözlənilən dəyər ilə uyğunluğu","Ofis sahəsini","Layihənin adını","Komandanın iş saatını"],"answer":0,"domain":"PROCESS"},{"q":"Procurement strategiyası seçilərkən nə nəzərə alınmalıdır?","options":["Yalnız ən ucuz qiymət","Risk, ehtiyac, bazar və müqavilə şərtləri","Təsadüfi seçim","Vendorun logo dizaynı"],"answer":1,"domain":"PROCESS"},{"q":"Layihənin keyfiyyət planında prevention tədbirləri var. Məqsəd nədir?","options":["Qüsurları yalnız sonunda tapmaq","Qüsurların yaranmasının qarşısını almaq","Testi azaltmaq","Scope-u dəyişmək"],"answer":1,"domain":"PROCESS"},{"q":"Schedule compression zamanı əlavə resurslarla müddət qısaldılır. Bu nədir?","options":["Refactoring","Crashing","Fast tracking","Rolling wave"],"answer":1,"domain":"PROCESS"},{"q":"İki fəaliyyət qismən paralel icra edilərək müddət qısaldılır. Bu nədir?","options":["Crashing","Benchmarking","Fast tracking","Inspection"],"answer":2,"domain":"PROCESS"},{"q":"Risk reyestrində yüksək ehtimallı və yüksək təsirli risk var. Nə etmək lazımdır?","options":["Heç nə etməmək","Silərək bağlamaq","Onu aşağı prioritetə salmaq","Prioritet verib uyğun risk cavabı planlaşdırmaq"],"answer":3,"domain":"PROCESS"},{"q":"Layihə deliverable-ları biznes strategiyasına uyğun gəlmir. Nə edilməlidir?","options":["Daha çox deliverable əlavə etmək","Strateji uyğunluğu və gözlənilən nəticələri yenidən qiymətləndirmək","Strategiyanı gizlətmək","Layihəni dəyişmədən davam etdirmək"],"answer":1,"domain":"PROCESS"},{"q":"Yeni qanun layihənin məhsuluna təsir edə bilər. İlk addım nədir?","options":["Qanunu görməməzlikdən gəlmək","Məhsulu dərhal bağlamaq","Təsiri qiymətləndirib uyğun compliance tədbirlərini planlaşdırmaq","Komandanı dəyişmək"],"answer":2,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihə təşkilatın strateji məqsədlərinə artıq uyğun gəlmir. Nə edilməlidir?","options":["Biznes dəyərini və davam etdirilmə əsasını yenidən qiymətləndirmək","Layihəni avtomatik davam etdirmək","Daha çox xərc çəkmək","Problemi gizlətmək"],"answer":0,"domain":"BUSINESS ENVIRONMENT"},{"q":"Bazarda böyük dəyişiklik baş verir. Layihə rəhbəri nə etməlidir?","options":["Dəyişikliyi görməməzlikdən gəlmək","Xarici mühiti və layihə məqsədlərinə təsiri təhlil etmək","Planı gizlətmək","Bütün riskləri silmək"],"answer":1,"domain":"BUSINESS ENVIRONMENT"},{"q":"Yeni data privacy tələbi müəyyən edilir. Nə edilməlidir?","options":["Məlumatı gizlətmək","Tələbin layihə və məhsula təsirini qiymətləndirib compliance-a uyğunlaşdırmaq","Tələbi son mərhələyə saxlamaq","Tələbi rədd etmək"],"answer":1,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihə üçün AI istifadəsi planlaşdırılır. Əsas diqqət nəyə yönəlməlidir?","options":["Məlumat keyfiyyəti, etik risk, insan nəzarəti və biznes dəyərinə","Yalnız AI-nin sürətinə","AI-ni nəzarətsiz tətbiq etməyə","İnsan qərarını tam ləğv etməyə"],"answer":0,"domain":"BUSINESS ENVIRONMENT"},{"q":"Sponsor layihəni davam etdirmək üçün yeni biznes əsaslandırması istəyir. Nə təqdim edilməlidir?","options":["Yalnız komandanın ölçüsü","Yalnız keçmiş xərclər","Xərclər, faydalar, risklər və strateji uyğunluq","Yalnız marketinq planı"],"answer":2,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihənin faydaları layihə bitdikdən sonra reallaşacaq. Nə vacibdir?","options":["Yalnız deliverable sayını ölçmək","Layihə bitəndə hər şeyi bağlamaq","Faydaları ölçməmək","Benefits realization üçün sahiblik və ölçmə mexanizmi"],"answer":3,"domain":"BUSINESS ENVIRONMENT"},{"q":"Yeni tənzimləmə məhsulun buraxılış tarixini riskə atır. Nə edilməlidir?","options":["Buraxılışı gizli etmək","Tənzimləməni nəzərə almamaq","Komandanı günahlandırmaq","Tələbin təsirini təhlil edib plan və risk cavabını uyğunlaşdırmaq"],"answer":3,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihənin sustainability məqsədi var. Hansı yanaşma daha yaxşıdır?","options":["Sustainability-ni tamamilə çıxarmaq","Yalnız hesabatda qeyd etmək","Mövzunu son həftəyə saxlamaq","Sustainability göstəricilərini layihə qərarlarına və nəticələrə inteqrasiya etmək"],"answer":3,"domain":"BUSINESS ENVIRONMENT"},{"q":"Müştəri davranışı dəyişib və ilkin məhsul artıq uyğun deyil. Nə edilməlidir?","options":["Məhsulu dəyişmədən buraxmaq","Layihəni gizlətmək","Dəyər hipotezini və məhsul prioritetlərini yenidən qiymətləndirmək","Müştərini günahlandırmaq"],"answer":2,"domain":"BUSINESS ENVIRONMENT"},{"q":"Təşkilatda struktur dəyişir. Layihəyə təsir necə idarə olunmalıdır?","options":["Komandanı avtomatik dəyişmək","Heç bir tədbir görməmək","Dəyişikliyin governance, resurs və məqsədlərə təsirini qiymətləndirmək","Bütün planları silmək"],"answer":2,"domain":"BUSINESS ENVIRONMENT"},{"q":"Audit layihədə proses uyğunsuzluğu aşkar edir. Nə etmək lazımdır?","options":["Auditoru günahlandırmaq","Sənədləri silmək","Audit nəticəsini gizlətmək","Uyğunsuzluğu araşdırıb düzəldici tədbir və izləmə planı yaratmaq"],"answer":3,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihənin büdcəsi azalır. Ən uyğun ilk addım nədir?","options":["Problemi gizlətmək","Bütün fəaliyyətləri dayandırmaq","Keyfiyyəti avtomatik azaltmaq","Prioritetləri və biznes dəyərini yenidən qiymətləndirmək"],"answer":3,"domain":"BUSINESS ENVIRONMENT"},{"q":"Müəssisə yeni bazara daxil olur. Layihə rəhbəri nəyi nəzərə almalıdır?","options":["Yalnız komanda ölçüsünü","Heç bir xarici faktoru","Bazar, tənzimləmə, müştəri və strateji riskləri","Yalnız daxili prosesləri"],"answer":2,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihənin sponsorluğu dəyişir. Nə edilməlidir?","options":["Yeni sponsorun gözləntiləri və governance tələbləri ilə uyğunlaşmaq","Bütün qərarları komandaya buraxmaq","Layihəni dayandırmaq","Heç bir məlumat verməmək"],"answer":0,"domain":"BUSINESS ENVIRONMENT"},{"q":"Təşkilatda yeni compliance prosesi tətbiq olunur. Layihə nə etməlidir?","options":["Yalnız layihə sonunda tətbiq etmək","Prosesi pozmaq","Prosesi gizlətmək","Prosesin layihəyə tətbiqini qiymətləndirib uyğunlaşdırmaq"],"answer":3,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihə nəticələri təşkilat üçün gözlənilən dəyəri yaratmır. Nə edilməlidir?","options":["Daha çox deliverable yaratmaq","Strategiya, nəticələr və fayda göstəricilərini yenidən təhlil etmək","Faydanı elan etmək","Layihəni səbəbsiz uzatmaq"],"answer":1,"domain":"BUSINESS ENVIRONMENT"},{"q":"Rəqib yeni texnologiya təqdim edir. Layihə rəhbəri nə etməlidir?","options":["Rəqibi görməməzlikdən gəlmək","Məhsulu dərhal dəyişmək","Komandanı dəyişmək","Xarici dəyişikliklərin biznes dəyərinə təsirini qiymətləndirmək"],"answer":3,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihənin nəticəsi təşkilatın ESG məqsədlərinə ziddir. Nə edilməlidir?","options":["Məlumatı silmək","Uyğunsuzluğu və alternativ həlləri qiymətləndirmək","Layihəni avtomatik davam etdirmək","ESG məqsədini gizlətmək"],"answer":1,"domain":"BUSINESS ENVIRONMENT"},{"q":"AI sistemi şəxsi məlumatlarla işləyir. Əsas məsələ nədir?","options":["Yalnız sürət","Yalnız xərc","Yalnız istifadəçi sayı","Məxfilik, qanuni uyğunluq, təhlükəsizlik və insan nəzarəti"],"answer":3,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihə rəhbəri biznes mühitində dəyişiklikləri necə izləməlidir?","options":["Yalnız layihənin sonunda","Yalnız sponsorun şəxsi fikri ilə","Müntəzəm environmental scanning və stakeholder məlumatlarından istifadə etməklə","Heç bir xarici məlumat olmadan"],"answer":2,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihə portfelində başqa layihə daha yüksək strateji dəyər yaradır. Nə edilməlidir?","options":["Yeni layihəni rədd etmək","Heç bir analiz aparmamaq","Mövcud layihəni səbəbsiz qorumaq","Prioritetləri və resurs bölgüsünü təşkilati strategiyaya görə yenidən qiymətləndirmək"],"answer":3,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihə üçün əsas faydanın sahibi məlum deyil. Nə edilməlidir?","options":["Benefits owner müəyyənləşdirmək","Layihəni bağlamaq","Faydanı layihə rəhbərinin şəxsi məsuliyyəti etmək","Faydanı ölçməmək"],"answer":0,"domain":"BUSINESS ENVIRONMENT"},{"q":"Təşkilat layihənin idarəetmə qaydalarını dəyişir. Layihə rəhbəri nə etməlidir?","options":["Köhnə qaydaları gizli saxlamaq","Qaydaları rədd etmək","Yeni governance tələblərini layihəyə inteqrasiya etmək","Layihəni dayandırmaq"],"answer":2,"domain":"BUSINESS ENVIRONMENT"},{"q":"Xarici iqtisadi dəyişiklik layihə xərclərini artırır. İlk addım nədir?","options":["Təsiri, riskləri və alternativləri qiymətləndirmək","Büdcəni xəbərsiz dəyişmək","Layihəni dərhal bağlamaq","Xərci gizlətmək"],"answer":0,"domain":"BUSINESS ENVIRONMENT"},{"q":"Layihə sponsoruna mənfi status vermək lazım gəlir. Ən yaxşı yanaşma hansıdır?","options":["Yalnız müsbət xəbərləri demək","Məlumatı dəyişdirmək","Məlumata əsaslanan, şəffaf və həll yönümlü məlumat vermək","Problemi gizlətmək"],"answer":2,"domain":"BUSINESS ENVIRONMENT"}];
-const letters=['A','B','C','D'];const quiz=document.getElementById('quiz');QUESTIONS.forEach((x,i)=>{let d=document.createElement('section');d.className='q';d.id='q'+i;d.innerHTML='<div class="domain">'+x.domain+'</div><h3>'+(i+1)+'. '+x.q+'</h3>'+x.options.map((o,j)=>'<label class="opt"><input type="radio" name="q'+i+'" value="'+j+'"> <b>'+letters[j]+')</b> '+o+'</label>').join('');quiz.appendChild(d)});document.addEventListener('change',update);function update(){let n=QUESTIONS.filter((_,i)=>document.querySelector('input[name=q'+i+']:checked')).length;document.getElementById('count').textContent=n+'/100 cavablandırılıb';document.getElementById('pct').textContent=n+'%';document.getElementById('fill').style.width=n+'%'}function submitQuiz(){let score=0,answered=0;QUESTIONS.forEach((x,i)=>{let e=document.querySelector('input[name=q'+i+']:checked'),sec=document.getElementById('q'+i);sec.classList.remove('error');if(e){answered++;if(+e.value===x.answer)score++}else sec.classList.add('error')});let pct=Math.round(score/100*100);let r=document.getElementById('result');r.style.display='block';r.innerHTML='<strong>'+score+'/100</strong><br><b>'+pct+'%</b><br><br>Cavablandırılıb: '+answered+'/100<br><br>'+(score>=80?'Əla nəticə!':score>=60?'Yaxşı nəticə. Daha çox situasiya sualı məşq edin.':'Daha çox məşq etmək faydalı olar.')+'<br><small>Qırmızı çərçivəli suallar cavablandırılmayıb.</small>';r.scrollIntoView({behavior:'smooth'})}function resetQuiz(){document.querySelectorAll('input[type=radio]').forEach(x=>x.checked=false);document.querySelectorAll('.q').forEach(x=>x.classList.remove('error'));document.getElementById('result').style.display='none';update();window.scrollTo({top:0,behavior:'smooth'})}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PMP — 100 Question Full Practice Exam | Youdidit.az</title>
+
+<meta name="description"
+content="Youdidit.az PMP 100-question English full practice exam with realistic scenario-based questions, countdown timer and detailed results.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --bg:#070711;
+  --panel:#10101d;
+  --panel2:#151525;
+  --border:rgba(255,255,255,.09);
+  --text:#f7f5ff;
+  --muted:#a7a4b8;
+  --purple:#8b5cf6;
+  --purple2:#a855f7;
+  --green:#34d399;
+  --red:#fb7185;
+  --gold:#fbbf24;
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(139,92,246,.18),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(168,85,247,.13),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  line-height:1.6;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  backdrop-filter:blur(18px);
+  background:rgba(7,7,17,.82);
+  border-bottom:1px solid var(--border);
+}
+
+.nav{
+  max-width:1180px;
+  margin:auto;
+  padding:18px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  font-family:Sora,sans-serif;
+  font-weight:800;
+  font-size:20px;
+}
+
+.logo span{
+  color:#a78bfa;
+}
+
+.back{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.back:hover{
+  color:white;
+}
+
+.hero{
+  max-width:1100px;
+  margin:0 auto;
+  padding:58px 22px 28px;
+}
+
+.badge{
+  display:inline-flex;
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(139,92,246,.13);
+  border:1px solid rgba(139,92,246,.35);
+  color:#c4b5fd;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.4px;
+}
+
+h1{
+  font-family:Sora,sans-serif;
+  font-size:clamp(32px,6vw,58px);
+  line-height:1.05;
+  margin:18px 0 15px;
+  letter-spacing:-1.5px;
+}
+
+.hero p{
+  max-width:800px;
+  color:var(--muted);
+  margin:0;
+  font-size:16px;
+}
+
+.info-grid{
+  max-width:1100px;
+  margin:20px auto 0;
+  padding:0 22px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.info{
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:17px;
+}
+
+.info strong{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
+}
+
+.info span{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.notice{
+  max-width:1100px;
+  margin:18px auto 0;
+  padding:0 22px;
+}
+
+.notice-box{
+  background:rgba(139,92,246,.08);
+  border:1px solid rgba(139,92,246,.25);
+  border-radius:18px;
+  padding:17px 19px;
+  color:#c9c5d8;
+  font-size:13px;
+}
+
+.exam-wrap{
+  max-width:900px;
+  margin:28px auto 80px;
+  padding:0 22px;
+}
+
+.exam-top{
+  position:sticky;
+  top:71px;
+  z-index:900;
+  background:rgba(16,16,29,.94);
+  backdrop-filter:blur(15px);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:15px;
+  margin-bottom:24px;
+  box-shadow:var(--shadow);
+}
+
+.exam-top-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.timer{
+  font-family:Sora,sans-serif;
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.timer.warning{
+  color:var(--gold);
+}
+
+.timer.danger{
+  color:var(--red);
+}
+
+.progress-info{
+  color:var(--muted);
+  font-size:13px;
+  text-align:right;
+}
+
+.progress{
+  height:7px;
+  background:#252537;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--purple),var(--purple2));
+  transition:width .2s ease;
+}
+
+.domain-title{
+  margin:40px 0 16px;
+  font-family:Sora,sans-serif;
+  font-size:21px;
+}
+
+.domain-title:first-child{
+  margin-top:0;
+}
+
+.question{
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:23px;
+  margin-bottom:18px;
+  transition:.2s ease;
+}
+
+.question:hover{
+  border-color:rgba(139,92,246,.28);
+}
+
+.question-number{
+  color:#a78bfa;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.6px;
+  margin-bottom:9px;
+}
+
+.question-text{
+  font-size:16px;
+  font-weight:600;
+  line-height:1.65;
+  margin-bottom:17px;
+}
+
+.option{
+  display:block;
+  margin:9px 0;
+  cursor:pointer;
+}
+
+.option input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+.option-content{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:13px 14px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:13px;
+  background:rgba(255,255,255,.025);
+  transition:.18s ease;
+}
+
+.option-letter{
+  flex:0 0 27px;
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:800;
+  color:#bbb7c9;
+}
+
+.option-text{
+  color:#d8d5df;
+  font-size:14px;
+  line-height:1.55;
+}
+
+.option:hover .option-content{
+  border-color:rgba(139,92,246,.5);
+  background:rgba(139,92,246,.06);
+}
+
+.option input:checked + .option-content{
+  border-color:#8b5cf6;
+  background:rgba(139,92,246,.13);
+  box-shadow:0 0 0 1px rgba(139,92,246,.16);
+}
+
+.option input:checked + .option-content .option-letter{
+  background:#8b5cf6;
+  color:white;
+  border-color:#8b5cf6;
+}
+
+.submit-area{
+  text-align:center;
+  margin:45px 0 20px;
+}
+
+.submit-btn,
+.reset-btn{
+  border:0;
+  cursor:pointer;
+  border-radius:14px;
+  padding:15px 25px;
+  font-family:Inter,sans-serif;
+  font-weight:800;
+  font-size:14px;
+}
+
+.submit-btn{
+  background:linear-gradient(135deg,#7c3aed,#a855f7);
+  color:white;
+  box-shadow:0 12px 35px rgba(139,92,246,.25);
+}
+
+.submit-btn:hover{
+  transform:translateY(-1px);
+}
+
+.reset-btn{
+  background:#242436;
+  color:#ddd9e8;
+  margin-top:15px;
+}
+
+.result{
+  display:none;
+  margin-top:35px;
+  background:linear-gradient(145deg,#131322,#0e0e19);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+
+.result.show{
+  display:block;
+}
+
+.result-head{
+  text-align:center;
+  padding-bottom:25px;
+  border-bottom:1px solid var(--border);
+}
+
+.score{
+  font-family:Sora,sans-serif;
+  font-size:55px;
+  font-weight:800;
+}
+
+.score-label{
+  color:var(--muted);
+}
+
+.result-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:22px 0;
+}
+
+.result-card{
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:15px;
+  text-align:center;
+}
+
+.result-card strong{
+  display:block;
+  font-size:21px;
+}
+
+.result-card span{
+  font-size:11px;
+  color:var(--muted);
+}
+
+.domain-results{
+  display:grid;
+  gap:10px;
+  margin-top:25px;
+}
+
+.domain-result{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--border);
+  padding:13px 15px;
+  border-radius:13px;
+}
+
+.domain-result span{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.review{
+  margin-top:30px;
+}
+
+.review h3{
+  font-family:Sora,sans-serif;
+}
+
+.review-item{
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:17px;
+  margin:10px 0;
+}
+
+.review-item.correct{
+  border-color:rgba(52,211,153,.35);
+}
+
+.review-item.incorrect{
+  border-color:rgba(251,113,133,.35);
+}
+
+.review-q{
+  font-weight:700;
+  margin-bottom:9px;
+}
+
+.review-answer{
+  font-size:13px;
+  color:#c9c5d5;
+}
+
+.correct-text{
+  color:var(--green);
+}
+
+.incorrect-text{
+  color:var(--red);
+}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:35px 22px;
+  color:var(--muted);
+  text-align:center;
+  font-size:13px;
+}
+
+@media(max-width:800px){
+  .info-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .result-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .exam-top{
+    top:62px;
+  }
+}
+
+@media(max-width:520px){
+  .nav{
+    padding:15px;
+  }
+
+  .hero{
+    padding-top:40px;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr 1fr;
+    padding:0 15px;
+  }
+
+  .exam-wrap{
+    padding:0 15px;
+  }
+
+  .question{
+    padding:18px;
+  }
+
+  .timer{
+    font-size:21px;
+  }
+
+  .progress-info{
+    font-size:11px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a href="international-exams.html" class="logo">
+      youdidit<span>.az</span>
+    </a>
+
+    <a href="international-exams.html" class="back">
+      ← International Exams
+    </a>
+  </div>
+</header>
+
+<section class="hero">
+
+  <span class="badge">PMP® 2026-ALIGNED PRACTICE EXAM</span>
+
+  <h1>Project Management Professional<br>100-Question Full Practice Exam</h1>
+
+  <p>
+    A challenging English-language PMP-style simulation focused on
+    scenario-based decision making, leadership, delivery, value,
+    governance, AI, sustainability and business outcomes.
+  </p>
+
+</section>
+
+<section class="info-grid">
+
+  <div class="info">
+    <strong>100</strong>
+    <span>Questions</span>
+  </div>
+
+  <div class="info">
+    <strong>120 min</strong>
+    <span>Practice Time</span>
+  </div>
+
+  <div class="info">
+    <strong>33 / 41 / 26</strong>
+    <span>People / Process / Business</span>
+  </div>
+
+  <div class="info">
+    <strong>1</strong>
+    <span>Correct answer per question</span>
+  </div>
+
+</section>
+
+<section class="notice">
+
+  <div class="notice-box">
+    <strong>Important:</strong>
+    This is an original Youdidit.az practice exam. It does not reproduce
+    proprietary PMI examination questions. The practice structure follows
+    the current PMP domain framework and emphasizes realistic project
+    scenarios rather than memorization.
+  </div>
+
+</section>
+
+<main class="exam-wrap">
+
+  <div class="exam-top">
+
+    <div class="exam-top-row">
+
+      <div>
+        <div style="font-size:11px;color:#9f9bad;text-transform:uppercase;letter-spacing:.7px;">
+          Time remaining
+        </div>
+
+        <div id="timer" class="timer">
+          120:00
+        </div>
+      </div>
+
+      <div class="progress-info">
+        <div id="answeredText">0 / 100 answered</div>
+        <div id="progressText">0%</div>
+      </div>
+
+    </div>
+
+    <div class="progress">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+
+  </div>
+
+  <form id="examForm">
+
+    <div id="questionsContainer"></div>
+
+    <div class="submit-area">
+
+      <button type="button" class="submit-btn" id="submitBtn">
+        Submit Practice Exam
+      </button>
+
+    </div>
+
+  </form>
+
+  <section id="result" class="result">
+
+    <div class="result-head">
+
+      <div class="score" id="scoreText">0%</div>
+
+      <div class="score-label">
+        Final Practice Result
+      </div>
+
+    </div>
+
+    <div class="result-grid">
+
+      <div class="result-card">
+        <strong id="correctCount">0</strong>
+        <span>Correct</span>
+      </div>
+
+      <div class="result-card">
+        <strong id="wrongCount">0</strong>
+        <span>Incorrect</span>
+      </div>
+
+      <div class="result-card">
+        <strong id="unansweredCount">0</strong>
+        <span>Unanswered</span>
+      </div>
+
+      <div class="result-card">
+        <strong id="timeUsed">—</strong>
+        <span>Time Used</span>
+      </div>
+
+    </div>
+
+    <div class="domain-results">
+
+      <div class="domain-result">
+        <strong>People</strong>
+        <span id="peopleResult">0 / 33</span>
+      </div>
+
+      <div class="domain-result">
+        <strong>Process</strong>
+        <span id="processResult">0 / 41</span>
+      </div>
+
+      <div class="domain-result">
+        <strong>Business Environment</strong>
+        <span id="businessResult">0 / 26</span>
+      </div>
+
+    </div>
+
+    <div class="review">
+
+      <h3>Question Review</h3>
+
+      <div id="reviewContainer"></div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:30px;">
+
+      <button class="reset-btn" id="resetBtn">
+        Retake Practice Exam
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Youdidit.az — Education • Exams • Career • Development
+</footer>
+
+<script>
+
+const QUESTIONS = [
+
+/* =========================
+   PEOPLE — 33 QUESTIONS
+========================= */
+
+{
+domain:"People",
+q:"A project team has two senior engineers who strongly disagree about the architecture for a critical component. Both have valid technical arguments, and the disagreement is beginning to affect the rest of the team. What should the project manager do FIRST?",
+options:[
+"Ask the sponsor to select the architecture so the disagreement ends quickly.",
+"Facilitate a structured discussion using agreed technical and project criteria.",
+"Allow the engineers to continue debating until one develops stronger evidence.",
+"Select the architecture based on the option with the lowest implementation cost."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A distributed agile team has started missing commitments because several members are frequently unavailable during collaboration windows. What should the project manager do FIRST?",
+options:[
+"Replace the members who are frequently unavailable.",
+"Increase the number of mandatory meetings.",
+"Investigate the working constraints and jointly establish effective collaboration agreements.",
+"Ask the product owner to reduce the team's backlog."
+],
+a:2
+},
+
+{
+domain:"People",
+q:"A newly assigned team member has strong domain knowledge but lacks experience with the project's technology stack. What should the project manager do?",
+options:[
+"Assign only low-risk work until the project ends.",
+"Create a development plan combining coaching, learning and progressively complex assignments.",
+"Remove the person from the project until formal training is completed.",
+"Ask another team member to permanently perform the technical work."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A key stakeholder says the project team is delivering outputs but not addressing the stakeholder's business expectations. What should the project manager do NEXT?",
+options:[
+"Review the stakeholder's expectations and reconnect them to the agreed outcomes and success criteria.",
+"Ask the team to increase its delivery speed.",
+"Escalate the stakeholder's concern directly to the sponsor.",
+"Change the project scope immediately."
+],
+a:0
+},
+
+{
+domain:"People",
+q:"An experienced agile team repeatedly asks the project manager to approve routine technical decisions. What is the BEST response?",
+options:[
+"Approve all decisions personally to avoid delays.",
+"Escalate the decisions to the sponsor.",
+"Clarify decision boundaries and empower the team to make decisions within them.",
+"Require the product owner to approve every technical decision."
+],
+a:2
+},
+
+{
+domain:"People",
+q:"During a retrospective, several team members avoid mentioning problems because they believe management may blame them. What should the project manager do?",
+options:[
+"Cancel retrospectives until the team becomes more comfortable.",
+"Establish psychological safety and focus discussions on learning and system improvement.",
+"Ask team members to submit anonymous complaints after every sprint.",
+"Require the team to document who caused each problem."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"Two senior stakeholders have competing priorities and are attempting to influence the team independently. What should the project manager do FIRST?",
+options:[
+"Follow the stakeholder with the higher organizational position.",
+"Ask the team to decide which stakeholder is correct.",
+"Facilitate alignment around shared objectives, constraints and decision criteria.",
+"Pause the project until both stakeholders reach agreement privately."
+],
+a:2
+},
+
+{
+domain:"People",
+q:"A highly motivated team member's performance has recently declined after being assigned repetitive work. What should the project manager do FIRST?",
+options:[
+"Remove the person from the project.",
+"Discuss the situation privately and understand the underlying motivation and work needs.",
+"Give the person additional work to increase productivity.",
+"Report the performance decline to the functional manager."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A sponsor announces a change in strategic priorities that may affect the project's direction. What should the project manager do FIRST?",
+options:[
+"Immediately stop all project work.",
+"Assess the implications and determine the appropriate governance and decision path.",
+"Continue execution and address the issue during project closure.",
+"Ask the team to decide whether the project should continue."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A multicultural project team interprets direct communication differently, causing repeated misunderstandings. What should the project manager do?",
+options:[
+"Require everyone to use the same communication style.",
+"Establish inclusive working agreements and adapt communication to team needs.",
+"Move all communication to written channels.",
+"Ask the most experienced team member to resolve cultural disagreements."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A project manager identifies a significant capability gap that may affect delivery. What should happen FIRST?",
+options:[
+"Assign the work to the strongest team member.",
+"Assess the capability gap and determine the appropriate development or staffing response.",
+"Reduce the project's quality requirements.",
+"Delay the project until a replacement is found."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A developer openly admits that an implementation mistake caused a defect. What should the project manager do FIRST?",
+options:[
+"Record the developer's mistake for future performance evaluation.",
+"Focus on identifying the cause and improving the process while addressing the defect.",
+"Ask the developer to work additional hours without compensation.",
+"Escalate the incident to the sponsor."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A stakeholder complains that project updates are too detailed and difficult to interpret. What should the project manager do?",
+options:[
+"Stop sending status reports.",
+"Provide all stakeholders with the same detailed technical report.",
+"Tailor communication to the stakeholder's information needs and decision requirements.",
+"Ask the stakeholder to obtain information from the project team."
+],
+a:2
+},
+
+{
+domain:"People",
+q:"A team member repeatedly interrupts colleagues during meetings and prevents quieter members from contributing. What should the project manager do?",
+options:[
+"Remove the person from future meetings.",
+"Address the behavior privately and reinforce agreed collaboration norms.",
+"Ignore the behavior because the person is technically valuable.",
+"Ask the sponsor to intervene."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A mature agile team consistently meets its commitments and resolves most impediments independently. What should the project manager do?",
+options:[
+"Increase managerial approval requirements.",
+"Continue providing direction on every task.",
+"Support autonomy while remaining available for escalation and organizational impediments.",
+"Reduce stakeholder communication."
+],
+a:2
+},
+
+{
+domain:"People",
+q:"A team member raises a concern that a supplier may be receiving preferential treatment from an internal decision maker. What should the project manager do FIRST?",
+options:[
+"Ignore the concern unless financial loss is proven.",
+"Investigate the concern through the appropriate ethical and governance channels.",
+"Publicly confront the decision maker.",
+"Terminate the supplier immediately."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A stakeholder has high organizational influence but limited day-to-day interest in the project. What is the most appropriate engagement approach?",
+options:[
+"Provide sufficient information and engagement to maintain support without unnecessary operational detail.",
+"Invite the stakeholder to every team meeting.",
+"Communicate only when a problem occurs.",
+"Allow the stakeholder to directly manage project activities."
+],
+a:0
+},
+
+{
+domain:"People",
+q:"Two team members have a personal disagreement that is affecting collaboration. What should the project manager do FIRST?",
+options:[
+"Separate the team members permanently.",
+"Discuss the situation with the individuals and focus on interests, facts and project impact.",
+"Ask the sponsor to select which person should remain.",
+"Ignore the issue unless it affects the schedule."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A project manager delegates responsibility for a work package to a senior team member. Which action BEST supports effective delegation?",
+options:[
+"Transfer responsibility without authority to preserve management control.",
+"Define expected outcomes, decision boundaries and accountability while allowing autonomy.",
+"Require approval for every task performed.",
+"Retain all decisions and delegate only execution."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A new executive stakeholder joins halfway through the project. What should the project manager do FIRST?",
+options:[
+"Send the stakeholder every historical project document.",
+"Assess the stakeholder's influence, interests, expectations and information needs.",
+"Ask the sponsor to manage the new stakeholder.",
+"Change the stakeholder register after the project is completed."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"An AI tool used by the project team generates a recommendation that conflicts with expert judgment. What should the project manager do?",
+options:[
+"Accept the AI recommendation because it is data-driven.",
+"Reject all AI-generated information permanently.",
+"Validate the recommendation using appropriate data, context and human expertise before acting.",
+"Ask the AI tool to make the final project decision."
+],
+a:2
+},
+
+{
+domain:"People",
+q:"A team cannot reach consensus on a decision after several discussions. What should the project manager do NEXT?",
+options:[
+"Select the option personally.",
+"Use agreed decision criteria and an appropriate decision-making method to reach a transparent conclusion.",
+"Escalate every disagreement to the sponsor.",
+"Delay the decision indefinitely."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"Several team members report sustained workload pressure and reduced energy. What should the project manager do FIRST?",
+options:[
+"Increase overtime temporarily.",
+"Assess workload, constraints and root causes and adjust work where appropriate.",
+"Reduce quality controls.",
+"Wait until performance metrics decline."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A stakeholder repeatedly describes the project as a technology implementation, while the approved objective focuses on customer retention. What should the project manager do?",
+options:[
+"Allow the stakeholder to define the project objective.",
+"Realign the stakeholder and team around the approved outcome and success measures.",
+"Add technology deliverables to the scope.",
+"Remove the stakeholder from the project."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A team member strongly resists a new delivery approach because they believe it increases risk. What should the project manager do FIRST?",
+options:[
+"Require immediate compliance.",
+"Understand the concern, review evidence and involve the team in evaluating the change.",
+"Remove the team member from the project.",
+"Delay the change until project closure."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A team member is meeting technical objectives but receives recurring feedback about communication problems. What should the project manager do?",
+options:[
+"Ignore the feedback because technical objectives are being met.",
+"Provide specific feedback, agree on improvement goals and follow up on progress.",
+"Reduce the person's responsibilities immediately.",
+"Ask another team member to communicate on their behalf."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"Two project teams require the same specialist during overlapping periods. What should the project manager do FIRST?",
+options:[
+"Assign the specialist to the project with the larger budget.",
+"Use objective priorities, constraints and organizational resource processes to resolve the conflict.",
+"Ask the specialist to work both schedules simultaneously.",
+"Allow the teams to negotiate privately without project oversight."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A junior team member identifies a risk earlier than senior members and reports it immediately. What should the project manager do?",
+options:[
+"Thank the member and encourage early risk transparency while assessing the risk appropriately.",
+"Ask the member to wait until the next formal review.",
+"Prevent junior members from reporting risks directly.",
+"Escalate the member's concern without investigation."
+],
+a:0
+},
+
+{
+domain:"People",
+q:"A stakeholder in another country prefers concise written updates, while the project team normally uses long technical reports. What should the project manager do?",
+options:[
+"Send the same report because consistency is more important than preference.",
+"Tailor the communication while preserving the information required for decisions.",
+"Stop communicating with the stakeholder directly.",
+"Ask the stakeholder to adapt to the team's preferred format."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A new team member joins during a critical delivery period. What is the BEST approach?",
+options:[
+"Give the person urgent work immediately without orientation.",
+"Provide targeted onboarding, clarify responsibilities and pair the person with appropriate support.",
+"Exclude the person until the next phase.",
+"Assign the person only administrative tasks."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A retrospective identifies that repeated approval delays are caused by unclear decision ownership. What should the project manager do?",
+options:[
+"Add more approval meetings.",
+"Clarify decision rights and update working agreements or governance mechanisms.",
+"Escalate every decision to the sponsor.",
+"Reduce stakeholder participation."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"Two stakeholders provide conflicting requirements for the same feature. What should the project manager do FIRST?",
+options:[
+"Implement both requirements regardless of cost.",
+"Identify the underlying business needs and facilitate prioritization using agreed criteria.",
+"Choose the requirement submitted first.",
+"Ask the development team to decide."
+],
+a:1
+},
+
+{
+domain:"People",
+q:"A project team questions whether its work is creating meaningful value. What should the project manager do?",
+options:[
+"Focus only on completing the remaining tasks.",
+"Reconnect the team to the project's purpose, expected outcomes and customer or organizational value.",
+"Increase reporting requirements.",
+"Ask the sponsor to motivate the team."
+],
+a:1
+},
+
+/* =========================
+   PROCESS — 41 QUESTIONS
+========================= */
+
+{
+domain:"Process",
+q:"A project has stable requirements, a well-understood technology and strict regulatory documentation requirements. Which delivery approach is MOST appropriate?",
+options:[
+"Fully adaptive delivery with requirements discovered only during execution.",
+"Predictive delivery with controlled planning and formal change management.",
+"Unstructured delivery with decisions made as issues arise.",
+"Continuous delivery without baseline documentation."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"In an agile project, several backlog items have similar business value, but one removes a major dependency for future high-value work. What should influence prioritization?",
+options:[
+"Only the estimated development effort.",
+"The dependency and its effect on future value, risk and flow.",
+"The order in which developers prefer to implement the items.",
+"The age of the backlog items."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"During a sprint, an executive requests a new feature that is valuable but unrelated to the sprint goal. What should happen?",
+options:[
+"Immediately insert the feature into the sprint.",
+"Ask developers to work overtime to include it.",
+"Have the product owner evaluate and prioritize it in the backlog while protecting the sprint goal.",
+"Reject the feature permanently."
+],
+a:2
+},
+
+{
+domain:"Process",
+q:"In a predictive project, a customer requests a significant change to an approved requirement. What should the project manager do FIRST?",
+options:[
+"Implement it because the customer requested it.",
+"Assess the impact and process the request through integrated change control.",
+"Ask the team to absorb the work.",
+"Update the schedule before analyzing the impact."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A feature repeatedly passes development review but fails customer acceptance because the expected behavior is interpreted differently by the team and customer. What should the project manager do?",
+options:[
+"Increase testing volume without clarifying expectations.",
+"Clarify measurable acceptance criteria with the appropriate stakeholders.",
+"Ask the customer to accept the current behavior.",
+"Remove the feature from the release."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A project has an earned value of $80,000 and actual cost of $100,000. What is the cost performance index?",
+options:[
+"0.80",
+"1.25",
+"0.20",
+"1.00"
+],
+a:0
+},
+
+{
+domain:"Process",
+q:"A project has an earned schedule indicator showing that progress is substantially behind the planned schedule. What should the project manager do FIRST?",
+options:[
+"Immediately add resources without analysis.",
+"Analyze the cause of the schedule variance and determine an appropriate response.",
+"Reduce the project scope without approval.",
+"Declare the project late."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A previously identified risk has occurred and is now affecting project delivery. What should the project manager do?",
+options:[
+"Continue monitoring it as a risk only.",
+"Manage it as an issue using the appropriate issue management process.",
+"Remove it from the risk register without documentation.",
+"Wait for the next phase before responding."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A project team identifies a threat that can be eliminated by changing the technical design before implementation. Which risk response is MOST appropriate?",
+options:[
+"Accept",
+"Transfer",
+"Avoid",
+"Share"
+],
+a:2
+},
+
+{
+domain:"Process",
+q:"A project team contracts with a specialist supplier to take responsibility for a specific financial risk under defined contractual terms. Which response is being used?",
+options:[
+"Mitigate",
+"Transfer",
+"Accept",
+"Exploit"
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A team identifies an opportunity that could substantially improve project value if additional resources are dedicated to it. Which response seeks to ensure the opportunity occurs?",
+options:[
+"Exploit",
+"Accept",
+"Transfer",
+"Avoid"
+],
+a:0
+},
+
+{
+domain:"Process",
+q:"The same type of defect appears in several releases despite repeated corrections. What should the project manager encourage?",
+options:[
+"More final inspection only.",
+"Root-cause analysis and preventive process improvement.",
+"Removal of all quality controls.",
+"Acceptance of the defect as unavoidable."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"An agile team's velocity has decreased for three consecutive iterations. What should the team do FIRST?",
+options:[
+"Increase the team's target velocity.",
+"Inspect the causes with the team and adapt the way of working.",
+"Add more backlog items.",
+"Compare individual developer productivity."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A hybrid project has an agile software component and a predictive infrastructure component. Integration testing reveals conflicting assumptions between the two workstreams. What should the project manager do?",
+options:[
+"Let each team resolve the problem independently.",
+"Facilitate integration planning and clarify interfaces, dependencies and responsibilities.",
+"Convert the entire project to predictive delivery immediately.",
+"Delay integration testing until final deployment."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A project has high uncertainty about customer needs but can deliver small increments for feedback. Which approach is MOST suitable?",
+options:[
+"Adaptive",
+"Fully predictive",
+"Sequential without feedback",
+"Contract-driven only"
+],
+a:0
+},
+
+{
+domain:"Process",
+q:"A project is subject to highly detailed legal requirements that are unlikely to change during execution. Which approach is generally more appropriate?",
+options:[
+"Predictive planning with controlled changes.",
+"Unstructured experimentation.",
+"Continuous reprioritization without baselines.",
+"Ad hoc delivery."
+],
+a:0
+},
+
+{
+domain:"Process",
+q:"An agile epic is too large to provide useful feedback within a single iteration. What should the team do?",
+options:[
+"Estimate the epic more precisely and keep it intact.",
+"Split it into smaller vertical slices that can deliver meaningful value.",
+"Move the epic to project closure.",
+"Assign the epic to multiple developers without decomposition."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"Which condition BEST indicates that an increment is ready according to a team's Definition of Done?",
+options:[
+"Most development tasks are completed.",
+"The product owner believes the feature looks acceptable.",
+"The agreed quality, testing, documentation and other completion criteria have been satisfied.",
+"The team has no remaining meetings."
+],
+a:2
+},
+
+{
+domain:"Process",
+q:"During a product demonstration, a stakeholder rejects a feature because it does not meet an expected business rule. What should the team examine FIRST?",
+options:[
+"The team's working hours.",
+"The acceptance criteria and shared understanding of the requirement.",
+"The project budget only.",
+"The number of developers assigned."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A critical-path activity is delayed by five days. What should the project manager assess FIRST?",
+options:[
+"Whether the delay changes the project's schedule forecast and available recovery options.",
+"Whether all non-critical activities should be cancelled.",
+"Whether the team should work every weekend.",
+"Whether the project should immediately be terminated."
+],
+a:0
+},
+
+{
+domain:"Process",
+q:"A stakeholder asks a team member to add several small features directly during development without formal evaluation. What should the project manager do?",
+options:[
+"Allow the changes because each is individually small.",
+"Evaluate the requests through the established scope and change process.",
+"Ask the team to hide the changes from the baseline.",
+"Add the changes only if the team has spare time."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"Several identified risks share the same underlying dependency. What should the project manager do?",
+options:[
+"Treat each risk as completely independent.",
+"Analyze the common cause and consider a coordinated response.",
+"Delete all but the highest-rated risk.",
+"Transfer every risk automatically."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A supplier delivers components that repeatedly fail agreed quality criteria. What should the project manager do FIRST?",
+options:[
+"Immediately terminate the contract.",
+"Review contractual requirements and evidence, then work through the appropriate supplier management process.",
+"Accept the components to protect the schedule.",
+"Rewrite the quality requirements."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"An AI forecasting tool predicts a significant schedule risk using historical project data. What should the project manager do?",
+options:[
+"Treat the prediction as a confirmed issue.",
+"Validate the data, assumptions and context before deciding on action.",
+"Ignore all AI-generated information.",
+"Automatically change the baseline."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A development team cannot start a high-value item because another team's interface is not ready. What should the project manager or product team do?",
+options:[
+"Track and actively manage the dependency while considering sequencing or alternative work.",
+"Remove the high-value item permanently.",
+"Wait without recording the dependency.",
+"Assign the blocked work to the same team regardless of capability."
+],
+a:0
+},
+
+{
+domain:"Process",
+q:"A product increment is technically complete, but early users indicate that it solves a less important problem than expected. What should the team do?",
+options:[
+"Continue building the original roadmap unchanged.",
+"Use the feedback to reassess the value hypothesis and reprioritize future work.",
+"Stop collecting user feedback.",
+"Declare the product successful because the increment was delivered."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A retrospective identifies repeated approval steps that add little value and create delays. What is the BEST response?",
+options:[
+"Keep all approvals because more controls are always safer.",
+"Identify the purpose of each step and streamline unnecessary process overhead.",
+"Remove all governance.",
+"Add another approval step to compensate."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A new regulatory requirement applies to a project deliverable already in development. What should the project manager do FIRST?",
+options:[
+"Ignore the requirement until audit time.",
+"Assess the compliance impact and determine required changes through governance.",
+"Ask developers to implement it informally.",
+"Remove the affected deliverable."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"Customer feedback shows that a lower-priority backlog item has become strategically important. What should happen?",
+options:[
+"Keep the backlog unchanged because priorities were already established.",
+"Reevaluate backlog priority based on current value, risk and strategic context.",
+"Add the item without removing anything else.",
+"Ask developers to select the priority."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A team reports a high number of completed features, but the intended business outcome has not improved. What should the project manager emphasize?",
+options:[
+"Number of tasks completed as the primary success measure.",
+"Outcome and value measures connected to the project's objectives.",
+"Hours worked by the team.",
+"Number of status reports produced."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A project has planned value of $120,000, earned value of $100,000 and actual cost of $110,000. What is the cost performance index?",
+options:[
+"0.91",
+"1.09",
+"0.83",
+"1.20"
+],
+a:0
+},
+
+{
+domain:"Process",
+q:"A project has earned value of $90,000 and actual cost of $75,000. What does this indicate?",
+options:[
+"The project has a CPI below 1.",
+"The project has a CPI above 1.",
+"The project is behind schedule by definition.",
+"The project has no cost information."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A project experiences frequent approved changes, but the delivery team cannot explain why change volume keeps increasing. What should the project manager do?",
+options:[
+"Reject future changes automatically.",
+"Analyze the pattern and underlying causes of the changes.",
+"Freeze stakeholder communication.",
+"Increase the project budget without analysis."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A customer acceptance test fails because a contractual requirement was not satisfied. What should the project manager do FIRST?",
+options:[
+"Ask the customer to waive the requirement.",
+"Determine the gap, its cause and the required corrective action.",
+"Close the project because testing failed.",
+"Change the contract informally."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A product has technically met its requirements, but adoption is significantly below expectations. What should the project team examine?",
+options:[
+"Only the development team's productivity.",
+"User needs, adoption barriers and whether the delivered solution addresses the intended outcome.",
+"Only the project schedule.",
+"Whether more status reports are required."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"When selecting a procurement strategy for a specialized component, what should be considered FIRST?",
+options:[
+"Only the lowest initial price.",
+"Market conditions, risk allocation, requirements and the organization's procurement policies.",
+"The supplier's marketing materials.",
+"The preference of the project manager."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A project team wants to reduce defects by detecting them earlier rather than relying on final inspection. Which approach is MOST aligned with quality management?",
+options:[
+"Build quality into the process and prevent defects where possible.",
+"Increase final inspection only.",
+"Reduce testing.",
+"Accept a higher defect rate."
+],
+a:0
+},
+
+{
+domain:"Process",
+q:"A project manager needs to shorten the schedule without changing scope. Which technique adds resources to critical activities when feasible?",
+options:[
+"Fast tracking",
+"Crashing",
+"Rolling wave planning",
+"Resource smoothing"
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A project manager overlaps activities that were originally planned sequentially to shorten the schedule, accepting additional coordination risk. What technique is this?",
+options:[
+"Crashing",
+"Fast tracking",
+"Resource leveling",
+"Reserve analysis"
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A risk has a high probability and high impact, and the team has identified a practical response that reduces both exposure and uncertainty. What should the project manager do?",
+options:[
+"Document the risk and take no action.",
+"Prioritize and implement the appropriate response while monitoring residual exposure.",
+"Remove the risk from the register.",
+"Wait until the risk occurs."
+],
+a:1
+},
+
+{
+domain:"Process",
+q:"A project is delivering its contracted outputs, but the outputs no longer support the organization's current strategy. What should the project manager do?",
+options:[
+"Continue without discussion because the baseline is approved.",
+"Raise the strategic misalignment through the appropriate governance process.",
+"Change the project's objectives independently.",
+"Hide the issue to protect project performance."
+],
+a:1
+},
+
+/* =========================
+   BUSINESS ENVIRONMENT — 26
+========================= */
+
+{
+domain:"Business Environment",
+q:"A new government regulation is expected to affect a major project deliverable. What should the project manager do FIRST?",
+options:[
+"Wait until the regulation becomes an audit finding.",
+"Assess the regulatory impact with the appropriate compliance stakeholders.",
+"Ignore the regulation because the project was already approved.",
+"Change the product immediately without analysis."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"The organization's strategy changes after a project has already started. What should the project manager do?",
+options:[
+"Continue exactly as planned because the project baseline cannot be questioned.",
+"Assess continued strategic alignment and escalate the decision through governance.",
+"Change the project objectives independently.",
+"Stop all work permanently."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A major market shift reduces the expected demand for the product under development. What should the project manager do?",
+options:[
+"Ignore market information until delivery.",
+"Assess the effect on the business case, value and expected benefits.",
+"Increase scope to compensate automatically.",
+"Continue spending at the original rate without review."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A project will process sensitive customer information using a new digital platform. What should the project manager ensure?",
+options:[
+"Only the development team reviews the data.",
+"Appropriate privacy, security and regulatory requirements are identified and addressed.",
+"Customer data is retained indefinitely.",
+"Security controls are added only after launch."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"An organization plans to use generative AI to support project decisions. Which governance consideration is MOST important?",
+options:[
+"Allowing the AI system to make all final decisions.",
+"Establishing appropriate controls for data, transparency, validation, privacy and accountability.",
+"Using AI outputs without human review.",
+"Restricting AI use to presentations only."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A project business case assumed a specific financial benefit, but new evidence suggests the benefit may be substantially lower. What should the project manager do?",
+options:[
+"Continue without changing the business case.",
+"Provide transparent analysis so governance can reassess the investment and expected value.",
+"Increase the forecasted benefit to maintain approval.",
+"Remove the benefit measure from reporting."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A project is nearing completion, but responsibility for realizing the intended business benefits has not been clearly assigned. What should happen?",
+options:[
+"Close the project and let the organization determine ownership later.",
+"Clarify benefits ownership and transition responsibilities before closure.",
+"Assign benefits ownership to the project team permanently.",
+"Ignore benefits because the deliverables are complete."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A newly introduced regulatory requirement may delay product release. What should the project manager do?",
+options:[
+"Release first and address compliance later.",
+"Assess the compliance requirement, schedule impact and governance options before deciding.",
+"Remove the regulatory requirement from the project.",
+"Ask the customer to accept the risk."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"An organization has announced sustainability targets that affect project procurement decisions. What should the project manager do?",
+options:[
+"Ignore sustainability because it is outside project delivery.",
+"Integrate applicable sustainability requirements into planning, procurement and decision making.",
+"Select the most expensive supplier to demonstrate commitment.",
+"Change project objectives without authorization."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"Customer behavior changes significantly after a competitor launches a new service. What should the project team do?",
+options:[
+"Continue unchanged because the original business case was approved.",
+"Assess the change's impact on value, benefits and strategic alignment.",
+"Increase the project scope automatically.",
+"Stop all stakeholder engagement."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A company restructures several departments while a major cross-functional project is underway. What should the project manager do FIRST?",
+options:[
+"Assume all responsibilities remain unchanged.",
+"Assess the organizational change's impact on stakeholders, resources, governance and delivery.",
+"Replace the entire project team.",
+"Pause the project indefinitely."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"An internal audit identifies a significant process nonconformance that could affect regulatory compliance. What should the project manager do?",
+options:[
+"Hide the finding until project closure.",
+"Assess and address the nonconformance through the organization's corrective and governance processes.",
+"Delete the audit finding.",
+"Continue without documenting the issue."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"The organization reduces the project's available budget because of a broader financial constraint. What should the project manager do FIRST?",
+options:[
+"Continue spending at the original rate.",
+"Assess scope, value, risks and constraints and present viable options through governance.",
+"Reduce quality without stakeholder approval.",
+"Remove the highest-cost team members immediately."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"An organization is considering entering a new international market through the project's product. Which factor should receive appropriate attention?",
+options:[
+"Only the development team's preferred technology.",
+"Regulatory, cultural, market, operational and strategic considerations.",
+"Only the launch date.",
+"Only the project's internal reporting format."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A new executive sponsor takes responsibility for the project and questions whether the original objectives remain relevant. What should the project manager do?",
+options:[
+"Defend the original objectives without reviewing context.",
+"Review the business case, strategic alignment and expected outcomes with the new sponsor.",
+"Change the objectives independently.",
+"Stop reporting project performance."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A governance committee changes its approval thresholds during project execution. What should the project manager do?",
+options:[
+"Continue using the old thresholds.",
+"Understand the updated governance requirements and incorporate them into project decision processes.",
+"Ignore the committee because the project was previously approved.",
+"Ask the team to determine which thresholds apply."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A completed product is technically successful, but the organization is not realizing the expected business benefit. What should the project manager or benefits owner examine?",
+options:[
+"Only whether all tasks were completed.",
+"Whether adoption, operational readiness and benefit assumptions are being realized.",
+"Only the number of project meetings.",
+"Whether the project documentation has enough pages."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A competitor introduces technology that may make the project's planned solution less attractive before launch. What should the project manager do?",
+options:[
+"Ignore the competitor until launch.",
+"Assess the external change and its potential effect on the project's value and strategic case.",
+"Copy the competitor's solution immediately.",
+"Increase project scope without analysis."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A sustainability initiative conflicts with a short-term cost-saving option under consideration for the project. What should the project manager do?",
+options:[
+"Choose the cheapest option automatically.",
+"Evaluate the decision against approved sustainability objectives, business value, risks and applicable requirements.",
+"Ignore sustainability metrics.",
+"Let an individual team member decide."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A proposed AI feature would require processing personal customer data. What should be considered before implementation?",
+options:[
+"Only model accuracy.",
+"Privacy, consent, security, regulatory obligations, data governance and appropriate human oversight.",
+"Only development cost.",
+"Whether competitors already use AI."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"Which activity BEST helps a project remain responsive to external changes that could affect its value?",
+options:[
+"Environmental scanning and regular assessment of relevant external factors.",
+"Freezing the business case permanently.",
+"Reducing stakeholder engagement.",
+"Limiting project reporting to internal metrics."
+],
+a:0
+},
+
+{
+domain:"Business Environment",
+q:"An organization's portfolio committee decides to prioritize another initiative because it has a stronger current strategic contribution. What should the project manager do?",
+options:[
+"Continue the project without acknowledging the portfolio decision.",
+"Assess the implications and support the governance decision regarding the project's future.",
+"Hide project information from the portfolio committee.",
+"Increase spending to make the project harder to cancel."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A project has no clearly identified owner for a major expected business benefit. What should the project manager do?",
+options:[
+"Assume the project manager owns the benefit indefinitely.",
+"Facilitate identification of the appropriate benefit owner and clarify transition responsibilities.",
+"Remove the benefit from the business case.",
+"Close the project immediately."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"An organization introduces a new enterprise governance policy that changes how major projects are approved. What should the project manager do?",
+options:[
+"Continue using the previous governance process.",
+"Assess the policy's applicability and update project governance accordingly.",
+"Ask the team to decide whether the policy matters.",
+"Wait until the next annual planning cycle."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"An unexpected economic change increases the cost of a critical imported component. What should the project manager do FIRST?",
+options:[
+"Ignore the change until procurement is complete.",
+"Assess cost, supply, risk and business-case implications and develop response options.",
+"Automatically reduce product quality.",
+"Cancel the project immediately."
+],
+a:1
+},
+
+{
+domain:"Business Environment",
+q:"A sponsor asks the project manager to report that the project is on track even though current evidence shows a significant risk to the expected outcome. What should the project manager do?",
+options:[
+"Report only positive information to preserve confidence.",
+"Provide accurate, transparent information and clearly explain the implications and response options.",
+"Delay the report until the risk disappears.",
+"Change the performance data."
+],
+a:1
+}
+
+];
+
+const TIME_LIMIT = 120 * 60;
+
+let remainingTime = TIME_LIMIT;
+let timerInterval = null;
+let submitted = false;
+let startTime = Date.now();
+
+const container = document.getElementById("questionsContainer");
+const timerEl = document.getElementById("timer");
+const answeredText = document.getElementById("answeredText");
+const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+
+function renderQuestions(){
+
+  let html = "";
+  let currentDomain = "";
+
+  QUESTIONS.forEach((item,index)=>{
+
+    if(item.domain !== currentDomain){
+
+      currentDomain = item.domain;
+
+      let domainNumber =
+        currentDomain === "People" ? "Domain I — People" :
+        currentDomain === "Process" ? "Domain II — Process" :
+        "Domain III — Business Environment";
+
+      html += `
+        <h2 class="domain-title">${domainNumber}</h2>
+      `;
+    }
+
+    html += `
+      <article class="question" id="question-${index+1}">
+
+        <div class="question-number">
+          QUESTION ${index+1} OF ${QUESTIONS.length}
+        </div>
+
+        <div class="question-text">
+          ${item.q}
+        </div>
+
+        ${item.options.map((option,optIndex)=>{
+
+          const letter = String.fromCharCode(65 + optIndex);
+
+          return `
+            <label class="option">
+
+              <input
+                type="radio"
+                name="question-${index}"
+                value="${optIndex}"
+                onchange="updateProgress()"
+              >
+
+              <span class="option-content">
+
+                <span class="option-letter">
+                  ${letter}
+                </span>
+
+                <span class="option-text">
+                  ${option}
+                </span>
+
+              </span>
+
+            </label>
+          `;
+
+        }).join("")}
+
+      </article>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+function updateProgress(){
+
+  let answered = 0;
+
+  QUESTIONS.forEach((_,index)=>{
+
+    const selected =
+      document.querySelector(`input[name="question-${index}"]:checked`);
+
+    if(selected){
+      answered++;
+    }
+
+  });
+
+  const percentage =
+    Math.round((answered / QUESTIONS.length) * 100);
+
+  answeredText.textContent =
+    `${answered} / ${QUESTIONS.length} answered`;
+
+  progressText.textContent =
+    `${percentage}%`;
+
+  progressBar.style.width =
+    `${percentage}%`;
+}
+
+function formatTime(seconds){
+
+  const mins =
+    Math.floor(seconds / 60);
+
+  const secs =
+    seconds % 60;
+
+  return `${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+}
+
+function updateTimer(){
+
+  if(submitted) return;
+
+  timerEl.textContent =
+    formatTime(remainingTime);
+
+  if(remainingTime <= 300){
+    timerEl.classList.add("warning");
+  }
+
+  if(remainingTime <= 60){
+    timerEl.classList.remove("warning");
+    timerEl.classList.add("danger");
+  }
+
+  if(remainingTime <= 0){
+
+    clearInterval(timerInterval);
+
+    alert(
+      "Time is up. Your practice exam will now be submitted."
+    );
+
+    submitExam(true);
+
+    return;
+  }
+
+  remainingTime--;
+}
+
+function startTimer(){
+
+  timerEl.textContent =
+    formatTime(remainingTime);
+
+  timerInterval =
+    setInterval(updateTimer,1000);
+}
+
+function getSelected(index){
+
+  const selected =
+    document.querySelector(
+      `input[name="question-${index}"]:checked`
+    );
+
+  return selected
+    ? Number(selected.value)
+    : null;
+}
+
+function submitExam(autoSubmit=false){
+
+  if(submitted) return;
+
+  if(!autoSubmit){
+
+    const answered =
+      QUESTIONS.filter((_,index)=>getSelected(index)!==null).length;
+
+    if(answered < QUESTIONS.length){
+
+      const missing =
+        QUESTIONS.length - answered;
+
+      const proceed =
+        confirm(
+          `You have ${missing} unanswered question(s). Submit anyway?`
+        );
+
+      if(!proceed) return;
+
+    }else{
+
+      const proceed =
+        confirm(
+          "Are you sure you want to submit your practice exam?"
+        );
+
+      if(!proceed) return;
+    }
+  }
+
+  submitted = true;
+
+  clearInterval(timerInterval);
+
+  const usedSeconds =
+    TIME_LIMIT - remainingTime;
+
+  let correct = 0;
+  let unanswered = 0;
+
+  const domains = {
+    "People": {
+      correct:0,
+      total:0
+    },
+    "Process": {
+      correct:0,
+      total:0
+    },
+    "Business Environment": {
+      correct:0,
+      total:0
+    }
+  };
+
+  QUESTIONS.forEach((item,index)=>{
+
+    domains[item.domain].total++;
+
+    const selected =
+      getSelected(index);
+
+    if(selected === null){
+
+      unanswered++;
+
+    }else if(selected === item.a){
+
+      correct++;
+
+      domains[item.domain].correct++;
+    }
+
+  });
+
+  const wrong =
+    QUESTIONS.length - correct - unanswered;
+
+  const percentage =
+    Math.round((correct / QUESTIONS.length) * 100);
+
+  document.getElementById("scoreText").textContent =
+    `${percentage}%`;
+
+  document.getElementById("correctCount").textContent =
+    correct;
+
+  document.getElementById("wrongCount").textContent =
+    wrong;
+
+  document.getElementById("unansweredCount").textContent =
+    unanswered;
+
+  document.getElementById("timeUsed").textContent =
+    formatTime(usedSeconds);
+
+  document.getElementById("peopleResult").textContent =
+    `${domains.People.correct} / ${domains.People.total}`;
+
+  document.getElementById("processResult").textContent =
+    `${domains.Process.correct} / ${domains.Process.total}`;
+
+  document.getElementById("businessResult").textContent =
+    `${domains["Business Environment"].correct} / ${domains["Business Environment"].total}`;
+
+  buildReview();
+
+  const result =
+    document.getElementById("result");
+
+  result.classList.add("show");
+
+  result.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+  document.querySelectorAll("input").forEach(input=>{
+    input.disabled = true;
+  });
+
+  document.getElementById("submitBtn").disabled = true;
+  document.getElementById("submitBtn").style.opacity = ".5";
+}
+
+function buildReview(){
+
+  const review =
+    document.getElementById("reviewContainer");
+
+  let html = "";
+
+  QUESTIONS.forEach((item,index)=>{
+
+    const selected =
+      getSelected(index);
+
+    const isCorrect =
+      selected === item.a;
+
+    const selectedText =
+      selected === null
+      ? "Not answered"
+      : `${String.fromCharCode(65 + selected)}. ${item.options[selected]}`;
+
+    const correctText =
+      `${String.fromCharCode(65 + item.a)}. ${item.options[item.a]}`;
+
+    html += `
+      <div class="review-item ${isCorrect ? "correct" : "incorrect"}">
+
+        <div class="review-q">
+          ${index+1}. ${item.q}
+        </div>
+
+        <div class="review-answer">
+          <div class="${isCorrect ? "correct-text" : "incorrect-text"}">
+            Your answer: ${selectedText}
+          </div>
+
+          <div class="correct-text" style="margin-top:5px;">
+            Correct answer: ${correctText}
+          </div>
+
+        </div>
+
+      </div>
+    `;
+  });
+
+  review.innerHTML = html;
+}
+
+document.getElementById("submitBtn")
+.addEventListener("click",()=>{
+
+  submitExam(false);
+
+});
+
+document.getElementById("resetBtn")
+.addEventListener("click",()=>{
+
+  location.reload();
+
+});
+
+renderQuestions();
+startTimer();
+updateProgress();
+
+</script>
+
+</body>
+</html>
