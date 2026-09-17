@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GMAT Practice Test — 64 Questions</title>
+<meta name="description" content="A free, interactive 64-question GMAT practice test covering Quant, Verbal, and Data Insights, with a built-in 128-minute timer.">
+<style>
+  * { margin: 0; }
+  body { background: #FAF8F3; }
+</style>
+</head>
+<body>
+<style>
+  #gmat-quiz {
+    --paper: #FAF8F3;
+    --ink: #1C2333;
+    --ink-soft: #4A5268;
+    --navy: #223055;
+    --navy-deep: #16203B;
+    --correct: #2F6F4E;
+    --correct-bg: #E7F2EA;
+    --wrong: #A33A2E;
+    --wrong-bg: #F7E9E6;
+    --line: #DDD6C7;
+    font-family: -apple-system, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    line-height: 1.5;
+  }
+  #gmat-quiz * { box-sizing: border-box; }
+  #gmat-quiz h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 32px 0 4px;
+    color: var(--navy-deep);
+  }
+  #gmat-quiz .subhead {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  #gmat-quiz .scorebar {
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    z-index: 5;
+  }
+  #gmat-quiz .scorebar strong { color: var(--navy-deep); font-size: 1rem; }
+  #gmat-quiz .timer-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #gmat-quiz .timer-display {
+    font-family: Georgia, serif;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy-deep);
+    min-width: 58px;
+    text-align: right;
+  }
+  #gmat-quiz .timer-display.low { color: var(--wrong); }
+  #gmat-quiz .timer-btn {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+  }
+  #gmat-quiz .timer-btn:hover { border-color: var(--navy); }
+  #gmat-quiz .timer-note {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin: -14px 0 20px;
+  }
+  #gmat-quiz .time-banner {
+    display: none;
+    background: var(--wrong-bg);
+    border: 1px solid var(--wrong);
+    color: var(--wrong);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  #gmat-quiz .time-banner.show { display: block; }
+  #gmat-quiz .progress-track {
+    height: 4px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+    flex: 1;
+    margin: 0 16px;
+  }
+  #gmat-quiz .progress-fill {
+    height: 100%;
+    background: var(--navy);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  #gmat-quiz .section-title {
+    font-family: Georgia, serif;
+    font-size: 1.2rem;
+    color: var(--navy-deep);
+    margin: 44px 0 6px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--navy-deep);
+  }
+  #gmat-quiz .passage {
+    background: #F1EEE4;
+    border-left: 3px solid var(--navy);
+    padding: 16px 18px;
+    margin: 18px 0 26px;
+    font-size: 0.93rem;
+    color: var(--ink-soft);
+    border-radius: 2px;
+  }
+  #gmat-quiz .passage strong { color: var(--ink); }
+  #gmat-quiz .question {
+    margin: 26px 0;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  #gmat-quiz .q-text {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  #gmat-quiz .q-num {
+    color: var(--navy);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  #gmat-quiz .options { display: flex; flex-direction: column; gap: 8px; }
+  #gmat-quiz .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    text-align: left;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.93rem;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  #gmat-quiz .option:hover:not(.disabled) { border-color: var(--navy); }
+  #gmat-quiz .option .letter {
+    font-weight: 700;
+    color: var(--navy);
+    min-width: 16px;
+  }
+  #gmat-quiz .option.correct { background: var(--correct-bg); border-color: var(--correct); }
+  #gmat-quiz .option.correct .letter { color: var(--correct); }
+  #gmat-quiz .option.wrong { background: var(--wrong-bg); border-color: var(--wrong); }
+  #gmat-quiz .option.wrong .letter { color: var(--wrong); }
+  #gmat-quiz .option.disabled { cursor: default; }
+  #gmat-quiz .explanation {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #F1EEE4;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+  #gmat-quiz .explanation.show { display: block; }
+  #gmat-quiz .summary {
+    margin-top: 50px;
+    padding: 28px;
+    background: var(--navy-deep);
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+  }
+  #gmat-quiz .summary .big {
+    font-family: Georgia, serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+  }
+  #gmat-quiz .summary .label { color: #B9C2D9; font-size: 0.9rem; margin-top: 4px; }
+  #gmat-quiz .reset-btn {
+    margin-top: 18px;
+    background: #fff;
+    color: var(--navy-deep);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>
+
+<div id="gmat-quiz">
+  <h1>GMAT Practice Test</h1>
+  <div class="subhead">64 questions · Quant, Verbal &amp; Data Insights · Tap an answer to check it</div>
+
+  <div class="scorebar">
+    <span>Answered: <strong id="gq-answered">0</strong>/64</span>
+    <div class="progress-track"><div class="progress-fill" id="gq-progress"></div></div>
+    <span>Score: <strong id="gq-score">0</strong></span>
+    <div class="timer-wrap">
+      <span class="timer-display" id="gq-timer">128:00</span>
+      <button class="timer-btn" id="gq-timer-start">Start</button>
+      <button class="timer-btn" id="gq-timer-reset">Reset</button>
+    </div>
+  </div>
+  <div class="timer-note">Recommended time: 128 minutes total (~2 min/question — the official GMAT Focus average pace across 64 questions).</div>
+
+  <div class="time-banner" id="gq-time-banner">Time's up — you can keep answering, but this is where a real GMAT section would end.</div>
+
+  <div id="gq-root"></div>
+
+  <div class="summary" id="gq-summary" style="display:none;">
+    <div class="big" id="gq-final-score">0/64</div>
+    <div class="label">Final score</div>
+    <button class="reset-btn" id="gq-reset">Retake test</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var DATA = [
+    { sec: "Quantitative Reasoning — Problem Solving", passage: null, items: [
+      { q: "If x + 5 = 2x − 3, what is the value of x?", o: ["−8","−2","2","8","12"], a: 3, e: "x+5=2x−3 → x=8." },
+      { q: "A store sells a jacket for $120 after a 20% discount. What was the original price?", o: ["$96","$100","$140","$144","$150"], a: 4, e: "120 / 0.8 = 150." },
+      { q: "The ratio of boys to girls in a class is 3:5. If there are 40 students total, how many boys are there?", o: ["8","12","15","20","24"], a: 2, e: "3/8 × 40 = 15." },
+      { q: "What is the sum of the first 20 positive integers?", o: ["190","200","210","380","400"], a: 2, e: "n(n+1)/2 = 20×21/2 = 210." },
+      { q: "A car travels 240 miles in 4 hours. What is its average speed in mph?", o: ["40","50","60","70","80"], a: 2, e: "240/4 = 60." },
+      { q: "A rectangle's length is twice its width. If the perimeter is 60, what is the area?", o: ["100","150","200","250","300"], a: 2, e: "w=10, l=20 → area 200." },
+      { q: "What is 15% of 15% of 400?", o: ["6","9","12","36","60"], a: 1, e: "0.15×0.15×400 = 9." },
+      { q: "If 3^(x+1) = 81, what is the value of x?", o: ["1","2","3","4","5"], a: 2, e: "3^4=81 → x+1=4 → x=3." },
+      { q: "The average of five consecutive even integers is 24. What is the largest?", o: ["24","26","28","30","32"], a: 2, e: "Terms: 20,22,24,26,28 → largest is 28." },
+      { q: "A bag has 4 red and 6 blue balls. What is the probability of drawing red?", o: ["1/10","2/5","3/5","1/2","3/10"], a: 1, e: "4/10 = 2/5." },
+      { q: "If x² − 9 = 0, what are all possible values of x?", o: ["3 only","−3 only","3 and −3","9 and −9","0 and 3"], a: 2, e: "x=±3." },
+      { q: "Worker A finishes a task in 6 hrs, worker B in 3 hrs. Working together, how long?", o: ["1","1.5","2","2.5","3"], a: 2, e: "1/6+1/3=1/2 → 2 hours." },
+      { q: "What is the LCM of 12 and 18?", o: ["24","36","48","54","72"], a: 1, e: "LCM = 36." },
+      { q: "If y = 2x + 3 and x = 4, what is y?", o: ["7","9","11","13","15"], a: 2, e: "2(4)+3 = 11." },
+      { q: "A company's profit rose from $50,000 to $65,000. What was the percentage increase?", o: ["20%","25%","30%","15%","35%"], a: 2, e: "15000/50000 = 30%." },
+      { q: "A triangle has sides 6, 8, and 10. What type of triangle is it?", o: ["Equilateral","Isosceles","Right","Obtuse","Acute (non-right)"], a: 2, e: "6²+8²=10² → right triangle." },
+      { q: "5 machines produce 100 units in 4 hours. How long for 10 machines to produce 100 units?", o: ["1","1.5","2","2.5","3"], a: 2, e: "20 machine-hrs ÷ 10 machines = 2 hrs." },
+      { q: "What is the median of 3, 7, 9, 12, 15, 18, 21?", o: ["9","12","13","15","18"], a: 1, e: "Middle (4th) value = 12." },
+      { q: "A number is increased 25% then decreased 20%. Net percentage change?", o: ["0%","5% increase","5% decrease","10% increase","Cannot be determined"], a: 0, e: "1.25×0.80 = 1.00 → no net change." },
+      { q: "The perimeter of a square is 48. What is its area?", o: ["100","121","144","169","196"], a: 2, e: "side=12 → area=144." }
+    ]},
+    { sec: "Quantitative Reasoning — Data Sufficiency", passage: "Each question has a question followed by two statements. A) Statement 1 alone sufficient. B) Statement 2 alone sufficient. C) Both together needed. D) Each alone sufficient. E) Together still not sufficient.", items: [
+      { q: "Is x > 0? (1) x² = 16  (2) x³ = 64", o: ["A","B","C","D","E"], a: 1, e: "(2) gives the unique real value x=4>0, sufficient alone; (1) gives x=±4, insufficient." },
+      { q: "What is the value of n? (1) n is a prime number less than 10.  (2) n is even.", o: ["A","B","C","D","E"], a: 2, e: "Only together (even prime <10) pins down n=2." },
+      { q: "Is quadrilateral ABCD a square? (1) All four sides are equal.  (2) All four angles are equal.", o: ["A","B","C","D","E"], a: 2, e: "Equal sides alone → could be rhombus; equal angles alone → could be rectangle; together → square." },
+      { q: "If x, y are integers, is x + y even? (1) x is even.  (2) y is even.", o: ["A","B","C","D","E"], a: 2, e: "Need both parities to know the sum's parity." },
+      { q: "What is the value of a? (1) a + b = 10  (2) a − b = 4", o: ["A","B","C","D","E"], a: 2, e: "Two equations, two unknowns → solvable only together (a=7)." },
+      { q: "Is triangle ABC a right triangle? (1) Its sides are 5, 12, 13.  (2) Angle A = 90°.", o: ["A","B","C","D","E"], a: 3, e: "Each alone establishes a right triangle." },
+      { q: "What is the price of a shirt after discount? (1) Original price was $50.  (2) Discount was 20%.", o: ["A","B","C","D","E"], a: 2, e: "Need both original price and discount rate." },
+      { q: "Is x divisible by 6? (1) x is divisible by 2.  (2) x is divisible by 3.", o: ["A","B","C","D","E"], a: 2, e: "Divisible by both 2 and 3 (coprime) → divisible by 6." },
+      { q: "What is z, where z = xy? (1) x = 5  (2) y = 3", o: ["A","B","C","D","E"], a: 2, e: "Need both x and y." },
+      { q: "Is m > n? (1) m − n = 5  (2) n < 0", o: ["A","B","C","D","E"], a: 0, e: "(1) alone: m−n=5>0 means m>n, always." },
+      { q: "What is the area of circle O? (1) Radius is 7.  (2) Circumference is 14π.", o: ["A","B","C","D","E"], a: 3, e: "Either radius or circumference alone determines the area." },
+      { q: "Did company X's revenue increase last year? (1) Costs increased.  (2) Profit increased.", o: ["A","B","C","D","E"], a: 2, e: "Revenue = Profit + Costs. If both increased, revenue must have increased — sufficient together." },
+      { q: "Is x an integer? (1) 2x is an integer.  (2) x/2 is an integer.", o: ["A","B","C","D","E"], a: 1, e: "(2) means x=2k for integer k, so x is always an integer; (1) alone allows x=0.5." },
+      { q: "What is |x|? (1) x² = 25  (2) x < 0", o: ["A","B","C","D","E"], a: 0, e: "(1) alone: |x| = √25 = 5, regardless of sign." }
+    ]},
+    { sec: "Verbal Reasoning — Critical Reasoning", passage: null, items: [
+      { q: "A company found employees who take breaks are more productive, and concludes mandating breaks will raise productivity. What most weakens this?", o: [
+          "Some employees already take breaks voluntarily.",
+          "Productive employees may simply have flexible jobs that also happen to allow breaks.",
+          "The company hasn't measured productivity this year.",
+          "Breaks are typically 15 minutes.",
+          "Employees who take breaks report higher satisfaction."
+        ], a: 1, e: "Suggests reverse causation / a confound, undermining the causal claim." },
+      { q: "Officials say new streetlights cut crime, citing a 30% drop in one neighborhood. What most strengthens this?", o: [
+          "Patrols also increased at the same time.",
+          "Comparable neighborhoods without new lights saw no significant change.",
+          "Streetlights are costly to maintain.",
+          "Crime fluctuates seasonally.",
+          "Population increased slightly."
+        ], a: 1, e: "A control-group comparison rules out alternative explanations." },
+      { q: "'All chess club members are good at logic. Maria is a member. So Maria is good at logic.' Which argument matches this structure?", o: [
+          "All roses are flowers. This is a flower. So it's a rose.",
+          "All doctors attended med school. John attended med school. So John is a doctor.",
+          "All squares are rectangles. This shape is a square. So it's a rectangle.",
+          "Some athletes are fast. Tom is an athlete. So Tom is fast.",
+          "No fish can fly. This animal can fly. So it's not a fish."
+        ], a: 2, e: "Same valid form: All A are B; X is A; therefore X is B." },
+      { q: "Students who eat breakfast score better on tests, so schools should give free breakfast to raise scores. What most weakens this?", o: [
+          "Free breakfast is costly to implement.",
+          "Wealthier students, who already eat breakfast, also have more academic resources overall.",
+          "Some students dislike the food.",
+          "Breakfast is the most important meal of the day.",
+          "National test scores are declining."
+        ], a: 1, e: "Introduces a confounding variable (wealth) explaining both." },
+      { q: "Umbrella sales rise in rainy seasons; last month sales were high, so it must have been rainy. What's the flaw?", o: [
+          "It assumes causation from correlation without ruling out other explanations.",
+          "It doesn't define 'unusually high.'",
+          "It doesn't specify location.",
+          "It assumes all stores sell umbrellas.",
+          "It contradicts known weather patterns."
+        ], a: 0, e: "Classic correlation-to-causation leap." },
+      { q: "A nutritionist says her diet helped 10 clients lose weight, so it will help anyone. What most undermines this?", o: [
+          "The diet requires logging meals.",
+          "Those 10 clients had personalized supervision unavailable to the general public.",
+          "Diets have existed for centuries.",
+          "Clients paid a high fee.",
+          "The diet emphasizes vegetables and protein."
+        ], a: 1, e: "Removes the generalizability of the result." },
+      { q: "A soda tax cut consumption 15%; editorial concludes taxing unhealthy products improves public health. What's most useful to evaluate this?", o: [
+          "Whether obesity/diabetes rates actually changed.",
+          "The exact tax percentage.",
+          "Tax revenue generated.",
+          "Public opinion on the tax.",
+          "Soda's price before the tax."
+        ], a: 0, e: "Directly tests the stated health outcome, not just the proxy behavior." },
+      { q: "Critics say a mandatory written exam unfairly disadvantages skilled-but-poor test-takers. What best addresses this while keeping the hiring goal?", o: [
+          "Eliminate the exam entirely.",
+          "Add a practical skills assessment alongside the exam.",
+          "Make the exam harder.",
+          "Only interview the top 10% scorers.",
+          "Require retaking the exam."
+        ], a: 1, e: "Balances both fairness and the original screening goal." },
+      { q: "A compound is claimed to cure colds because patients recovered in 3 days. What most weakens this?", o: [
+          "It has a bitter taste.",
+          "Colds typically resolve within 3–7 days on their own anyway.",
+          "It's expensive to produce.",
+          "Few patients were studied.",
+          "The study was in one country."
+        ], a: 1, e: "Removes the causal link — recovery would have happened regardless." },
+      { q: "A new highway is expected to cut congestion since new highways initially reduce travel time. What casts most doubt on long-term effectiveness?", o: [
+          "Highways are costly to build.",
+          "Reduced travel times often attract more drivers, restoring congestion later.",
+          "It will take three years to build.",
+          "Other cities built similar highways.",
+          "Transit ridership has declined."
+        ], a: 1, e: "Classic induced-demand rebuttal." },
+      { q: "'Our campaign raised brand awareness 40%. Therefore, ___.' Best completion?", o: [
+          "awareness will keep growing at this rate forever.",
+          "it was a worthwhile investment in awareness, though its effect on sales is still unknown.",
+          "all future campaigns should copy this one.",
+          "competitors will now lose market share.",
+          "surveys are the best success metric."
+        ], a: 1, e: "Appropriately hedged, doesn't overreach beyond the data." },
+      { q: "Short sleepers are more likely to get heart disease, so researchers conclude sleeping longer prevents it. What's the flaw?", o: [
+          "It ignores that an underlying condition could cause both short sleep and heart disease.",
+          "It doesn't say how sleep was measured.",
+          "It assumes heart disease is common.",
+          "It doesn't mention diet.",
+          "It's based on survey data."
+        ], a: 0, e: "Points to a common-cause confound." },
+      { q: "A bakery's sales dropped after a chain store opened nearby; owner blames the chain entirely. What most weakens this?", o: [
+          "The chain sells different products.",
+          "Road construction closed the street in front of the bakery at the same time.",
+          "The bakery has operated for 10 years.",
+          "The chain is pricier than the bakery.",
+          "The owner is planning a marketing campaign."
+        ], a: 1, e: "Offers an alternative cause for the sales drop." },
+      { q: "What most strengthens the claim that remote work increases productivity?", o: [
+          "A survey shows employees prefer remote work.",
+          "Companies going remote saw higher output per employee, even after controlling for industry, role, and workload.",
+          "Remote work cuts commuting time.",
+          "Some employees dislike remote work.",
+          "Remote work is more common since 2020."
+        ], a: 1, e: "A controlled comparison directly supports the causal claim." },
+      { q: "A university requires a language course to improve cognitive skills, but many students disengage. What's most relevant to evaluating whether the goal is met?", o: [
+          "Whether disengaged students still show the intended cognitive gains.",
+          "How many languages are offered.",
+          "The cost of the courses.",
+          "Student opinions on the requirement.",
+          "Total university enrollment."
+        ], a: 0, e: "Tests the requirement against its actual stated goal." }
+    ]},
+    { sec: "Verbal Reasoning — Reading Comprehension", passage: "Passage 1: Urban planners increasingly cite the '15-minute city,' a model where residents reach daily needs — groceries, healthcare, schools, work — within a 15-minute walk or bike ride. Proponents say it cuts car reliance, emissions, and builds community. Critics note it's hard to retrofit into car-centric cities, requiring costly infrastructure and zoning reform, and that rising property values in newly convenient areas could displace lower-income residents. Paris and Melbourne have piloted elements of the model, with early reports of modest reductions in vehicle use in targeted districts.", items: [
+      { q: "The primary goal of the 15-minute city model is to:", o: [
+          "eliminate all automobile use.",
+          "let residents reach most daily necessities within a short walk or bike ride.",
+          "raise city-center property values.",
+          "reduce urban population density.",
+          "replace public transit with walking."
+        ], a: 1, e: "Matches the passage's core definition." },
+      { q: "A major obstacle to implementing the model, per the passage, is:", o: [
+          "lack of resident interest.",
+          "the existing design of cities around car travel.",
+          "opposition from environmental groups.",
+          "the cost of bicycles.",
+          "insufficient research on urban planning."
+        ], a: 1, e: "Directly stated as the retrofitting challenge." },
+      { q: "Which fact would most support the critics' displacement concern?", o: [
+          "Property values in a pilot district rose sharply and lower-income renters moved out.",
+          "Melbourne already had good public transit.",
+          "Paris has a long planning-reform history.",
+          "Some residents still prefer driving.",
+          "Paris's emissions fell for unrelated reasons."
+        ], a: 0, e: "Directly evidences the displacement mechanism described." },
+      { q: "The author's tone toward the 15-minute city concept is best described as:", o: ["dismissive","balanced, weighing benefits and challenges","strongly advocative","sarcastic","indifferent"], a: 1, e: "Presents both proponents' and critics' views evenly." },
+      { q: "Early results from Paris and Melbourne can be inferred to be:", o: [
+          "conclusive proof the model works everywhere.",
+          "preliminary and limited to specific districts.",
+          "entirely negative.",
+          "unrelated to vehicle use.",
+          "based on decades of data."
+        ], a: 1, e: "Passage says 'modest reductions ... in targeted districts.'" }
+    ]},
+    { sec: "Verbal Reasoning — Reading Comprehension (cont.)", passage: "Passage 2: 'Choice overload' interests behavioral economists studying consumer decisions. Classical theory assumes more options improve outcomes. But studies since the early 2000s found too many options can cause decision paralysis or lower satisfaction. A famous jam-display study found only 3% purchased when 24 varieties were offered, versus 30% with 6 varieties. Later research has been mixed, with some studies failing to replicate the effect, suggesting it depends on factors like choice complexity, decision-maker expertise, and time available.", items: [
+      { q: "The primary purpose of this passage is to:", o: [
+          "argue classical economic theory is entirely wrong.",
+          "describe choice overload and the mixed evidence around it.",
+          "promote a brand of jam.",
+          "criticize behavioral economists.",
+          "explain how stores should design displays."
+        ], a: 1, e: "Summarizes both the phenomenon and its contested evidence." },
+      { q: "Classical economic theory, per the passage, assumes:", o: [
+          "consumers prefer fewer choices.",
+          "more options generally lead to better outcomes.",
+          "decision paralysis is common.",
+          "stores should limit variety.",
+          "satisfaction is unrelated to choice."
+        ], a: 1, e: "Stated directly as the classical assumption." },
+      { q: "The jam study is used in the passage primarily to:", o: [
+          "prove classical theory always wrong.",
+          "illustrate a case where more choices seemed to reduce purchases.",
+          "show consumers dislike jam.",
+          "expose a marketing flaw.",
+          "give grocery sales statistics."
+        ], a: 1, e: "It's a concrete illustration of the overload effect." },
+      { q: "Later research on choice overload, per the passage:", o: [
+          "fully confirmed the jam study everywhere.",
+          "produced inconsistent results, suggesting context matters.",
+          "was never conducted.",
+          "focused only on jam.",
+          "disproved the effect entirely."
+        ], a: 1, e: "Passage explicitly notes mixed, context-dependent findings." },
+      { q: "The relationship between the two bodies of research described is best characterized as:", o: [
+          "unrelated.",
+          "the later research builds on and complicates the earlier conclusions.",
+          "flat contradiction with no ambiguity.",
+          "identical conclusions.",
+          "the first study was based on the second."
+        ], a: 1, e: "Later work refines rather than simply confirms or negates." }
+    ]},
+    { sec: "Data Insights", passage: null, items: [
+      { q: "Quarterly revenue ($M): Q1=45, Q2=52, Q3=48, Q4=60. What is the % increase from Q1 to Q4?", o: ["25%","33.3%","15%","20%","30%"], a: 1, e: "(60−45)/45 = 33.3%." },
+      { q: "Regional unit sales: North 120, South 95, East 140, West 105. What % of total does East represent (nearest whole %)?", o: ["25%","28%","30%","32%","35%"], a: 2, e: "140/460 ≈ 30.4% → 30%." },
+      { q: "HR records show 1,240 employees in March; a press release says 'over 1,200' for the same period. What can validly be concluded?", o: [
+          "Source B is incorrect.",
+          "The actual count is exactly 1,240.",
+          "Both sources are consistent with roughly 1,200–1,250 employees.",
+          "Employee count is declining.",
+          "Source A includes contractors, Source B doesn't."
+        ], a: 2, e: "The two figures are compatible, not contradictory." },
+      { q: "Defect rate fell from 8% to 3% after a new QC process; production volume rose 10% over the same period. Best-supported conclusion?", o: [
+          "The new process caused the volume increase.",
+          "Defects fell and volume rose, but the data alone doesn't prove the process caused the volume increase.",
+          "Defects will keep falling indefinitely.",
+          "Volume and defects are always inversely related.",
+          "The QC process had no effect on defects."
+        ], a: 1, e: "Correlation between two trends isn't proof of a causal link between them." },
+      { q: "Delivery time dropped from 5 to 3 days after a new logistics partner was hired; satisfaction rose from 72% to 85% over the same period. Best-supported conclusion?", o: [
+          "The logistics partner is solely responsible for the satisfaction change.",
+          "Faster delivery coincided with higher satisfaction, though causation isn't definitively established by these two sources alone.",
+          "Satisfaction depends only on delivery time.",
+          "The partner's costs decreased.",
+          "Delivery time will keep falling at the same rate."
+        ], a: 1, e: "Two correlated trends, appropriately hedged — no proven causal claim." }
+    ]}
+  ];
+
+  var root = document.getElementById("gq-root");
+  var totalQ = 0, answered = 0, score = 0;
+  var qEls = [];
+
+  DATA.forEach(function (section) {
+    var h = document.createElement("div");
+    h.className = "section-title";
+    h.textContent = section.sec;
+    root.appendChild(h);
+
+    if (section.passage) {
+      var p = document.createElement("div");
+      p.className = "passage";
+      p.innerHTML = section.passage;
+      root.appendChild(p);
+    }
+
+    section.items.forEach(function (item) {
+      totalQ++;
+      var num = totalQ;
+      var wrap = document.createElement("div");
+      wrap.className = "question";
+
+      var qt = document.createElement("div");
+      qt.className = "q-text";
+      qt.innerHTML = '<span class="q-num">Q' + num + '.</span>' + item.q;
+      wrap.appendChild(qt);
+
+      var opts = document.createElement("div");
+      opts.className = "options";
+
+      var explanation = document.createElement("div");
+      explanation.className = "explanation";
+      explanation.textContent = item.e;
+
+      var answeredThis = false;
+
+      item.o.forEach(function (optText, idx) {
+        var letter = String.fromCharCode(65 + idx);
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option";
+        btn.innerHTML = '<span class="letter">' + letter + '</span><span>' + optText + '</span>';
+
+        btn.addEventListener("click", function () {
+          if (answeredThis) return;
+          answeredThis = true;
+          answered++;
+          var isCorrect = idx === item.a;
+          if (isCorrect) score++;
+
+          Array.prototype.forEach.call(opts.children, function (b, i) {
+            b.classList.add("disabled");
+            if (i === item.a) b.classList.add("correct");
+            if (i === idx && !isCorrect) b.classList.add("wrong");
+          });
+
+          explanation.classList.add("show");
+          updateBar();
+        });
+
+        opts.appendChild(btn);
+      });
+
+      wrap.appendChild(opts);
+      wrap.appendChild(explanation);
+      root.appendChild(wrap);
+    });
+  });
+
+  var answeredEl = document.getElementById("gq-answered");
+  var scoreEl = document.getElementById("gq-score");
+  var progressEl = document.getElementById("gq-progress");
+  var summaryEl = document.getElementById("gq-summary");
+  var finalScoreEl = document.getElementById("gq-final-score");
+
+  function updateBar() {
+    answeredEl.textContent = answered;
+    scoreEl.textContent = score;
+    progressEl.style.width = (answered / totalQ * 100) + "%";
+    if (answered === totalQ) {
+      finalScoreEl.textContent = score + "/" + totalQ;
+      summaryEl.style.display = "block";
+      summaryEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
+  document.getElementById("gq-reset").addEventListener("click", function () {
+    location.reload();
+  });
+
+  // ---- Timer: 128 minutes total (~2 min/question, GMAT Focus average pace) ----
+  var TOTAL_SECONDS = 128 * 60;
+  var remaining = TOTAL_SECONDS;
+  var timerId = null;
+  var running = false;
+
+  var timerEl = document.getElementById("gq-timer");
+  var startBtn = document.getElementById("gq-timer-start");
+  var resetBtn = document.getElementById("gq-timer-reset");
+  var banner = document.getElementById("gq-time-banner");
+
+  function formatTime(s) {
+    var m = Math.floor(s / 60);
+    var sec = s % 60;
+    return (m < 10 ? "0" : "") + m + ":" + (sec < 10 ? "0" : "") + sec;
+  }
+
+  function renderTimer() {
+    timerEl.textContent = formatTime(Math.max(remaining, 0));
+    timerEl.classList.toggle("low", remaining <= 300 && remaining > 0);
+    if (remaining <= 0) {
+      banner.classList.add("show");
+      stopTimer();
+    }
+  }
+
+  function tick() {
+    remaining--;
+    renderTimer();
+  }
+
+  function startTimer() {
+    if (running) return;
+    running = true;
+    startBtn.textContent = "Pause";
+    timerId = setInterval(tick, 1000);
+  }
+
+  function stopTimer() {
+    running = false;
+    startBtn.textContent = "Start";
+    clearInterval(timerId);
+  }
+
+  startBtn.addEventListener("click", function () {
+    if (running) { stopTimer(); } else {
+      if (remaining <= 0) return;
+      startTimer();
+    }
+  });
+
+  resetBtn.addEventListener("click", function () {
+    stopTimer();
+    remaining = TOTAL_SECONDS;
+    banner.classList.remove("show");
+    renderTimer();
+  });
+
+  renderTimer();
+})();
+</script>
+
+</body>
+</html>
