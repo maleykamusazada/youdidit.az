@@ -59,15 +59,28 @@ input[type=text]{width:100%;margin-top:7px;padding:13px;border-radius:12px;borde
 .opt:has(input:checked){background:rgba(118,81,255,.2);border-color:#9b75ff}
 .opt input{margin-top:4px;accent-color:#8a5bff}
 /* sertifikat (kağız kimi açıq rəngdə) */
-#cert{background:#fff;color:#1c2333;border:6px double #6b52ff;border-radius:8px;padding:28px 20px;text-align:center}
-#cert .brand{font-family:'Sora',sans-serif;color:#6b52ff;font-weight:800;letter-spacing:3px}
-#cert h2{font-family:'Sora',sans-serif;font-size:2rem;letter-spacing:4px;margin:8px 0}
-#cert .name{display:inline-block;margin:10px 0;padding:0 14px;font-size:1.7rem;font-weight:700;border-bottom:2px solid #d5dbe8}
-#cert .pct{font-family:'Sora',sans-serif;font-size:3.4rem;font-weight:800;color:#6b52ff;line-height:1.1;margin-top:10px}
-#cert table{width:100%;max-width:520px;margin:14px auto;border-collapse:collapse;text-align:left}
-#cert td,#cert th{padding:6px 8px;border-bottom:1px solid #e3e7f1;font-size:.95rem}
-#cert th{color:#667085}
-#cert .foot{color:#667085;font-size:.85rem;margin-top:12px}
+#cert{--a:#6b52ff;--b:#a34eff;max-width:680px;margin:14px auto 0;padding:6px;border-radius:20px;background:linear-gradient(135deg,var(--a),var(--b));color:#1c2333;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+#cert,#cert *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#cert .in{padding:34px 24px 24px;border-radius:15px;text-align:center;background:radial-gradient(circle at 50% 0,rgba(107,82,255,.10),transparent 62%),#fff}
+#cert .brand{display:inline-flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.5px}
+#cert .brand i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-size:17px;color:#fff;background:linear-gradient(135deg,var(--a),var(--b))}
+#cert .brand b{color:var(--a)}
+#cert h2{margin:26px 0 0;font-family:'Sora',sans-serif;font-size:1.8rem;font-weight:800;letter-spacing:6px}
+#cert .line{width:56px;height:3px;margin:12px auto 18px;border-radius:3px;background:linear-gradient(90deg,var(--a),var(--b))}
+#cert .sm{color:#667085;font-size:.9rem}
+#cert .name{margin:8px 0 6px;font-family:'Sora',sans-serif;font-size:1.75rem;font-weight:700;word-break:break-word}
+#cert .ring{--p:0;width:150px;height:150px;margin:22px auto 6px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(from 0deg,var(--a),var(--b) calc(var(--p)*1%),#ece9fb 0)}
+#cert .ring div{width:120px;height:120px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#cert .ring strong{font-family:'Sora',sans-serif;font-size:2.3rem;line-height:1;color:var(--a)}
+#cert .ring span{margin-top:5px;font-size:.8rem;color:#667085}
+#cert .subs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px 28px;max-width:600px;margin:24px auto 0;text-align:left}
+#cert .st{display:flex;justify-content:space-between;gap:8px;margin-bottom:6px;font-size:.9rem}
+#cert .st b{color:var(--a);white-space:nowrap}
+#cert .bar{height:6px;border-radius:6px;background:#ece9fb;overflow:hidden}
+#cert .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--a),var(--b))}
+#cert .meta{display:flex;justify-content:center;gap:34px;margin-top:26px;padding-top:16px;border-top:1px solid #ece9f8;font-size:.9rem;font-weight:600}
+#cert .meta small{display:block;margin-bottom:2px;color:#98a2b3;font-size:.68rem;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+#cert .no{margin-top:12px;color:#98a2b3;font-size:.78rem;letter-spacing:.5px}
 /* footer */
 footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07)}
 .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
@@ -80,11 +93,11 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07)}
 @media(max-width:1000px){.nav-links,.nav-button{display:none}.menu-toggle{display:flex}}
 @media(max-width:650px){:root{--nav:64px}.container{width:calc(100% - 24px)}.logo{font-size:20px}.page{padding-top:32px}.footer-inner{flex-direction:column;text-align:center}}
 @media print{
-  @page{size:A4 landscape;margin:10mm}
+  @page{size:A4 portrait;margin:12mm}
   body{background:#fff}
   body *{visibility:hidden}
   #cert,#cert *{visibility:visible}
-  #cert{position:absolute;left:0;top:0;width:100%}
+  #cert{position:absolute;left:0;top:0;width:100%;max-width:none;margin:0;box-shadow:none}
 }
 </style>
 </head>
@@ -232,17 +245,19 @@ function certificate(e) {
   const total = size(e.g), pct = Math.round(ok / total * 100), now = new Date();
   const date = pad(now.getDate()) + '.' + pad(now.getMonth() + 1) + '.' + now.getFullYear();
   const no = 'YD-' + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
-  $('result').innerHTML = `<div id="cert">
-      <div class="brand">YOUDIDIT.AZ</div><h2>SERTİFİKAT</h2>
-      <div>Bu sertifikat təqdim olunur:</div>
+  $('result').innerHTML = `<div id="cert"><div class="in">
+      <div class="brand"><i>✓</i><span>Youdidit<b>.az</b></span></div>
+      <h2>SERTİFİKAT</h2><div class="line"></div>
+      <div class="sm">Bu sertifikat təqdim olunur</div>
       <div class="name">${esc(e.name)}</div>
-      <div>${d.label} sınağında iştirak etdiyinə görə</div>
-      <div class="pct">${pct}%</div>
-      <div>${ok} / ${total} düzgün cavab</div>
-      <table><tr><th>Fənn</th><th>Nəticə</th><th>Faiz</th></tr>${rows.map(r =>
-        `<tr><td>${esc(r.n)}</td><td>${r.c} / ${r.t}</td><td>${Math.round(r.c / r.t * 100)}%</td></tr>`).join('')}</table>
-      <div class="foot">Tarix: ${date} · Sərf olunan vaxt: ${dur(e.used)} · № ${no}</div>
-    </div>
+      <div class="sm">${d.label} sınağında iştirak etdiyinə görə</div>
+      <div class="ring" style="--p:${pct}"><div><strong>${pct}%</strong><span>${ok} / ${total}</span></div></div>
+      <div class="sm">düzgün cavab</div>
+      <div class="subs">${rows.map(r => { const f = Math.round(r.c / r.t * 100);
+        return `<div><div class="st"><span>${esc(r.n)}</span><b>${r.c}/${r.t} · ${f}%</b></div><div class="bar"><i style="width:${f}%"></i></div></div>`; }).join('')}</div>
+      <div class="meta"><div><small>Tarix</small>${date}</div><div><small>Sərf olunan vaxt</small>${dur(e.used)}</div></div>
+      <div class="no">Sertifikat № ${no}</div>
+    </div></div>
     <button class="btn btn-primary full" onclick="window.print()">Sertifikatı yüklə / çap et (PDF)</button>
     <button class="btn btn-secondary full" id="again">Sınaq siyahısına qayıt</button>`;
   $('again').onclick = showStart;
