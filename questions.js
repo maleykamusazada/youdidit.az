@@ -62,4 +62,39 @@ window.SINAQLAR = {"3":{"label":"3-cü sinif","subjects":[{"name":"İngilis dili
   fix('8', 'Azərbaycan dili və ədəbiyyat', x => x.q.includes('qarşılaşdırma əlaqəsi'),
     'Hansı variantda “isə” sözü qarşılaşdırma əlaqəsi yaradan vasitə kimi işlənmişdir?',
     ['Ali məktəbə qəbul olsa, sevinəcəyəm.', 'Qardaşım şəhərdə yaşayır, mən isə kənddə yaşayıram.', 'Yağış yağdı, yollar isladı.', 'Gəldim, gördüm, qayıtdım.'], 1);
+
+  // ================= Əlavə düzəlişlər =================
+
+  // 4-cü sinif Riyaziyyat: təkrarlanan "4 154" variantı
+  fix('4', 'Riyaziyyat', x => x.q.startsWith('7 000 − 2 846'),
+    null, ['4 154', '4 254', '4 164', '4 174'], 0);
+
+  // 7-ci sinif tarix: variantın sonuna düşmüş "Ümumi tarix" başlığı
+  fix('7', 'Azərbaycan tarixi və Ümumi tarix', x => x.q.startsWith('Aşağıdakı hadisələrdən hansının xronoloji ardıcıllıq baxımından'),
+    null,
+    ['Babəkin rəhbərliyi ilə Xürrəmilər hərəkatının genişlənməsi', 'Sacilər dövlətinin yaranması', 'Azərbaycan ərazisində Sasanilərin hakimiyyətinin güclənməsi', 'Şirvanşahlar dövlətinin yaranması'], 2);
+
+  // 8-ci sinif tarix: variantın sonuna düşmüş "🌍 Ümumi tarix" başlığı
+  fix('8', 'Tarix', x => x.q.startsWith('XVIII əsrdə Azərbaycan xanlıqlarının mövcudluğu ilə Səfəvilər'),
+    null,
+    ['Xanlıqlar dövründə siyasi hakimiyyət daha çox ayrı-ayrı yerli hakimlərin əlində cəmlənmişdi', 'Xanlıqlar dövründə bütün Azərbaycan ərazisi vahid mərkəzdən idarə olunurdu', 'Səfəvilər dövründə Azərbaycan ərazisində heç bir mərkəzi hakimiyyət mövcud deyildi', 'Xanlıqların hamısı eyni vaxtda yaranmış və vahid hökmdara tabe olmuşdu'], 0);
+
+  // 8-ci sinif ingilis dili: variantın içinə düşmüş oxu mətni
+  fix('8', 'İngilis dili', x => x.q.startsWith('Choose the correct option.\nWhen I was walking home'),
+    null, ['meet', 'have met', 'met', 'was meeting'], 2);
+
+  // 8-ci sinif ingilis dili: 11–15-ci suallarda çatışmayan oxu mətni
+  const passage = 'Read the text and answer.\nA Different Way of Learning\n' +
+    'Many students believe that studying for several hours without taking a break is the best way to prepare for an exam. However, research and experience suggest that this is not always effective. Short breaks can help students maintain concentration and remember information more easily. Some students also prefer studying in groups. Working with others allows them to explain difficult ideas, ask questions and notice mistakes they might not notice when studying alone. However, group study is useful only when students remain focused on their work. Another important factor is sleep. A student who studies all night before an exam may spend more time with the books, but lack of sleep can make it harder to concentrate the next day. Therefore, effective learning is not simply about studying longer; it is also about studying in a sensible way.\n';
+  const eng8 = S['8'].subjects.find(s => s.name === 'İngilis dili');
+  ['According to the text, short breaks can help students',
+   'Why can group study be useful?',
+   'According to the text, group study is effective when students',
+   'What problem can lack of sleep cause?',
+   'What is the main idea of the text?'
+  ].forEach(t => {
+    const item = eng8 && eng8.questions.find(x => x.q === t);
+    if (item) item.q = passage + item.q;
+    else console.warn('Tapılmadı:', t);
+  });
 })();
