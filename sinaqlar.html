@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinif sınaqları — Youdidit.az</title>
+<meta name="description" content="Youdidit.az — 3-cü sinifdən 8-ci sinfə qədər fənn sınaqları. Vaxt məhdudiyyəti, nəticə faizi və sertifikat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050713;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10);--nav:72px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.container{width:min(1180px,calc(100% - 32px));margin:auto}
+/* navbar (index ilə eyni) */
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{min-height:var(--nav);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-family:'Sora',sans-serif;font-size:23px;font-weight:800;letter-spacing:-1px}
+.logo span{color:#9d65ff}
+.nav-links{display:flex;align-items:center;gap:22px}
+.nav-links a{color:#c2c6df;font-size:12px;font-weight:600;transition:.25s}
+.nav-links a:hover,.nav-links a.cur{color:#fff}
+.nav-button{padding:10px 19px;border-radius:999px;background:linear-gradient(135deg,#6b52ff,#a34eff);font-size:12px;font-weight:800;box-shadow:0 8px 25px rgba(118,81,255,.28);white-space:nowrap}
+.menu-toggle{display:none;width:42px;height:42px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.05);color:#fff;font-size:21px;cursor:pointer;align-items:center;justify-content:center}
+.mobile-menu{display:none;padding:10px 0 18px}
+.mobile-menu.active{display:block}
+.mobile-menu a{display:block;padding:13px 15px;margin-top:5px;border-radius:12px;color:#c2c6df;font-size:13px;font-weight:600;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}
+.mobile-menu .mobile-order{margin-top:10px;text-align:center;color:#fff;background:linear-gradient(135deg,#6b52ff,#a34eff);border-color:transparent}
+/* düymələr */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 21px;border-radius:14px;border:0;font-size:13px;font-weight:800;color:#fff;cursor:pointer;transition:.3s}
+.btn-primary{background:linear-gradient(135deg,#5d55ff,#a84fff);box-shadow:0 12px 35px rgba(118,81,255,.32)}
+.btn-primary:hover{transform:translateY(-3px)}
+.btn-secondary{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.13)}
+.full{width:100%;margin-top:14px}
+/* səhifə */
+.page{max-width:860px;margin:auto;padding:46px 0 60px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+.section-title{font-family:'Sora',sans-serif;font-size:clamp(29px,4vw,42px);letter-spacing:-1.5px}
+.section-description{color:var(--muted);font-size:13px;line-height:1.7;margin-top:11px;max-width:570px}
+#tabs{display:flex;gap:8px;overflow-x:auto;margin:24px 0 4px;padding-bottom:6px}
+.grade{flex:0 0 auto;padding:11px 15px;border-radius:11px;background:linear-gradient(135deg,rgba(93,85,255,.23),rgba(164,79,255,.12));border:1px solid rgba(131,105,255,.22);color:#fff;font-size:12px;font-weight:800;cursor:pointer;transition:.25s}
+.grade:hover,.grade.on{background:linear-gradient(135deg,#5d55ff,#a84fff)}
+.card{margin-top:14px;padding:22px;border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018));border:1px solid var(--border)}
+.card h2{font-family:'Sora',sans-serif;font-size:22px;margin-bottom:6px}
+.m{color:var(--muted);font-size:13px;margin-bottom:12px}
+.card ul{margin:8px 0 18px 20px;color:#d9dcef;font-size:14px;line-height:1.8}
+label.f{display:block;font-size:12px;font-weight:700;color:#c9bbff}
+input[type=text]{width:100%;margin-top:7px;padding:13px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:#fff;font:inherit;font-size:15px}
+#bar{position:sticky;top:var(--nav);z-index:900;display:flex;justify-content:space-between;padding:11px 16px;margin-top:10px;border-radius:14px;background:linear-gradient(135deg,#4b43d6,#8a3fe0);font-weight:800;font-size:14px;box-shadow:0 8px 25px rgba(0,0,0,.4)}
+#bar.low{background:#c0261b}
+.sub{margin:28px 0 0;font-family:'Sora',sans-serif;font-size:19px;color:#b99cff}
+.q p{margin-bottom:8px;line-height:1.6;white-space:pre-line;font-size:15px}
+.opt{display:flex;gap:10px;align-items:flex-start;margin-top:8px;padding:11px 13px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.03);cursor:pointer;font-size:14px;transition:.2s}
+.opt:hover{border-color:rgba(155,119,255,.4)}
+.opt:has(input:checked){background:rgba(118,81,255,.2);border-color:#9b75ff}
+.opt input{margin-top:4px;accent-color:#8a5bff}
+/* sertifikat (kağız kimi açıq rəngdə) */
+#cert{background:#fff;color:#1c2333;border:6px double #6b52ff;border-radius:8px;padding:28px 20px;text-align:center}
+#cert .brand{font-family:'Sora',sans-serif;color:#6b52ff;font-weight:800;letter-spacing:3px}
+#cert h2{font-family:'Sora',sans-serif;font-size:2rem;letter-spacing:4px;margin:8px 0}
+#cert .name{display:inline-block;margin:10px 0;padding:0 14px;font-size:1.7rem;font-weight:700;border-bottom:2px solid #d5dbe8}
+#cert .pct{font-family:'Sora',sans-serif;font-size:3.4rem;font-weight:800;color:#6b52ff;line-height:1.1;margin-top:10px}
+#cert table{width:100%;max-width:520px;margin:14px auto;border-collapse:collapse;text-align:left}
+#cert td,#cert th{padding:6px 8px;border-bottom:1px solid #e3e7f1;font-size:.95rem}
+#cert th{color:#667085}
+#cert .foot{color:#667085;font-size:.85rem;margin-top:12px}
+/* footer */
+footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07)}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.footer-brand{font-family:'Sora',sans-serif;font-weight:800}
+.footer-brand span{color:#9b68ff}
+.footer-description{color:#7f86a8;font-size:10px;margin-top:5px}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:17px}
+.footer-links a{color:#9299b9;font-size:10px}
+.footer-links a:hover{color:#fff}
+@media(max-width:1000px){.nav-links,.nav-button{display:none}.menu-toggle{display:flex}}
+@media(max-width:650px){:root{--nav:64px}.container{width:calc(100% - 24px)}.logo{font-size:20px}.page{padding-top:32px}.footer-inner{flex-direction:column;text-align:center}}
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  body{background:#fff}
+  body *{visibility:hidden}
+  #cert,#cert *{visibility:visible}
+  #cert{position:absolute;left:0;top:0;width:100%}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">Youdidit<span>.az</span></a>
+    <div class="nav-links">
+      <a href="index.html">Ana səhifə</a>
+      <a href="index.html#exams">İmtahanlar</a>
+      <a href="resources.html">Resurslar</a>
+      <a href="sinif-testleri.html">Sinif testləri</a>
+      <a href="lavazimatlar.html">Ləvazimatlar</a>
+      <a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a>
+      <a href="index.html#services">Xidmətlər</a>
+    </div>
+    <a href="order.html" class="nav-button">Sifariş et →</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menyu" aria-expanded="false" type="button">☰</button>
+  </div>
+  <div class="container mobile-menu" id="mobileMenu">
+    <a href="index.html">Ana səhifə</a>
+    <a href="index.html#exams">İmtahanlar</a>
+    <a href="resources.html">Resurslar</a>
+    <a href="sinif-testleri.html">Sinif testləri</a>
+    <a href="lavazimatlar.html">🛍️ Ləvazimatlar</a>
+    <a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a>
+    <a href="index.html#services">Xidmətlər</a>
+    <a href="order.html" class="mobile-order">Sifariş et →</a>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="page">
+    <div class="section-label">SİNİF SINAQLARI</div>
+    <h1 class="section-title">Sinfini seç, sınağa başla.</h1>
+    <p class="section-description">Hər sinif üçün fənlər bir sınaqda toplanıb. Vaxt sual sayına görə təyin olunur, sonda faizlə nəticə və sertifikat alırsan.</p>
+    <p class="section-description" style="margin-top:8px">Riyaziyyat IQ testləri üçün <a href="sinif-testleri.html" style="color:#b99cff;font-weight:700">Sinif testləri →</a></p>
+    <div id="tabs"></div>
+    <div id="start" hidden></div>
+    <div id="exam" hidden></div>
+    <div id="result" hidden></div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-brand">Youdidit<span>.az</span></div>
+      <div class="footer-description">Təhsil • İmtahan • Karyera • İnkişaf</div>
+    </div>
+    <div class="footer-links">
+      <a href="exams.html">İmtahanlar</a>
+      <a href="resources.html">Resurslar</a>
+      <a href="sinif-testleri.html">Testlər</a>
+      <a href="lavazimatlar.html">Ləvazimatlar</a>
+      <a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a>
+      <a href="order.html">Sifariş</a>
+      <a href="mailto:youdidit.az@gmail.com">✉ youdidit.az@gmail.com</a>
+      <a href="https://www.instagram.com/youdidit.az/" target="_blank" rel="noopener">◎ @youdidit.az</a>
+    </div>
+  </div>
+</footer>
+
+<script src="questions.js"></script>
+<script>
+const menuToggle = document.getElementById('menuToggle'), mobileMenu = document.getElementById('mobileMenu');
+menuToggle.onclick = () => {
+  const o = mobileMenu.classList.toggle('active');
+  menuToggle.textContent = o ? '✕' : '☰'; menuToggle.setAttribute('aria-expanded', o);
+};
+
+const D = window.SINAQLAR, G = Object.keys(D);
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const size = g => D[g].subjects.reduce((s, x) => s + x.questions.length, 0);
+const sizes = G.map(size), lo = Math.min(...sizes), hi = Math.max(...sizes);
+// Sual sayına görə vaxt: ən az sual = 60 dəq, ən çox sual = 120 dəq (5 dəqiqəyə yuvarlaqlaşdırılır)
+const mins = g => hi === lo ? 60 : Math.round((60 + 60 * (size(g) - lo) / (hi - lo)) / 5) * 5;
+const dur = m => (m >= 60 ? Math.floor(m / 60) + ' saat ' : '') + (m % 60 ? m % 60 + ' dəqiqə' : '');
+const pad = n => String(n).padStart(2, '0');
+const fmt = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); return pad(Math.floor(s / 3600)) + ':' + pad(Math.floor(s / 60) % 60) + ':' + pad(s % 60); };
+const want = new URLSearchParams(location.search).get('grade');
+let sel = G.includes(want) ? want : G[0], ex = null;
+
+function view(id) { ['start', 'exam', 'result'].forEach(x => $(x).hidden = x !== id); }
+function drawTabs() {
+  $('tabs').innerHTML = G.map(g => `<button class="grade ${g === sel ? 'on' : ''}" data-g="${g}">${D[g].label}</button>`).join('');
+}
+$('tabs').onclick = e => {
+  const g = e.target.dataset.g;
+  if (!g || (g === sel && !ex && !$('start').hidden)) return;
+  if (ex) { if (!confirm('Sınaq davam edir. Çıxsanız cavablarınız itəcək. Çıxmaq istəyirsiniz?')) return; stop(); }
+  sel = g; history.replaceState(null, '', '?grade=' + g); drawTabs(); showStart();
+};
+function stop() { if (ex) clearInterval(ex.t); ex = null; window.onbeforeunload = null; }
+
+function showStart() {
+  const d = D[sel];
+  $('start').innerHTML = `<div class="card"><h2>${d.label} sınağı</h2>
+    <p class="m">${size(sel)} sual · vaxt: ${dur(mins(sel))}</p>
+    <b style="font-size:13px">Fənlər:</b><ul>${d.subjects.map(s => `<li>${esc(s.name)} — ${s.questions.length} sual</li>`).join('')}</ul>
+    <label class="f">Ad və soyad (sertifikatda görünəcək)<input type="text" id="nm" maxlength="60" autocomplete="name"></label>
+    <button class="btn btn-primary full" id="go">Sınağa başla →</button></div>`;
+  $('go').onclick = begin;
+  view('start');
+}
+
+function begin() {
+  const name = $('nm').value.trim();
+  if (name.length < 3) { alert('Zəhmət olmasa ad və soyadınızı yazın.'); return; }
+  const now = Date.now();
+  ex = { g: sel, name, ans: {}, start: now, end: now + mins(sel) * 60000 };
+  $('exam').innerHTML = '<div id="bar"><span id="tm"></span><span id="cnt"></span></div>' +
+    D[sel].subjects.map((s, si) => `<h2 class="sub">${esc(s.name)}</h2>` + s.questions.map((q, qi) =>
+      `<div class="card q"><p><b>${qi + 1}.</b> ${esc(q.q)}</p>` + q.o.map((o, oi) =>
+        `<label class="opt"><input type="radio" name="q${si}_${qi}" value="${si}_${qi}_${oi}"><span><b>${'ABCD'[oi]})</b> ${esc(o)}</span></label>`).join('') + '</div>').join('')).join('') +
+    '<button class="btn btn-primary full" id="fin">Sınağı bitir</button>';
+  $('exam').onchange = e => { const [si, qi, oi] = e.target.value.split('_'); ex.ans[si + '_' + qi] = +oi; count(); };
+  $('fin').onclick = () => finish(false);
+  window.onbeforeunload = e => { e.preventDefault(); e.returnValue = ''; };
+  ex.t = setInterval(tick, 1000); tick(); count(); view('exam'); window.scrollTo(0, 0);
+}
+function count() { $('cnt').textContent = Object.keys(ex.ans).length + ' / ' + size(ex.g); }
+function tick() {
+  const left = ex.end - Date.now();
+  $('tm').textContent = '⏱ ' + fmt(left);
+  $('bar').classList.toggle('low', left < 300000);
+  if (left <= 0) { alert('Vaxt bitdi. Sınaq avtomatik təhvil verilir.'); finish(true); }
+}
+function finish(auto) {
+  if (!ex) return;
+  const total = size(ex.g), done = Object.keys(ex.ans).length;
+  if (!auto && done < total && !confirm((total - done) + ' sual cavabsız qalıb. Yenə də bitirmək istəyirsiniz?')) return;
+  const e = ex; e.used = Math.min(mins(e.g), Math.max(1, Math.round((Date.now() - e.start) / 60000)));
+  stop(); certificate(e);
+}
+
+function certificate(e) {
+  const d = D[e.g]; let ok = 0;
+  const rows = d.subjects.map((s, si) => {
+    const c = s.questions.filter((q, qi) => e.ans[si + '_' + qi] === q.a).length; ok += c;
+    return { n: s.name, c, t: s.questions.length };
+  });
+  const total = size(e.g), pct = Math.round(ok / total * 100), now = new Date();
+  const date = pad(now.getDate()) + '.' + pad(now.getMonth() + 1) + '.' + now.getFullYear();
+  const no = 'YD-' + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+  $('result').innerHTML = `<div id="cert">
+      <div class="brand">YOUDIDIT.AZ</div><h2>SERTİFİKAT</h2>
+      <div>Bu sertifikat təqdim olunur:</div>
+      <div class="name">${esc(e.name)}</div>
+      <div>${d.label} sınağında iştirak etdiyinə görə</div>
+      <div class="pct">${pct}%</div>
+      <div>${ok} / ${total} düzgün cavab</div>
+      <table><tr><th>Fənn</th><th>Nəticə</th><th>Faiz</th></tr>${rows.map(r =>
+        `<tr><td>${esc(r.n)}</td><td>${r.c} / ${r.t}</td><td>${Math.round(r.c / r.t * 100)}%</td></tr>`).join('')}</table>
+      <div class="foot">Tarix: ${date} · Sərf olunan vaxt: ${dur(e.used)} · № ${no}</div>
+    </div>
+    <button class="btn btn-primary full" onclick="window.print()">Sertifikatı yüklə / çap et (PDF)</button>
+    <button class="btn btn-secondary full" id="again">Sınaq siyahısına qayıt</button>`;
+  $('again').onclick = showStart;
+  view('result'); window.scrollTo(0, 0);
+}
+
+drawTabs(); showStart();
+</script>
+</body>
+</html>
