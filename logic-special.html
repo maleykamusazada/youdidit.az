@@ -74,5 +74,7 @@ function makeCertificate(){const canvas=document.createElement('canvas');canvas.
 $('certBtn').onclick=()=>{const canvas=makeCertificate(),data=canvas.toDataURL('image/png'),filename='sertifikat-'+student.name.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9ƏəĞğİıÖöŞşÜüÇç_-]/g,'')+'.png';const ios=/iPad|iPhone|iPod/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1);if(ios){const w=window.open();if(w){w.document.write(`<title>Sertifikat</title><body style="margin:0;text-align:center;background:#eee"><img src="${data}" style="max-width:100%;height:auto"><p>Şəklin üzərinə uzun basın → Save to Photos / Share</p></body>`);w.document.close();$('iosHelp').classList.remove('hidden')}}else{const a=document.createElement('a');a.href=data;a.download=filename;a.click()}};
 $('restartBtn').onclick=()=>location.reload();
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
+
 </html>
