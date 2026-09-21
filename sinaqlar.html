@@ -81,6 +81,12 @@ input[type=text]{width:100%;margin-top:7px;padding:13px;border-radius:12px;borde
 #cert .meta{display:flex;justify-content:center;gap:34px;margin-top:26px;padding-top:16px;border-top:1px solid #ece9f8;font-size:.9rem;font-weight:600}
 #cert .meta small{display:block;margin-bottom:2px;color:#98a2b3;font-size:.68rem;font-weight:600;letter-spacing:1px;text-transform:uppercase}
 #cert .no{margin-top:12px;color:#98a2b3;font-size:.78rem;letter-spacing:.5px}
+/* sınaq / izah alt tabları */
+.sub-tabs{display:flex;gap:8px;margin:14px 0 0}
+.stab{flex:1;padding:12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:#c2c6df;font-size:13px;font-weight:800;cursor:pointer}
+.stab.on{background:linear-gradient(135deg,#5d55ff,#a84fff);color:#fff;border-color:transparent}
+#izah-box{margin-top:14px;border-radius:20px;overflow:hidden;border:1px solid var(--border)}
+#izah-box iframe{display:block;width:100%;height:85vh;border:0;background:#eef2f9}
 /* footer */
 footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07)}
 .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
@@ -137,6 +143,8 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07)}
     <p class="section-description">Hər sinif üçün fənlər bir sınaqda toplanıb. Vaxt sual sayına görə təyin olunur, sonda faizlə nəticə və sertifikat alırsan.</p>
     <p class="section-description" style="margin-top:8px">Riyaziyyat IQ testləri üçün <a href="sinif-testleri.html" style="color:#b99cff;font-weight:700">Sinif testləri →</a></p>
     <div id="tabs"></div>
+    <div id="subtabs" hidden></div>
+    <div id="izah" hidden></div>
     <div id="start" hidden></div>
     <div id="exam" hidden></div>
     <div id="result" hidden></div>
@@ -182,8 +190,30 @@ const pad = n => String(n).padStart(2, '0');
 const fmt = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); return pad(Math.floor(s / 3600)) + ':' + pad(Math.floor(s / 60) % 60) + ':' + pad(s % 60); };
 const want = new URLSearchParams(location.search).get('grade');
 let sel = G.includes(want) ? want : G[0], ex = null;
+// İzah lövhələri: yeni sinif hazır olanda bura bir sətir əlavə et
+const IZAH = { "3": "izah-sinif3.html", "4": "izah-sinif4.html" };
+let mode = 'sinaq';
 
-function view(id) { ['start', 'exam', 'result'].forEach(x => $(x).hidden = x !== id); }
+function view(id) {
+  ['start', 'exam', 'result', 'izah'].forEach(x => $(x).hidden = x !== id);
+  $('subtabs').hidden = !(id === 'start' || id === 'izah');
+}
+function drawSub() {
+  $('subtabs').innerHTML = `<div class="sub-tabs"><button class="stab ${mode === 'sinaq' ? 'on' : ''}" data-m="sinaq">📝 Sınaq</button><button class="stab ${mode === 'izah' ? 'on' : ''}" data-m="izah">📖 İzah</button></div>`;
+}
+function showIzah() {
+  const src = IZAH[sel];
+  $('izah').innerHTML = src
+    ? `<div id="izah-box"><iframe src="${src}" title="${D[sel].label} izah lövhəsi" loading="lazy"></iframe></div>`
+    : `<div class="card"><h2>${D[sel].label} izahı</h2><p class="m">Bu sinif üçün izah lövhəsi tezliklə əlavə olunacaq.</p></div>`;
+  view('izah');
+}
+$('subtabs').onclick = e => {
+  const m = e.target.dataset.m;
+  if (!m || m === mode) return;
+  mode = m; drawSub();
+  if (mode === 'izah') showIzah(); else view('start');
+};
 function drawTabs() {
   $('tabs').innerHTML = G.map(g => `<button class="grade ${g === sel ? 'on' : ''}" data-g="${g}">${D[g].label}</button>`).join('');
 }
@@ -203,7 +233,8 @@ function showStart() {
     <label class="f">Ad və soyad (sertifikatda görünəcək)<input type="text" id="nm" maxlength="60" autocomplete="name"></label>
     <button class="btn btn-primary full" id="go">Sınağa başla →</button></div>`;
   $('go').onclick = begin;
-  view('start');
+  drawSub();
+  if (mode === 'izah') showIzah(); else view('start');
 }
 
 function begin() {
@@ -268,5 +299,4 @@ drawTabs(); showStart();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
-
 </html>
