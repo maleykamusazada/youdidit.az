@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>İzahlar</title>
+<style>
+:root{
+  --bg:#eef2f9; --fg:#1b2a4a; --muted:#5d6b88; --line:#d3dcec; --chip:#ffffff; --accent:#4f6df5;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){ --bg:#121826; --fg:#e8edf8; --muted:#94a0ba; --line:#2a3550; --chip:#1c2438; }
+}
+:root[data-theme="dark"]{ --bg:#121826; --fg:#e8edf8; --muted:#94a0ba; --line:#2a3550; --chip:#1c2438; }
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:var(--bg);color:var(--fg);display:flex;flex-direction:column;
+  font-family:ui-rounded,"SF Pro Rounded",system-ui,"Segoe UI",Roboto,sans-serif;
+  padding-top:env(safe-area-inset-top,0px);
+}
+header{padding:12px 14px 8px}
+h1{font-size:20px;margin:0 0 10px;font-weight:800}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.tab{
+  flex:0 0 auto;border:2px solid var(--line);background:var(--chip);color:var(--fg);
+  border-radius:14px;padding:10px 16px;font:inherit;font-weight:700;font-size:15px;cursor:pointer;
+}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab:disabled{opacity:.55;cursor:default}
+.tab small{display:block;font-size:11px;font-weight:600;opacity:.85}
+main{flex:1;min-height:0;display:flex}
+iframe{flex:1;width:100%;border:0;background:transparent}
+button:focus-visible{outline:3px solid #ffb703;outline-offset:2px}
+</style>
+</head>
+<body>
+<header>
+  <h1>📖 İzahlar</h1>
+  <div class="tabs" id="tabs" role="tablist"></div>
+</header>
+<main><iframe id="f" title="İzah lövhəsi"></iframe></main>
+
+<script>
+// Yeni sinif hazır olanda yalnız src əlavə et: {n:"5", label:"5-ci sinif", src:"izah/sinif5.html"}
+const SINIFLER=[
+  {n:"3",label:"3-cü sinif",src:"izah/sinif3.html"},
+  {n:"4",label:"4-cü sinif",src:"izah/sinif4.html"},
+  {n:"5",label:"5-ci sinif"},
+  {n:"6",label:"6-cı sinif"},
+  {n:"7",label:"7-ci sinif"},
+  {n:"8",label:"8-ci sinif"}
+];
+const tabs=document.getElementById("tabs"),f=document.getElementById("f");
+function pick(n){
+  const s=SINIFLER.find(x=>x.n===n&&x.src)||SINIFLER.find(x=>x.src);
+  f.src=s.src;
+  try{history.replaceState(null,"","#"+s.n)}catch(e){}
+  [...tabs.children].forEach((b,i)=>b.setAttribute("aria-selected",SINIFLER[i]===s));
+}
+SINIFLER.forEach(s=>{
+  const b=document.createElement("button");b.className="tab";b.setAttribute("role","tab");
+  b.innerHTML=s.label+(s.src?"":"<small>tezliklə</small>");
+  if(s.src)b.onclick=()=>pick(s.n);else b.disabled=true;
+  tabs.appendChild(b);
+});
+pick(location.hash.replace("#",""));
+</script>
+</body>
+</html>
