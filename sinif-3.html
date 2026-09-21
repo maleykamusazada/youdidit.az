@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3-cü sinif sınağı — izah lövhəsi</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✏️%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#eef2f9; --fg:#1b2a4a; --muted:#5d6b88; --line:#d3dcec; --chip:#ffffff;
+  --paper:#fbfcff; --grid:#dbe6f6; --margin:#ef6b6b; --ink:#1b2a4a;
+  --ok:#2e9e5b; --okbg:#e3f6ea; --bad:#d64545; --badbg:#fde9e9;
+  --accent:#4f6df5;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){ --bg:#121826; --fg:#e8edf8; --muted:#94a0ba; --line:#2a3550; --chip:#1c2438; }
+}
+:root[data-theme="dark"]{ --bg:#121826; --fg:#e8edf8; --muted:#94a0ba; --line:#2a3550; --chip:#1c2438; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:ui-rounded,"SF Pro Rounded",system-ui,"Segoe UI",Roboto,sans-serif;
+  padding-bottom:110px;
+}
+.wrap{max-width:1000px;margin:0 auto;padding:14px 14px 0}
+h1{font-size:18px;margin:2px 0 10px;font-weight:700}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.tab{
+  flex:0 0 auto; border:2px solid var(--line); background:var(--chip); color:var(--fg);
+  border-radius:14px; padding:10px 14px; font:inherit; font-weight:700; font-size:15px; cursor:pointer;
+}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.pill{
+  position:relative; width:40px;height:40px;border-radius:12px;border:2px solid var(--line);
+  background:var(--chip);color:var(--fg);font:inherit;font-weight:700;cursor:pointer;
+}
+.pill[aria-current="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.pill.solved::after{content:"";position:absolute;right:3px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--ok)}
+.pill.inked::before{content:"";position:absolute;left:4px;bottom:4px;width:12px;height:3px;border-radius:2px;background:var(--margin)}
+
+/* ---- Dəftər səhifəsi ---- */
+.stage{
+  position:relative; min-height:62vh; border-radius:18px; overflow:hidden;
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(to right,var(--grid) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+  border:2px solid var(--line);
+  color:var(--ink);
+}
+.stage::before{ /* sol sahə xətti */
+  content:"";position:absolute;left:52px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.55;z-index:0
+}
+.content{position:relative;z-index:1;padding:22px 22px 26px 72px}
+.stage.board .content{visibility:hidden}
+.meta{font-size:15px;font-weight:700;color:var(--accent);margin:0 0 10px}
+.ctx{
+  background:rgba(255,255,255,.88);border:2px dashed var(--accent);border-radius:14px;
+  padding:12px 16px;font-size:21px;line-height:1.5;margin:0 0 14px;white-space:pre-line
+}
+.q{font-size:clamp(24px,4.2vw,34px);line-height:1.35;font-weight:800;margin:0 0 18px;white-space:pre-line}
+.opts{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:700px){.opts{grid-template-columns:1fr 1fr}}
+.opt{
+  display:flex;align-items:center;gap:12px;text-align:left;width:100%;
+  font:inherit;font-size:clamp(20px,3.2vw,26px);font-weight:700;color:var(--ink);
+  background:#fff;border:3px solid #cdd7ea;border-radius:16px;padding:14px 16px;cursor:pointer;
+  min-height:64px;
+}
+.opt .l{flex:0 0 auto;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#e9eefb;font-size:20px}
+.opt.ok{background:var(--okbg);border-color:var(--ok)}
+.opt.ok .l{background:var(--ok);color:#fff}
+.opt.bad{background:var(--badbg);border-color:var(--bad)}
+.opt.bad .l{background:var(--bad);color:#fff}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{
+  font:inherit;font-weight:700;font-size:16px;border-radius:12px;border:2px solid #cdd7ea;
+  background:#fff;color:var(--ink);padding:10px 14px;cursor:pointer;min-height:44px
+}
+.why{
+  margin-top:14px;background:#fff8dc;border:2px solid #f2d36b;border-radius:14px;padding:12px 16px;
+  font-size:20px;line-height:1.5;font-weight:600
+}
+canvas#pen{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;touch-action:auto}
+.stage.drawing canvas#pen{pointer-events:auto;touch-action:none;cursor:crosshair}
+
+.nav{display:flex;gap:10px;justify-content:space-between;margin-top:12px}
+.nav .btn{background:var(--chip);color:var(--fg);border-color:var(--line);flex:1}
+.key{margin-top:10px;background:var(--chip);border:2px solid var(--line);border-radius:14px;padding:12px 16px;font-size:17px;line-height:1.7}
+
+/* ---- Şəkillər və planetlər ---- */
+.fig{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0 0 18px}
+.fig .card{background:rgba(255,255,255,.92);border:2px solid #cdd7ea;border-radius:16px;padding:10px 14px;text-align:center;font-weight:700;font-size:16px;min-width:92px}
+.fig .card b{display:block;font-size:46px;line-height:1.15;margin-bottom:2px;font-weight:400}
+.fig .arrow{font-size:30px;font-weight:800;color:var(--accent)}
+.fig svg{max-width:100%;height:auto;background:rgba(255,255,255,.75);border:2px solid #cdd7ea;border-radius:16px}
+.pl{cursor:pointer}
+.sysnote{margin-top:10px;font-size:18px;font-weight:700}
+.subtabs{display:flex;gap:8px;margin-top:12px}
+.subtabs[hidden]{display:none}
+.subtabs .tab{flex:1}
+
+/* ---- Alət paneli ---- */
+.bar{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  z-index:20;display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;
+  max-width:calc(100% - 16px);
+  background:#1b2a4a;color:#fff;border-radius:22px;padding:8px 10px;
+  box-shadow:0 8px 30px rgba(10,20,50,.35);
+}
+.tb{
+  border:0;background:transparent;color:#fff;font:inherit;font-size:20px;
+  min-width:46px;height:46px;border-radius:14px;cursor:pointer;padding:0 8px
+}
+.tb[aria-pressed="true"]{background:#4f6df5}
+.tb small{display:block;font-size:11px;line-height:1;margin-top:2px;opacity:.85}
+.sw{width:30px;height:30px;border-radius:50%;border:3px solid transparent;cursor:pointer;padding:0}
+.sw[aria-pressed="true"]{border-color:#fff}
+.sz{width:38px;height:46px;border:0;background:transparent;cursor:pointer;display:grid;place-items:center;border-radius:12px}
+.sz i{display:block;background:#fff;border-radius:50%}
+.sz[aria-pressed="true"]{background:#33456f}
+.sep{width:1px;height:28px;background:#ffffff33;margin:0 2px}
+button:focus-visible{outline:3px solid #ffb703;outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>3-cü sinif sınağı — izah lövhəsi</h1>
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div class="pills" id="pills"></div>
+
+  <div class="stage" id="stage">
+    <div class="content" id="content"></div>
+    <canvas id="pen"></canvas>
+  </div>
+
+  <div class="subtabs" id="subtabs" hidden></div>
+  <div class="nav">
+    <button class="btn" id="prev">◀ Əvvəlki</button>
+    <button class="btn" id="keyBtn">🔑 Cavab açarı</button>
+    <button class="btn" id="next">Növbəti ▶</button>
+  </div>
+  <div class="key" id="key" hidden></div>
+</div>
+
+<div class="bar" id="bar" aria-label="Alətlər">
+  <button class="tb" id="tDraw" aria-pressed="false" title="Qələm rejimi">✏️<small>Qələm</small></button>
+  <button class="tb" id="tErase" aria-pressed="false" title="Silgi">🧽<small>Silgi</small></button>
+  <span class="sep"></span>
+  <span id="colors" style="display:flex;gap:6px"></span>
+  <span class="sep"></span>
+  <span id="sizes" style="display:flex"></span>
+  <span class="sep"></span>
+  <button class="tb" id="tUndo" title="Geri al">↶<small>Geri</small></button>
+  <button class="tb" id="tClear" title="Bu səhifəni təmizlə">🗑️<small>Təmizlə</small></button>
+  <button class="tb" id="tBoard" aria-pressed="false" title="Boş lövhə">⬜<small>Lövhə</small></button>
+</div>
+
+<script>
+const DATA = [
+{ id:"en", name:"🇬🇧 English", color:"#4f6df5", questions:[
+ {q:"Choose the correct answer.\nWhat is your name?", o:["I am ten.","My name is Ali.","I am fine.","I live in Baku."], a:1, why:"Adı soruşanda “My name is …” deyirik."},
+ {q:"Choose the correct word.\nThis is my ___. She is my mother’s daughter.", o:["brother","father","sister","grandfather"], a:2, why:"Ananın qızı = bacı, yəni sister."},
+ {q:"Choose the correct answer.\nHow many pencils have you got?", o:["I am seven.","It is seven.","I have got seven.","They are seven."], a:2, why:"“Have you got?” sualına “I have got …” cavabı verilir."},
+ {q:"Choose the correct colour.\nThe sun is usually ___.", o:["yellow","purple","black","pink"], a:0, why:"Günəş adətən sarı (yellow) rəngdə çəkilir."},
+ {q:"Choose the correct word.\nThis is a ___ . 🐱", o:["dog","cat","bird","horse"], a:1, why:"🐱 şəkli pişikdir: cat."},
+ {q:"Choose the correct form.\nI ___ a student.", o:["is","are","am","be"], a:2, why:"I ilə həmişə am işlənir: I am."},
+ {q:"Choose the correct form.\nShe ___ my friend.", o:["am","are","is","be"], a:2, why:"He / she / it ilə is işlənir."},
+ {q:"Choose the correct word.\nWe write with a ___.", o:["pencil","bag","chair","door"], a:0, why:"Qələmlə (pencil) yazırıq."},
+ {q:"Choose the correct answer.\nWhat day comes after Monday?", o:["Sunday","Tuesday","Wednesday","Friday"], a:1, why:"Monday-dən sonra Tuesday gəlir."},
+ {q:"Choose the correct word.\nI can ___ . 🏊", o:["swim","swims","swimming","swam"], a:0, why:"“Can”-dan sonra feil dəyişmir: I can swim."},
+ {q:"Choose the correct answer.\nWhere do you sleep?", o:["In the kitchen.","In the bedroom.","In the garden.","In the classroom."], a:1, why:"Yatmaq üçün yataq otağı: bedroom."},
+ {q:"Choose the correct form.\nThey ___ happy.", o:["am","is","are","be"], a:2, why:"They / we / you ilə are işlənir."},
+ {q:"Choose the correct word.\nI have two ___. 👀", o:["nose","mouth","eyes","ear"], a:2, why:"Two dedikdə söz cəm olur: eyes. Gözlər iki dənədir."},
+ {q:"Choose the correct answer.\n“Thank you!”", o:["Goodbye!","You’re welcome!","Good morning!","Sorry!"], a:1, why:"Təşəkkürə cavab: You’re welcome (buyur)."},
+ {ctx:"This is Emma. She is eight years old. She has got a little dog. Its name is Max. Emma likes her dog.", q:"Read and answer.\nHow old is Emma?", o:["Six","Seven","Eight","Nine"], a:2, why:"Mətndə: “She is eight years old.”"}
+]},
+{ id:"math", name:"➕ Riyaziyyat", color:"#f08a24", questions:[
+ {q:"347 + 125 = ?", o:["462","472","482","452"], a:1, why:"7+5=12 (2 yaz, 1 yadda). 4+2+1=7. 3+1=4. Cavab 472."},
+ {q:"600 − 278 = ?", o:["312","322","332","342"], a:1, why:"600 − 278 = 322. Yoxlama: 322 + 278 = 600."},
+ {q:"7 × 8 = ?", o:["54","56","58","64"], a:1, why:"Vurma cədvəli: 7 × 8 = 56."},
+ {q:"63 : 7 = ?", o:["7","8","9","10"], a:2, why:"7 × 9 = 63 olduğu üçün 63 : 7 = 9."},
+ {q:"Hansı ədəd daha böyükdür?", o:["398","389","397","388"], a:0, why:"Yüzlük eynidir (3). Onluqları müqayisə edirik: 9 > 8. Sonra təkliklər: 398 > 397."},
+ {q:"1 metrdə neçə santimetr var?", o:["10","50","100","1000"], a:2, why:"1 m = 100 sm."},
+ {q:"Saat 3:00-dır. 2 saat sonra saat neçə olacaq?", o:["4:00","5:00","6:00","7:00"], a:1, why:"3 + 2 = 5, yəni saat 5:00."},
+ {q:"Bir tort 4 bərabər hissəyə bölünüb. Onun 1 hissəsi tortun hansı hissəsidir?", o:["1/2","1/3","1/4","4/1"], a:2, why:"4 bərabər hissədən 1-i: 1/4."},
+ {q:"Bir qutuda 24 karandaş var. Onlar 6 uşağa bərabər paylanır. Hər uşağa neçə karandaş düşər?", o:["3","4","5","6"], a:1, why:"Bölmə: 24 : 6 = 4."},
+ {q:"Ardıcıllığı tamamla:\n5, 10, 15, 20, ___", o:["22","24","25","30"], a:2, why:"Hər dəfə 5 artır: 20 + 5 = 25."},
+ {q:"Bir kitabın qiyməti 7 manatdır. Aysel 3 belə kitab alsa, neçə manat ödəməlidir?", o:["18","20","21","24"], a:2, why:"3 kitab: 7 × 3 = 21 manat."},
+ {q:"Hansı fiqurun 4 bərabər tərəfi var?", o:["Üçbucaq","Dairə","Kvadrat","Düzbucaqlı"], a:2, why:"Kvadratın 4 tərəfinin hamısı bərabərdir."},
+ {q:"1 kq = ? qram", o:["10","100","500","1000"], a:3, why:"1 kq = 1000 q."},
+ {q:"Bir səbətdə 35 alma var. 12 alma götürüldü. Səbətdə neçə alma qaldı?", o:["21","22","23","24"], a:2, why:"Çıxma: 35 − 12 = 23."},
+ {q:"Bir ədədin üzərinə 8 əlavə etdikdə 25 alınır. Bu hansı ədəddir?", o:["15","16","17","18"], a:2, why:"Tərsi ilə: 25 − 8 = 17. Yoxlama: 17 + 8 = 25."}
+]},
+{ id:"az", name:"🇦🇿 Azərbaycan dili", color:"#2e9e5b", questions:[
+ {q:"Hansı sırada yalnız isimlər verilmişdir?", o:["kitab, məktəb, müəllim","gözəl, böyük, şirin","qaçır, yazır, oxuyur","tez, yavaş, yaxşı"], a:0, why:"İsim: kim? nə? sualına cavab verir. Kitab, məktəb, müəllim isimdir. Gözəl, böyük sifət; qaçır feil; tez zərfdir."},
+ {q:"“Gülərüz uşaq dostlarına kömək etdi.” cümləsində sifət hansıdır?", o:["uşaq","dostlarına","kömək","gülərüz"], a:3, why:"Sifət əşyanın əlamətini bildirir (necə?). Necə uşaq? Gülərüz."},
+ {q:"Hansı söz feildir?", o:["kitab","yaşıl","qaçır","böyük"], a:2, why:"Feil hərəkət bildirir (nə edir?). Qaçır."},
+ {q:"“Məktəb” sözündə neçə heca var?", o:["1","2","3","4"], a:1, why:"Hecaların sayı saitlərin sayı qədərdir. Məktəb: ə, ə, yəni mək-təb, 2 heca."},
+ {q:"Hansı sözdə 3 sait var?", o:["alma","kitab","məktəb","müəllim"], a:3, why:"Müəllim: ü, ə, i, 3 sait. Alma, kitab, məktəb sözlərində 2 sait var."},
+ {q:"“Böyük” sözünün əks mənası hansıdır?", o:["uzun","kiçik","hündür","geniş"], a:1, why:"Böyük ↔ kiçik."},
+ {q:"“Gözəl” sözünün yaxınmənalı qarşılığı hansıdır?", o:["çirkin","balaca","qəşəng","zəif"], a:2, why:"Gözəl ≈ qəşəng. Çirkin əks mənalıdır."},
+ {q:"Hansı sözdə samitlərin sayı saitlərin sayından çoxdur?", o:["ana","ata","məktəb","alma"], a:2, why:"Məktəb: m, k, t, b (4 samit), ə, ə (2 sait). Digərlərində samit azdır."},
+ {q:"Hansı cümlənin sonunda sual işarəsi (?) qoyulmalıdır?", o:["Bu gün hava çox gözəldir","Sən kitabını gətirmisən","Mən məktəbə gedirəm","Uşaqlar həyətdə oynayırlar"], a:1, why:"“Sən kitabını gətirmisən?” sual mənası daşıyır."},
+ {q:"Hansı söz düzgün hecalanıb?", o:["mə-ktəb","kit-ab","qa-şıq","müəl-lim"], a:2, why:"Saitlər arasında tək samit olanda o, sonrakı hecaya keçir: qa-şıq. Düzgün variantlar: mək-təb, ki-tab, mü-əl-lim."},
+ {q:"“Uşaqlar bağçada oynayırlar.” cümləsində feil hansıdır?", o:["uşaqlar","bağçada","oynayırlar","cümləsində"], a:2, why:"Nə edirlər? Oynayırlar. Bu hərəkəti bildirir."},
+ {q:"Hansı söz təkdədir?", o:["kitablar","uşaqlar","qələmlər","dəftər"], a:3, why:"-lar / -lər şəkilçisi cəm bildirir. Dəftər bir dənədir."},
+ {q:"Hansı cümlə əmr cümləsidir?", o:["Sən bu kitabı oxudun?","Bu gün hava günəşlidir.","Kitabını çantana qoy.","Kaş mən də sizinlə gedəydim!"], a:2, why:"Əmr cümləsi tələb və ya göstəriş bildirir: “Kitabını çantana qoy.”"},
+ {ctx:"Murad səhər tezdən oyandı. O, səhər yeməyini yedikdən sonra məktəbə getdi. Məktəbdə müəllimi ona yeni kitab hədiyyə etdi. Murad çox sevindi.", q:"Mətni oxu və sualı cavablandır.\nMurad nə vaxt məktəbə getdi?", o:["Axşam","Gecə","Səhər yeməyindən sonra","Günortadan sonra"], a:2, why:"Mətndə: “səhər yeməyini yedikdən sonra məktəbə getdi”."},
+ {q:"Hansı cümlədə sözlərin hamısı düzgün yazılıb?", o:["Mən bu gün mektəbə gedirəm.","Müəllim bizə maraqlı hekayə danışdı.","Uşaqlar həyatda oynayırlar.","Anam dadlı yemey hazırladı."], a:1, why:"Səhvlər: mektəb → məktəb; həyatda → həyətdə; yemey → yemək."}
+]},
+{ id:"gen", name:"🌍 Ümumi dünyagörüşü", color:"#a855c7", questions:[
+ {q:"Günəş hansı səma cismidir?", o:["Planet","Ulduz","Peyk","Kometa"], a:1, why:"Günəş özü işıq saçan ulduzdur."},
+ {q:"Yer kürəsinin təbii peyki hansıdır?", o:["Günəş","Mars","Ay","Venera"], a:2, why:"Yerin ətrafında dolanan təbii peyk Aydır."},
+ {q:"Bitkilərin böyüməsi üçün aşağıdakılardan hansı əsasən lazımdır?", o:["Günəş işığı və su","Yalnız daş","Yalnız qum","Plastik"], a:0, why:"Bitkilər işıq, su və hava ilə böyüyür."},
+ {q:"Hansı heyvan məməlidir?", o:["Sərçə","Balıq","Dovşan","Kəpənək"], a:2, why:"Məməli heyvanlar balasını südlə bəsləyir. Dovşan məməlidir."},
+ {q:"İnsan nəfəs almaq üçün əsasən hansı orqandan istifadə edir?", o:["Mədə","Ağciyər","Ürək","Böyrək"], a:1, why:"Nəfəs alan orqan ağciyərdir."},
+ {q:"Hansı fəsildə havalar adətən daha isti olur?", o:["Qış","Payız","Yaz","Yay"], a:3, why:"Ən isti fəsil yaydır."},
+ {q:"Su donduqda nəyə çevrilir?", o:["Buxara","Buz","Torpağa","Havaya"], a:1, why:"Donan su buza çevrilir."},
+ {q:"Hansı davranış sağlam həyat tərzinə daha uyğundur?", o:["Əlləri yumadan yemək","Həddindən artıq şirniyyat yemək","Sağlam qidalanmaq və hərəkət etmək","Gecə çox gec yatmaq"], a:2, why:"Sağlam qida və hərəkət sağlamlığı qoruyur."},
+ {q:"Azərbaycanın paytaxtı hansı şəhərdir?", o:["Gəncə","Şəki","Bakı","Quba"], a:2, why:"Azərbaycanın paytaxtı Bakıdır."},
+ {q:"Yol keçərkən ilk növbədə nə etmək lazımdır?", o:["Qaçaraq yolu keçmək","Telefona baxmaq","Yolun hər iki tərəfinə baxmaq","Gözləri yummaq"], a:2, why:"Əvvəl sola, sonra sağa baxırıq, maşın yoxdursa keçirik."},
+ {q:"Hansı canlı uçur?", o:["At","Balıq","Qartal","Dovşan"], a:2, why:"Qartal quşdur, qanadları var və uçur."},
+ {q:"Ağacların yarpaqları əsasən hansı fəsildə saralıb tökülür?", o:["Yaz","Yay","Payız","Qış"], a:2, why:"Yarpaq tökümü payızda olur."},
+ {q:"Kompasın əsas məqsədi nədir?", o:["Temperaturu ölçmək","Vaxtı göstərmək","İstiqaməti müəyyən etmək","Çəkini ölçmək"], a:2, why:"Kompas şimalı göstərir və istiqaməti tapmağa kömək edir."},
+ {q:"Elektrik cihazlarından istifadə edərkən hansı davranış doğrudur?", o:["Yaş əllə elektrik cihazına toxunmaq","Elektrik naqilləri ilə oynamaq","Cihazlardan böyüklərin nəzarəti ilə düzgün istifadə etmək","Rozetkaya əşya salmaq"], a:2, why:"Elektrik təhlükəlidir. Böyüklərin nəzarəti şərtdir."},
+ {q:"Aşağıdakılardan hansı təbiəti qorumağa kömək edir?", o:["Zibili meşəyə atmaq","Ağacları səbəbsiz kəsmək","Suyu boş yerə axıtmaq","Zibili uyğun qutulara atmaq"], a:3, why:"Zibili qutuya atmaq təbiəti təmiz saxlayır."}
+]}
+];
+
+const COLORS=["#1b2a4a","#e03131","#1c7ed6","#2f9e44","#f08c00"];
+const SIZES=[3,6,12];
+const $=s=>document.querySelector(s);
+const stage=$("#stage"),canvas=$("#pen"),ctx=canvas.getContext("2d"),content=$("#content");
+let S=0,I=0,drawOn=false,eraser=false,board=false,color=COLORS[0],size=SIZES[1],penSeen=false,view="q",selP=-1;
+const st={};
+function loadInk(){try{return JSON.parse(localStorage.getItem("sinaq3-ink")||"{}")}catch(e){return {}}}
+const strokes=loadInk();
+let saveT;function saveInk(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem("sinaq3-ink",JSON.stringify(strokes))}catch(e){}},400)}
+const kq=(s,i)=>DATA[s].id+"-"+i;
+const K=()=>board?DATA[S].id+"-board":(view==="planets"?"gen-planets":kq(S,I));
+function stt(){const k=kq(S,I);return st[k]=st[k]||{picked:[],show:false,why:false}}
+
+/* ---------- Şəkillər (Ümumi dünyagörüşü) ---------- */
+const cards=a=>a.map(x=>typeof x==="string"?`<span class="arrow">${x}</span>`:`<div class="card"><b>${x[0]}</b>${x[1]}</div>`).join("");
+function sunSvg(){
+  let r="";
+  for(let a=0;a<12;a++){const t=a*Math.PI/6;
+    r+=`<line x1="${(120+46*Math.cos(t)).toFixed(1)}" y1="${(75+46*Math.sin(t)).toFixed(1)}" x2="${(120+64*Math.cos(t)).toFixed(1)}" y2="${(75+64*Math.sin(t)).toFixed(1)}"/>`}
+  return `<svg viewBox="0 0 240 150" width="260"><g stroke="#f5a623" stroke-width="6" stroke-linecap="round">${r}</g><circle cx="120" cy="75" r="36" fill="#ffd43b" stroke="#f5a623" stroke-width="4"/><text x="120" y="81" text-anchor="middle" font-size="17" font-weight="800" fill="#7a4b00">Günəş</text></svg>`;
+}
+const earthMoonSvg=`<svg viewBox="0 0 320 170" width="340"><ellipse cx="160" cy="85" rx="110" ry="58" fill="none" stroke="#9aa7c4" stroke-width="3" stroke-dasharray="6 6"/><circle cx="160" cy="85" r="30" fill="#4dabf7" stroke="#1c7ed6" stroke-width="3"/><text x="160" y="91" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">Yer</text><circle cx="251" cy="52" r="13" fill="#ced4da" stroke="#868e96" stroke-width="3"/><text x="251" y="30" text-anchor="middle" font-size="15" font-weight="800" fill="#1b2a4a">Ay</text></svg>`;
+const trafficSvg=`<svg viewBox="0 0 280 220" width="250"><rect x="40" y="8" width="80" height="204" rx="16" fill="#2b2f3a"/><circle cx="80" cy="56" r="24" fill="#e03131"/><circle cx="80" cy="110" r="24" fill="#f59f00" opacity=".35"/><circle cx="80" cy="164" r="24" fill="#2f9e44"/><text x="140" y="62" font-size="18" font-weight="800" fill="#1b2a4a">qırmızı: dayan</text><text x="140" y="116" font-size="18" font-weight="800" fill="#1b2a4a">sarı: hazır ol</text><text x="140" y="170" font-size="18" font-weight="800" fill="#1b2a4a">yaşıl: keç</text></svg>`;
+const compassSvg=`<svg viewBox="0 0 240 240" width="240"><circle cx="120" cy="120" r="104" fill="#fff" stroke="#1b2a4a" stroke-width="5"/><text x="120" y="46" text-anchor="middle" font-size="17" font-weight="800" fill="#e03131">Şimal</text><text x="120" y="212" text-anchor="middle" font-size="17" font-weight="800" fill="#1b2a4a">Cənub</text><text x="204" y="126" text-anchor="end" font-size="17" font-weight="800" fill="#1b2a4a">Şərq</text><text x="36" y="126" text-anchor="start" font-size="17" font-weight="800" fill="#1b2a4a">Qərb</text><polygon points="120,62 106,120 134,120" fill="#e03131"/><polygon points="120,178 106,120 134,120" fill="#868e96"/><circle cx="120" cy="120" r="6" fill="#1b2a4a"/></svg>`;
+const FIG_GEN=[
+  sunSvg(),
+  earthMoonSvg,
+  cards([["☀️","işıq"],"+",["💧","su"],"→",["🌱","böyüyür"]]),
+  cards([["🐦","Sərçə"],["🐟","Balıq"],["🐰","Dovşan"],["🦋","Kəpənək"]]),
+  cards([["🍽️","Mədə"],["🫁","Ağciyər"],["❤️","Ürək"],["🫘","Böyrək"]]),
+  cards([["🌸","Yaz"],["☀️","Yay"],["🍂","Payız"],["❄️","Qış"]]),
+  cards([["💧","Su"],"→",["🥶","donur"],"→",["🧊","Buz"]]),
+  cards([["🧼","Əlləri yumaq"],["🥗","Sağlam qida"],["🏃","Hərəkət"],["😴","Vaxtında yatmaq"]]),
+  cards([["🇦🇿","Azərbaycan"],"→",["⭐","Paytaxt: Bakı"]]),
+  trafficSvg,
+  cards([["🐴","At"],["🐟","Balıq"],["🦅","Qartal"],["🐇","Dovşan"]]),
+  cards([["🌳","Yay: yaşıl"],"→",["🍂","Payız: sarı"],"→",["❄️","Qış: yarpaqsız"]]),
+  compassSvg,
+  cards([["🔌","Rozetka"],["⚡","Elektrik"],["👨‍👩‍👧","Böyüklərin nəzarəti"]]),
+  cards([["♻️","Zibil qutusu"],["🌳","Ağac"],["💧","Su"]])
+];
+
+/* ---------- Günəş sistemi ---------- */
+const PLANETS=[
+  {n:"Merkuri",r:9,c:"#b0a99f",f:"Günəşə ən yaxın və ən kiçik planetdir."},
+  {n:"Venera",r:16,c:"#e8c27a",f:"Ən isti planetdir."},
+  {n:"Yer",r:17,c:"#4dabf7",f:"Bizim planetimizdir. Üzərində həyat var, təbii peyki Aydır."},
+  {n:"Mars",r:12,c:"#e8590c",f:"Qırmızı planet adlanır."},
+  {n:"Yupiter",r:44,c:"#d9a066",f:"Ən böyük planetdir."},
+  {n:"Saturn",r:38,c:"#e6c88f",f:"Ətrafında gözəl halqaları var.",ring:true},
+  {n:"Uran",r:26,c:"#74c0d8",f:"Çox soyuq, mavi-yaşıl planetdir."},
+  {n:"Neptun",r:25,c:"#3b5bdb",f:"Günəşdən ən uzaq planetdir."}
+];
+function renderPlanets(){
+  content.innerHTML="";
+  const m=document.createElement("p");m.className="meta";m.textContent="🌍 Ümumi dünyagörüşü · Günəş sistemi";content.appendChild(m);
+  const h=document.createElement("p");h.className="q";h.textContent="Planetə toxun və izah et";content.appendChild(h);
+  const xs=[150,225,310,390,505,645,765,865];
+  let g='<circle cx="20" cy="150" r="85" fill="#ffd43b" stroke="#f5a623" stroke-width="5"/><text x="34" y="156" font-size="18" font-weight="800" fill="#7a4b00">Günəş</text>';
+  PLANETS.forEach((p,i)=>{
+    const x=xs[i],hw=Math.max(p.r*(p.ring?1.8:1),36);
+    g+=`<g class="pl" data-i="${i}">`;
+    if(p.ring)g+=`<ellipse cx="${x}" cy="150" rx="${p.r*1.8}" ry="${p.r*.42}" fill="none" stroke="#c9a66b" stroke-width="7" transform="rotate(-18 ${x} 150)"/>`;
+    g+=`<circle cx="${x}" cy="150" r="${p.r}" fill="${p.c}" stroke="${selP===i?"#e03131":"#1b2a4a"}" stroke-width="${selP===i?6:2}"/>`;
+    g+=`<rect x="${x-hw}" y="60" width="${hw*2}" height="200" fill="transparent"/>`;
+    g+=`<text x="${x}" y="262" text-anchor="middle" font-size="15" font-weight="800" fill="${selP===i?"#e03131":"#1b2a4a"}">${i+1}. ${p.n}</text></g>`;
+  });
+  const wrap=document.createElement("div");
+  wrap.innerHTML=`<svg viewBox="0 0 920 290" style="width:100%;height:auto;background:rgba(255,255,255,.75);border:2px solid #cdd7ea;border-radius:16px">${g}</svg>`;
+  wrap.querySelectorAll(".pl").forEach(el=>el.onclick=()=>{selP=+el.dataset.i;renderPlanets()});
+  content.appendChild(wrap);
+  const info=document.createElement("div");info.className="why";
+  info.textContent=selP<0?"Planetə toxun, məlumat burada görünəcək.":`${PLANETS[selP].n}: Günəşdən ${selP+1}-ci planetdir. ${PLANETS[selP].f}`;
+  content.appendChild(info);
+  const note=document.createElement("p");note.className="sysnote";note.textContent="☀️ Günəş ulduzdur.  🌙 Ay Yerin təbii peykidir.";content.appendChild(note);
+  requestAnimationFrame(fit);
+}
+function renderSubtabs(){
+  const b=$("#subtabs");
+  if(DATA[S].id!=="gen"){b.hidden=true;return}
+  b.hidden=false;b.innerHTML="";
+  [["q","📝 Suallar"],["planets","🪐 Planetlər"]].forEach(([v,t])=>{
+    const x=document.createElement("button");x.className="tab";x.textContent=t;x.setAttribute("aria-selected",view===v);
+    x.onclick=()=>{view=v;board=false;syncBar();render()};b.appendChild(x);
+  });
+}
+
+/* ---------- Görünüş ---------- */
+function setAccent(){document.documentElement.style.setProperty("--accent",DATA[S].color)}
+function renderTabs(){
+  const t=$("#tabs");t.innerHTML="";
+  DATA.forEach((d,i)=>{
+    const b=document.createElement("button");b.className="tab";b.setAttribute("role","tab");
+    b.setAttribute("aria-selected",i===S);b.textContent=d.name;
+    b.onclick=()=>{S=i;I=0;board=false;view="q";syncBar();render()};t.appendChild(b);
+  });
+}
+function renderPills(){
+  const p=$("#pills");p.innerHTML="";
+  DATA[S].questions.forEach((q,i)=>{
+    const b=document.createElement("button");b.className="pill";b.textContent=i+1;
+    if(i===I&&view==="q")b.setAttribute("aria-current","true");
+    const s=st[kq(S,i)];
+    if(s&&s.picked.includes(q.a))b.classList.add("solved");
+    if((strokes[kq(S,i)]||[]).length)b.classList.add("inked");
+    b.onclick=()=>{I=i;board=false;view="q";render()};p.appendChild(b);
+  });
+}
+function renderContent(){
+  if(view==="planets"&&DATA[S].id==="gen"){renderPlanets();return}
+  const q=DATA[S].questions[I],s=stt();
+  content.innerHTML="";
+  const m=document.createElement("p");m.className="meta";m.textContent=DATA[S].name+" · sual "+(I+1)+" / "+DATA[S].questions.length;
+  content.appendChild(m);
+  if(q.ctx){const c=document.createElement("div");c.className="ctx";c.textContent=q.ctx;content.appendChild(c)}
+  const h=document.createElement("p");h.className="q";h.textContent=q.q;content.appendChild(h);
+  if(DATA[S].id==="gen"&&FIG_GEN[I]){const f=document.createElement("div");f.className="fig";f.innerHTML=FIG_GEN[I];content.appendChild(f)}
+  const o=document.createElement("div");o.className="opts";
+  q.o.forEach((t,i)=>{
+    const b=document.createElement("button");b.className="opt";
+    const l=document.createElement("span");l.className="l";l.textContent="ABCD"[i];
+    const x=document.createElement("span");x.textContent=t;
+    b.append(l,x);
+    if(s.picked.includes(i))b.classList.add(i===q.a?"ok":"bad");
+    if(s.show&&i===q.a)b.classList.add("ok");
+    b.onclick=()=>{if(!s.picked.includes(i))s.picked.push(i);renderContent();renderPills()};
+    o.appendChild(b);
+  });
+  content.appendChild(o);
+  const a=document.createElement("div");a.className="acts";
+  const b1=document.createElement("button");b1.className="btn";b1.textContent=s.show?"🙈 Cavabı gizlət":"✅ Cavabı göstər";
+  b1.onclick=()=>{s.show=!s.show;if(!s.show)s.picked=[];renderContent();renderPills()};
+  const b2=document.createElement("button");b2.className="btn";b2.textContent=s.why?"💡 İzahı bağla":"💡 İzah";
+  b2.onclick=()=>{s.why=!s.why;renderContent()};
+  a.append(b1,b2);content.appendChild(a);
+  if(s.why){const w=document.createElement("div");w.className="why";w.textContent=q.why;content.appendChild(w)}
+  requestAnimationFrame(fit);
+}
+function renderKey(){
+  $("#key").textContent=DATA[S].questions.map((q,i)=>(i+1)+"-"+"ABCD"[q.a]).join(",  ");
+}
+function render(){setAccent();stage.classList.toggle("board",board);renderTabs();renderSubtabs();renderPills();renderContent();renderKey()}
+
+/* ---------- Qələm ---------- */
+function fit(){
+  const r=stage.getBoundingClientRect(),d=window.devicePixelRatio||1;
+  canvas.width=Math.round(r.width*d);canvas.height=Math.round(r.height*d);
+  ctx.setTransform(d,0,0,d,0,0);redraw();
+}
+function style(s){
+  ctx.globalCompositeOperation=s.e?"destination-out":"source-over";
+  ctx.strokeStyle=s.c;ctx.fillStyle=s.c;ctx.lineWidth=s.w;ctx.lineCap="round";ctx.lineJoin="round";
+}
+function paint(s){
+  style(s);const p=s.p;
+  if(p.length===1){ctx.beginPath();ctx.arc(p[0][0],p[0][1],s.w/2,0,7);ctx.fill();return}
+  ctx.beginPath();ctx.moveTo(p[0][0],p[0][1]);
+  for(let i=1;i<p.length-1;i++){
+    const mx=(p[i][0]+p[i+1][0])/2,my=(p[i][1]+p[i+1][1])/2;
+    ctx.quadraticCurveTo(p[i][0],p[i][1],mx,my);
+  }
+  const l=p[p.length-1];ctx.lineTo(l[0],l[1]);ctx.stroke();
+}
+function redraw(){
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.restore();
+  (strokes[K()]||[]).forEach(paint);
+}
+let curS=null,pid=null,last=null;
+const pt=e=>{const r=canvas.getBoundingClientRect();return [Math.round((e.clientX-r.left)*10)/10,Math.round((e.clientY-r.top)*10)/10]};
+canvas.addEventListener("pointerdown",e=>{
+  if(!drawOn)return;
+  if(e.pointerType==="pen")penSeen=true;
+  if(e.pointerType==="touch"&&penSeen)return; // əl ayası qorunması
+  e.preventDefault();canvas.setPointerCapture(e.pointerId);pid=e.pointerId;
+  curS={c:color,w:eraser?size*4:size,e:eraser,p:[pt(e)]};last=curS.p[0];paint(curS);
+});
+canvas.addEventListener("pointermove",e=>{
+  if(!curS||e.pointerId!==pid)return;e.preventDefault();
+  const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];
+  style(curS);
+  for(const ev of evs){
+    const n=pt(ev);ctx.beginPath();ctx.moveTo(last[0],last[1]);ctx.lineTo(n[0],n[1]);ctx.stroke();
+    curS.p.push(n);last=n;
+  }
+});
+function endStroke(e){
+  if(!curS||e.pointerId!==pid)return;
+  const k=K();(strokes[k]=strokes[k]||[]).push(curS);curS=null;pid=null;
+  saveInk();redraw();renderPills();
+}
+canvas.addEventListener("pointerup",endStroke);
+canvas.addEventListener("pointercancel",endStroke);
+new ResizeObserver(fit).observe(stage);
+
+/* ---------- Alət paneli ---------- */
+function syncBar(){
+  $("#tDraw").setAttribute("aria-pressed",drawOn);
+  $("#tErase").setAttribute("aria-pressed",eraser&&drawOn);
+  $("#tBoard").setAttribute("aria-pressed",board);
+  stage.classList.toggle("drawing",drawOn);
+  document.querySelectorAll(".sw").forEach(b=>b.setAttribute("aria-pressed",!eraser&&b.dataset.c===color));
+  document.querySelectorAll(".sz").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.s===size));
+}
+COLORS.forEach(c=>{
+  const b=document.createElement("button");b.className="sw";b.style.background=c;b.dataset.c=c;b.title="Rəng";
+  b.onclick=()=>{color=c;eraser=false;drawOn=true;syncBar()};$("#colors").appendChild(b);
+});
+SIZES.forEach(s=>{
+  const b=document.createElement("button");b.className="sz";b.dataset.s=s;b.title="Qalınlıq";
+  const i=document.createElement("i");i.style.width=i.style.height=(s+4)+"px";b.appendChild(i);
+  b.onclick=()=>{size=s;syncBar()};$("#sizes").appendChild(b);
+});
+$("#tDraw").onclick=()=>{drawOn=!drawOn;if(!drawOn)eraser=false;syncBar()};
+$("#tErase").onclick=()=>{eraser=!eraser;if(eraser)drawOn=true;syncBar()};
+$("#tUndo").onclick=()=>{(strokes[K()]||[]).pop();saveInk();redraw();renderPills()};
+$("#tClear").onclick=()=>{strokes[K()]=[];saveInk();redraw();renderPills()};
+$("#tBoard").onclick=()=>{board=!board;stage.classList.toggle("board",board);redraw();syncBar()};
+$("#prev").onclick=()=>{board=false;view="q";I=(I+DATA[S].questions.length-1)%DATA[S].questions.length;render()};
+$("#next").onclick=()=>{board=false;view="q";I=(I+1)%DATA[S].questions.length;render()};
+$("#keyBtn").onclick=()=>{const k=$("#key");k.hidden=!k.hidden};
+
+render();syncBar();
+</script>
+</body>
+</html>
