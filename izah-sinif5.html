@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>5-ci sinif sınağı — izah lövhəsi</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✏️%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#eef2f9; --fg:#1b2a4a; --muted:#5d6b88; --line:#d3dcec; --chip:#ffffff;
+  --paper:#fbfcff; --grid:#dbe6f6; --margin:#ef6b6b; --ink:#1b2a4a;
+  --ok:#2e9e5b; --okbg:#e3f6ea; --bad:#d64545; --badbg:#fde9e9;
+  --accent:#4f6df5;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){ --bg:#121826; --fg:#e8edf8; --muted:#94a0ba; --line:#2a3550; --chip:#1c2438; }
+}
+:root[data-theme="dark"]{ --bg:#121826; --fg:#e8edf8; --muted:#94a0ba; --line:#2a3550; --chip:#1c2438; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:ui-rounded,"SF Pro Rounded",system-ui,"Segoe UI",Roboto,sans-serif;
+  padding-bottom:110px;
+}
+.wrap{max-width:1000px;margin:0 auto;padding:14px 14px 0}
+h1{font-size:18px;margin:2px 0 10px;font-weight:700}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.tab{
+  flex:0 0 auto; border:2px solid var(--line); background:var(--chip); color:var(--fg);
+  border-radius:14px; padding:10px 14px; font:inherit; font-weight:700; font-size:15px; cursor:pointer;
+}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.pill{
+  position:relative; width:40px;height:40px;border-radius:12px;border:2px solid var(--line);
+  background:var(--chip);color:var(--fg);font:inherit;font-weight:700;cursor:pointer;
+}
+.pill[aria-current="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.pill.solved::after{content:"";position:absolute;right:3px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--ok)}
+.pill.inked::before{content:"";position:absolute;left:4px;bottom:4px;width:12px;height:3px;border-radius:2px;background:var(--margin)}
+
+/* ---- Dəftər səhifəsi ---- */
+.stage{
+  position:relative; min-height:62vh; border-radius:18px; overflow:hidden;
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(to right,var(--grid) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+  border:2px solid var(--line);
+  color:var(--ink);
+}
+.stage::before{ /* sol sahə xətti */
+  content:"";position:absolute;left:52px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.55;z-index:0
+}
+.content{position:relative;z-index:1;padding:22px 22px 26px 72px}
+.stage.board .content{visibility:hidden}
+.meta{font-size:15px;font-weight:700;color:var(--accent);margin:0 0 10px}
+.ctx{
+  background:rgba(255,255,255,.88);border:2px dashed var(--accent);border-radius:14px;
+  padding:12px 16px;font-size:21px;line-height:1.5;margin:0 0 14px;white-space:pre-line
+}
+.q{font-size:clamp(24px,4.2vw,34px);line-height:1.35;font-weight:800;margin:0 0 18px;white-space:pre-line}
+.opts{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:700px){.opts{grid-template-columns:1fr 1fr}}
+.opt{
+  display:flex;align-items:center;gap:12px;text-align:left;width:100%;
+  font:inherit;font-size:clamp(20px,3.2vw,26px);font-weight:700;color:var(--ink);
+  background:#fff;border:3px solid #cdd7ea;border-radius:16px;padding:14px 16px;cursor:pointer;
+  min-height:64px;
+}
+.opt .l{flex:0 0 auto;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#e9eefb;font-size:20px}
+.opt.ok{background:var(--okbg);border-color:var(--ok)}
+.opt.ok .l{background:var(--ok);color:#fff}
+.opt.bad{background:var(--badbg);border-color:var(--bad)}
+.opt.bad .l{background:var(--bad);color:#fff}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{
+  font:inherit;font-weight:700;font-size:16px;border-radius:12px;border:2px solid #cdd7ea;
+  background:#fff;color:var(--ink);padding:10px 14px;cursor:pointer;min-height:44px
+}
+.why{
+  margin-top:14px;background:#fff8dc;border:2px solid #f2d36b;border-radius:14px;padding:12px 16px;
+  font-size:20px;line-height:1.5;font-weight:600
+}
+canvas#pen{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;touch-action:auto}
+.stage.drawing canvas#pen{pointer-events:auto;touch-action:none;cursor:crosshair}
+
+.nav{display:flex;gap:10px;justify-content:space-between;margin-top:12px}
+.nav .btn{background:var(--chip);color:var(--fg);border-color:var(--line);flex:1}
+.key{margin-top:10px;background:var(--chip);border:2px solid var(--line);border-radius:14px;padding:12px 16px;font-size:17px;line-height:1.7}
+
+/* ---- Şəkillər və planetlər ---- */
+.fig{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0 0 18px}
+.fig .card{background:rgba(255,255,255,.92);border:2px solid #cdd7ea;border-radius:16px;padding:10px 14px;text-align:center;font-weight:700;font-size:16px;min-width:92px}
+.fig .card b{display:block;font-size:46px;line-height:1.15;margin-bottom:2px;font-weight:400}
+.fig .arrow{font-size:30px;font-weight:800;color:var(--accent)}
+.fig svg{max-width:100%;height:auto;background:rgba(255,255,255,.75);border:2px solid #cdd7ea;border-radius:16px}
+.pl{cursor:pointer}
+.sysnote{margin-top:10px;font-size:18px;font-weight:700}
+.subtabs{display:flex;gap:8px;margin-top:12px}
+.subtabs[hidden]{display:none}
+.subtabs .tab{flex:1}
+
+/* ---- Alət paneli ---- */
+.bar{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  z-index:20;display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center;
+  max-width:calc(100% - 16px);
+  background:#1b2a4a;color:#fff;border-radius:22px;padding:8px 10px;
+  box-shadow:0 8px 30px rgba(10,20,50,.35);
+}
+.tb{
+  border:0;background:transparent;color:#fff;font:inherit;font-size:20px;
+  min-width:46px;height:46px;border-radius:14px;cursor:pointer;padding:0 8px
+}
+.tb[aria-pressed="true"]{background:#4f6df5}
+.tb small{display:block;font-size:11px;line-height:1;margin-top:2px;opacity:.85}
+.sw{width:30px;height:30px;border-radius:50%;border:3px solid transparent;cursor:pointer;padding:0}
+.sw[aria-pressed="true"]{border-color:#fff}
+.sz{width:38px;height:46px;border:0;background:transparent;cursor:pointer;display:grid;place-items:center;border-radius:12px}
+.sz i{display:block;background:#fff;border-radius:50%}
+.sz[aria-pressed="true"]{background:#33456f}
+.sep{width:1px;height:28px;background:#ffffff33;margin:0 2px}
+button:focus-visible{outline:3px solid #ffb703;outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>5-ci sinif sınağı — izah lövhəsi</h1>
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div class="pills" id="pills"></div>
+
+  <div class="stage" id="stage">
+    <div class="content" id="content"></div>
+    <canvas id="pen"></canvas>
+  </div>
+
+  <div class="subtabs" id="subtabs" hidden></div>
+  <div class="nav">
+    <button class="btn" id="prev">◀ Əvvəlki</button>
+    <button class="btn" id="keyBtn">🔑 Cavab açarı</button>
+    <button class="btn" id="next">Növbəti ▶</button>
+  </div>
+  <div class="key" id="key" hidden></div>
+</div>
+
+<div class="bar" id="bar" aria-label="Alətlər">
+  <button class="tb" id="tDraw" aria-pressed="false" title="Qələm rejimi">✏️<small>Qələm</small></button>
+  <button class="tb" id="tErase" aria-pressed="false" title="Silgi">🧽<small>Silgi</small></button>
+  <span class="sep"></span>
+  <span id="colors" style="display:flex;gap:6px"></span>
+  <span class="sep"></span>
+  <span id="sizes" style="display:flex"></span>
+  <span class="sep"></span>
+  <button class="tb" id="tUndo" title="Geri al">↶<small>Geri</small></button>
+  <button class="tb" id="tClear" title="Bu səhifəni təmizlə">🗑️<small>Təmizlə</small></button>
+  <button class="tb" id="tBoard" aria-pressed="false" title="Boş lövhə">⬜<small>Lövhə</small></button>
+</div>
+
+<script>
+const DATA = [
+ {
+  "id": "az",
+  "name": "🇦🇿 Azərbaycan dili",
+  "color": "#2e9e5b",
+  "questions": [
+   {
+    "q": "Hansı cümlədə mücərrəd isim işlənmişdir?",
+    "o": [
+     "Bağçada qırmızı güllər açmışdı.",
+     "Uşaqlar kitabxanaya getdilər.",
+     "Onun səbrinə hamı heyran qaldı.",
+     "Masanın üzərində dəftər vardı."
+    ],
+    "a": 2,
+    "why": "Mücərrəd isim gözlə görünməz, əllə tutulmaz: səbr. Digərləri konkret əşyadır (gül, kitabxana, dəftər)."
+   },
+   {
+    "q": "Hansı sıradakı sözlərin hamısı düzəltmə sözdür?",
+    "o": [
+     "yazıçı, duzlu, gözlük",
+     "kitab, məktəb, çiçək",
+     "qapıçı, dəmir, su",
+     "evlər, uşaqlar, dağlar"
+    ],
+    "a": 0,
+    "why": "Düzəltmə söz kökə şəkilçi artırmaqla düzəlir: yaz+ıçı, duz+lu, göz+lük."
+   },
+   {
+    "q": "“Dostumun məsləhətinə qulaq asdım.” cümləsində “dostumun” sözü hansı haldadır?",
+    "o": [
+     "Yiyəlik hal",
+     "Yönlük hal",
+     "Təsirlik hal",
+     "Yerlik hal"
+    ],
+    "a": 0,
+    "why": "Kimin məsləhəti? Dostumun. -ın, -in, -un, -ün şəkilçisi yiyəlik halı bildirir."
+   },
+   {
+    "q": "Hansı cümlədə sifət isimləşmişdir?",
+    "o": [
+     "Qırmızı alma süfrənin üstündə idi.",
+     "Böyük ev küçənin sonunda yerləşirdi.",
+     "Böyüklər uşaqlara yol göstərdilər.",
+     "Yaşıl yarpaqlar küləklə hərəkət edirdi."
+    ],
+    "a": 2,
+    "why": "“Böyüklər” sözü sifətdən (böyük) yaranıb, isim kimi işlənir və -lər şəkilçisi alıb, yəni sifət isimləşib."
+   },
+   {
+    "q": "Hansı cümlədə əvəzlik isim əvəzinə işlənmişdir?",
+    "o": [
+     "Bu kitab çox maraqlıdır.",
+     "Mən tapşırığı vaxtında tamamladım.",
+     "Həmin gün hava yağışlı idi.",
+     "Belə davranış heç kimə xoş gəlmədi."
+    ],
+    "a": 1,
+    "why": "“Mən” adın əvəzinə işlənib. Bu kitab, həmin gün ifadələrində bu, həmin sözləri sifət əvəzinə işlənir."
+   },
+   {
+    "q": "“Şagirdlər tapşırığı diqqətlə yerinə yetirdilər.” cümləsində “diqqətlə” sözü hansı nitq hissəsidir?",
+    "o": [
+     "Sifət",
+     "Zərf",
+     "İsim",
+     "Əvəzlik"
+    ],
+    "a": 1,
+    "why": "Necə yerinə yetirdilər? Diqqətlə. Hərəkətin tərzini bildirir, deməli zərfdir."
+   },
+   {
+    "q": "Hansı cümlədə mürəkkəb söz işlənmişdir?",
+    "o": [
+     "Uşaqlar həyətə çıxdılar.",
+     "Anam süfrəyə yemək gətirdi.",
+     "Ayaqqabı qapının yanında qalmışdı.",
+     "Müəllim dərsi izah etdi."
+    ],
+    "a": 2,
+    "why": "Mürəkkəb söz iki sözün birləşməsindən yaranır: ayaq + qabı = ayaqqabı."
+   },
+   {
+    "q": "Hansı variantda sözün düzgün hecalanması verilmişdir?",
+    "o": [
+     "müəl-lim",
+     "mək-təb",
+     "kita-bxa-na",
+     "şag-ird"
+    ],
+    "a": 1,
+    "why": "Ardıcıl iki samit arasında heca bölünür: mək-təb. Düzgün yazılışlar: mü-əl-lim, ki-tab-xa-na, şa-gird."
+   },
+   {
+    "q": "Hansı cümlədə söz məcazi mənada işlənmişdir?",
+    "o": [
+     "Uşaq stəkanı ehtiyatla yerə qoydu.",
+     "Günəş səhər tezdən doğdu.",
+     "Onun ürəyi daş idi.",
+     "Qız kitabı masanın üstünə qoydu."
+    ],
+    "a": 2,
+    "why": "Məcazi mənada söz öz həqiqi mənasında deyil. “Ürəyi daş idi” = ürəyi qatı, rəhmsiz idi."
+   },
+   {
+    "q": "Hansı cümlədə həmcins üzvlər işlənmişdir?",
+    "o": [
+     "Səhər məktəbə getdim.",
+     "Uşaqlar sakitcə kitab oxuyurdular.",
+     "Anar, Leyla və Murad yarışda iştirak etdilər.",
+     "Müəllim şagirdlərə sual verdi."
+    ],
+    "a": 2,
+    "why": "Həmcins üzvlər eyni suala cavab verir: kim? Anar, Leyla və Murad. Vergül və “və” ilə sadalanır."
+   },
+   {
+    "q": "“Yağış yağdığı üçün yollar islandı.” cümləsi quruluşuna görə hansıdır?",
+    "o": [
+     "Sadə cümlə",
+     "Mürəkkəb cümlə",
+     "Söz birləşməsi",
+     "Adlıq cümlə"
+    ],
+    "a": 1,
+    "why": "Cümlə iki hissədən ibarətdir: “Yağış yağdığı üçün” və “yollar islandı”. Səbəb-nəticə əlaqəsi olduğuna görə mürəkkəb cümlədir."
+   },
+   {
+    "q": "Hansı cümlədə xəbər isimlə ifadə olunmuşdur?",
+    "o": [
+     "Uşaqlar həyətə qaçdılar.",
+     "Mən bu kitabı oxudum.",
+     "Mənim qardaşım həkimdir.",
+     "Quşlar ağacdan uçdular."
+    ],
+    "a": 2,
+    "why": "Qardaşım nədir? Həkimdir. Xəbər isim (həkim) ilə ifadə olunub."
+   },
+   {
+    "q": "Hansı variantda antonim sözlər verilmişdir?",
+    "o": [
+     "gözəl — yaraşıqlı",
+     "sürətli — cəld",
+     "böyük — iri",
+     "cəsur — qorxaq"
+    ],
+    "a": 3,
+    "why": "Antonim əks mənalı sözlərdir: cəsur ↔ qorxaq. Digərləri yaxınmənalıdır."
+   },
+   {
+    "q": "Hansı cümlədə vergülün işlənməsi düzgündür?",
+    "o": [
+     "Anam, atam və bacım evdə idi.",
+     "Anam atam, və bacım evdə idi.",
+     "Anam atam və, bacım evdə idi.",
+     "Anam, atam, və bacım evdə idi."
+    ],
+    "a": 0,
+    "why": "Sadalamada sözlər vergüllə ayrılır, “və”-dən əvvəl vergül qoyulmur: Anam, atam və bacım."
+   },
+   {
+    "q": "Aşağıdakı cümlələrin hansında “ki” bağlayıcı kimi işlənmişdir?",
+    "o": [
+     "Mən ki bu kitabı oxumuşam.",
+     "Evdəki kitabları rəfə düzdüm.",
+     "Sən demişdin ki, sabah gələcəksən.",
+     "Dünənki görüş çox maraqlı keçdi."
+    ],
+    "a": 2,
+    "why": "“Sən demişdin ki, sabah gələcəksən”: ki iki cümləni bağlayır, bağlayıcıdır. Digərlərində ədat və ya şəkilçidir."
+   }
+  ]
+ },
+ {
+  "id": "math",
+  "name": "➕ Riyaziyyat",
+  "color": "#f08a24",
+  "questions": [
+   {
+    "q": "Bir ədədin 3-ə bölünməsindən qalıq 2, 5-ə bölünməsindən qalıq 1-dir. Aşağıdakı ədədlərdən hansı bu şərtlərin hər ikisini ödəyir?",
+    "o": [
+     "31",
+     "41",
+     "46",
+     "52"
+    ],
+    "a": 1,
+    "why": "41 = 3·13 + 2 və 41 = 5·8 + 1. 31, 46 və 52 üçün 3-ə bölünəndə qalıq 1 alınır."
+   },
+   {
+    "q": "48 və 72 ədədlərinin ƏBOB-u ilə ƏKOB-unun cəmi neçədir?",
+    "o": [
+     "216",
+     "240",
+     "168",
+     "288"
+    ],
+    "a": 2,
+    "why": "48 = 2⁴·3, 72 = 2³·3². ƏBOB = 2³·3 = 24. ƏKOB = 2⁴·3² = 144. Cəmi 24 + 144 = 168."
+   },
+   {
+    "q": "Bir kitabın əvvəlcə 2/5 hissəsi, sonra isə qalan hissəsinin 1/3-i oxundu. Kitabın hansı hissəsi hələ oxunmayıb?",
+    "o": [
+     "1/5",
+     "2/5",
+     "3/5",
+     "4/15"
+    ],
+    "a": 1,
+    "why": "Oxundu 2/5, qalan 3/5. Qalanın 1/3-i: 3/5 · 1/3 = 1/5. Oxunan 2/5 + 1/5 = 3/5, oxunmayan 2/5."
+   },
+   {
+    "q": "Aşağıdakı kəsrlərdən hansı 3/4 ilə 5/6 arasında yerləşir?",
+    "o": [
+     "7/10",
+     "4/5",
+     "11/12",
+     "2/3"
+    ],
+    "a": 1,
+    "why": "Ortaq məxrəc 60: 3/4 = 45/60, 5/6 = 50/60. 4/5 = 48/60 bunların arasındadır."
+   },
+   {
+    "q": "Bir ədədin 3/8-i 18-ə bərabərdir. Həmin ədədin 5/12-i neçədir?",
+    "o": [
+     "15",
+     "18",
+     "20",
+     "24"
+    ],
+    "a": 2,
+    "why": "3/8-i 18 olarsa, hər 1/8 = 18 : 3 = 6. Ədəd 8 · 6 = 48. 5/12-i: 48 : 12 · 5 = 20."
+   },
+   {
+    "q": "4,08 + 2,7 - 1,35 ifadəsinin qiyməti neçədir?",
+    "o": [
+     "5,33",
+     "5,43",
+     "5,53",
+     "5,63"
+    ],
+    "a": 1,
+    "why": "4,08 + 2,7 = 6,78. Sonra 6,78 − 1,35 = 5,43."
+   },
+   {
+    "q": "Bir düzbucaqlının uzunluğu 14,5 sm, eni isə 6,5 sm-dir. Onun perimetri neçə santimetrdir?",
+    "o": [
+     "40 sm",
+     "41 sm",
+     "42 sm",
+     "43 sm"
+    ],
+    "a": 2,
+    "why": "P = (a + b) · 2 = (14,5 + 6,5) · 2 = 21 · 2 = 42 sm."
+   },
+   {
+    "q": "Kvadratın perimetri 36 sm-dir. Bu kvadratın sahəsi neçə kvadrat santimetrdir?",
+    "o": [
+     "72",
+     "81",
+     "96",
+     "108"
+    ],
+    "a": 1,
+    "why": "Tərəf 36 : 4 = 9 sm. Sahə 9 · 9 = 81 sm²."
+   },
+   {
+    "q": "Saat 14:35-də başlayan dərs 45 dəqiqə davam etdi. Dərs saat neçədə başa çatdı?",
+    "o": [
+     "15:10",
+     "15:15",
+     "15:20",
+     "15:25"
+    ],
+    "a": 2,
+    "why": "14:35 + 25 dəq = 15:00. Qalan 20 dəqiqə əlavə olunur: 15:20."
+   },
+   {
+    "q": "Bir sinifdə 28 şagird var. Onların 3/7-i qızdır. Sinifdə neçə oğlan var?",
+    "o": [
+     "12",
+     "14",
+     "16",
+     "18"
+    ],
+    "a": 2,
+    "why": "Qızlar: 28 : 7 · 3 = 12. Oğlanlar: 28 − 12 = 16."
+   },
+   {
+    "q": "Ardıcıllığı davam etdirin:\n3, 7, 15, 31, 63, ?",
+    "o": [
+     "95",
+     "111",
+     "127",
+     "129"
+    ],
+    "a": 2,
+    "why": "Hər üzv əvvəlkinin 2 mislinə 1 əlavə etməklə tapılır: 63 · 2 + 1 = 127."
+   },
+   {
+    "q": "Bir səbətdə alma və armudların birlikdə sayı 36-dır. Almaların sayı armudların sayından 8 ədəd çoxdur. Səbətdə neçə alma var?",
+    "o": [
+     "20",
+     "21",
+     "22",
+     "24"
+    ],
+    "a": 2,
+    "why": "Armud x, alma x + 8. 2x + 8 = 36, x = 14. Alma 14 + 8 = 22."
+   },
+   {
+    "q": "Bir ədədin 25%-i 18-dir. Bu ədəd neçədir?",
+    "o": [
+     "64",
+     "72",
+     "76",
+     "80"
+    ],
+    "a": 1,
+    "why": "25% = 1/4. Ədədin 1/4-i 18 isə, ədəd 18 · 4 = 72."
+   },
+   {
+    "q": "Açıq bucaq (180°) iki hissəyə bölünüb. Hissələrdən biri digərindən 20° böyükdür. Böyük bucaq neçə dərəcədir?",
+    "o": [
+     "80°",
+     "90°",
+     "100°",
+     "110°"
+    ],
+    "a": 2,
+    "why": "Açıq bucaq 180°. x + (x + 20) = 180, 2x = 160, x = 80. Böyük bucaq 100°."
+   },
+   {
+    "q": "Bir mağazada 120 manatlıq məhsula əvvəlcə 10% endirim edildi. Sonra endirimli qiymətə 5 manat əlavə xidmət haqqı əlavə olundu. Müştəri ümumilikdə neçə manat ödəməlidir?",
+    "o": [
+     "108 manat",
+     "110 manat",
+     "113 manat",
+     "115 manat"
+    ],
+    "a": 2,
+    "why": "10% of 120 = 12, endirimli qiymət 120 − 12 = 108. Sonra 108 + 5 = 113 manat."
+   }
+  ]
+ },
+ {
+  "id": "tar",
+  "name": "🏺 Azərbaycan tarixi",
+  "color": "#b5651d",
+  "questions": [
+   {
+    "q": "Azərbaycan ərazisində insanların ən qədim məskənlərindən biri hesab olunan Azıx mağarası hansı rayonun ərazisində yerləşir?",
+    "o": [
+     "Quba",
+     "Kəlbəcər",
+     "Şəki",
+     "Füzuli"
+    ],
+    "a": 3,
+    "why": "Azıx mağarası Füzuli rayonundadır. Azərbaycanda ən qədim insan məskənlərindən biridir."
+   },
+   {
+    "q": "Azıx mağarasında tapılmış qədim insan çənəsi elmi ədəbiyyatda hansı adla tanınır?",
+    "o": [
+     "Azıxantrop",
+     "Neandertal",
+     "Homo sapiens",
+     "Kromanyon"
+    ],
+    "a": 0,
+    "why": "Azıxda tapılan qədim insan çənəsi “Azıxantrop” adlanır."
+   },
+   {
+    "q": "İbtidai insanların əmək alətlərini əsasən daşdan hazırlamasının əsas səbəbi nə idi?",
+    "o": [
+     "Daşın yalnız dini mərasimlərdə istifadə olunması",
+     "Daşın təbiətdə geniş yayılması və emalının mümkün olması",
+     "Metal emalının qadağan edilməsi",
+     "Daş alətlərin yalnız ov üçün yararlı olması"
+    ],
+    "a": 1,
+    "why": "Daş təbiətdə çox idi və onu emal etmək mümkün idi, ona görə alətlər daşdan hazırlanırdı."
+   },
+   {
+    "q": "Mezolit dövrünün ən mühüm yeniliklərindən biri hansı hesab olunur?",
+    "o": [
+     "Dəmir alətlərin meydana gəlməsi",
+     "Ox və kamanın yaradılması",
+     "Yazının yaranması",
+     "İlk şəhərlərin salınması"
+    ],
+    "a": 1,
+    "why": "Mezolitdə ox və kaman icad olundu, ov asanlaşdı."
+   },
+   {
+    "q": "Neolit dövründə insanların həyatında baş verən əsas dəyişiklik hansı variantda düzgün göstərilmişdir?",
+    "o": [
+     "Ovçuluğun tamamilə yox olması",
+     "İstehsal təsərrüfatının yaranması",
+     "Dəmirçilik sənətinin geniş yayılması",
+     "Dövlətlərin yaranması"
+    ],
+    "a": 1,
+    "why": "Neolitdə əkinçilik və maldarlıq yarandı, yəni istehsal təsərrüfatı meydana gəldi."
+   },
+   {
+    "q": "Eneolit dövrünü Neolit dövründən fərqləndirən əsas xüsusiyyət hansıdır?",
+    "o": [
+     "İnsanların mağaralarda yaşamağa başlaması",
+     "Mis metalından istifadə olunmağa başlanması",
+     "Ox və kamanın ilk dəfə yaradılması",
+     "Əkinçiliyin meydana gəlməsi"
+    ],
+    "a": 1,
+    "why": "Eneolit mis-daş dövrüdür. Fərqi: mis metalından istifadə başlandı."
+   },
+   {
+    "q": "Azərbaycanda ilk metallurgiyanın inkişafında hansı metalın mənimsənilməsi mühüm mərhələ olmuşdur?",
+    "o": [
+     "Dəmir",
+     "Qızıl",
+     "Mis",
+     "Gümüş"
+    ],
+    "a": 2,
+    "why": "İnsanın mənimsədiyi ilk metal mis olub. Dəmir sonra gəlib."
+   },
+   {
+    "q": "Tunc dövründə tayfalar arasında sosial fərqlərin artmasının əsas göstəricilərindən biri hansı idi?",
+    "o": [
+     "Bütün insanların eyni təsərrüfatla məşğul olması",
+     "Əmlak bərabərsizliyinin meydana gəlməsi",
+     "Ovçuluğun tamamilə aradan qalxması",
+     "Yazının bütün əhali arasında yayılması"
+    ],
+    "a": 1,
+    "why": "Tuncda bəziləri varlanıb, bəziləri kasıblaşıb: əmlak bərabərsizliyi yaranıb."
+   },
+   {
+    "q": "Kür-Araz mədəniyyətinin əsas xüsusiyyətlərindən biri hansı variantda düzgün verilmişdir?",
+    "o": [
+     "Yalnız dəniz ticarətinə əsaslanması",
+     "Xüsusi saxsı qab nümunələri ilə seçilməsi və geniş əraziyə yayılması",
+     "Yalnız dəmir alətlərdən istifadə edilməsi",
+     "Yazılı qanunların yaradılması ilə tanınması"
+    ],
+    "a": 1,
+    "why": "Kür-Araz mədəniyyəti xüsusi saxsı qabları ilə seçilir və geniş əraziyə yayılıb."
+   },
+   {
+    "q": "Qədim Azərbaycan ərazisində tayfa ittifaqlarının yaranmasına əsas səbəblərdən biri hansı idi?",
+    "o": [
+     "Tayfaların bir-birindən tam təcrid olunmaq istəməsi",
+     "Xarici təhlükələrə qarşı birgə mübarizə ehtiyacı",
+     "Əkinçiliyin tamamilə dayandırılması",
+     "Şəhərlərin bütün tayfaları idarə etməsi"
+    ],
+    "a": 1,
+    "why": "Tayfalar xarici təhlükələrə qarşı birgə mübarizə üçün ittifaqlar yaradıb."
+   },
+   {
+    "q": "Manna dövləti əsasən Azərbaycanın hansı ərazisində yaranmışdı?",
+    "o": [
+     "Şimali Azərbaycanın Xəzərsahili ərazilərində",
+     "Cənubi Azərbaycanın Urmiya gölü hövzəsində",
+     "Naxçıvanın yalnız dağlıq hissəsində",
+     "Şirvan ərazisində"
+    ],
+    "a": 1,
+    "why": "Manna Cənubi Azərbaycanda, Urmiya gölünün hövzəsində yaranıb."
+   },
+   {
+    "q": "Manna dövlətinin yaranması ilə bağlı aşağıdakı fikirlərdən hansı doğrudur?",
+    "o": [
+     "Manna e.ə. IX əsrdə Urmiya gölü ətrafında meydana gəlmişdir.",
+     "Manna eramızın I əsrində yaranmışdır.",
+     "Manna yalnız Şimali Azərbaycan ərazisini əhatə etmişdir.",
+     "Manna Sasanilər dövründə yaradılmışdır."
+    ],
+    "a": 0,
+    "why": "Manna e.ə. IX əsrdə Urmiya gölü ətrafında meydana gəlib."
+   },
+   {
+    "q": "Qədim Azərbaycan ərazisində Midiya ilə bağlı hadisələr hansı dövrə aiddir?",
+    "o": [
+     "E.ə. I minilliyə",
+     "Eramızın I minilliyinə",
+     "Eramızın II minilliyinə",
+     "E.ə. IV minilliyə"
+    ],
+    "a": 0,
+    "why": "Midiya e.ə. I minilliyə aiddir."
+   },
+   {
+    "q": "Tarixi mənbələrin öyrənilməsinin əsas məqsədi nədir?",
+    "o": [
+     "Keçmiş haqqında yalnız rəvayətlər toplamaq",
+     "Keçmişdə baş vermiş hadisələr haqqında məlumat əldə etmək",
+     "Yalnız qədim insanların istifadə etdiyi əşyaları toplamaq",
+     "Müasir hadisələri gələcək üçün dəyişdirmək"
+    ],
+    "a": 1,
+    "why": "Tarixi mənbələr keçmişdə baş vermiş hadisələr haqqında məlumat əldə etmək üçün öyrənilir."
+   },
+   {
+    "q": "Aşağıdakı hadisələrdən hansı ən qədimdən ən yeniyə doğru düzgün ardıcıllıqla verilmişdir?",
+    "o": [
+     "Neolit → Paleolit → Eneolit → Tunc dövrü",
+     "Paleolit → Mezolit → Neolit → Eneolit",
+     "Mezolit → Paleolit → Eneolit → Neolit",
+     "Eneolit → Neolit → Mezolit → Paleolit"
+    ],
+    "a": 1,
+    "why": "Ardıcıllıq: Paleolit → Mezolit → Neolit → Eneolit → Tunc dövrü."
+   }
+  ]
+ },
+ {
+  "id": "en",
+  "name": "🇬🇧 İngilis dili",
+  "color": "#4f6df5",
+  "questions": [
+   {
+    "q": "Choose the correct sentence.",
+    "o": [
+     "My sister are twelve years old.",
+     "My sister is twelve years old.",
+     "My sister am twelve years old.",
+     "My sister be twelve years old."
+    ],
+    "a": 1,
+    "why": "My sister = she. She ilə is işlənir."
+   },
+   {
+    "q": "Complete the sentence:\nTom and I ___ got two English books.",
+    "o": [
+     "has",
+     "have",
+     "are",
+     "is"
+    ],
+    "a": 1,
+    "why": "Tom and I = we. We ilə have got işlənir."
+   },
+   {
+    "q": "Choose the correct question.\n___ your father work in a hospital?",
+    "o": [
+     "Is",
+     "Does",
+     "Do",
+     "Has"
+    ],
+    "a": 1,
+    "why": "Your father = he. He üçün sual: Does + feil əsas formada (Does he work...?)."
+   },
+   {
+    "q": "Choose the correct answer:\nWhat does Emma do after school?",
+    "o": [
+     "She is reading a book now.",
+     "She reads a book every evening.",
+     "She read a book yesterday.",
+     "She can reading a book."
+    ],
+    "a": 1,
+    "why": "Every evening = vərdiş, Present Simple: reads."
+   },
+   {
+    "q": "Look! The children ___ football in the garden.",
+    "o": [
+     "play",
+     "plays",
+     "are playing",
+     "is playing"
+    ],
+    "a": 2,
+    "why": "Look! indi baş verən hərəkətdir: are playing."
+   },
+   {
+    "q": "Choose the sentence with the correct use of there is / there are.",
+    "o": [
+     "There are a big table in the kitchen.",
+     "There is three chairs near the window.",
+     "There is a small table and two chairs in the room.",
+     "There are a small table and two chairs in the room."
+    ],
+    "a": 2,
+    "why": "Ən yaxın söz tək (a small table), ona görə there is. There is three chairs səhvdir, çünki chairs cəmdir."
+   },
+   {
+    "q": "Choose the correct option.\nThis is ___ pencil. It belongs to me.",
+    "o": [
+     "me",
+     "my",
+     "mine",
+     "I"
+    ],
+    "a": 1,
+    "why": "Pencil-dən əvvəl my işlənir: my pencil. Mine təkbaşına işlənir."
+   },
+   {
+    "q": "Complete the sentence:\nThere isn’t ___ milk in the fridge.",
+    "o": [
+     "some",
+     "many",
+     "any",
+     "a"
+    ],
+    "a": 2,
+    "why": "Milk sayılmayan isimdir. Mənfi cümlədə any işlənir: isn’t any milk."
+   },
+   {
+    "q": "Choose the correct sentence.",
+    "o": [
+     "She can to swim very well.",
+     "She can swimming very well.",
+     "She can swims very well.",
+     "She can swim very well."
+    ],
+    "a": 3,
+    "why": "Can-dan sonra feil dəyişmir: can swim. To, -s, -ing əlavə olunmur."
+   },
+   {
+    "q": "Where is the cat?\nThe cat is ___ the table.",
+    "o": [
+     "under",
+     "between",
+     "opposite",
+     "behind"
+    ],
+    "a": 0,
+    "why": "Pişik masanın altındadır: under the table (şəkilə bax)."
+   },
+   {
+    "q": "Choose the correct question for the answer:\n“I live in Baku.”",
+    "o": [
+     "Who do you live?",
+     "Where do you live?",
+     "What do you live?",
+     "When do you live?"
+    ],
+    "a": 1,
+    "why": "Cavabda yer var (I live in Baku), sual Where do you live?"
+   },
+   {
+    "q": "Choose the correct plural form.",
+    "o": [
+     "childs",
+     "childs’",
+     "children",
+     "childrens"
+    ],
+    "a": 2,
+    "why": "Child düzensiz cəmlənir: child → children."
+   },
+   {
+    "q": "Complete the sentence:\nMy brother ___ breakfast at 8 o’clock every morning.",
+    "o": [
+     "have",
+     "has",
+     "is having",
+     "having"
+    ],
+    "a": 1,
+    "why": "My brother = he. He ilə has işlənir."
+   },
+   {
+    "q": "Choose the correct sentence.",
+    "o": [
+     "These is my new shoes.",
+     "This are my new shoes.",
+     "These are my new shoes.",
+     "Those is my new shoes."
+    ],
+    "a": 2,
+    "why": "Cəm (shoes) üçün these are işlənir. This are və those is səhvdir."
+   },
+   {
+    "ctx": "Lucy gets up at seven o’clock every morning. She has breakfast with her family and goes to school at eight. Today, however, she is staying at home because she is ill.",
+    "q": "Read the text and choose the correct answer.\nWhy is Lucy staying at home today?",
+    "o": [
+     "She gets up late.",
+     "She has breakfast with her family.",
+     "She is ill.",
+     "She goes to school at eight."
+    ],
+    "a": 2,
+    "why": "Mətndə: she is staying at home because she is ill. Yəni xəstədir."
+   }
+  ]
+ },
+ {
+  "id": "inf",
+  "name": "💻 İnformatika",
+  "color": "#0aa2c0",
+  "questions": [
+   {
+    "q": "Aşağıdakılardan hansı informasiya prosesinə nümunədir?",
+    "o": [
+     "Kitabın rəfdə saxlanılması",
+     "Şagirdin mətni oxuyub əsas fikri müəyyən etməsi",
+     "Kompüterin masanın üzərində yerləşməsi",
+     "Dəftərin çantaya qoyulması"
+    ],
+    "a": 1,
+    "why": "İnformasiya prosesləri: qəbul, saxlama, emal, ötürmə. Mətni oxuyub əsas fikri tapmaq emaldır."
+   },
+   {
+    "q": "Kompüterdə məlumatın uzunmüddətli saxlanılması üçün hansı qurğudan istifadə olunur?",
+    "o": [
+     "Monitor",
+     "Klaviatura",
+     "Sərt disk / SSD",
+     "Mikrofon"
+    ],
+    "a": 2,
+    "why": "Uzunmüddətli saxlama üçün sərt disk və ya SSD istifadə olunur."
+   },
+   {
+    "q": "Aşağıdakılardan hansı giriş qurğusu hesab olunur?",
+    "o": [
+     "Monitor",
+     "Printer",
+     "Dinamik",
+     "Klaviatura"
+    ],
+    "a": 3,
+    "why": "Giriş qurğusu kompüterə məlumat daxil edir: klaviatura. Monitor, printer və dinamik çıxış qurğusudur."
+   },
+   {
+    "q": "Kompüterdə faylları müəyyən əlamətə görə qruplaşdırmaq üçün əsasən nədən istifadə edilir?",
+    "o": [
+     "Qovluqlardan",
+     "Pəncərələrdən",
+     "Kursorlardan",
+     "Menyulardan"
+    ],
+    "a": 0,
+    "why": "Fayllar qovluqlarda qruplaşdırılır."
+   },
+   {
+    "q": "Aşağıdakılardan hansı fayl adının uzantısı ola bilər?",
+    "o": [
+     ".jpg",
+     "www",
+     "http",
+     "@mail"
+    ],
+    "a": 0,
+    "why": "Uzantı fayl adının sonunda nöqtədən sonra gəlir: .jpg, .docx, .mp3."
+   },
+   {
+    "q": "Alqoritm nədir?",
+    "o": [
+     "Kompüterin yalnız yaddaş qurğusu",
+     "Məsələnin həlli üçün müəyyən ardıcıllıqla yerinə yetirilən göstərişlər",
+     "İnternetə qoşulmaq üçün istifadə olunan proqram",
+     "Kompüterdə saxlanılan istənilən məlumat"
+    ],
+    "a": 1,
+    "why": "Alqoritm məsələni həll etmək üçün ardıcıl göstərişlərdir."
+   },
+   {
+    "q": "Aşağıdakı ardıcıllıqlardan hansı çay hazırlamaq üçün alqoritmə daha uyğundur?",
+    "o": [
+     "Suyu qaynat → stəkana su tök → çay əlavə et → şəkər əlavə et",
+     "Şəkər əlavə et → suyu iç → stəkanı götür → suyu qaynat",
+     "Çayı iç → suyu qaynat → stəkanı yuy → çay əlavə et",
+     "Stəkanı yerə qoy → çayı iç → şəkər əlavə et → suyu qaynat"
+    ],
+    "a": 0,
+    "why": "Düzgün ardıcıllıq: suyu qaynat, stəkana tök, çay əlavə et, şəkər əlavə et."
+   },
+   {
+    "q": "Kompüterdə eyni vaxtda bir neçə fayl üzərində işləmək üçün hansı anlayış daha uyğundur?",
+    "o": [
+     "Fayl adı",
+     "Qovluq",
+     "Pəncərə",
+     "Fayl uzantısı"
+    ],
+    "a": 2,
+    "why": "Hər fayl ayrıca pəncərədə açılır, ona görə eyni vaxtda bir neçə pəncərə ilə işləyirik."
+   },
+   {
+    "q": "Aşağıdakılardan hansı mətn informasiyasına nümunədir?",
+    "o": [
+     "Fotoşəkil",
+     "Musiqi",
+     "“Sabah hava günəşli olacaq.”",
+     "Video"
+    ],
+    "a": 2,
+    "why": "Mətn informasiyası hərflərlə yazılmış cümlədir. Foto, musiqi və video başqa növlərdir."
+   },
+   {
+    "q": "Şəkildəki obyektin rəngini dəyişmək üçün hansı proqram növündən istifadə etmək daha məqsədəuyğundur?",
+    "o": [
+     "Qrafik redaktor",
+     "Mətn redaktoru",
+     "Kalkulyator",
+     "Fayl meneceri"
+    ],
+    "a": 0,
+    "why": "Şəkilin rəngini dəyişmək üçün qrafik redaktor lazımdır."
+   },
+   {
+    "q": "İnternetdə təhlükəsiz davranışla bağlı hansı fikir doğrudur?",
+    "o": [
+     "Şifrəni dostlarla paylaşmaq təhlükəsizdir.",
+     "Tanımadığın şəxsin göndərdiyi hər bir faylı açmaq olar.",
+     "Güclü şifrəni başqaları ilə paylaşmamaq lazımdır.",
+     "İnternetdə gördüyümüz bütün məlumatları doğru qəbul etmək lazımdır."
+    ],
+    "a": 2,
+    "why": "Güclü şifrəni heç kimlə paylaşmaq olmaz. Tanımadığın fayl və məlumata etibar edilməz."
+   },
+   {
+    "q": "Aşağıdakı şifrələrdən hansı daha təhlükəsiz şifrə nümunəsidir?",
+    "o": [
+     "12345678",
+     "qwerty",
+     "0501234567",
+     "M7!qR2#pL9"
+    ],
+    "a": 3,
+    "why": "Güclü şifrə uzun olur, hərf, rəqəm və xüsusi işarələrdən ibarətdir: M7!qR2#pL9."
+   },
+   {
+    "q": "Kompüterdə silinmiş faylın müvəqqəti saxlanıldığı bölmə hansı ola bilər?",
+    "o": [
+     "Səbət (Recycle Bin)",
+     "İş masası (Desktop)",
+     "Klaviatura",
+     "Tapşırıqlar paneli"
+    ],
+    "a": 0,
+    "why": "Silinən fayl əvvəlcə Səbətə (Recycle Bin) düşür."
+   },
+   {
+    "q": "Bir şagird əvvəlcə ədəd daxil edir, sonra həmin ədədin cüt olub-olmadığını müəyyən edir. Bu prosesdə əsas məqsəd nədir?",
+    "o": [
+     "Məlumatın yalnız saxlanılması",
+     "Məlumatın emal edilməsi",
+     "Məlumatın çap edilməsi",
+     "Məlumatın silinməsi"
+    ],
+    "a": 1,
+    "why": "Ədədin cüt olub-olmadığını yoxlamaq məlumatın emalıdır."
+   },
+   {
+    "q": "Aşağıdakı məlumatlardan hansında eyni obyekt haqqında müxtəlif informasiya növləri birlikdə təqdim olunmuşdur?",
+    "o": [
+     "Yalnız “Bakı” sözü",
+     "Yalnız şəhərin fotosu",
+     "“Bakı — Azərbaycanın paytaxtıdır” yazısı",
+     "“Bakı” sözü, şəhərin fotosu və onun xəritədə göstərilməsi"
+    ],
+    "a": 3,
+    "why": "Yalnız variant D-də eyni obyekt üçün mətn, şəkil və xəritə birlikdədir."
+   }
+  ]
+ },
+ {
+  "id": "nat",
+  "name": "🌿 Təbiət",
+  "color": "#a855c7",
+  "questions": [
+   {
+    "q": "Aşağıdakılardan hansı canlıların əsas xüsusiyyətlərindən biri deyil?",
+    "o": [
+     "Qidalanma",
+     "Tənəffüs",
+     "Böyümə və inkişaf",
+     "Müəyyən həcmə malik olma"
+    ],
+    "a": 3,
+    "why": "Canlılar qidalanır, tənəffüs edir, böyüyür. Həcmə malik olmaq hər cismə xasdır, canlıya məxsus xüsusiyyət deyil."
+   },
+   {
+    "q": "Şagird stəkandakı suya bir qədər duz əlavə edib qarışdırır. Bir müddət sonra duz görünmür. Bu zaman hansı hadisə baş vermişdir?",
+    "o": [
+     "Duz suya çevrilmişdir.",
+     "Duz suda həll olmuşdur.",
+     "Su duza çevrilmişdir.",
+     "Duz buxarlanmışdır."
+    ],
+    "a": 1,
+    "why": "Duz suda həll olur, yox olmur. Su duzlu olur."
+   },
+   {
+    "q": "Duzlu sudan duzu yenidən əldə etmək üçün hansı üsul daha uyğundur?",
+    "o": [
+     "Süzmə",
+     "Maqnitlə ayırma",
+     "Buxarlandırma",
+     "Çökdürmə"
+    ],
+    "a": 2,
+    "why": "Suyu buxarlandırsan, su havaya uçur, duz qalır."
+   },
+   {
+    "q": "Aşağıdakılardan hansı fiziki hadisəyə nümunədir?",
+    "o": [
+     "Kağızın yanması",
+     "Dəmirin paslanması",
+     "Südün turşuması",
+     "Buzun əriməsi"
+    ],
+    "a": 3,
+    "why": "Fiziki hadisədə yeni maddə yaranmır. Buz əriyəndə yenə sudur."
+   },
+   {
+    "q": "Hava haqqında hansı fikir doğrudur?",
+    "o": [
+     "Hava yalnız oksigendən ibarətdir.",
+     "Hava müxtəlif qazların qarışığıdır.",
+     "Havanın tərkibində su buxarı ola bilməz.",
+     "Havanın tərkibi bütün şəraitdə tamamilə dəyişməz qalır."
+    ],
+    "a": 1,
+    "why": "Hava azot, oksigen, karbon qazı və s. qazların qarışığıdır. Tərkibində su buxarı da olur."
+   },
+   {
+    "q": "Bitkinin yarpaqları fotosintez zamanı əsasən hansı qazdan istifadə edir?",
+    "o": [
+     "Oksigen",
+     "Azot",
+     "Karbon qazı",
+     "Hidrogen"
+    ],
+    "a": 2,
+    "why": "Yarpaqlar fotosintezdə karbon qazını udur, oksigen buraxır."
+   },
+   {
+    "q": "Bitkinin kökünün əsas funksiyalarından biri hansıdır?",
+    "o": [
+     "Günəş işığını qəbul etmək",
+     "Torpaqdan su və mineral maddələri qəbul etmək",
+     "Toxum əmələ gətirmək",
+     "Havaya oksigen buraxmaq"
+    ],
+    "a": 1,
+    "why": "Kök torpaqdan su və mineral maddələri alır, bitkini də torpağa bərkidir."
+   },
+   {
+    "q": "Qida zəncirinə diqqət edin:\nOt → dovşan → tülkü\nBu zəncirdə istehsalçı hansı orqanizmdir?",
+    "o": [
+     "Tülkü",
+     "Dovşan",
+     "Ot",
+     "Hamısı"
+    ],
+    "a": 2,
+    "why": "İstehsalçı özü qida hazırlayan orqanizmdir: ot. Dovşan ot yeyir, tülkü dovşanı."
+   },
+   {
+    "q": "Əgər ekosistemdə bitkilərin sayı kəskin azalarsa, ilk növbədə hansı nəticənin yaranması daha gözləniləndir?",
+    "o": [
+     "Otyeyən heyvanlar üçün qida azalacaq.",
+     "Günəşin Yerə düşən enerjisi artacaq.",
+     "Torpaqdakı bütün canlılar dərhal yox olacaq.",
+     "Yırtıcı heyvanların sayı mütləq artacaq."
+    ],
+    "a": 0,
+    "why": "Bitki azalsa, otyeyən heyvanların qidası azalar."
+   },
+   {
+    "q": "Yer öz oxu ətrafında bir dəfə fırlandıqda əsasən hansı hadisə baş verir?",
+    "o": [
+     "Fəsillər dəyişir.",
+     "Gecə və gündüz növbələşir.",
+     "Ayın fazaları yaranır.",
+     "İl tamamlanır."
+    ],
+    "a": 1,
+    "why": "Yer öz oxu ətrafında fırlananda gecə və gündüz növbələşir. Fəsillər Günəş ətrafında dolanmaqdan yaranır."
+   },
+   {
+    "q": "Fəsillərin yaranmasının əsas səbəbi hansı variantda daha düzgün göstərilmişdir?",
+    "o": [
+     "Yerin Günəşdən məsafəsinin il ərzində çox dəyişməsi",
+     "Ayın Yer ətrafında hərəkəti",
+     "Yerin oxunun meyilli olması və Günəş ətrafında dolanması",
+     "Günəşin Yer ətrafında hərəkət etməsi"
+    ],
+    "a": 2,
+    "why": "Yerin oxu meyillidir və Yer Günəş ətrafında dolanır, ona görə fəsillər dəyişir."
+   },
+   {
+    "q": "Aşağıdakılardan hansı Günəş sisteminin planeti deyil?",
+    "o": [
+     "Mars",
+     "Venera",
+     "Ay",
+     "Saturn"
+    ],
+    "a": 2,
+    "why": "Ay Yerin təbii peykidir, planet deyil. Mars, Venera və Saturn planetdir."
+   },
+   {
+    "q": "Ayın öz işığı olmadığını hansı müşahidə daha yaxşı izah edir?",
+    "o": [
+     "Ayın yalnız gecələr görünməsi",
+     "Ayın Günəşdən aldığı işığı əks etdirməsi",
+     "Ayın Yerə ən yaxın səma cismi olması",
+     "Ayın Yer ətrafında hərəkət etməsi"
+    ],
+    "a": 1,
+    "why": "Ayın öz işığı yoxdur, Günəşdən aldığı işığı əks etdirir."
+   },
+   {
+    "q": "Şagird torpaq nümunəsinə su əlavə etdikdə torpağın bəzi hissəciklərinin aşağı çökdüyünü müşahidə edir. Bu müşahidə torpağın hansı xüsusiyyətini göstərir?",
+    "o": [
+     "Torpağın yalnız sudan ibarət olduğunu",
+     "Torpağın müxtəlif komponentlərdən təşkil olunduğunu",
+     "Torpağın canlı olmadığını",
+     "Torpağın yalnız mineral maddələrdən ibarət olduğunu"
+    ],
+    "a": 1,
+    "why": "Su əlavə edəndə hissəciklər çökür: torpaq müxtəlif komponentlərdən ibarətdir."
+   },
+   {
+    "q": "Bir ərazidə ağacların kütləvi şəkildə kəsilməsi hansı nəticəyə birbaşa səbəb ola bilər?",
+    "o": [
+     "Torpağın eroziyaya daha çox məruz qalmasına",
+     "Günəşin temperaturunun azalmasına",
+     "Yerin öz oxu ətrafında daha yavaş fırlanmasına",
+     "Ayın Yerə daha yaxınlaşmasına"
+    ],
+    "a": 0,
+    "why": "Ağacların kökü torpağı tutur. Ağaclar kəsiləndə yağış və külək torpağı aparır (eroziya)."
+   }
+  ]
+ }
+];
+
+const COLORS=["#1b2a4a","#e03131","#1c7ed6","#2f9e44","#f08c00"];
+const SIZES=[3,6,12];
+const $=s=>document.querySelector(s);
+const stage=$("#stage"),canvas=$("#pen"),ctx=canvas.getContext("2d"),content=$("#content");
+let S=0,I=0,drawOn=false,eraser=false,board=false,color=COLORS[0],size=SIZES[1],penSeen=false,view="q",selP=-1;
+const st={};
+function loadInk(){try{return JSON.parse(localStorage.getItem("sinaq5-ink")||"{}")}catch(e){return {}}}
+const strokes=loadInk();
+let saveT;function saveInk(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem("sinaq5-ink",JSON.stringify(strokes))}catch(e){}},400)}
+const kq=(s,i)=>DATA[s].id+"-"+i;
+const K=()=>board?DATA[S].id+"-board":(view==="planets"?"nat-planets":kq(S,I));
+function stt(){const k=kq(S,I);return st[k]=st[k]||{picked:[],show:false,why:false}}
+
+/* ---------- Şəkillər ---------- */
+const cards=a=>a.map(x=>typeof x==="string"?`<span class="arrow">${x}</span>`:`<div class="card"><b>${x[0]}</b>${x[1]}</div>`).join("");
+const earthMoonSvg=`<svg viewBox="0 0 320 170" width="340"><ellipse cx="160" cy="85" rx="110" ry="58" fill="none" stroke="#9aa7c4" stroke-width="3" stroke-dasharray="6 6"/><circle cx="160" cy="85" r="30" fill="#4dabf7" stroke="#1c7ed6" stroke-width="3"/><text x="160" y="91" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">Yer</text><circle cx="251" cy="52" r="13" fill="#ced4da" stroke="#868e96" stroke-width="3"/><text x="251" y="30" text-anchor="middle" font-size="15" font-weight="800" fill="#1b2a4a">Ay</text></svg>`;
+const dayNightSvg=`<svg viewBox="0 0 330 170" width="350"><circle cx="40" cy="85" r="30" fill="#ffd43b" stroke="#f5a623" stroke-width="4"/><text x="40" y="90" text-anchor="middle" font-size="13" font-weight="800" fill="#7a4b00">Günəş</text><g stroke="#f5a623" stroke-width="4" stroke-linecap="round"><line x1="82" y1="60" x2="128" y2="60"/><line x1="82" y1="85" x2="128" y2="85"/><line x1="82" y1="110" x2="128" y2="110"/></g><circle cx="220" cy="85" r="62" fill="#1b2a4a"/><path d="M220 23 A62 62 0 0 0 220 147 Z" fill="#4dabf7"/><circle cx="220" cy="85" r="62" fill="none" stroke="#1b2a4a" stroke-width="3"/><text x="190" y="90" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">Gündüz</text><text x="252" y="90" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">Gecə</text><text x="220" y="164" text-anchor="middle" font-size="13" font-weight="800" fill="#1b2a4a">Yer oxu ətrafında fırlanır</text></svg>`;
+const catTable=`<svg viewBox="0 0 320 170" width="340"><rect x="60" y="50" width="200" height="16" rx="5" fill="#c69c6d" stroke="#8a6a3c" stroke-width="3"/><rect x="74" y="66" width="12" height="78" fill="#c69c6d" stroke="#8a6a3c" stroke-width="3"/><rect x="234" y="66" width="12" height="78" fill="#c69c6d" stroke="#8a6a3c" stroke-width="3"/><text x="160" y="128" text-anchor="middle" font-size="46">🐱</text><text x="160" y="34" text-anchor="middle" font-size="16" font-weight="800" fill="#1b2a4a">table</text></svg>`;
+const bar3=`<svg viewBox="0 0 340 120" width="350"><g stroke="#1b2a4a" stroke-width="3"><rect x="10" y="20" width="60" height="46" fill="#74c69d"/><rect x="70" y="20" width="60" height="46" fill="#74c69d"/><rect x="130" y="20" width="60" height="46" fill="#ffd43b"/><rect x="190" y="20" width="60" height="46" fill="#fff"/><rect x="250" y="20" width="60" height="46" fill="#fff"/></g><text x="70" y="90" text-anchor="middle" font-size="15" font-weight="800" fill="#1b2a4a">2/5 oxundu</text><text x="160" y="112" text-anchor="middle" font-size="15" font-weight="800" fill="#1b2a4a">1/5 sonra</text><text x="250" y="90" text-anchor="middle" font-size="15" font-weight="800" fill="#1b2a4a">oxunmayıb</text></svg>`;
+const bar5=`<svg viewBox="0 0 340 120" width="350"><g stroke="#1b2a4a" stroke-width="3">${[0,1,2,3,4,5,6,7].map(i=>`<rect x="${10+i*40}" y="20" width="40" height="46" fill="${i<3?"#ffd43b":"#fff"}"/>`).join("")}</g><text x="70" y="90" text-anchor="middle" font-size="15" font-weight="800" fill="#1b2a4a">3/8 = 18</text><text x="170" y="112" text-anchor="middle" font-size="15" font-weight="800" fill="#1b2a4a">hər 1/8 = 6, bütün 8 hissə = ?</text></svg>`;
+const rectSvg=`<svg viewBox="0 0 320 170" width="330"><rect x="30" y="34" width="200" height="100" rx="6" fill="#e7f0ff" stroke="#1c7ed6" stroke-width="4"/><text x="130" y="24" text-anchor="middle" font-size="18" font-weight="800" fill="#1b2a4a">14,5 sm</text><text x="240" y="90" font-size="18" font-weight="800" fill="#1b2a4a">6,5 sm</text></svg>`;
+const squareSvg=`<svg viewBox="0 0 320 170" width="330"><rect x="30" y="20" width="120" height="120" rx="6" fill="#e6f6ea" stroke="#2e9e5b" stroke-width="4"/><text x="90" y="86" text-anchor="middle" font-size="20" font-weight="800" fill="#1b2a4a">S = ?</text><text x="170" y="60" font-size="17" font-weight="800" fill="#1b2a4a">P = 36 sm</text><text x="170" y="92" font-size="17" font-weight="800" fill="#1b2a4a">tərəf = 36 : 4</text></svg>`;
+const dotsSvg=(()=>{let s="";for(let c=0;c<7;c++)for(let r=0;r<4;r++)s+=`<circle cx="${30+c*40}" cy="${26+r*34}" r="12" fill="${c<3?"#ff8fab":"#74a7ff"}" stroke="#1b2a4a" stroke-width="2"/>`;return `<svg viewBox="0 0 320 170" width="330">${s}<text x="10" y="162" font-size="15" font-weight="800" fill="#1b2a4a">qız: 3 sütun · oğlan: 4 sütun</text></svg>`})();
+const angleSvg=`<svg viewBox="0 0 320 170" width="330"><line x1="20" y1="140" x2="300" y2="140" stroke="#1b2a4a" stroke-width="4"/><line x1="160" y1="140" x2="210" y2="20" stroke="#e03131" stroke-width="4"/><text x="88" y="118" font-size="17" font-weight="800" fill="#1b2a4a">x + 20°</text><text x="212" y="126" font-size="17" font-weight="800" fill="#1b2a4a">x</text><text x="160" y="164" text-anchor="middle" font-size="15" font-weight="800" fill="#1b2a4a">açıq bucaq = 180°</text></svg>`;
+const timeline=cards([["🪨","Paleolit"],"→",["🏹","Mezolit"],"→",["🌾","Neolit"],"→",["🔶","Eneolit"],"→",["🥉","Tunc"]]);
+const FIGS={
+ "math-2":bar3,"math-4":bar5,"math-6":rectSvg,"math-7":squareSvg,"math-9":dotsSvg,"math-13":angleSvg,
+ "tar-0":cards([["🕳️","Azıx mağarası"],"→",["📍","Füzuli rayonu"]]),
+ "tar-3":timeline,"tar-4":timeline,"tar-5":timeline,"tar-14":timeline,
+ "tar-10":cards([["🌊","Urmiya gölü"],"→",["🏰","Manna dövləti"]]),
+ "tar-11":cards([["📅","e.ə. IX əsr"],"→",["🏰","Manna yaranır"]]),
+ "en-9":catTable,
+ "inf-1":cards([["💾","Disk / SSD"],["🖥️","Monitor"],["⌨️","Klaviatura"],["🎤","Mikrofon"]]),
+ "inf-2":cards([["⌨️","Klaviatura"],["🖨️","Printer"],["🖥️","Monitor"],["🔊","Dinamik"]]),
+ "inf-3":cards([["📁","Qovluq"],"→",["📄","fayllar"]]),
+ "inf-6":cards([["♨️","Suyu qaynat"],"→",["🥛","Stəkana tök"],"→",["🍃","Çay"],"→",["🍬","Şəkər"]]),
+ "inf-12":cards([["🗑️","Səbət"],["🖥️","İş masası"],["⌨️","Klaviatura"]]),
+ "nat-0":cards([["🍎","qidalanır"],["🫁","tənəffüs edir"],["📈","böyüyür"]]),
+ "nat-2":cards([["🧂","duz"],"+",["💧","su"],"→",["♨️","buxarlandır"],"→",["🧂","duz qalır"]]),
+ "nat-3":cards([["🧊","Buz"],"→",["💧","Su"]]),
+ "nat-5":cards([["☀️","işıq"],"+",["💧","su"],"+",["💨","karbon qazı"],"→",["🌿","qida + oksigen"]]),
+ "nat-7":cards([["🌱","Ot"],"→",["🐰","Dovşan"],"→",["🦊","Tülkü"]]),
+ "nat-8":cards([["🌱","Bitki azalır"],"→",["🐰","otyeyən acdır"],"→",["🦊","yırtıcı"]]),
+ "nat-9":dayNightSvg,
+ "nat-10":cards([["🌸","Yaz"],["☀️","Yay"],["🍂","Payız"],["❄️","Qış"]]),
+ "nat-11":cards([["☀️","Günəş: ulduz"],["🌍","Yer: planet"],["🌙","Ay: peyk"]]),
+ "nat-12":earthMoonSvg,
+ "nat-14":cards([["🌳","Ağaclar kəsilir"],"→",["🌧️","yağış, külək"],"→",["🏜️","torpaq yuyulur"]])
+};
+
+/* ---------- Günəş sistemi ---------- */
+const PLANETS=[
+  {n:"Merkuri",r:9,c:"#b0a99f",f:"Günəşə ən yaxın və ən kiçik planetdir."},
+  {n:"Venera",r:16,c:"#e8c27a",f:"Ən isti planetdir."},
+  {n:"Yer",r:17,c:"#4dabf7",f:"Bizim planetimizdir. Üzərində həyat var, təbii peyki Aydır."},
+  {n:"Mars",r:12,c:"#e8590c",f:"Qırmızı planet adlanır."},
+  {n:"Yupiter",r:44,c:"#d9a066",f:"Ən böyük planetdir."},
+  {n:"Saturn",r:38,c:"#e6c88f",f:"Ətrafında gözəl halqaları var.",ring:true},
+  {n:"Uran",r:26,c:"#74c0d8",f:"Çox soyuq, mavi-yaşıl planetdir."},
+  {n:"Neptun",r:25,c:"#3b5bdb",f:"Günəşdən ən uzaq planetdir."}
+];
+function renderPlanets(){
+  content.innerHTML="";
+  const m=document.createElement("p");m.className="meta";m.textContent="🌿 Təbiət · Günəş sistemi";content.appendChild(m);
+  const h=document.createElement("p");h.className="q";h.textContent="Planetə toxun və izah et";content.appendChild(h);
+  const xs=[150,225,310,390,505,645,765,865];
+  let g='<circle cx="20" cy="150" r="85" fill="#ffd43b" stroke="#f5a623" stroke-width="5"/><text x="34" y="156" font-size="18" font-weight="800" fill="#7a4b00">Günəş</text>';
+  PLANETS.forEach((p,i)=>{
+    const x=xs[i],hw=Math.max(p.r*(p.ring?1.8:1),36);
+    g+=`<g class="pl" data-i="${i}">`;
+    if(p.ring)g+=`<ellipse cx="${x}" cy="150" rx="${p.r*1.8}" ry="${p.r*.42}" fill="none" stroke="#c9a66b" stroke-width="7" transform="rotate(-18 ${x} 150)"/>`;
+    g+=`<circle cx="${x}" cy="150" r="${p.r}" fill="${p.c}" stroke="${selP===i?"#e03131":"#1b2a4a"}" stroke-width="${selP===i?6:2}"/>`;
+    g+=`<rect x="${x-hw}" y="60" width="${hw*2}" height="200" fill="transparent"/>`;
+    g+=`<text x="${x}" y="262" text-anchor="middle" font-size="15" font-weight="800" fill="${selP===i?"#e03131":"#1b2a4a"}">${i+1}. ${p.n}</text></g>`;
+  });
+  const wrap=document.createElement("div");
+  wrap.innerHTML=`<svg viewBox="0 0 920 290" style="width:100%;height:auto;background:rgba(255,255,255,.75);border:2px solid #cdd7ea;border-radius:16px">${g}</svg>`;
+  wrap.querySelectorAll(".pl").forEach(el=>el.onclick=()=>{selP=+el.dataset.i;renderPlanets()});
+  content.appendChild(wrap);
+  const info=document.createElement("div");info.className="why";
+  info.textContent=selP<0?"Planetə toxun, məlumat burada görünəcək.":`${PLANETS[selP].n}: Günəşdən ${selP+1}-ci planetdir. ${PLANETS[selP].f}`;
+  content.appendChild(info);
+  const note=document.createElement("p");note.className="sysnote";note.textContent="☀️ Günəş ulduzdur.  🌙 Ay Yerin təbii peykidir.";content.appendChild(note);
+  requestAnimationFrame(fit);
+}
+function renderSubtabs(){
+  const b=$("#subtabs");
+  if(DATA[S].id!=="nat"){b.hidden=true;return}
+  b.hidden=false;b.innerHTML="";
+  [["q","📝 Suallar"],["planets","🪐 Planetlər"]].forEach(([v,t])=>{
+    const x=document.createElement("button");x.className="tab";x.textContent=t;x.setAttribute("aria-selected",view===v);
+    x.onclick=()=>{view=v;board=false;syncBar();render()};b.appendChild(x);
+  });
+}
+
+/* ---------- Görünüş ---------- */
+function setAccent(){document.documentElement.style.setProperty("--accent",DATA[S].color)}
+function renderTabs(){
+  const t=$("#tabs");t.innerHTML="";
+  DATA.forEach((d,i)=>{
+    const b=document.createElement("button");b.className="tab";b.setAttribute("role","tab");
+    b.setAttribute("aria-selected",i===S);b.textContent=d.name;
+    b.onclick=()=>{S=i;I=0;board=false;view="q";syncBar();render()};t.appendChild(b);
+  });
+}
+function renderPills(){
+  const p=$("#pills");p.innerHTML="";
+  DATA[S].questions.forEach((q,i)=>{
+    const b=document.createElement("button");b.className="pill";b.textContent=i+1;
+    if(i===I&&view==="q")b.setAttribute("aria-current","true");
+    const s=st[kq(S,i)];
+    if(s&&s.picked.includes(q.a))b.classList.add("solved");
+    if((strokes[kq(S,i)]||[]).length)b.classList.add("inked");
+    b.onclick=()=>{I=i;board=false;view="q";render()};p.appendChild(b);
+  });
+}
+function renderContent(){
+  if(view==="planets"&&DATA[S].id==="nat"){renderPlanets();return}
+  const q=DATA[S].questions[I],s=stt();
+  content.innerHTML="";
+  const m=document.createElement("p");m.className="meta";m.textContent=DATA[S].name+" · sual "+(I+1)+" / "+DATA[S].questions.length;
+  content.appendChild(m);
+  if(q.ctx){const c=document.createElement("div");c.className="ctx";c.textContent=q.ctx;content.appendChild(c)}
+  const h=document.createElement("p");h.className="q";h.textContent=q.q;content.appendChild(h);
+  const fg=FIGS[DATA[S].id+"-"+I];if(fg){const f=document.createElement("div");f.className="fig";f.innerHTML=fg;content.appendChild(f)}
+  const o=document.createElement("div");o.className="opts";
+  q.o.forEach((t,i)=>{
+    const b=document.createElement("button");b.className="opt";
+    const l=document.createElement("span");l.className="l";l.textContent="ABCD"[i];
+    const x=document.createElement("span");x.textContent=t;
+    b.append(l,x);
+    if(s.picked.includes(i))b.classList.add(i===q.a?"ok":"bad");
+    if(s.show&&i===q.a)b.classList.add("ok");
+    b.onclick=()=>{if(!s.picked.includes(i))s.picked.push(i);renderContent();renderPills()};
+    o.appendChild(b);
+  });
+  content.appendChild(o);
+  const a=document.createElement("div");a.className="acts";
+  const b1=document.createElement("button");b1.className="btn";b1.textContent=s.show?"🙈 Cavabı gizlət":"✅ Cavabı göstər";
+  b1.onclick=()=>{s.show=!s.show;if(!s.show)s.picked=[];renderContent();renderPills()};
+  const b2=document.createElement("button");b2.className="btn";b2.textContent=s.why?"💡 İzahı bağla":"💡 İzah";
+  b2.onclick=()=>{s.why=!s.why;renderContent()};
+  a.append(b1,b2);content.appendChild(a);
+  if(s.why){const w=document.createElement("div");w.className="why";w.textContent=q.why;content.appendChild(w)}
+  requestAnimationFrame(fit);
+}
+function renderKey(){
+  $("#key").textContent=DATA[S].questions.map((q,i)=>(i+1)+"-"+"ABCD"[q.a]).join(",  ");
+}
+function render(){setAccent();stage.classList.toggle("board",board);renderTabs();renderSubtabs();renderPills();renderContent();renderKey()}
+
+/* ---------- Qələm ---------- */
+function fit(){
+  const r=stage.getBoundingClientRect(),d=window.devicePixelRatio||1;
+  canvas.width=Math.round(r.width*d);canvas.height=Math.round(r.height*d);
+  ctx.setTransform(d,0,0,d,0,0);redraw();
+}
+function style(s){
+  ctx.globalCompositeOperation=s.e?"destination-out":"source-over";
+  ctx.strokeStyle=s.c;ctx.fillStyle=s.c;ctx.lineWidth=s.w;ctx.lineCap="round";ctx.lineJoin="round";
+}
+function paint(s){
+  style(s);const p=s.p;
+  if(p.length===1){ctx.beginPath();ctx.arc(p[0][0],p[0][1],s.w/2,0,7);ctx.fill();return}
+  ctx.beginPath();ctx.moveTo(p[0][0],p[0][1]);
+  for(let i=1;i<p.length-1;i++){
+    const mx=(p[i][0]+p[i+1][0])/2,my=(p[i][1]+p[i+1][1])/2;
+    ctx.quadraticCurveTo(p[i][0],p[i][1],mx,my);
+  }
+  const l=p[p.length-1];ctx.lineTo(l[0],l[1]);ctx.stroke();
+}
+function redraw(){
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.restore();
+  (strokes[K()]||[]).forEach(paint);
+}
+let curS=null,pid=null,last=null;
+const pt=e=>{const r=canvas.getBoundingClientRect();return [Math.round((e.clientX-r.left)*10)/10,Math.round((e.clientY-r.top)*10)/10]};
+canvas.addEventListener("pointerdown",e=>{
+  if(!drawOn)return;
+  if(e.pointerType==="pen")penSeen=true;
+  if(e.pointerType==="touch"&&penSeen)return; // əl ayası qorunması
+  e.preventDefault();canvas.setPointerCapture(e.pointerId);pid=e.pointerId;
+  curS={c:color,w:eraser?size*4:size,e:eraser,p:[pt(e)]};last=curS.p[0];paint(curS);
+});
+canvas.addEventListener("pointermove",e=>{
+  if(!curS||e.pointerId!==pid)return;e.preventDefault();
+  const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];
+  style(curS);
+  for(const ev of evs){
+    const n=pt(ev);ctx.beginPath();ctx.moveTo(last[0],last[1]);ctx.lineTo(n[0],n[1]);ctx.stroke();
+    curS.p.push(n);last=n;
+  }
+});
+function endStroke(e){
+  if(!curS||e.pointerId!==pid)return;
+  const k=K();(strokes[k]=strokes[k]||[]).push(curS);curS=null;pid=null;
+  saveInk();redraw();renderPills();
+}
+canvas.addEventListener("pointerup",endStroke);
+canvas.addEventListener("pointercancel",endStroke);
+new ResizeObserver(fit).observe(stage);
+
+/* ---------- Alət paneli ---------- */
+function syncBar(){
+  $("#tDraw").setAttribute("aria-pressed",drawOn);
+  $("#tErase").setAttribute("aria-pressed",eraser&&drawOn);
+  $("#tBoard").setAttribute("aria-pressed",board);
+  stage.classList.toggle("drawing",drawOn);
+  document.querySelectorAll(".sw").forEach(b=>b.setAttribute("aria-pressed",!eraser&&b.dataset.c===color));
+  document.querySelectorAll(".sz").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.s===size));
+}
+COLORS.forEach(c=>{
+  const b=document.createElement("button");b.className="sw";b.style.background=c;b.dataset.c=c;b.title="Rəng";
+  b.onclick=()=>{color=c;eraser=false;drawOn=true;syncBar()};$("#colors").appendChild(b);
+});
+SIZES.forEach(s=>{
+  const b=document.createElement("button");b.className="sz";b.dataset.s=s;b.title="Qalınlıq";
+  const i=document.createElement("i");i.style.width=i.style.height=(s+4)+"px";b.appendChild(i);
+  b.onclick=()=>{size=s;syncBar()};$("#sizes").appendChild(b);
+});
+$("#tDraw").onclick=()=>{drawOn=!drawOn;if(!drawOn)eraser=false;syncBar()};
+$("#tErase").onclick=()=>{eraser=!eraser;if(eraser)drawOn=true;syncBar()};
+$("#tUndo").onclick=()=>{(strokes[K()]||[]).pop();saveInk();redraw();renderPills()};
+$("#tClear").onclick=()=>{strokes[K()]=[];saveInk();redraw();renderPills()};
+$("#tBoard").onclick=()=>{board=!board;stage.classList.toggle("board",board);redraw();syncBar()};
+$("#prev").onclick=()=>{board=false;view="q";I=(I+DATA[S].questions.length-1)%DATA[S].questions.length;render()};
+$("#next").onclick=()=>{board=false;view="q";I=(I+1)%DATA[S].questions.length;render()};
+$("#keyBtn").onclick=()=>{const k=$("#key");k.hidden=!k.hidden};
+
+render();syncBar();
+</script>
+</body>
+</html>
