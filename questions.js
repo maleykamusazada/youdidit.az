@@ -97,4 +97,13 @@ window.SINAQLAR = {"3":{"label":"3-cü sinif","subjects":[{"name":"İngilis dili
     if (item) item.q = passage + item.q;
     else console.warn('Tapılmadı:', t);
   });
+
+  // ---------- 5-ci sinif: əlavə düzəlişlər ----------
+  fix('5', 'Riyaziyyat', x => x.q.startsWith('Saat 14:35'),
+    null, ['15:10', '15:15', '15:20', '15:25'], 2);
+
+  fix('5', 'Riyaziyyat', x => x.q.startsWith('Düz bucaq iki hissəyə'),
+    'Açıq bucaq (180°) iki hissəyə bölünüb. Hissələrdən biri digərindən 20° böyükdür. Böyük bucaq neçə dərəcədir?',
+    ['80°', '90°', '100°', '110°'], 2);
+
 })();
