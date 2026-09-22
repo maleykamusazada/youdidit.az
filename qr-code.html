@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Kod Generator — Youdidit.az</title>
+<meta name="description" content="CV-nə, portfolion linkinə və ya LinkedIn profilinə QR kod yarat — pulsuz, birbaşa saytda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{width:min(560px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 70px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,36px);letter-spacing:-1px;margin-bottom:10px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:30px;max-width:480px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:600}
+input[type=text]{width:100%;padding:13px 14px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;color:var(--white);font-size:14px;font-family:inherit;outline:none}
+.opts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.opt-btn{padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--muted);font-size:11.5px;font-weight:700;cursor:pointer}
+.opt-btn.active{background:linear-gradient(135deg,#5d55ff,#a84fff);color:white;border-color:transparent}
+.qr-wrap{margin-top:26px;display:flex;flex-direction:column;align-items:center;gap:16px}
+#qrbox{background:#fff;padding:18px;border-radius:16px;min-height:216px;display:flex;align-items:center;justify-content:center}
+#qrbox .placeholder{color:#999;font-size:12px;width:216px;text-align:center}
+.download-btn{padding:12px 22px;border-radius:12px;background:linear-gradient(135deg,#5d55ff,#a84fff);color:white;border:none;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
+.download-btn:disabled{opacity:.4;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">QR KOD GENERATOR</div>
+<h1>Linkini QR koda çevir</h1>
+<p class="sub">CV-nin linkini, LinkedIn profilini və ya portfolionu daxil et — dərhal QR kod yaradılır, PNG kimi yüklə.</p>
+
+<div class="card">
+<label>Link və ya mətn</label>
+<input type="text" id="qrInput" placeholder="https://linkedin.com/in/adiniz" oninput="genQR()">
+
+<div class="opts">
+<button class="opt-btn active" data-size="180" onclick="setSize(180,this)">Kiçik</button>
+<button class="opt-btn" data-size="260" onclick="setSize(260,this)">Orta</button>
+<button class="opt-btn" data-size="340" onclick="setSize(340,this)">Böyük</button>
+</div>
+
+<div class="qr-wrap">
+<div id="qrbox"><span class="placeholder">Link daxil et, QR kod burada görünəcək</span></div>
+<button class="download-btn" id="dlBtn" disabled onclick="downloadQR()">PNG kimi yüklə</button>
+</div>
+</div>
+</div>
+</section>
+
+<script>
+let qr = null;
+let currentSize = 180;
+
+function setSize(size, btn){
+  currentSize = size;
+  document.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  genQR();
+}
+
+function genQR(){
+  const val = document.getElementById('qrInput').value.trim();
+  const box = document.getElementById('qrbox');
+  const dlBtn = document.getElementById('dlBtn');
+  box.innerHTML = '';
+  if(!val){
+    box.innerHTML = '<span class="placeholder">Link daxil et, QR kod burada görünəcək</span>';
+    dlBtn.disabled = true;
+    return;
+  }
+  new QRCode(box, { text: val, width: currentSize, height: currentSize, colorDark:"#0d1128", colorLight:"#ffffff" });
+  dlBtn.disabled = false;
+}
+
+function downloadQR(){
+  const img = document.querySelector('#qrbox img') || document.querySelector('#qrbox canvas');
+  if(!img) return;
+  const link = document.createElement('a');
+  link.download = 'qr-kod.png';
+  if(img.tagName === 'CANVAS'){
+    link.href = img.toDataURL('image/png');
+  } else {
+    link.href = img.src;
+  }
+  link.click();
+}
+</script>
+</body>
+</html>
