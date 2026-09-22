@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karyera Testi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#FAF8F4;--ink:#1C1B19;--teal:#1F4E4A;--gold:#B8905A;--line:#DBD6CC;--panel:#FFFFFF;--muted:#6B665C;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;}
+  header{padding:28px 32px 20px;border-bottom:1px solid var(--line);}
+  header h1{font-family:'Fraunces',serif;font-weight:600;font-size:28px;margin:0 0 4px;}
+  header p{margin:0;color:var(--muted);font-size:14px;}
+  .progress-wrap{max-width:640px;margin:0 auto;padding:16px 32px 0;}
+  .progress-bar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;}
+  .progress-fill{height:100%;background:var(--teal);width:0%;transition:width .2s;}
+  .progress-label{font-size:12px;color:var(--muted);margin-top:5px;}
+  .wrap{max-width:640px;margin:0 auto;padding:20px 32px 32px;}
+  .q{background:var(--panel);border:1px solid var(--line);padding:20px 22px;margin-bottom:16px;}
+  .q .num{font-size:12px;color:var(--gold);margin-bottom:6px;}
+  .q h3{font-family:'Fraunces',serif;font-size:17px;margin:0 0 14px;font-weight:600;}
+  .opt{display:block;border:1px solid var(--line);border-radius:3px;padding:10px 12px;margin-bottom:8px;cursor:pointer;font-size:13.5px;transition:border-color .15s;}
+  .opt:hover{border-color:var(--teal);}
+  .opt input{margin-right:8px;}
+  .opt.selected{border-color:var(--teal);background:#EEF3F2;}
+  .submit-btn{background:var(--teal);color:#fff;border:none;padding:12px 22px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:14.5px;width:100%;margin-top:6px;}
+  .submit-btn:hover{background:#173C39;}
+  .submit-btn:disabled{background:#B8B2A5;cursor:not-allowed;}
+  #result{display:none;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal);padding:24px;margin-top:10px;}
+  #result .tag{font-size:12px;color:var(--gold);}
+  #result h2{font-family:'Fraunces',serif;font-size:24px;margin:6px 0 10px;}
+  #result p{font-size:14px;line-height:1.6;color:var(--ink);margin:0 0 10px;}
+  #result .fields{font-size:13px;color:var(--muted);margin-bottom:16px;}
+  .bars{margin-top:6px;}
+  .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:12.5px;}
+  .bar-row .bl{width:120px;color:var(--muted);flex-shrink:0;}
+  .bar-track{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden;}
+  .bar-fill{height:100%;background:var(--teal);}
+  .bar-pct{width:36px;text-align:right;color:var(--muted);flex-shrink:0;}
+  .restart{background:none;border:1px solid var(--line);color:var(--muted);padding:8px 14px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:13px;margin-top:16px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>Karyera Testi</h1>
+  <p>30 sualı cavablandırın, sizə uyğun ola biləcək karyera istiqamətini və faiz bölgüsünü görün.</p>
+</header>
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+  <div class="progress-label" id="progLabel">0 / 30 cavablandırıldı</div>
+</div>
+
+<div class="wrap">
+  <form id="quiz"></form>
+  <div id="result"></div>
+</div>
+
+<script>
+const questions = [
+{q:"Hansı iş mühiti sizi daha çox cəlb edir?",opts:[{t:"Komanda ilə birgə, insanlarla ünsiyyətli",type:"social"},{t:"Rəqəmlər, məlumat və analiz",type:"analytic"},{t:"Yaradıcı, sərbəst, fərqli fikirlər",type:"creative"},{t:"Struktur, plan, aydın qaydalar",type:"organized"}]},
+{q:"Boş vaxtınızda nə etməyi sevirsiniz?",opts:[{t:"Yeni layihə fikirləşmək",type:"creative"},{t:"Kitab oxumaq, məsələ həll etmək",type:"analytic"},{t:"Dostlarla görüşmək, tədbir təşkil etmək",type:"social"},{t:"Ev/iş sahəsini nizamlamaq",type:"organized"}]},
+{q:"Komanda işində sizin rolunuz çox vaxt hansıdır?",opts:[{t:"Fikirlər irəli sürən",type:"creative"},{t:"Faktları yoxlayan, dəqiqliyə fikir verən",type:"analytic"},{t:"Əlaqələndirici, motivasiya verən",type:"social"},{t:"Prosesi izləyən, vaxtı idarə edən",type:"organized"}]},
+{q:"Hansı fənn/mövzu sizə həmişə maraqlı gəlib?",opts:[{t:"Riyaziyyat, statistika, texnologiya",type:"analytic"},{t:"Sənət, dizayn, ədəbiyyat",type:"creative"},{t:"Psixologiya, sosiologiya, dillər",type:"social"},{t:"İqtisadiyyat, idarəetmə, hüquq",type:"organized"}]},
+{q:"Bir tapşırığa başlayanda ilk nə edirsiniz?",opts:[{t:"Plan və addımları müəyyən edirəm",type:"organized"},{t:"Başqalarının fikrini soruşuram",type:"social"},{t:"Məlumat toplayıb təhlil edirəm",type:"analytic"},{t:"Fərqli variantlar üzərində fikirləşirəm",type:"creative"}]},
+{q:"Hansı nəticə sizi daha çox razı salır?",opts:[{t:"Kimisə problemini həll etmək",type:"social"},{t:"Dəqiq, doğru nəticə əldə etmək",type:"analytic"},{t:"Yeni, orijinal bir şey yaratmaq",type:"creative"},{t:"Hər şeyin vaxtında bitməsi",type:"organized"}]},
+{q:"İdeal iş günü necə görünür?",opts:[{t:"Görüşlər, insanlarla ünsiyyət dolu",type:"social"},{t:"Sakit, konsentrasiya tələb edən",type:"analytic"},{t:"Dəyişkən, hər gün fərqli tapşırıq",type:"creative"},{t:"Aydın cədvəl və tapşırıq siyahısı",type:"organized"}]},
+{q:"Problemlə üzləşəndə necə davranırsınız?",opts:[{t:"Başqalarından məsləhət alıram",type:"social"},{t:"Səbəb-nəticə əlaqəsini araşdırıram",type:"analytic"},{t:"Alışılmamış həll yolu axtarıram",type:"creative"},{t:"Addım-addım metod tətbiq edirəm",type:"organized"}]},
+{q:"Hansı bacarığınızı daha güclü sayırsınız?",opts:[{t:"İnsanları dinləmək və anlamaq",type:"social"},{t:"Məntiqi düşünmək",type:"analytic"},{t:"Təxəyyül və ifadə",type:"creative"},{t:"Təşkil etmək və planlaşdırmaq",type:"organized"}]},
+{q:"Layihə üzərində işləyərkən sizi ən çox nə narahat edir?",opts:[{t:"Komandada anlaşılmazlıq",type:"social"},{t:"Səhv və ya qeyri-dəqiq məlumat",type:"analytic"},{t:"Yaradıcılığın məhdudlaşması",type:"creative"},{t:"Planın pozulması, xaos",type:"organized"}]},
+{q:"Hansı kitab/film janrı sizi daha çox cəlb edir?",opts:[{t:"İnsan münasibətləri haqqında",type:"social"},{t:"Elmi, sirr, məntiq tələb edən",type:"analytic"},{t:"Fantastika, sənət, vizual əsərlər",type:"creative"},{t:"Bioqrafiya, strategiya, tarix",type:"organized"}]},
+{q:"Yeni bacarıq öyrənəndə hansı üsul sizə uyğundur?",opts:[{t:"Başqaları ilə birgə öyrənmək",type:"social"},{t:"Məntiqli, addım-addım izah",type:"analytic"},{t:"Sınaq-səhv, sərbəst təcrübə",type:"creative"},{t:"Strukturlu kurs və planla",type:"organized"}]},
+{q:"İş yerində sizi ən çox nə motivasiya edir?",opts:[{t:"Başqalarına fayda vermək",type:"social"},{t:"Mürəkkəb məsələni həll etmək",type:"analytic"},{t:"Yeni ideyalar reallaşdırmaq",type:"creative"},{t:"Aydın məqsəd və nəticə",type:"organized"}]},
+{q:"Sizə ən çox hansı tərif xoş gəlir?",opts:[{t:"\"Sən əla dinləyicisən\"",type:"social"},{t:"\"Sən çox dəqiqsən\"",type:"analytic"},{t:"\"Sən çox orijinalsan\"",type:"creative"},{t:"\"Sən çox mütəşəkkilsən\"",type:"organized"}]},
+{q:"Qrup layihəsində hansı tapşırığı seçərdiniz?",opts:[{t:"Komanda daxilində ünsiyyəti idarə etmək",type:"social"},{t:"Məlumatları toplamaq və təhlil etmək",type:"analytic"},{t:"Təqdimatın vizual dizaynını hazırlamaq",type:"creative"},{t:"Cədvəl və son tarixləri izləmək",type:"organized"}]},
+{q:"Stresli vəziyyətdə necə davranırsınız?",opts:[{t:"Kiməsə danışıb rahatlaşıram",type:"social"},{t:"Problemi hissələrə bölüb həll edirəm",type:"analytic"},{t:"Fərqli bucaqdan baxmağa çalışıram",type:"creative"},{t:"Prioritetləri müəyyənləşdirirəm",type:"organized"}]},
+{q:"Hansı fəaliyyət sizə daha çox zövq verir?",opts:[{t:"Kiməsə nəyisə öyrətmək",type:"social"},{t:"Bir sistemi başa düşmək",type:"analytic"},{t:"Əl işi, rəsm, musiqi",type:"creative"},{t:"Bir şeyi nizama salmaq",type:"organized"}]},
+{q:"İş görüşməsində sizə hansı sual maraqlı gələr?",opts:[{t:"Komanda mədəniyyəti necədir?",type:"social"},{t:"Hansı vasitələr/metodlarla işlənir?",type:"analytic"},{t:"Sərbəstlik dərəcəsi nə qədərdir?",type:"creative"},{t:"İş prosesi necə strukturlaşıb?",type:"organized"}]},
+{q:"Uğuru necə qiymətləndirirsiniz?",opts:[{t:"İnsanlara təsirimlə",type:"social"},{t:"Əldə etdiyim dəqiq nəticələrlə",type:"analytic"},{t:"Yaratdığım orijinal işlərlə",type:"creative"},{t:"Nizamla və planın icrası ilə",type:"organized"}]},
+{q:"Hansı vəziyyətdə özünüzü rahat hiss edirsiniz?",opts:[{t:"İnsanlarla dolu otaqda",type:"social"},{t:"Tək, dərin fikirləşərkən",type:"analytic"},{t:"Sərbəst, çərçivəsiz mühitdə",type:"creative"},{t:"Aydın qayda və rejimdə",type:"organized"}]},
+{q:"Qərar verərkən nəyə əsaslanırsınız?",opts:[{t:"Başqalarına necə təsir edəcəyinə",type:"social"},{t:"Faktlara və dəlillərə",type:"analytic"},{t:"Hiss və intuitivə",type:"creative"},{t:"Qayda və prosedura",type:"organized"}]},
+{q:"Hansı vəzifə adı sizə daha cəlbedici gəlir?",opts:[{t:"Əlaqələr üzrə mütəxəssis",type:"social"},{t:"Analitik / Tədqiqatçı",type:"analytic"},{t:"Dizayner / Yaradıcı direktor",type:"creative"},{t:"Layihə meneceri / Koordinator",type:"organized"}]},
+{q:"Uşaqlıqda ən çox nə etməyi sevirdiniz?",opts:[{t:"Dostlarla oyun təşkil etmək",type:"social"},{t:"Tapmaca və məntiq oyunları",type:"analytic"},{t:"Rəsm çəkmək, hekayə uydurmaq",type:"creative"},{t:"Otağı, əşyaları nizamlamaq",type:"organized"}]},
+{q:"Komandada konflikt yaranarsa nə edərsiniz?",opts:[{t:"Tərəflər arasında körpü qururam",type:"social"},{t:"Səbəbi obyektiv təhlil edirəm",type:"analytic"},{t:"Alternativ həll təklif edirəm",type:"creative"},{t:"Qaydalara uyğun prosesi izləyirəm",type:"organized"}]},
+{q:"Hansı bacarığı inkişaf etdirmək istərdiniz?",opts:[{t:"Liderlik və ünsiyyət",type:"social"},{t:"Data analitikası",type:"analytic"},{t:"Dizayn və yaradıcılıq",type:"creative"},{t:"Layihə idarəetməsi",type:"organized"}]},
+{q:"Sizin üçün 'yaxşı iş' nə deməkdir?",opts:[{t:"İnsanlara kömək edən iş",type:"social"},{t:"Dəqiq və məntiqli iş",type:"analytic"},{t:"Özünü ifadə edə biləcəyin iş",type:"creative"},{t:"Aydın struktura malik iş",type:"organized"}]},
+{q:"Yeni layihəyə başlayarkən ən çox nədən həyəcanlanırsınız?",opts:[{t:"Yeni insanlarla tanışlıqdan",type:"social"},{t:"Maraqlı bir problemi həll etməkdən",type:"analytic"},{t:"Yeni bir şey yaratmaqdan",type:"creative"},{t:"Aydın nəticəyə çatmaqdan",type:"organized"}]},
+{q:"Vaxtınızı necə idarə edirsiniz?",opts:[{t:"Çevik, insanlara görə uyğunlaşdırıram",type:"social"},{t:"Prioritetə görə məntiqli ardıcıllıqla",type:"analytic"},{t:"Ilhama görə, sərbəst",type:"creative"},{t:"Ciddi cədvəllə",type:"organized"}]},
+{q:"Hansı mühitdə daha məhsuldar olursunuz?",opts:[{t:"Açıq, insanlarla dolu ofis",type:"social"},{t:"Sakit, az səs-küylü yer",type:"analytic"},{t:"Rəngarəng, ilhamverici məkan",type:"creative"},{t:"Səliqəli, nizamlı iş masası",type:"organized"}]},
+{q:"Gələcək karyeranızda ən vacib olan nədir?",opts:[{t:"Mənalı əlaqələr qurmaq",type:"social"},{t:"Peşəkar dərinlik və ekspertiza",type:"analytic"},{t:"Yaradıcı azadlıq",type:"creative"},{t:"Sabitlik və aydın irəliləyiş",type:"organized"}]}
+];
+
+const results = {
+  social:{title:"Sosial & İnsanlarla İş",desc:"Ünsiyyət, əməkdaşlıq və insanlara dəstək vermək sizin güclü tərəfinizdir.",fields:"HR, marketinq, müəllimlik, satış, PR, sosial xidmətlər"},
+  analytic:{title:"Analitik & Texniki",desc:"Məlumatla işləmək, məntiqi düşünmək və dəqiq nəticələr sizi motivasiya edir.",fields:"Məlumat analitikası, mühəndislik, maliyyə, proqramlaşdırma, tədqiqat"},
+  creative:{title:"Yaradıcı & Dizayn",desc:"Orijinal fikirlər, vizual düşüncə və yeni yanaşmalar sizin üstünlüyünüzdür.",fields:"Qrafik dizayn, marketinq kreativi, jurnalistika, memarlıq, media"},
+  organized:{title:"Struktur & İdarəetmə",desc:"Planlaşdırma, nizam və prosesləri idarə etmək sizə xasdır.",fields:"Layihə idarəetməsi, logistika, mühasibatlıq, əməliyyat menecmenti, hüquq"}
+};
+
+let answers = new Array(questions.length).fill(null);
+
+function updateProgress(){
+  const done = answers.filter(a=>a!==null).length;
+  document.getElementById('progFill').style.width = (done/questions.length*100)+'%';
+  document.getElementById('progLabel').textContent = `${done} / ${questions.length} cavablandırıldı`;
+}
+
+function render(){
+  document.getElementById('quiz').innerHTML = questions.map((item,qi)=>`
+    <div class="q">
+      <div class="num">Sual ${qi+1}/${questions.length}</div>
+      <h3>${item.q}</h3>
+      ${item.opts.map((o,oi)=>`
+        <label class="opt ${answers[qi]===oi?'selected':''}" onclick="select(${qi},${oi})">
+          <input type="radio" name="q${qi}" ${answers[qi]===oi?'checked':''}> ${o.t}
+        </label>`).join('')}
+    </div>`).join('') + `<button type="button" class="submit-btn" id="submit" onclick="finish()" ${answers.includes(null)?'disabled':''}>Nəticəni gör</button>`;
+  updateProgress();
+}
+
+function select(qi,oi){ answers[qi]=oi; render(); document.querySelectorAll('.q')[qi].scrollIntoView({behavior:'smooth',block:'center'}); }
+
+function finish(){
+  const counts = {social:0,analytic:0,creative:0,organized:0};
+  answers.forEach((oi,qi)=>{ counts[questions[qi].opts[oi].type]++; });
+  const total = questions.length;
+  const top = Object.keys(counts).reduce((a,b)=>counts[a]>=counts[b]?a:b);
+  const r = results[top];
+  const order = Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+  document.getElementById('quiz').style.display='none';
+  document.querySelector('.progress-wrap').style.display='none';
+  const res = document.getElementById('result');
+  res.style.display='block';
+  res.innerHTML = `
+    <div class="tag">Sizin nəticəniz</div>
+    <h2>${r.title}</h2>
+    <p>${r.desc}</p>
+    <p class="fields"><strong>Uyğun sahələr:</strong> ${r.fields}</p>
+    <div class="bars">
+      ${order.map(k=>{
+        const pct = Math.round(counts[k]/total*100);
+        const labels={social:'Sosial',analytic:'Analitik',creative:'Yaradıcı',organized:'Struktur'};
+        return `<div class="bar-row"><div class="bl">${labels[k]}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><div class="bar-pct">${pct}%</div></div>`;
+      }).join('')}
+    </div>
+    <button class="restart" onclick="restart()">Yenidən başla</button>`;
+}
+
+function restart(){
+  answers = new Array(questions.length).fill(null);
+  document.getElementById('result').style.display='none';
+  document.querySelector('.progress-wrap').style.display='block';
+  document.getElementById('quiz').style.display='block';
+  render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+render();
+</script>
+</body>
+</html>
