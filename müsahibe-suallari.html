@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Müsahibə Sualları Bankı — Youdidit.az</title>
+<meta name="description" content="10 sahə üzrə 80+ müsahibə sualı və peşəkar cavab tövsiyələri — pulsuz, birbaşa saytda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{width:min(780px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 70px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,36px);letter-spacing:-1px;margin-bottom:10px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:22px;max-width:580px}
+.star-card{background:linear-gradient(135deg,rgba(93,85,255,.14),rgba(164,79,255,.07));border:1px solid rgba(131,105,255,.24);border-radius:16px;padding:18px 20px;margin-bottom:24px}
+.star-card .lbl{font-size:11px;color:#cdbbff;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.star-card p{font-size:12.5px;color:var(--muted);line-height:1.7}
+.star-card b{color:var(--white)}
+.search-row{margin-bottom:18px}
+input[type=text]{width:100%;padding:12px 15px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;color:var(--white);font-size:13.5px;font-family:inherit;outline:none}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.tab{padding:8px 15px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer}
+.tab.active{background:linear-gradient(135deg,#5d55ff,#a84fff);color:white;border-color:transparent}
+.count{font-size:11.5px;color:var(--muted);margin-bottom:14px}
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin-bottom:12px;cursor:pointer;transition:.2s}
+.qcard:hover{border-color:rgba(151,113,255,.4)}
+.qcard .cat-tag{font-size:9.5px;color:#9d76ff;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.qcard .q{font-size:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.qcard .chevron{color:#9d76ff;font-size:12px;transition:.2s;flex-shrink:0}
+.qcard.open .chevron{transform:rotate(90deg)}
+.qcard .a{max-height:0;overflow:hidden;transition:.25s;color:var(--muted);font-size:12.5px;line-height:1.7}
+.qcard.open .a{max-height:300px;margin-top:12px}
+.empty{color:var(--muted);font-size:13px;text-align:center;padding:30px 0}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">MÜSAHİBƏ SUALLARI BANKI</div>
+<h1>Sualı gör, tövsiyəni oxu</h1>
+<p class="sub">10 sahə üzrə 80-dən çox sual və peşəkar cavab tövsiyəsi. Sahəni seç və ya axtarış qutusundan istifadə et.</p>
+
+<div class="star-card">
+<div class="lbl">STAR metodu — davranış sualları üçün</div>
+<p><b>S</b>ituasiya — kontekst ver. <b>T</b>apşırıq — sənin rolun nə idi. <b>A</b>ddım — konkret nə etdin. <b>R</b>(esult) Nəticə — ölçülə bilən sonuc. Hər davranış sualına ("Bir dəfə... necə etdiniz?") bu strukturla cavab ver.</p>
+</div>
+
+<div class="search-row">
+<input type="text" id="search" placeholder="Sual axtar (məs. 'komanda', 'stress', 'büdcə')..." oninput="onSearch()">
+</div>
+
+<div class="tabs" id="tabs"></div>
+<div class="count" id="count"></div>
+<div id="list"></div>
+</div>
+</section>
+
+<script>
+const bank = {
+  "Ümumi": [
+    {q:"Özünüz haqqında danışın.",a:"Qısa CV xülasəsi kimi düşün: kim olduğun, əsas təcrübən, hazırkı iş üçün niyə uyğun olduğun. 1-2 dəqiqədən çox uzatma."},
+    {q:"Niyə bizim şirkətdə işləmək istəyirsiniz?",a:"Şirkət haqqında əvvəlcədən araşdırma apar, konkret bir layihə/dəyərlə öz məqsədin arasında əlaqə qur."},
+    {q:"Güclü və zəif tərəfləriniz nələrdir?",a:"Real bir zəif tərəf seç, amma onun üzərində necə işlədiyini də göstər — sadəcə şablon cavab vermə."},
+    {q:"5 il sonra özünüzü harada görürsünüz?",a:"Realist ol, vəzifə ilə əlaqəli inkişaf istiqamətini göstər, amma həddindən artıq konkret vəd vermə."},
+    {q:"Niyə əvvəlki işinizdən ayrıldınız?",a:"Neqativ danışma, inkişaf, yeni imkan və ya məsuliyyət artımı kimi müsbət çərçivədə izah et."},
+    {q:"Maaş gözləntiniz nədir?",a:"Bazar araşdırması apar, aralıq ver (nöqtə ədəd yox), təcrübə və məsuliyyətə görə əsaslandır."},
+    {q:"Çətin bir qərarı necə qəbul etdiniz?",a:"STAR metodundan istifadə et, qərarın arxasındakı məntiqi və nəticəni aydın göstər."},
+    {q:"Stress altında necə işləyirsiniz?",a:"Prioritetləşdirmə, vaxt idarəetməsi və sakit qalma strategiyalarından konkret nümunə ver."},
+    {q:"Bizə hansı sualınız var?",a:"Həmişə 2-3 sual hazırla — komanda mədəniyyəti, gözləntilər, növbəti addımlar barədə. Sualsız qalma."},
+    {q:"Uğursuzluqla necə davranırsınız?",a:"Real bir nümunə seç, nədən öyrəndiyini və sonra necə düzəltdiyini vurğula — məsuliyyəti öz üzərinə götür."}
+  ],
+  "IT / Proqramlaşdırma": [
+    {q:"Ən çətin texniki problemi necə həll etdiniz?",a:"STAR metodundan istifadə et: Situasiya, Tapşırıq, Addım, Nəticə. Konkret texnologiya və ölçülə bilən nəticə göstər."},
+    {q:"Kod keyfiyyətini necə təmin edirsiniz?",a:"Code review, test yazma, sənədləşdirmə və standartlara riayət kimi konkret vərdişlərdən danış."},
+    {q:"Yeni texnologiyanı necə öyrənirsiniz?",a:"Rəsmi sənəd, praktiki layihə, community resurslar — öz öyrənmə prosesini addım-addım izah et."},
+    {q:"Komanda daxilində fikir ayrılığı yarananda nə edirsiniz?",a:"Faktlara əsaslanaraq müzakirə, digər tərəfi dinləmək və ortaq həll tapmağa fokuslan."},
+    {q:"Son layihənizin arxitekturasını izah edin.",a:"Yüksək səviyyədən başla (komponentlər, data axını), sonra öz rolunu və qərar verdiyin texniki seçimləri detallandır."},
+    {q:"Texniki borcu (technical debt) necə idarə edirsiniz?",a:"Prioritetləşdirmə meyarlarından (risk, təsir, vaxt) və komandaya necə izah etdiyindən danış."},
+    {q:"Bir termini qeyri-texniki insana necə izah edərdiniz?",a:"Metafora/analogiyadan istifadə et, jarqonsuz izah bacarığını nümayiş etdir."},
+    {q:"Debug prosesiniz necədir?",a:"Problemi təkrarlama, izolyasiya, hipotez qurma və sistematik yoxlama addımlarını izah et."},
+    {q:"Deadline sıxışdırılanda nə edirsiniz?",a:"Prioritetləşdirmə, şəffaf kommunikasiya (mümkün gecikməni əvvəlcədən bildirmək) və scope idarəetməsindən danış."}
+  ],
+  "Marketinq": [
+    {q:"Uğurlu bir kampaniya nümunəsi göstərin.",a:"Məqsəd, strategiya, icra və ölçülə bilən nəticəni (məs. konversiya artımı) konkret rəqəmlərlə göstər."},
+    {q:"Kampaniyanın uğurunu necə ölçürsünüz?",a:"KPI-lardan (CTR, ROI, konversiya və s.) danış, məlumatla qərar vermə bacarığını vurğula."},
+    {q:"Auditoriyanı necə seqmentləşdirirsiniz?",a:"Demoqrafik, davranış və maraq əsaslı seqmentasiya metodlarından misal ver."},
+    {q:"Məhdud büdcə ilə necə işlədiniz?",a:"Prioritetləşdirmə və yüksək ROI kanallarına fokuslanma bacarığını konkret misalla göstər."},
+    {q:"Brend mesajını necə formalaşdırırsınız?",a:"Auditoriya araşdırması, rəqib analizi və brendin əsas dəyərləri ilə uyğunluqdan danış."},
+    {q:"A/B testi haqqında nə bilirsiniz?",a:"Hipotez qurma, tək dəyişəni test etmə və statistik əhəmiyyəti izah et."},
+    {q:"Sosial media strategiyasını necə qurursunuz?",a:"Platforma seçimi, məzmun planı, tezlik və performans ölçmə prosesini addım-addım izah et."},
+    {q:"Neqativ geri bildirimlə necə davranırsınız?",a:"Sakit, həll yönümlü yanaşma və brendin nüfuzunu qorumaq üçün atdığın addımları göstər."}
+  ],
+  "Satış": [
+    {q:"İmtina edən müştəri ilə necə davranırsınız?",a:"Səbəbi anlamaq üçün sual ver, real dəyər təklif et, təzyiq göstərmədən əlaqəni davam etdir."},
+    {q:"Aylıq/rüblük planı necə yerinə yetirirsiniz?",a:"Boru kəməri idarəetməsi, prioritetləşdirmə və davamlı təqib vərdişlərindən danış."},
+    {q:"Çətin müştəri ilə uğurlu təcrübənizi paylaşın.",a:"STAR metodu ilə konkret vəziyyət və nəticəni izah et, empatiya və həll yönümlü yanaşmanı vurğula."},
+    {q:"Soyuq zəngə (cold call) necə hazırlaşırsınız?",a:"Əvvəlcədən araşdırma, aydın açılış cümləsi və dəyər təklifinin qısa təqdimatından danış."},
+    {q:"Qiymət etirazını necə aradan qaldırırsınız?",a:"Qiymət deyil, dəyər üzərində danış — ROI, uzunmüddətli fayda və müqayisəli üstünlüklərlə əsaslandır."},
+    {q:"Uzun satış dövrünü necə idarə edirsiniz?",a:"Mərhələli təqib planı, qərar vericilərlə əlaqə saxlama və səbrli, ardıcıl yanaşmadan danış."},
+    {q:"Rəqibin öz məhsulunu daha ucuz təklif etdiyini desə nə edərsiniz?",a:"Fərqləndirici dəyəri vurğula, faktlarla müqayisə et, təzyiqə düşmədən sakit qal."}
+  ],
+  "HR / İnsan Resursları": [
+    {q:"Namizədi necə qiymətləndirirsiniz?",a:"Struktur müsahibə sualları, bacarıq testləri və mədəni uyğunluq meyarlarından danış."},
+    {q:"Komanda daxilində konflikti necə idarə edirsiniz?",a:"Neytrallıq, hər iki tərəfi dinləmək və ədalətli həll tapmaq prosesini izah et."},
+    {q:"Yeni işçinin adaptasiyasını necə asanlaşdırırsınız?",a:"Onboarding planı, mentor təyinatı və mütəmadi geri bildirim mexanizmindən bəhs et."},
+    {q:"İşdən çıxarma prosesini necə aparırsınız?",a:"Hörmətli, aydın kommunikasiya, hüquqi tələblərə riayət və dəstəkləyici yanaşmadan danış."},
+    {q:"Əməkdaş məmnuniyyətini necə ölçürsünüz?",a:"Anonim sorğular, bir-bir görüşlər və davamlı geri bildirim mədəniyyətindən misal ver."},
+    {q:"Çeşidləmə (screening) zamanı nələrə fikir verirsiniz?",a:"Vəzifə tələblərinə uyğunluq, keçmiş nailiyyətlər və mədəni uyğunluq siqnallarını izah et."},
+    {q:"Müxtəliflik və inklüziyanı necə dəstəkləyirsiniz?",a:"Qərəzsiz işə qəbul prosesləri, bərabər imkanlar və inklüziv komanda mədəniyyəti nümunələrindən danış."},
+    {q:"Çətin bir işə qəbul qərarını necə verdiniz?",a:"Konkret kriteriyalar və məlumata əsaslanan qərar prosesini STAR metodu ilə izah et."}
+  ],
+  "Müəllimlik / Təhsil": [
+    {q:"Fərqli səviyyəli şagirdlərlə necə işləyirsiniz?",a:"Differensasiya edilmiş tapşırıqlar və fərdi dəstək yanaşmalarından danış."},
+    {q:"Sinifdə intizam problemini necə həll edirsiniz?",a:"Qabaqlayıcı qaydalar, sakit ünsiyyət və müsbət davranışı gücləndirmə metodlarını izah et."},
+    {q:"Valideynlərlə əlaqəni necə qurursunuz?",a:"Müntəzəm, şəffaf ünsiyyət və uşağın inkişafına fokuslanan əməkdaşlıq yanaşmasını vurğula."},
+    {q:"Motivasiyası aşağı şagirdi necə cəlb edirsiniz?",a:"Fərdi maraqlara uyğunlaşdırma, kiçik uğurları qeyd etmə və dəstəkləyici mühit yaratmaqdan danış."},
+    {q:"Dərs planınızı necə hazırlayırsınız?",a:"Məqsəd qoyma, fəaliyyət seçimi, qiymətləndirmə metodu və vaxt bölgüsünü izah et."},
+    {q:"Texnologiyanı dərsdə necə istifadə edirsiniz?",a:"Konkret alət/platforma nümunəsi ver, öyrənməyə necə əlavə dəyər qatdığını göstər."},
+    {q:"Uzaqdan təhsil zamanı hansı çətinliklərlə qarşılaşdınız?",a:"Cəlbetmə strategiyaları, texniki maneələr və onları necə aşdığından danış."},
+    {q:"Şagird nailiyyətini necə qiymətləndirirsiniz?",a:"Formativ və summativ qiymətləndirmə metodlarının kombinasiyasından, fərdi irəliləyişə fokusdan danış."}
+  ],
+  "Maliyyə / Mühasibatlıq": [
+    {q:"Ən mürəkkəb maliyyə hesabatını necə hazırladınız?",a:"Məlumat mənbələri, yoxlama prosesi və dəqiqliyi təmin etmək üçün atdığın addımları izah et."},
+    {q:"Uyğunsuzluğu (discrepancy) necə aşkarlayıb həll edirsiniz?",a:"Sistematik yoxlama prosesi, kök səbəb analizi və düzəliş addımlarından danış."},
+    {q:"Büdcə planlaşdırmasında təcrübəniz nədir?",a:"Proqnozlaşdırma metodu, maraqlı tərəflərlə əməkdaşlıq və büdcəyə nəzarət prosesini izah et."},
+    {q:"Vergi qanunvericiliyindəki dəyişiklikləri necə izləyirsiniz?",a:"Rəsmi mənbələr (Vergilər Nazirliyi), peşəkar icmalar və davamlı təhsil vərdişlərindən danış."},
+    {q:"Son tarixlə (deadline) işləmə təcrübəniz necədir?",a:"Prioritetləşdirmə, erkən başlama və dəqiqlik-sürət balansını necə qurduğunu göstər."},
+    {q:"Excel/maliyyə proqramları biliyiniz hansı səviyyədədir?",a:"Konkret funksiyalar (pivot cədvəl, formullar) və real iş nümunələri ilə göstər."},
+    {q:"Maliyyə fırıldaqçılığının qarşısını necə alırsınız?",a:"Daxili nəzarət mexanizmləri, sənəd yoxlaması və şübhəli əməliyyatları necə izlədiyindən danış."},
+    {q:"Rəhbərliyə maliyyə nəticələrini necə təqdim edirsiniz?",a:"Sadə dildə, vizual dəstəklə və əsas göstəricilərə fokuslanaraq izah et."}
+  ],
+  "Dizayn (UX/Qrafik)": [
+    {q:"Dizayn prosesinizi izah edin.",a:"Araşdırma, ideya (wireframe), prototip, test və iterasiya mərhələlərini addım-addım izah et."},
+    {q:"İstifadəçi əsaslı qərarları necə verirsiniz?",a:"İstifadəçi araşdırması, testlər və məlumata əsaslanan dizayn qərarlarından konkret nümunə ver."},
+    {q:"Müştəri/rəhbərlə dizayn barədə fikir ayrılığı yarananda nə edirsiniz?",a:"Dizaynı əsaslandırmaq üçün data və istifadəçi ehtiyaclarından istifadə et, kompromis tapmağa fokuslan."},
+    {q:"Portfolionuzdakı ən sevdiyiniz layihəni göstərin.",a:"Problemi, prosesini və nəticəni (istifadəçi/biznes təsiri) aydın izah et."},
+    {q:"Dizayn sistemi ilə işləmə təcrübəniz nədir?",a:"Komponent kitabxanaları, ardıcıllıq və miqyaslanma üstünlüklərindən danış."},
+    {q:"Əlçatanlıq (accessibility) prinsiplərini necə tətbiq edirsiniz?",a:"Kontrast, klaviatura naviqasiyası, ekran oxuyucu uyğunluğu kimi konkret praktikalardan danış."},
+    {q:"Vaxt təzyiqi altında dizayn keyfiyyətini necə qoruyursunuz?",a:"Prioritetləşdirmə, mövcud komponentlərdən istifadə və minimum həyat qabiliyyətli dizayn (MVP) yanaşmasından danış."}
+  ],
+  "Müştəri Xidməti": [
+    {q:"Əsəbi müştəri ilə necə davranırsınız?",a:"Sakit qalma, aktiv dinləmə, empatiya göstərmə və konkret həll təklif etmə addımlarını izah et."},
+    {q:"Bir müştəri probleminin necə həll etdiyinizi izah edin.",a:"STAR metodu ilə, müştərinin narahatlığını necə aradan qaldırdığını göstər."},
+    {q:"Eyni vaxtda bir neçə müraciəti necə idarə edirsiniz?",a:"Prioritetləşdirmə, vaxt idarəetməsi və alət (ticketing sistemi) istifadəsindən danış."},
+    {q:"Həll edə bilmədiyiniz bir problemlə üzləşəndə nə edirsiniz?",a:"Şəffaf ünsiyyət, düzgün istiqamətə yönləndirmə (eskalasiya) və müştərini məlumatlandırma prosesini izah et."},
+    {q:"Müştəri məmnuniyyətini necə ölçürsünüz?",a:"CSAT, NPS kimi göstəricilər və geri bildirimlərin təhlilindən danış."},
+    {q:"Şirkət siyasəti ilə müştəri istəyi ziddiyyət təşkil edəndə nə edirsiniz?",a:"Siyasəti hörmətlə izah et, alternativ həll təklif et, mümkün olduqda çeviklik göstər."},
+    {q:"Təkrarlanan şikayətləri necə azaldırsınız?",a:"Kök səbəb analizi və məlumatı müvafiq komandaya (məhsul, keyfiyyət) ötürmə prosesindən danış."}
+  ],
+  "Menecment / Liderlik": [
+    {q:"Komandanızı necə motivasiya edirsiniz?",a:"Fərdi ehtiyacları anlama, aydın məqsəd qoyma və nailiyyətləri qeyd etmə vərdişlərindən danış."},
+    {q:"Zəif performans göstərən işçi ilə necə davranırsınız?",a:"Konkret geri bildirim, dəstək planı və izlənilə bilən inkişaf məqsədləri qoyma prosesini izah et."},
+    {q:"Prioritetləri necə müəyyən edirsiniz?",a:"Təsir/təcililik matrisi kimi çərçivələr və maraqlı tərəflərlə kommunikasiyadan danış."},
+    {q:"Çətin bir qərarı komandaya necə çatdırdınız?",a:"Şəffaflıq, səbəbi izah etmə və narahatlıqları dinləmə prosesini STAR metodu ilə göstər."},
+    {q:"Komandanızda dəyişikliyi necə idarə edirsiniz?",a:"Aydın kommunikasiya, tədricən keçid və komandanı prosesə cəlb etmə yanaşmasından danış."},
+    {q:"Liderlik tərzinizi necə təsvir edərdiniz?",a:"Konkret nümunələrlə dəstəklə (məs. koçvari, nəticə-yönümlü) — universal deyil, situasiyaya uyğun olduğunu göstər."},
+    {q:"Uzaqdan işləyən komandanı necə idarə edirsiniz?",a:"Aydın gözləntilər, müntəzəm check-in və nəticə-əsaslı qiymətləndirmədən danış."},
+    {q:"Uğursuz bir layihədən nə öyrəndiniz?",a:"Məsuliyyəti öz üzərinə götür, kök səbəbi analiz et və sonrakı layihələrdə tətbiq etdiyin dərsi göstər."}
+  ]
+};
+
+let activeCat = "Ümumi";
+
+function allItems(){
+  const arr = [];
+  Object.keys(bank).forEach(cat=>{
+    bank[cat].forEach(item=>arr.push({...item, cat}));
+  });
+  return arr;
+}
+
+function render(cat){
+  activeCat = cat;
+  document.getElementById('search').value = '';
+  document.getElementById('tabs').innerHTML = Object.keys(bank).map(c=>
+    `<button class="tab ${c===cat?'active':''}" onclick="render('${c}')">${c}</button>`
+  ).join('');
+  document.getElementById('count').textContent = `${bank[cat].length} sual`;
+  renderList(bank[cat].map(i=>({...i,cat})), false);
+}
+
+function renderList(items, showCat){
+  const list = document.getElementById('list');
+  if(items.length===0){
+    list.innerHTML = '<div class="empty">Uyğun sual tapılmadı.</div>';
+    return;
+  }
+  list.innerHTML = items.map(item=>`
+    <div class="qcard" onclick="this.classList.toggle('open')">
+      ${showCat?`<div class="cat-tag">${item.cat}</div>`:''}
+      <div class="q">${item.q}<span class="chevron">▸</span></div>
+      <div class="a">${item.a}</div>
+    </div>`).join('');
+}
+
+function onSearch(){
+  const term = document.getElementById('search').value.trim().toLowerCase();
+  if(!term){ render(activeCat); return; }
+  document.getElementById('tabs').innerHTML = Object.keys(bank).map(c=>
+    `<button class="tab" onclick="render('${c}')">${c}</button>`
+  ).join('');
+  const matches = allItems().filter(i => i.q.toLowerCase().includes(term) || i.a.toLowerCase().includes(term));
+  document.getElementById('count').textContent = `${matches.length} nəticə tapıldı`;
+  renderList(matches, true);
+}
+
+render("Ümumi");
+</script>
+</body>
+</html>
