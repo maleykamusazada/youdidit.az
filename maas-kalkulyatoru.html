@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maaş Kalkulyatoru — Youdidit.az</title>
+<meta name="description" content="Brüt maaşdan net maaşı hesablayın — 2026-cı il Azərbaycan gəlir vergisi, sosial sığorta və icbari tibbi sığorta dərəcələrinə əsasən.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--purple:#7651ff;--purple2:#a454ff;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{width:min(720px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 70px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,36px);letter-spacing:-1px;margin-bottom:10px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:30px;max-width:520px}
+.input-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:600}
+.input-row{display:flex;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:4px 4px 4px 16px}
+.input-row span{color:var(--muted);font-size:13px;margin-right:8px}
+input[type=number]{flex:1;background:transparent;border:none;outline:none;color:var(--white);font-size:22px;font-family:'Sora',sans-serif;font-weight:700;padding:12px 0}
+.unit{padding:10px 16px;color:var(--muted);font-size:13px}
+.result{margin-top:26px}
+.net-box{background:linear-gradient(135deg,rgba(93,85,255,.18),rgba(164,79,255,.10));border:1px solid rgba(131,105,255,.28);border-radius:16px;padding:22px;text-align:center}
+.net-box .lbl{font-size:11px;color:#cdbbff;text-transform:uppercase;letter-spacing:1px;font-weight:700}
+.net-box .val{font-family:'Sora',sans-serif;font-size:38px;font-weight:800;margin-top:6px}
+.breakdown{margin-top:18px;border-top:1px solid var(--border);padding-top:16px}
+.brow{display:flex;justify-content:space-between;padding:9px 0;font-size:13px;border-bottom:1px solid rgba(255,255,255,.05)}
+.brow .l{color:var(--muted)}
+.brow .v{font-weight:600}
+.brow.minus .v{color:#ff8b8b}
+.note{margin-top:20px;font-size:11px;color:#7f86a8;line-height:1.7}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">MAAŞ KALKULYATORU</div>
+<h1>Brüt maaşdan net maaşa</h1>
+<p class="sub">Brüt (ümumi) maaşını daxil et — gəlir vergisi, sosial sığorta və icbari tibbi sığorta çıxıldıqdan sonra əlinə keçəcək net məbləği gör.</p>
+
+<div class="input-card">
+<label>Brüt (ümumi) aylıq maaş</label>
+<div class="input-row">
+<span>₼</span>
+<input type="number" id="gross" placeholder="1500" min="0" oninput="calc()">
+<span class="unit">AZN / ay</span>
+</div>
+
+<div class="result" id="result" style="display:none;">
+<div class="net-box">
+<div class="lbl">Net maaş (əlinə keçən)</div>
+<div class="val" id="netVal">0 ₼</div>
+</div>
+<div class="breakdown">
+<div class="brow"><span class="l">Brüt maaş</span><span class="v" id="bGross">0 ₼</span></div>
+<div class="brow minus"><span class="l">Gəlir vergisi</span><span class="v" id="bTax">-0 ₼</span></div>
+<div class="brow minus"><span class="l">Sosial sığorta (işçi payı)</span><span class="v" id="bSS">-0 ₼</span></div>
+<div class="brow minus"><span class="l">İcbari tibbi sığorta (işçi payı)</span><span class="v" id="bHI">-0 ₼</span></div>
+</div>
+</div>
+</div>
+
+<p class="note">Hesablama neft-qaz sahəsində fəaliyyəti olmayan, qeyri-dövlət sektoru işçiləri üçün 2026-cı ildən qüvvədə olan dərəcələrə əsaslanır (Vergilər Nazirliyi). Gəlir vergisi dərəcəsi 2500 ₼-dək 3%, 2500–8000 ₼ arası 10%, 8000 ₼-dən yuxarı 14%-dir; sosial sığorta işçi payı ilk 200 ₼-dən 3%, qalanından 10%; icbari tibbi sığorta 2500 ₼-dək 2%, yuxarısında 0.5%. Nəticə məlumat xarakterlidir, dəqiq hesablama üçün mühasiblə əlaqə saxlayın.</p>
+</div>
+</section>
+
+<script>
+function calc(){
+  const g = parseFloat(document.getElementById('gross').value);
+  const resultBox = document.getElementById('result');
+  if(isNaN(g) || g<=0){ resultBox.style.display='none'; return; }
+  resultBox.style.display='block';
+
+  const ss = Math.min(g,200)*0.03 + Math.max(g-200,0)*0.10;
+  const hi = Math.min(g,2500)*0.02 + Math.max(g-2500,0)*0.005;
+  const taxable = Math.max(g - ss - hi, 0);
+
+  let tax;
+  if(taxable <= 2500){ tax = taxable*0.03; }
+  else if(taxable <= 8000){ tax = 75 + (taxable-2500)*0.10; }
+  else { tax = 625 + (taxable-8000)*0.14; }
+
+  const net = g - ss - hi - tax;
+
+  document.getElementById('netVal').textContent = net.toFixed(2) + ' ₼';
+  document.getElementById('bGross').textContent = g.toFixed(2) + ' ₼';
+  document.getElementById('bTax').textContent = '-' + tax.toFixed(2) + ' ₼';
+  document.getElementById('bSS').textContent = '-' + ss.toFixed(2) + ' ₼';
+  document.getElementById('bHI').textContent = '-' + hi.toFixed(2) + ' ₼';
+}
+</script>
+</body>
+</html>
