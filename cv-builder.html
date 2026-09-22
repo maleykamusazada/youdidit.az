@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF8F4; --ink:#1C1B19; --teal:#1F4E4A; --gold:#B8905A;
+    --line:#DBD6CC; --panel:#FFFFFF; --muted:#6B665C;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;}
+  header{padding:28px 32px 20px;border-bottom:1px solid var(--line);}
+  header h1{font-family:'Fraunces',serif;font-weight:600;font-size:28px;margin:0 0 4px;}
+  header p{margin:0;color:var(--muted);font-size:14px;}
+  .wrap{display:flex;gap:28px;padding:28px 32px;max-width:1280px;margin:0 auto;align-items:flex-start;flex-wrap:wrap;}
+  .form-panel{flex:1 1 380px;min-width:320px;}
+  .preview-panel{flex:1 1 480px;min-width:320px;position:sticky;top:28px;}
+  fieldset{border:1px solid var(--line);border-radius:2px;padding:16px 18px;margin:0 0 18px;background:var(--panel);}
+  legend{font-family:'Fraunces',serif;font-size:15px;padding:0 6px;color:var(--teal);}
+  label{display:block;font-size:12.5px;color:var(--muted);margin:10px 0 4px;}
+  input,textarea{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:3px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink);}
+  textarea{resize:vertical;min-height:60px;}
+  .row{display:flex;gap:10px;}
+  .row > div{flex:1;}
+  .item-block{border-left:2px solid var(--line);padding-left:12px;margin-bottom:14px;position:relative;}
+  .remove{position:absolute;right:0;top:0;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;text-decoration:underline;}
+  .add-btn{background:none;border:1px dashed var(--teal);color:var(--teal);padding:7px 12px;border-radius:3px;cursor:pointer;font-size:13px;font-family:inherit;}
+  .add-btn:hover{background:#EEF3F2;}
+  .skills-hint{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  #cv-paper{background:#fff;border:1px solid var(--line);box-shadow:0 2px 14px rgba(0,0,0,.06);padding:44px 40px;min-height:600px;font-family:'Inter',sans-serif;}
+  #cv-paper h2{font-family:'Fraunces',serif;font-size:26px;margin:0 0 2px;}
+  .cv-contact{font-size:13px;color:var(--muted);margin-bottom:18px;}
+  .cv-section{margin-bottom:18px;}
+  .cv-section h3{font-family:'Fraunces',serif;font-size:14px;color:var(--teal);text-transform:none;border-bottom:1px solid var(--line);padding-bottom:4px;margin:0 0 8px;}
+  .cv-entry{margin-bottom:10px;}
+  .cv-entry .top{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600;}
+  .cv-entry .sub{font-size:12.5px;color:var(--muted);margin:1px 0 3px;}
+  .cv-entry p{font-size:13px;margin:0;line-height:1.5;}
+  .cv-skills span{display:inline-block;border:1px solid var(--line);border-radius:3px;padding:2px 8px;font-size:12px;margin:0 5px 5px 0;color:var(--teal);}
+  .empty{color:#B8B2A5;font-style:italic;font-size:13px;}
+  .actions{margin-top:12px;text-align:right;}
+  button.primary{background:var(--teal);color:#fff;border:none;padding:10px 18px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:14px;}
+  button.primary:hover{background:#173C39;}
+  @media print{
+    header,.form-panel,.actions{display:none !important;}
+    .wrap{padding:0;display:block;}
+    .preview-panel{position:static;}
+    #cv-paper{box-shadow:none;border:none;padding:0;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>CV Builder</h1>
+  <p>Məlumatları doldurun, sağda canlı önizləməni izləyin və PDF kimi yükləyin.</p>
+</header>
+
+<div class="wrap">
+  <div class="form-panel">
+    <fieldset>
+      <legend>Şəxsi məlumat</legend>
+      <label>Ad Soyad</label>
+      <input id="f-name" placeholder="Aygün Məmmədova">
+      <div class="row">
+        <div><label>Vəzifə / İstiqamət</label><input id="f-role" placeholder="Marketinq mütəxəssisi"></div>
+      </div>
+      <div class="row">
+        <div><label>E-poçt</label><input id="f-email" placeholder="aygun@example.com"></div>
+        <div><label>Telefon</label><input id="f-phone" placeholder="+994 50 000 00 00"></div>
+      </div>
+      <div class="row">
+        <div><label>Şəhər</label><input id="f-city" placeholder="Bakı"></div>
+        <div><label>LinkedIn / Sayt</label><input id="f-link" placeholder="linkedin.com/in/..."></div>
+      </div>
+      <label>Haqqımda (qısa özət)</label>
+      <textarea id="f-about" placeholder="2 illik təcrübəyə malik, komanda ilə işləməyi bacaran..."></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>Təhsil</legend>
+      <div id="edu-list"></div>
+      <button class="add-btn" onclick="addEdu()">+ Təhsil əlavə et</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>İş təcrübəsi</legend>
+      <div id="exp-list"></div>
+      <button class="add-btn" onclick="addExp()">+ Təcrübə əlavə et</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Bacarıqlar və dillər</legend>
+      <label>Bacarıqlar (vergüllə ayırın)</label>
+      <input id="f-skills" placeholder="Excel, Canva, Layihə idarəetməsi">
+      <label>Dillər (vergüllə ayırın)</label>
+      <input id="f-langs" placeholder="Azərbaycan (Ana dili), İngilis (B2)">
+    </fieldset>
+  </div>
+
+  <div class="preview-panel">
+    <div id="cv-paper"></div>
+    <div class="actions">
+      <button class="primary" onclick="window.print()">PDF kimi yüklə / çap et</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let edu = [{school:'',degree:'',years:''}];
+let exp = [{company:'',title:'',years:'',desc:''}];
+
+function addEdu(){ edu.push({school:'',degree:'',years:''}); renderForm(); }
+function addExp(){ exp.push({company:'',title:'',years:'',desc:''}); renderForm(); }
+function removeEdu(i){ edu.splice(i,1); renderForm(); }
+function removeExp(i){ exp.splice(i,1); renderForm(); }
+
+function renderForm(){
+  const eduHtml = edu.map((e,i)=>`
+    <div class="item-block">
+      ${edu.length>1?`<button class="remove" onclick="removeEdu(${i})">sil</button>`:''}
+      <label>Məktəb/Universitet</label>
+      <input value="${e.school}" oninput="edu[${i}].school=this.value;renderPreview()">
+      <div class="row">
+        <div><label>Dərəcə/İxtisas</label><input value="${e.degree}" oninput="edu[${i}].degree=this.value;renderPreview()"></div>
+        <div><label>İllər</label><input value="${e.years}" placeholder="2020–2024" oninput="edu[${i}].years=this.value;renderPreview()"></div>
+      </div>
+    </div>`).join('');
+  document.getElementById('edu-list').innerHTML = eduHtml;
+
+  const expHtml = exp.map((e,i)=>`
+    <div class="item-block">
+      ${exp.length>1?`<button class="remove" onclick="removeExp(${i})">sil</button>`:''}
+      <label>Şirkət</label>
+      <input value="${e.company}" oninput="exp[${i}].company=this.value;renderPreview()">
+      <div class="row">
+        <div><label>Vəzifə</label><input value="${e.title}" oninput="exp[${i}].title=this.value;renderPreview()"></div>
+        <div><label>İllər</label><input value="${e.years}" placeholder="2022–hazırda" oninput="exp[${i}].years=this.value;renderPreview()"></div>
+      </div>
+      <label>Qısa təsvir</label>
+      <textarea oninput="exp[${i}].desc=this.value;renderPreview()">${e.desc}</textarea>
+    </div>`).join('');
+  document.getElementById('exp-list').innerHTML = expHtml;
+  renderPreview();
+}
+
+function renderPreview(){
+  const name = document.getElementById('f-name').value || 'Ad Soyad';
+  const role = document.getElementById('f-role').value;
+  const email = document.getElementById('f-email').value;
+  const phone = document.getElementById('f-phone').value;
+  const city = document.getElementById('f-city').value;
+  const link = document.getElementById('f-link').value;
+  const about = document.getElementById('f-about').value;
+  const skills = document.getElementById('f-skills').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const langs = document.getElementById('f-langs').value.split(',').map(s=>s.trim()).filter(Boolean);
+
+  const contact = [email,phone,city,link].filter(Boolean).join('  ·  ');
+
+  const eduHtml = edu.filter(e=>e.school||e.degree).map(e=>`
+    <div class="cv-entry">
+      <div class="top"><span>${e.school||''}</span><span>${e.years||''}</span></div>
+      <div class="sub">${e.degree||''}</div>
+    </div>`).join('') || '<p class="empty">Təhsil məlumatı əlavə edin</p>';
+
+  const expHtml = exp.filter(e=>e.company||e.title).map(e=>`
+    <div class="cv-entry">
+      <div class="top"><span>${e.title||''} — ${e.company||''}</span><span>${e.years||''}</span></div>
+      <p>${e.desc||''}</p>
+    </div>`).join('') || '<p class="empty">İş təcrübəsi əlavə edin</p>';
+
+  const skillsHtml = skills.length ? `<div class="cv-skills">${skills.map(s=>`<span>${s}</span>`).join('')}</div>` : '<p class="empty">Bacarıq əlavə edin</p>';
+  const langsHtml = langs.length ? `<div class="cv-skills">${langs.map(s=>`<span>${s}</span>`).join('')}</div>` : '';
+
+  document.getElementById('cv-paper').innerHTML = `
+    <h2>${name}</h2>
+    ${role?`<div style="color:var(--teal);font-size:14px;margin-bottom:6px;">${role}</div>`:''}
+    <div class="cv-contact">${contact}</div>
+    ${about?`<div class="cv-section"><p style="font-size:13px;line-height:1.5;">${about}</p></div>`:''}
+    <div class="cv-section"><h3>Təhsil</h3>${eduHtml}</div>
+    <div class="cv-section"><h3>İş təcrübəsi</h3>${expHtml}</div>
+    <div class="cv-section"><h3>Bacarıqlar</h3>${skillsHtml}</div>
+    ${langs.length?`<div class="cv-section"><h3>Dillər</h3>${langsHtml}</div>`:''}
+  `;
+}
+
+document.querySelectorAll('#f-name,#f-role,#f-email,#f-phone,#f-city,#f-link,#f-about,#f-skills,#f-langs')
+  .forEach(el=>el.addEventListener('input',renderPreview));
+
+renderForm();
+</script>
+</body>
+</html>
