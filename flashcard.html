@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flashcard Aləti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#FAF8F4;--ink:#1C1B19;--teal:#1F4E4A;--gold:#B8905A;--line:#DBD6CC;--panel:#FFFFFF;--muted:#6B665C;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;}
+  header{padding:28px 32px 20px;border-bottom:1px solid var(--line);}
+  header h1{font-family:'Fraunces',serif;font-weight:600;font-size:28px;margin:0 0 4px;}
+  header p{margin:0;color:var(--muted);font-size:14px;}
+  .wrap{max-width:640px;margin:0 auto;padding:32px;}
+  .tabs{display:flex;gap:8px;margin-bottom:18px;}
+  .tab{padding:8px 16px;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13.5px;background:var(--panel);}
+  .tab.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+  #editView fieldset{border:1px solid var(--line);padding:14px 16px;margin-bottom:12px;background:var(--panel);position:relative;}
+  #editView label{display:block;font-size:12px;color:var(--muted);margin:0 0 4px;}
+  #editView input{width:100%;padding:8px 9px;border:1px solid var(--line);border-radius:3px;font-family:inherit;font-size:14px;margin-bottom:8px;}
+  .remove{position:absolute;right:10px;top:10px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;text-decoration:underline;}
+  .add-btn{background:none;border:1px dashed var(--teal);color:var(--teal);padding:8px 14px;border-radius:3px;cursor:pointer;font-size:13.5px;font-family:inherit;}
+  .add-btn:hover{background:#EEF3F2;}
+  #studyView{display:none;text-align:center;}
+  .card-count{font-size:12.5px;color:var(--muted);margin-bottom:14px;}
+  .card{background:var(--panel);border:1px solid var(--line);min-height:220px;display:flex;align-items:center;justify-content:center;padding:30px;cursor:pointer;font-family:'Fraunces',serif;font-size:22px;line-height:1.4;box-shadow:0 2px 14px rgba(0,0,0,.05);}
+  .card .side-label{position:absolute;margin-top:-190px;font-family:'Inter',sans-serif;font-size:11px;color:var(--gold);}
+  .nav{display:flex;justify-content:center;gap:14px;margin-top:16px;}
+  .nav button{background:var(--panel);border:1px solid var(--line);padding:9px 16px;border-radius:3px;cursor:pointer;font-family:inherit;font-size:13.5px;}
+  .nav button:hover{border-color:var(--teal);}
+  .empty{color:var(--muted);font-size:14px;padding:30px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>Flashcard Aləti</h1>
+  <p>Öz kartlarınızı yaradın (sual/termin — cavab), sonra "Öyrən" rejimində təkrarlayın.</p>
+</header>
+
+<div class="wrap">
+  <div class="tabs">
+    <div class="tab active" id="tabEdit" onclick="switchTab('edit')">Kartları redaktə et</div>
+    <div class="tab" id="tabStudy" onclick="switchTab('study')">Öyrən</div>
+  </div>
+
+  <div id="editView">
+    <div id="cardList"></div>
+    <button class="add-btn" onclick="addCard()">+ Kart əlavə et</button>
+  </div>
+
+  <div id="studyView">
+    <div class="card-count" id="cardCount"></div>
+    <div style="position:relative;">
+      <div class="card" id="cardFace" onclick="flip()"></div>
+    </div>
+    <div class="nav">
+      <button onclick="prevCard()">← Əvvəlki</button>
+      <button onclick="flip()">Çevir</button>
+      <button onclick="nextCard()">Növbəti →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let cards = [
+  {front:'', back:''},
+  {front:'', back:''}
+];
+let idx = 0, showBack = false;
+
+function addCard(){ cards.push({front:'',back:''}); renderEdit(); }
+function removeCard(i){ cards.splice(i,1); renderEdit(); }
+
+function renderEdit(){
+  document.getElementById('cardList').innerHTML = cards.map((c,i)=>`
+    <fieldset>
+      ${cards.length>1?`<button class="remove" onclick="removeCard(${i})">sil</button>`:''}
+      <label>Ön üz (sual/termin)</label>
+      <input value="${c.front}" oninput="cards[${i}].front=this.value">
+      <label>Arxa üz (cavab)</label>
+      <input value="${c.back}" oninput="cards[${i}].back=this.value">
+    </fieldset>`).join('');
+}
+
+function switchTab(tab){
+  document.getElementById('tabEdit').classList.toggle('active', tab==='edit');
+  document.getElementById('tabStudy').classList.toggle('active', tab==='study');
+  document.getElementById('editView').style.display = tab==='edit' ? 'block' : 'none';
+  document.getElementById('studyView').style.display = tab==='study' ? 'block' : 'none';
+  if(tab==='study'){ idx=0; showBack=false; renderStudy(); }
+}
+
+function renderStudy(){
+  const valid = cards.filter(c=>c.front.trim());
+  if(valid.length===0){
+    document.getElementById('cardCount').textContent = '';
+    document.getElementById('cardFace').innerHTML = '<span class="empty">Əvvəlcə kart əlavə edin</span>';
+    return;
+  }
+  if(idx>=valid.length) idx=0;
+  document.getElementById('cardCount').textContent = `Kart ${idx+1} / ${valid.length}`;
+  const c = valid[idx];
+  document.getElementById('cardFace').textContent = showBack ? (c.back||'(cavab boşdur)') : c.front;
+}
+
+function flip(){ showBack=!showBack; renderStudy(); }
+function nextCard(){
+  const valid = cards.filter(c=>c.front.trim());
+  if(valid.length===0) return;
+  idx=(idx+1)%valid.length; showBack=false; renderStudy();
+}
+function prevCard(){
+  const valid = cards.filter(c=>c.front.trim());
+  if(valid.length===0) return;
+  idx=(idx-1+valid.length)%valid.length; showBack=false; renderStudy();
+}
+
+renderEdit();
+</script>
+</body>
+</html>
