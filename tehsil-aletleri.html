@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Təhsil Alətləri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF8F4; --ink:#1C1B19; --teal:#1F4E4A; --gold:#B8905A;
+    --line:#DBD6CC; --panel:#FFFFFF; --muted:#6B665C;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;}
+  header{padding:40px 32px 28px;border-bottom:1px solid var(--line);max-width:1100px;margin:0 auto;}
+  header h1{font-family:'Fraunces',serif;font-weight:600;font-size:32px;margin:0 0 6px;}
+  header p{margin:0;color:var(--muted);font-size:15px;max-width:520px;}
+  .grid{max-width:1100px;margin:0 auto;padding:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:22px 22px 20px;display:flex;flex-direction:column;min-height:160px;transition:border-color .15s;}
+  .card.ready:hover{border-color:var(--teal);}
+  .card .icon{font-family:'Fraunces',serif;font-size:22px;color:var(--teal);margin-bottom:10px;}
+  .card h3{font-family:'Fraunces',serif;font-size:18px;margin:0 0 6px;}
+  .card p{font-size:13.5px;color:var(--muted);line-height:1.5;margin:0 0 14px;flex:1;}
+  .card a{align-self:flex-start;text-decoration:none;color:var(--teal);font-size:13.5px;font-weight:600;border-bottom:1px solid var(--teal);padding-bottom:1px;}
+  .card.soon{opacity:.55;}
+  .card.soon .tag{display:inline-block;font-size:11px;color:var(--gold);border:1px solid var(--gold);padding:2px 7px;border-radius:2px;margin-bottom:8px;width:fit-content;}
+</style>
+</head>
+<body>
+<header>
+  <h1>Təhsil Alətləri</h1>
+  <p>CV hazırlamaqdan bilik yoxlamaqadək — təhsil və karyera yolunuzda köməkçi alətlər toplusu.</p>
+</header>
+
+<div class="grid">
+
+  <div class="card ready">
+    <div class="icon">Aa</div>
+    <h3>CV Builder</h3>
+    <p>Məlumatlarınızı doldurun, canlı önizləməyə baxın və hazır CV-nizi PDF kimi yükləyin.</p>
+    <a href="cv-builder.html">Aləti aç →</a>
+  </div>
+
+  <div class="card soon">
+    <div class="tag">Tezliklə</div>
+    <div class="icon">%</div>
+    <h3>GPA Hesablayıcısı</h3>
+    <p>Fənn qiymətlərinizi daxil edin, orta balınızı (GPA) avtomatik hesablayın.</p>
+  </div>
+
+  <div class="card soon">
+    <div class="tag">Tezliklə</div>
+    <div class="icon">?</div>
+    <h3>Karyera Testi</h3>
+    <p>Bir neçə sualla hansı peşə istiqamətinin sizə uyğun olduğunu öyrənin.</p>
+  </div>
+
+  <div class="card soon">
+    <div class="tag">Tezliklə</div>
+    <div class="icon">▤</div>
+    <h3>Flashcard Alət</h3>
+    <p>Öz kartlarınızı yaradın, təkrarlayın, yeni sözləri və terminləri yadda saxlayın.</p>
+  </div>
+
+</div>
+</body>
+</html>
