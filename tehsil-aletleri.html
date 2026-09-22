@@ -2,67 +2,175 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Təhsil Alətləri</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Təhsil Alətləri — Youdidit.az</title>
+<meta name="description" content="Youdidit.az təhsil alətləri: CV Builder, GPA hesablayıcısı, Karyera testi və Flashcard — pulsuz, birbaşa saytda.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --paper:#FAF8F4; --ink:#1C1B19; --teal:#1F4E4A; --gold:#B8905A;
-    --line:#DBD6CC; --panel:#FFFFFF; --muted:#6B665C;
-  }
-  *{box-sizing:border-box;}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;}
-  header{padding:40px 32px 28px;border-bottom:1px solid var(--line);max-width:1100px;margin:0 auto;}
-  header h1{font-family:'Fraunces',serif;font-weight:600;font-size:32px;margin:0 0 6px;}
-  header p{margin:0;color:var(--muted);font-size:15px;max-width:520px;}
-  .grid{max-width:1100px;margin:0 auto;padding:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:22px 22px 20px;display:flex;flex-direction:column;min-height:160px;transition:border-color .15s;}
-  .card.ready:hover{border-color:var(--teal);}
-  .card .icon{font-family:'Fraunces',serif;font-size:22px;color:var(--teal);margin-bottom:10px;}
-  .card h3{font-family:'Fraunces',serif;font-size:18px;margin:0 0 6px;}
-  .card p{font-size:13.5px;color:var(--muted);line-height:1.5;margin:0 0 14px;flex:1;}
-  .card a{align-self:flex-start;text-decoration:none;color:var(--teal);font-size:13.5px;font-weight:600;border-bottom:1px solid var(--teal);padding-bottom:1px;}
-  .card.soon{opacity:.55;}
-  .card.soon .tag{display:inline-block;font-size:11px;color:var(--gold);border:1px solid var(--gold);padding:2px 7px;border-radius:2px;margin-bottom:8px;width:fit-content;}
+:root{--bg:#050713;--bg2:#090b1d;--card:#0d1128;--card2:#111735;--white:#f8f7ff;--muted:#a6adcd;--purple:#7651ff;--purple2:#a454ff;--blue:#397cff;--cyan:#16cfff;--pink:#f653c5;--green:#20d3a3;--orange:#ff8b4d;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.5),transparent),radial-gradient(1px 1px at 25% 70%,rgba(170,140,255,.5),transparent),radial-gradient(1px 1px at 52% 30%,rgba(255,255,255,.4),transparent),radial-gradient(1px 1px at 75% 80%,rgba(170,140,255,.45),transparent),radial-gradient(1px 1px at 92% 40%,rgba(255,255,255,.4),transparent)}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.container{width:min(1180px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-family:'Sora',sans-serif;font-size:23px;font-weight:800;letter-spacing:-1px}
+.logo span{color:#9d65ff}
+.nav-links{display:flex;align-items:center;gap:22px}
+.nav-links a{color:#c2c6df;font-size:12px;font-weight:600;transition:.25s}
+.nav-links a:hover,.nav-links a.active{color:white}
+.nav-button{padding:10px 19px;border-radius:999px;background:linear-gradient(135deg,#6b52ff,#a34eff);font-size:12px;font-weight:800;box-shadow:0 8px 25px rgba(118,81,255,.28);white-space:nowrap}
+.menu-toggle{display:none;width:42px;height:42px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.05);color:white;font-size:21px;cursor:pointer;align-items:center;justify-content:center;transition:.25s}
+.mobile-menu{display:none;padding:10px 0 18px}
+.mobile-menu.active{display:block}
+.mobile-menu a{display:block;padding:13px 15px;margin-top:5px;border-radius:12px;color:#c2c6df;font-size:13px;font-weight:600;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}
+.mobile-menu .mobile-order{margin-top:10px;text-align:center;color:white;background:linear-gradient(135deg,#6b52ff,#a34eff);border-color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 21px;border-radius:14px;font-size:13px;font-weight:800;transition:.3s}
+.btn-primary{background:linear-gradient(135deg,#5d55ff,#a84fff);box-shadow:0 12px 35px rgba(118,81,255,.32)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 45px rgba(118,81,255,.45)}
+.section{padding:60px 0 80px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+.page-head{max-width:700px;margin:0 auto 40px}
+.page-head h1{font-family:'Sora',sans-serif;font-size:clamp(30px,4.5vw,44px);letter-spacing:-1.5px;line-height:1.1}
+.page-head p{color:var(--muted);font-size:14px;line-height:1.7;margin-top:14px;max-width:560px}
+.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.tool-card{position:relative;min-height:225px;padding:22px;display:flex;flex-direction:column;overflow:hidden;border-radius:21px;border:1px solid var(--border);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.015)),var(--card);transition:.35s}
+.tool-card:hover{transform:translateY(-8px);border-color:rgba(151,113,255,.45);box-shadow:0 25px 60px rgba(0,0,0,.35),0 0 35px rgba(118,81,255,.13)}
+.tool-icon{width:47px;height:47px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:linear-gradient(135deg,var(--i1),var(--i2));font-size:21px;margin-bottom:20px}
+.tool-card h3{font-size:15px;margin-bottom:8px}
+.tool-card p{color:#9299ba;font-size:11px;line-height:1.65;flex:1}
+.tool-link{margin-top:14px;color:#b99cff;font-size:10px;font-weight:800}
+.tool-arrow{position:absolute;right:18px;bottom:17px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.07)}
+footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07);margin-top:20px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.footer-brand{font-family:'Sora',sans-serif;font-weight:800}
+.footer-brand span{color:#9b68ff}
+.footer-description{color:#7f86a8;font-size:10px;margin-top:5px}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:17px}
+.footer-links a{color:#9299b9;font-size:10px}
+.footer-links a:hover{color:white}
+@media(max-width:1000px){
+.nav-links{display:none}
+.nav-button{display:none}
+.menu-toggle{display:flex}
+.tools-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:650px){
+.container{width:calc(100% - 24px)}
+.tools-grid{grid-template-columns:1fr}
+.footer-inner{flex-direction:column;text-align:center}
+}
 </style>
 </head>
 <body>
-<header>
-  <h1>Təhsil Alətləri</h1>
-  <p>CV hazırlamaqdan bilik yoxlamaqadək — təhsil və karyera yolunuzda köməkçi alətlər toplusu.</p>
-</header>
 
-<div class="grid">
+<nav class="navbar">
+<div class="container nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<div class="nav-links">
+<a href="index.html">Ana səhifə</a>
+<a href="index.html#exams">İmtahanlar</a>
+<a href="resources.html">Resurslar</a>
+<a href="sinif-testleri.html">Sinif testləri</a>
+<a href="tehsil-aletleri.html" class="active">Təhsil alətləri</a>
+<a href="index.html#services">Xidmətlər</a>
+</div>
+<a href="order.html" class="nav-button">Sifariş et →</a>
+<button class="menu-toggle" id="menuToggle" aria-label="Menyu" aria-expanded="false" type="button">☰</button>
+</div>
+<div class="container mobile-menu" id="mobileMenu">
+<a href="index.html">Ana səhifə</a>
+<a href="index.html#exams">İmtahanlar</a>
+<a href="resources.html">Resurslar</a>
+<a href="sinif-testleri.html">Sinif testləri</a>
+<a href="tehsil-aletleri.html">Təhsil alətləri</a>
+<a href="index.html#services">Xidmətlər</a>
+<a href="order.html" class="mobile-order">Sifariş et →</a>
+</div>
+</nav>
 
-  <div class="card ready">
-    <div class="icon">Aa</div>
-    <h3>CV Builder</h3>
-    <p>Məlumatlarınızı doldurun, canlı önizləməyə baxın və hazır CV-nizi PDF kimi yükləyin.</p>
-    <a href="cv-builder.html">Aləti aç →</a>
-  </div>
+<section class="section">
+<div class="container">
+<div class="page-head">
+<div class="section-label">TƏHSİL ALƏTLƏRİ</div>
+<h1>Hazırlaş, ölç, kəşf et.</h1>
+<p>CV yazmaqdan tutmuş orta balını hesablamağa, karyera istiqamətini tapmağa qədər — pulsuz, birbaşa saytda işləyən köməkçi alətlər.</p>
+</div>
 
-  <div class="card soon">
-    <div class="tag">Tezliklə</div>
-    <div class="icon">%</div>
-    <h3>GPA Hesablayıcısı</h3>
-    <p>Fənn qiymətlərinizi daxil edin, orta balınızı (GPA) avtomatik hesablayın.</p>
-  </div>
+<div class="tools-grid">
 
-  <div class="card soon">
-    <div class="tag">Tezliklə</div>
-    <div class="icon">?</div>
-    <h3>Karyera Testi</h3>
-    <p>Bir neçə sualla hansı peşə istiqamətinin sizə uyğun olduğunu öyrənin.</p>
-  </div>
+<a href="cv-builder.html" class="tool-card" style="--i1:#168cff;--i2:#19cffb;">
+<div class="tool-icon">💼</div>
+<h3>CV Builder</h3>
+<p>Məlumatlarını doldur, canlı önizləməyə bax və hazır CV-ni PDF kimi yüklə.</p>
+<span class="tool-link">Aləti aç →</span>
+<div class="tool-arrow">→</div>
+</a>
 
-  <div class="card soon">
-    <div class="tag">Tezliklə</div>
-    <div class="icon">▤</div>
-    <h3>Flashcard Alət</h3>
-    <p>Öz kartlarınızı yaradın, təkrarlayın, yeni sözləri və terminləri yadda saxlayın.</p>
-  </div>
+<a href="gpa-hesablayici.html" class="tool-card" style="--i1:#18b88e;--i2:#29d8a9;">
+<div class="tool-icon">📊</div>
+<h3>GPA Hesablayıcısı</h3>
+<p>Fənn qiymətlərini və kreditlərini daxil et, orta balın avtomatik hesablansın.</p>
+<span class="tool-link">Aləti aç →</span>
+<div class="tool-arrow">→</div>
+</a>
+
+<a href="karyera-testi.html" class="tool-card" style="--i1:#9d55ff;--i2:#e85cff;">
+<div class="tool-icon">🧭</div>
+<h3>Karyera Testi</h3>
+<p>30 sualla hansı peşə istiqamətinin sənə uyğun olduğunu faizlərlə öyrən.</p>
+<span class="tool-link">Aləti aç →</span>
+<div class="tool-arrow">→</div>
+</a>
+
+<a href="flashcard.html" class="tool-card" style="--i1:#ff793f;--i2:#ffad54;">
+<div class="tool-icon">🗂️</div>
+<h3>Flashcard Alət</h3>
+<p>Öz kartlarını yarat, təkrarla, yeni sözləri və terminləri yadda saxla.</p>
+<span class="tool-link">Aləti aç →</span>
+<div class="tool-arrow">→</div>
+</a>
 
 </div>
+</div>
+</section>
+
+<footer>
+<div class="container footer-inner">
+<div>
+<div class="footer-brand">Youdidit<span>.az</span></div>
+<div class="footer-description">Təhsil • İmtahan • Karyera • İnkişaf</div>
+</div>
+<div class="footer-links">
+<a href="index.html#exams">İmtahanlar</a>
+<a href="resources.html">Resurslar</a>
+<a href="sinif-testleri.html">Testlər</a>
+<a href="tehsil-aletleri.html">Təhsil alətləri</a>
+<a href="order.html">Sifariş</a>
+<a href="mailto:youdidit.az@gmail.com">✉ youdidit.az@gmail.com</a>
+</div>
+</div>
+</footer>
+
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+menuToggle.addEventListener("click", function(){
+  const isOpen = mobileMenu.classList.toggle("active");
+  menuToggle.textContent = isOpen ? "✕" : "☰";
+  menuToggle.setAttribute("aria-expanded", isOpen);
+});
+document.querySelectorAll("#mobileMenu a").forEach(function(link){
+  link.addEventListener("click", function(){
+    mobileMenu.classList.remove("active");
+    menuToggle.textContent = "☰";
+  });
+});
+</script>
 </body>
 </html>
