@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xaricdə Təhsil Büdcəsi — Youdidit.az</title>
+<meta name="description" content="Xaricdə təhsil üçün yaşayış, təhsil haqqı və digər xərcləri hesablayaraq büdcəni planlaşdır.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{width:min(760px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 70px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,36px);letter-spacing:-1px;margin-bottom:10px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:26px;max-width:600px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px}
+.curr-row{display:flex;gap:8px;margin-bottom:20px}
+.curr-btn{flex:1;padding:9px;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--muted);font-size:12.5px;font-weight:700;cursor:pointer;text-align:center}
+.curr-btn.active{background:linear-gradient(135deg,#5d55ff,#a84fff);color:white;border-color:transparent}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:600}
+.input-row{display:flex;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:2px 12px}
+.input-row span{color:var(--muted);font-size:12px;margin-right:6px}
+input[type=number]{flex:1;background:transparent;border:none;outline:none;color:var(--white);font-size:14px;font-family:inherit;padding:10px 0}
+.result{margin-top:24px}
+.total-box{background:linear-gradient(135deg,rgba(93,85,255,.18),rgba(164,79,255,.10));border:1px solid rgba(131,105,255,.28);border-radius:16px;padding:22px;text-align:center}
+.total-box .lbl{font-size:11px;color:#cdbbff;text-transform:uppercase;letter-spacing:1px;font-weight:700}
+.total-box .val{font-family:'Sora',sans-serif;font-size:32px;font-weight:800;margin-top:6px}
+.total-box .sub2{font-size:11.5px;color:var(--muted);margin-top:6px}
+.breakdown{margin-top:18px;border-top:1px solid var(--border);padding-top:14px}
+.brow{display:flex;justify-content:space-between;padding:8px 0;font-size:13px;border-bottom:1px solid rgba(255,255,255,.05)}
+.brow .l{color:var(--muted)}
+.brow .v{font-weight:600}
+.note{margin-top:18px;font-size:11px;color:#7f86a8;line-height:1.7}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">XARİCDƏ TƏHSİL BÜDCƏSİ</div>
+<h1>Nə qədər lazım olacaq?</h1>
+<p class="sub">Təhsil haqqını, aylıq yaşayış xərcini və birdəfəlik ödənişləri daxil et — proqramın tam müddəti üçün təxmini büdcəni gör.</p>
+
+<div class="card">
+<div class="curr-row">
+<div class="curr-btn active" data-c="₼" onclick="setCurr('₼',this)">₼ AZN</div>
+<div class="curr-btn" data-c="$" onclick="setCurr('$',this)">$ USD</div>
+<div class="curr-btn" data-c="€" onclick="setCurr('€',this)">€ EUR</div>
+</div>
+
+<div class="grid2">
+<div class="field">
+<label>Proqramın müddəti (il)</label>
+<div class="input-row"><input type="number" id="years" placeholder="4" min="0" step="0.5" oninput="calc()"></div>
+</div>
+<div class="field">
+<label>İllik təhsil haqqı</label>
+<div class="input-row"><span id="s1">₼</span><input type="number" id="tuition" placeholder="15000" min="0" oninput="calc()"></div>
+</div>
+<div class="field">
+<label>Aylıq yaşayış xərci</label>
+<div class="input-row"><span id="s2">₼</span><input type="number" id="living" placeholder="900" min="0" oninput="calc()"></div>
+</div>
+<div class="field">
+<label>Uçuş / gediş-gəliş (illik)</label>
+<div class="input-row"><span id="s3">₼</span><input type="number" id="flight" placeholder="600" min="0" oninput="calc()"></div>
+</div>
+<div class="field">
+<label>Viza / sığorta (birdəfəlik)</label>
+<div class="input-row"><span id="s4">₼</span><input type="number" id="visa" placeholder="500" min="0" oninput="calc()"></div>
+</div>
+<div class="field">
+<label>Digər birdəfəlik xərclər</label>
+<div class="input-row"><span id="s5">₼</span><input type="number" id="other" placeholder="400" min="0" oninput="calc()"></div>
+</div>
+</div>
+
+<div class="result" id="result" style="display:none;">
+<div class="total-box">
+<div class="lbl">Ümumi təxmini büdcə</div>
+<div class="val" id="totalVal">0</div>
+<div class="sub2" id="totalSub"></div>
+</div>
+<div class="breakdown">
+<div class="brow"><span class="l">Ümumi təhsil haqqı</span><span class="v" id="bTuition">0</span></div>
+<div class="brow"><span class="l">Ümumi yaşayış xərci</span><span class="v" id="bLiving">0</span></div>
+<div class="brow"><span class="l">Ümumi uçuş xərci</span><span class="v" id="bFlight">0</span></div>
+<div class="brow"><span class="l">Birdəfəlik xərclər</span><span class="v" id="bOnce">0</span></div>
+<div class="brow"><span class="l">Aylıq orta büdcə</span><span class="v" id="bMonthly">0</span></div>
+</div>
+</div>
+
+<p class="note">Bu hesablama sənin daxil etdiyin rəqəmlərə əsaslanır, valyuta çevrilməsi aparmır — hər ölkənin cari yaşayış və təhsil xərclərini universitetin rəsmi saytından və ya tələbə forumlarından yoxlamaq tövsiyə olunur.</p>
+</div>
+</div>
+</section>
+
+<script>
+let curr = '₼';
+
+function setCurr(c, btn){
+  curr = c;
+  document.querySelectorAll('.curr-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  ['s1','s2','s3','s4','s5'].forEach(id=>document.getElementById(id).textContent=c);
+  calc();
+}
+
+function calc(){
+  const years = parseFloat(document.getElementById('years').value) || 0;
+  const tuition = parseFloat(document.getElementById('tuition').value) || 0;
+  const living = parseFloat(document.getElementById('living').value) || 0;
+  const flight = parseFloat(document.getElementById('flight').value) || 0;
+  const visa = parseFloat(document.getElementById('visa').value) || 0;
+  const other = parseFloat(document.getElementById('other').value) || 0;
+
+  if(years<=0){ document.getElementById('result').style.display='none'; return; }
+
+  const totalTuition = tuition*years;
+  const totalLiving = living*12*years;
+  const totalFlight = flight*years;
+  const totalOnce = visa+other;
+  const grandTotal = totalTuition+totalLiving+totalFlight+totalOnce;
+  const monthlyAvg = grandTotal/(years*12);
+
+  document.getElementById('result').style.display='block';
+  document.getElementById('totalVal').textContent = curr + grandTotal.toLocaleString('az-AZ',{maximumFractionDigits:0});
+  document.getElementById('totalSub').textContent = years + ' illik proqram üçün';
+  document.getElementById('bTuition').textContent = curr + totalTuition.toLocaleString('az-AZ',{maximumFractionDigits:0});
+  document.getElementById('bLiving').textContent = curr + totalLiving.toLocaleString('az-AZ',{maximumFractionDigits:0});
+  document.getElementById('bFlight').textContent = curr + totalFlight.toLocaleString('az-AZ',{maximumFractionDigits:0});
+  document.getElementById('bOnce').textContent = curr + totalOnce.toLocaleString('az-AZ',{maximumFractionDigits:0});
+  document.getElementById('bMonthly').textContent = curr + monthlyAvg.toLocaleString('az-AZ',{maximumFractionDigits:0});
+}
+</script>
+</body>
+</html>
