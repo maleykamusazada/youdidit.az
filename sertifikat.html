@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diplom / Sertifikat Şablonu — Youdidit.az</title>
+<meta name="description" content="Kurs, tədbir və ya nailiyyət üçün hazır sertifikat şablonundan istifadə et, PNG kimi yüklə.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{width:min(1100px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 70px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,36px);letter-spacing:-1px;margin-bottom:10px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:28px;max-width:600px}
+.wrap{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+.form-panel{flex:1 1 300px;min-width:280px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px}
+.form-panel label{display:block;font-size:12px;color:var(--muted);margin:0 0 6px;font-weight:600}
+.form-panel input,.form-panel select{width:100%;padding:11px 12px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;color:var(--white);font-size:13px;font-family:inherit;margin-bottom:14px;outline:none}
+.tpl-row{display:flex;gap:8px;margin-bottom:16px}
+.tpl-btn{flex:1;padding:9px;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--muted);font-size:11.5px;font-weight:700;cursor:pointer;text-align:center}
+.tpl-btn.active{background:linear-gradient(135deg,#5d55ff,#a84fff);color:white;border-color:transparent}
+.dl-btn{width:100%;padding:13px;border-radius:11px;background:linear-gradient(135deg,#5d55ff,#a84fff);color:white;border:none;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit}
+.preview-panel{flex:2 1 500px;min-width:300px;display:flex;justify-content:center}
+#certWrap{width:100%;max-width:640px;aspect-ratio:1.42/1;position:relative}
+.cert{width:100%;height:100%;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8%;font-family:'Inter',sans-serif;box-sizing:border-box}
+.cert-purple{background:linear-gradient(135deg,#151a3d,#0b0e26);border:10px solid #7651ff;color:#f8f7ff}
+.cert-purple .badge{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#7651ff,#a454ff);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px}
+.cert-gold{background:#FDFBF5;border:10px double #B8905A;color:#2c2620}
+.cert-gold .badge{width:56px;height:56px;border-radius:50%;background:#B8905A;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px}
+.cert-title{font-family:'Playfair Display',serif;font-size:clamp(18px,3.4vw,28px);font-weight:700;margin-bottom:6px}
+.cert-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:18px}
+.cert-name{font-family:'Playfair Display',serif;font-size:clamp(24px,4.6vw,38px);font-weight:700;border-bottom:2px solid currentColor;padding-bottom:6px;margin-bottom:16px;display:inline-block}
+.cert-desc{font-size:clamp(11px,1.6vw,13px);line-height:1.6;max-width:90%;opacity:.85;margin-bottom:20px}
+.cert-footer{display:flex;justify-content:space-between;width:100%;margin-top:auto;font-size:10.5px;opacity:.7}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">DİPLOM / SERTİFİKAT ŞABLONU</div>
+<h1>Nailiyyəti sənədləşdir</h1>
+<p class="sub">Məlumatları doldur, şablonu seç, sağda canlı önizləməyə bax və PNG kimi yüklə.</p>
+
+<div class="wrap">
+<div class="form-panel">
+<label>Şablon</label>
+<div class="tpl-row">
+<div class="tpl-btn active" onclick="setTpl('purple',this)">Mor</div>
+<div class="tpl-btn" onclick="setTpl('gold',this)">Qızılı</div>
+</div>
+
+<label>Alan şəxsin adı</label>
+<input id="cName" placeholder="Aygün Məmmədova" oninput="render()">
+
+<label>Sertifikat başlığı</label>
+<input id="cTitle" placeholder="İştirak Sertifikatı" value="İştirak Sertifikatı" oninput="render()">
+
+<label>Təsvir / səbəb</label>
+<input id="cDesc" placeholder="'Rəqəmsal Marketinq' kursunu uğurla tamamladığına görə" oninput="render()">
+
+<label>Verən təşkilat</label>
+<input id="cOrg" placeholder="Youdidit.az" value="Youdidit.az" oninput="render()">
+
+<label>Tarix</label>
+<input id="cDate" type="date" oninput="render()">
+
+<button class="dl-btn" onclick="download()">PNG kimi yüklə</button>
+</div>
+
+<div class="preview-panel">
+<div id="certWrap">
+<div class="cert cert-purple" id="cert">
+<div class="badge">🏆</div>
+<div class="cert-sub" id="pSub">SERTİFİKAT</div>
+<div class="cert-title" id="pTitle">İştirak Sertifikatı</div>
+<div class="cert-name" id="pName">Ad Soyad</div>
+<div class="cert-desc" id="pDesc">Nailiyyətin təsviri burada görünəcək</div>
+<div class="cert-footer">
+<span id="pOrg">Youdidit.az</span>
+<span id="pDate">—</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<script>
+let currentTpl = 'purple';
+
+function setTpl(tpl, btn){
+  currentTpl = tpl;
+  document.querySelectorAll('.tpl-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const cert = document.getElementById('cert');
+  cert.classList.remove('cert-purple','cert-gold');
+  cert.classList.add(tpl==='gold' ? 'cert-gold' : 'cert-purple');
+}
+
+function render(){
+  document.getElementById('pName').textContent = document.getElementById('cName').value || 'Ad Soyad';
+  document.getElementById('pTitle').textContent = document.getElementById('cTitle').value || 'İştirak Sertifikatı';
+  document.getElementById('pDesc').textContent = document.getElementById('cDesc').value || 'Nailiyyətin təsviri burada görünəcək';
+  document.getElementById('pOrg').textContent = document.getElementById('cOrg').value || 'Youdidit.az';
+  const d = document.getElementById('cDate').value;
+  document.getElementById('pDate').textContent = d ? new Date(d).toLocaleDateString('az-AZ',{year:'numeric',month:'long',day:'numeric'}) : '—';
+}
+
+function download(){
+  html2canvas(document.getElementById('cert'), {scale:3}).then(canvas=>{
+    const link = document.createElement('a');
+    link.download = 'sertifikat.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
+
+render();
+</script>
+</body>
+</html>
