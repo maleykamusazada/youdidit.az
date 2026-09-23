@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universitet Müqayisəsi — Youdidit.az</title>
+<meta name="description" content="Fərqli universitet və proqramları yan-yana müqayisə et — pulsuz, birbaşa saytda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{width:min(1180px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 70px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,36px);letter-spacing:-1px;margin-bottom:10px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:12px;max-width:640px}
+.note{font-size:11px;color:#7f86a8;margin-bottom:22px;line-height:1.6;max-width:640px}
+.scroll-wrap{overflow-x:auto;padding-bottom:8px}
+table{border-collapse:collapse;min-width:100%}
+td,th{padding:12px 14px;border:1px solid var(--border);vertical-align:top}
+.field-col{background:var(--card);color:var(--muted);font-size:12px;font-weight:700;white-space:nowrap;position:sticky;left:0;z-index:2}
+.uni-col{min-width:230px;background:#0a0e24}
+.uni-col input, .uni-col textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;color:var(--white);font-size:12.5px;font-family:inherit;padding:8px 9px;outline:none}
+.uni-col textarea{min-height:50px;resize:vertical}
+.uni-name{font-family:'Sora',sans-serif;font-weight:700;font-size:14px;padding:10px 9px;background:transparent;border:none;border-bottom:2px solid rgba(151,113,255,.4);color:var(--white);width:100%;outline:none}
+.preset-select{width:100%;background:rgba(118,81,255,.1);border:1px solid rgba(151,113,255,.3);border-radius:8px;color:#cdbbff;font-size:11px;font-family:inherit;padding:6px 8px;margin-top:6px;outline:none}
+.remove-col{color:var(--muted);font-size:11px;text-decoration:underline;cursor:pointer;background:none;border:none;font-family:inherit;margin-top:6px}
+.toolbar{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.add-btn{background:none;border:1px dashed #7651ff;color:#b99cff;padding:10px 18px;border-radius:10px;cursor:pointer;font-size:13px;font-family:inherit}
+.add-btn:hover{background:rgba(118,81,255,.08)}
+.print-btn{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--white);padding:10px 18px;border-radius:10px;cursor:pointer;font-size:13px;font-family:inherit}
+@media print{
+  .navbar,.sub,.note,.toolbar,.preset-select{display:none!important}
+  body{background:#fff;color:#000}
+  .field-col{background:#f0f0f0;color:#000}
+  .uni-col{background:#fff}
+  input,textarea{border:none!important;color:#000!important;background:transparent!important}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">UNİVERSİTET MÜQAYİSƏSİ</div>
+<h1>Seçimlərini yan-yana qoy</h1>
+<p class="sub">Nəzərdən keçirdiyin universitet və proqramları əlavə et, meyarları doldur — hansının sənə daha uyğun olduğunu vizual şəkildə gör. Tanınmış universitet seçəndə ad/ölkə/dil avtomatik doldurulur.</p>
+<p class="note">Qeyd: Təhsil haqqı, reytinq və qəbul şərtləri tez-tez dəyişir — bu sahələri hər zaman universitetin rəsmi saytından yoxlayıb özün daxil et.</p>
+
+<div class="scroll-wrap">
+<table id="cmpTable"></table>
+</div>
+
+<div class="toolbar">
+<button class="add-btn" onclick="addUni()">+ Universitet əlavə et</button>
+<button class="print-btn" onclick="window.print()">🖨️ Çap et / PDF kimi saxla</button>
+</div>
+</div>
+</section>
+
+<script>
+const fields = [
+  {key:'country', label:'Ölkə'},
+  {key:'language', label:'Tədris dili'},
+  {key:'tuition', label:'Təhsil haqqı (illik)'},
+  {key:'duration', label:'Müddət'},
+  {key:'admission', label:'Qəbul şərtləri'},
+  {key:'scholarship', label:'Təqaüd / maliyyə yardımı'},
+  {key:'deadline', label:'Müraciət son tarixi'},
+  {key:'ranking', label:'Reytinq / status'},
+  {key:'website', label:'Rəsmi sayt'},
+  {key:'notes', label:'Qeydlər'}
+];
+
+const presets = [
+  {name:'Bakı Dövlət Universiteti (BDU)', country:'Azərbaycan', language:'Azərbaycan / İngilis', website:'bsu.edu.az'},
+  {name:'ADA Universiteti', country:'Azərbaycan', language:'İngilis', website:'ada.edu.az'},
+  {name:'UNEC', country:'Azərbaycan', language:'Azərbaycan / İngilis', website:'unec.edu.az'},
+  {name:'Xəzər Universiteti', country:'Azərbaycan', language:'Azərbaycan / İngilis', website:'khazar.org'},
+  {name:'Bakı Ali Neft Məktəbi (BANM)', country:'Azərbaycan', language:'İngilis', website:'bhos.edu.az'},
+  {name:'Azərbaycan Dövlət İqtisad Universiteti', country:'Azərbaycan', language:'Azərbaycan / İngilis', website:'unec.edu.az'},
+  {name:'Harvard University', country:'ABŞ', language:'İngilis', website:'harvard.edu'},
+  {name:'University of Oxford', country:'Böyük Britaniya', language:'İngilis', website:'ox.ac.uk'},
+  {name:'University of Cambridge', country:'Böyük Britaniya', language:'İngilis', website:'cam.ac.uk'},
+  {name:'Technical University of Munich', country:'Almaniya', language:'Alman / İngilis', website:'tum.de'},
+  {name:'Sorbonne University', country:'Fransa', language:'Fransız', website:'sorbonne-universite.fr'},
+  {name:'Boğaziçi Universiteti', country:'Türkiyə', language:'Türk / İngilis', website:'boun.edu.tr'},
+  {name:'İstanbul Texniki Universitet (İTÜ)', country:'Türkiyə', language:'Türk / İngilis', website:'itu.edu.tr'},
+  {name:'KAIST', country:'Cənubi Koreya', language:'İngilis', website:'kaist.ac.kr'},
+  {name:'National University of Singapore', country:'Sinqapur', language:'İngilis', website:'nus.edu.sg'}
+];
+
+let unis = [
+  {name:'Universitet 1', country:'', language:'', tuition:'', duration:'', admission:'', scholarship:'', deadline:'', ranking:'', website:'', notes:''},
+  {name:'Universitet 2', country:'', language:'', tuition:'', duration:'', admission:'', scholarship:'', deadline:'', ranking:'', website:'', notes:''}
+];
+
+function blankUni(n){
+  return {name:'Universitet ' + n, country:'', language:'', tuition:'', duration:'', admission:'', scholarship:'', deadline:'', ranking:'', website:'', notes:''};
+}
+
+function addUni(){
+  unis.push(blankUni(unis.length+1));
+  render();
+}
+
+function removeUni(i){
+  unis.splice(i,1);
+  render();
+}
+
+function applyPreset(i, idx){
+  if(idx==='') return;
+  const p = presets[idx];
+  unis[i].name = p.name;
+  unis[i].country = p.country;
+  unis[i].language = p.language;
+  unis[i].website = p.website;
+  render();
+}
+
+function render(){
+  const table = document.getElementById('cmpTable');
+  let html = '<tr><td class="field-col">Universitet</td>' + unis.map((u,i)=>`
+    <td class="uni-col">
+      <input class="uni-name" value="${u.name}" oninput="unis[${i}].name=this.value">
+      <select class="preset-select" onchange="applyPreset(${i}, this.value)">
+        <option value="">— Sürətli seç —</option>
+        ${presets.map((p,pi)=>`<option value="${pi}">${p.name}</option>`).join('')}
+      </select>
+      ${unis.length>2?`<div><button class="remove-col" onclick="removeUni(${i})">sil</button></div>`:''}
+    </td>`).join('') + '</tr>';
+
+  fields.forEach(f=>{
+    html += `<tr><td class="field-col">${f.label}</td>` + unis.map((u,i)=>{
+      const isLong = f.key==='admission' || f.key==='notes';
+      return `<td class="uni-col">${isLong
+        ? `<textarea oninput="unis[${i}].${f.key}=this.value">${u[f.key]}</textarea>`
+        : `<input value="${u[f.key]}" oninput="unis[${i}].${f.key}=this.value">`}</td>`;
+    }).join('') + '</tr>';
+  });
+
+  table.innerHTML = html;
+}
+
+render();
+</script>
+</body>
+</html>
