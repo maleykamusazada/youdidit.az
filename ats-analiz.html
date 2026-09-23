@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATS CV Analizi — Youdidit.az</title>
+<meta name="description" content="CV-ni iş elanı ilə müqayisə et, ATS uyğunluq faizini və çatışmayan açar sözləri gör.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10);--green:#20d3a3;--red:#ff6f6f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{width:min(820px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 70px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,36px);letter-spacing:-1px;margin-bottom:10px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:26px;max-width:600px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:600}
+textarea{width:100%;min-height:190px;padding:13px 14px;background:var(--card);border:1px solid var(--border);border-radius:14px;color:var(--white);font-size:13px;font-family:inherit;outline:none;resize:vertical;line-height:1.6}
+.analyze-btn{width:100%;padding:14px;border-radius:14px;background:linear-gradient(135deg,#5d55ff,#a84fff);color:white;border:none;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;margin-top:6px}
+.analyze-btn:hover{transform:translateY(-2px)}
+#result{display:none;margin-top:30px}
+.score-box{text-align:center;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px}
+.score-ring{font-family:'Sora',sans-serif;font-size:44px;font-weight:800}
+.score-lbl{font-size:12px;color:var(--muted);margin-top:4px}
+.bar-track{height:8px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-top:16px}
+.bar-fill{height:100%;background:linear-gradient(90deg,#5d55ff,#a84fff);transition:width .4s}
+.kw-section{margin-top:22px}
+.kw-title{font-size:12.5px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.kw-list{display:flex;flex-wrap:wrap;gap:7px}
+.kw-tag{padding:6px 11px;border-radius:999px;font-size:11.5px;font-weight:600}
+.kw-tag.match{background:rgba(32,211,163,.14);border:1px solid rgba(32,211,163,.35);color:var(--green)}
+.kw-tag.missing{background:rgba(255,111,111,.12);border:1px solid rgba(255,111,111,.32);color:var(--red)}
+.tips{margin-top:26px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 22px}
+.tips h3{font-size:13.5px;margin-bottom:12px}
+.tips ul{padding-left:18px;color:var(--muted);font-size:12.5px;line-height:1.9}
+.note{margin-top:16px;font-size:11px;color:#7f86a8;line-height:1.7}
+@media(max-width:650px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">ATS CV ANALİZİ</div>
+<h1>CV-n iş elanına nə qədər uyğundur?</h1>
+<p class="sub">İş elanının mətnini və CV-nin mətnini yapışdır — sistem açar sözləri müqayisə edib uyğunluq faizini və çatışmayan sözləri göstərəcək.</p>
+
+<div class="grid2">
+<div class="field">
+<label>İş elanının mətni</label>
+<textarea id="jobText" placeholder="İş elanının tam mətnini bura yapışdırın..."></textarea>
+</div>
+<div class="field">
+<label>CV-nin mətni</label>
+<textarea id="cvText" placeholder="CV-nizin mətnini bura yapışdırın (Word/PDF-dən kopyalayıb yapışdıra bilərsiniz)..."></textarea>
+</div>
+</div>
+
+<button class="analyze-btn" onclick="analyze()">Analiz et</button>
+
+<div id="result">
+<div class="score-box">
+<div class="score-ring" id="scoreVal">0%</div>
+<div class="score-lbl">Açar söz uyğunluğu</div>
+<div class="bar-track"><div class="bar-fill" id="scoreBar" style="width:0%"></div></div>
+</div>
+
+<div class="kw-section">
+<div class="kw-title">✅ CV-də tapılan açar sözlər</div>
+<div class="kw-list" id="matchList"></div>
+</div>
+
+<div class="kw-section">
+<div class="kw-title">⚠️ CV-də çatışmayan açar sözlər</div>
+<div class="kw-list" id="missList"></div>
+</div>
+
+<div class="tips">
+<h3>📋 ATS-dostu CV üçün ümumi tövsiyələr</h3>
+<ul>
+<li>Cədvəl, şəkil, sütun (column) düzənindən çəkin — ATS sistemləri onları düzgün oxuya bilmir.</li>
+<li>Standart bölmə başlıqlarından istifadə et: "Təhsil", "İş Təcrübəsi", "Bacarıqlar".</li>
+<li>Elandakı açar sözləri (bacarıq, vəzifə adı) öz təcrübəni düzgün əks etdirən yerlərdə CV-nə daxil et.</li>
+<li>Faylı .docx və ya sadə formatlı .pdf kimi saxla, şəkil/skan formatında göndərmə.</li>
+<li>Əlaqə məlumatını header/footer-də deyil, sənədin əsas mətnində yerləşdir.</li>
+</ul>
+</div>
+
+<p class="note">Bu alət sadə açar söz müqayisəsinə əsaslanır və real ATS sistemlərinin tam əvəzi deyil — hər şirkətin öz alqoritmi var. Nəticəni ümumi istiqamət kimi qəbul et.</p>
+</div>
+</div>
+</section>
+
+<script>
+const stopwords = new Set(["və","ilə","üçün","bu","bir","olan","kimi","çox","hər","artıq","da","də","ki","nə","ya","və ya","olaraq","üzrə","daxil","əsasən","ən","ona","onun","bizim","sizin","işə","işi","işin","olur","edir","edən","olmaq","etmək","var","yoxdur","the","and","for","with","are","this","that","will","have","from"]);
+
+function extractWords(text){
+  return (text.toLowerCase().match(/[a-zçəğıöşü]{4,}/gi) || []);
+}
+
+function stem(w){ return w.slice(0, Math.min(6, w.length)); }
+
+function analyze(){
+  const jobText = document.getElementById('jobText').value;
+  const cvText = document.getElementById('cvText').value;
+  if(!jobText.trim() || !cvText.trim()){
+    alert('Zəhmət olmasa hər iki xananı doldurun.');
+    return;
+  }
+
+  const jobWords = extractWords(jobText).filter(w=>!stopwords.has(w));
+  const freq = {};
+  jobWords.forEach(w=>{ freq[w]=(freq[w]||0)+1; });
+  const topKeywords = Object.keys(freq).sort((a,b)=>freq[b]-freq[a]).slice(0,20);
+
+  const cvWords = extractWords(cvText);
+  const cvStems = new Set(cvWords.map(stem));
+
+  const matched = [];
+  const missing = [];
+  topKeywords.forEach(kw=>{
+    if(cvStems.has(stem(kw))) matched.push(kw); else missing.push(kw);
+  });
+
+  const pct = topKeywords.length ? Math.round(matched.length/topKeywords.length*100) : 0;
+
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('scoreVal').textContent = pct + '%';
+  document.getElementById('scoreBar').style.width = pct + '%';
+  document.getElementById('matchList').innerHTML = matched.length ? matched.map(w=>`<span class="kw-tag match">${w}</span>`).join('') : '<span style="color:var(--muted);font-size:12px;">Uyğun söz tapılmadı</span>';
+  document.getElementById('missList').innerHTML = missing.length ? missing.map(w=>`<span class="kw-tag missing">${w}</span>`).join('') : '<span style="color:var(--muted);font-size:12px;">Çatışmayan söz yoxdur 🎉</span>';
+
+  document.getElementById('result').scrollIntoView({behavior:'smooth', block:'start'});
+}
+</script>
+</body>
+</html>
