@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gündəlik Motivasiya — Youdidit.az</title>
+<meta name="description" content="Hər gün yeni bir sitatla ruhlandırıcı başlanğıc. Gündəlik motivasiya sitatları, sevimlilərə əlavə et və paylaş.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.container{width:min(760px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 80px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px;text-align:center}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,34px);letter-spacing:-1px;margin-bottom:10px;text-align:center}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin:0 auto 34px;max-width:520px;text-align:center}
+
+.quote-card{position:relative;padding:52px 36px;border-radius:24px;background:var(--card);border:1px solid var(--border);text-align:center;overflow:hidden;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.quote-glow{position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(118,81,255,.22),transparent 60%);pointer-events:none}
+.quote-mark{font-family:'Playfair Display',serif;font-size:54px;color:#7651ff;line-height:1;margin-bottom:6px}
+.quote-text{font-family:'Playfair Display',serif;font-size:clamp(20px,3.4vw,28px);font-weight:600;line-height:1.5;max-width:560px;position:relative}
+.quote-tag{margin-top:18px;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#9d76ff;position:relative}
+.date-badge{display:inline-block;margin-bottom:18px;font-size:11px;font-weight:700;color:var(--muted);padding:6px 14px;border-radius:999px;border:1px solid var(--border);position:relative}
+
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;justify-content:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border:1px solid var(--border);border-radius:12px;font-size:12.5px;font-weight:800;cursor:pointer;background:rgba(255,255,255,.03);color:var(--white);transition:transform .15s ease, background .15s ease}
+.btn:active{transform:scale(.96)}
+.btn-primary{background:linear-gradient(135deg,#5d55ff,#a84fff);border:none}
+.btn-fav.active{background:linear-gradient(135deg,#ff5d8f,#ff9d5d);border:none}
+
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:#171b36;border:1px solid var(--border);padding:12px 20px;border-radius:12px;font-size:12.5px;font-weight:700;opacity:0;pointer-events:none;transition:all .25s ease;z-index:2000}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.fav-box{margin-top:56px;padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--border)}
+.fav-box h3{font-size:13px;margin-bottom:14px}
+.fav-empty{color:var(--muted);font-size:12.5px}
+.fav-item{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
+.fav-item:last-child{border-bottom:none}
+.fav-item p{font-size:13px;line-height:1.6;font-family:'Playfair Display',serif}
+.fav-item button{flex:none;background:none;border:none;color:#ff8fa8;font-size:11px;font-weight:800;cursor:pointer}
+
+.cat-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px}
+.cat{padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.03);font-size:11.5px;font-weight:700;cursor:pointer;color:var(--muted)}
+.cat.active{border-color:rgba(155,117,255,.6);background:rgba(118,81,255,.16);color:var(--white)}
+
+footer{padding:28px 0;border-top:1px solid rgba(255,255,255,.07);text-align:center;color:#7f86a8;font-size:11px}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">İNTERAKTİV ALƏT</div>
+<h1>💬 Gündəlik Motivasiya</h1>
+<p class="sub">Hər gün yeni bir sitatla ruhlandırıcı başlanğıc. Bugünkü sitatı oxu, sevimlilərinə əlavə et və ya dostunla paylaş.</p>
+
+<div class="cat-row" id="catRow"></div>
+
+<div class="quote-card">
+<div class="quote-glow"></div>
+<div class="date-badge" id="dateBadge">27 sentyabr 2026</div>
+<div class="quote-mark">"</div>
+<div class="quote-text" id="quoteText">Yüklənir...</div>
+<div class="quote-tag" id="quoteTag">UĞUR</div>
+</div>
+
+<div class="actions">
+<button class="btn btn-primary" onclick="newQuote()">🔄 Yeni sitat</button>
+<button class="btn btn-fav" id="favBtn" onclick="toggleFav()">🤍 Sevimlilərə əlavə et</button>
+<button class="btn" onclick="copyQuote()">📋 Kopyala</button>
+<button class="btn" onclick="shareQuote()">↗️ Paylaş</button>
+</div>
+
+<div class="fav-box">
+<h3>⭐ Sevimli Sitatların (<span id="favCount">0</span>)</h3>
+<div id="favList"><p class="fav-empty">Hələ sevimli sitat yoxdur. Bəyəndiyin sitatı "Sevimlilərə əlavə et" düyməsi ilə buraya əlavə et.</p></div>
+</div>
+
+</div>
+</section>
+
+<footer>Youdidit.az — Təhsil • İmtahan • Karyera • İnkişaf</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const QUOTES = [
+  {t:"Böyük addımlar kiçik qərarlarla başlayır — bu gün at ilk addımı.", c:"Başlanğıc"},
+  {t:"Yorulmaq normaldır, dayanmaq sənin seçimindir.", c:"Əzmkarlıq"},
+  {t:"Müvəffəqiyyət tələsik gəlmir, davamlı səydən doğulur.", c:"Uğur"},
+  {t:"Bugünkü səyin, sabahkı sənin ən böyük dəstəyindir.", c:"Əzmkarlıq"},
+  {t:"Qorxu addımını gecikdirə bilər, amma səni dayandıra bilməz.", c:"Cəsarət"},
+  {t:"Kiçik irəliləyişlər də irəliləyişdir — özünə səbirli ol.", c:"Səbir"},
+  {t:"Ən çətin gün belə, öyrənmək üçün bir fürsətdir.", c:"Öyrənmə"},
+  {t:"Sən düşündüyündən daha güclüsən, sadəcə hələ sınamamısan.", c:"Güc"},
+  {t:"Bugünkü intizam, sabahkı azadlığın açarıdır.", c:"Karyera"},
+  {t:"Hədəfin böyük olsun, amma addımların sabit olsun.", c:"Hədəf"},
+  {t:"Uğursuzluq son deyil — sadəcə yolun bir dönəməcidir.", c:"Uğur"},
+  {t:"Özünə inam, bacarığından əvvəl gələn ilk vasitədir.", c:"İnam"},
+  {t:"Hər səhər yeni bir imkandır — onu dəyərləndir.", c:"Başlanğıc"},
+  {t:"Vaxtını təxirə salmağa yox, irəliləməyə həsr et.", c:"Əzmkarlıq"},
+  {t:"Kiçik vərdişlər zaman keçdikcə böyük dəyişikliklərə çevrilir.", c:"İnkişaf"},
+  {t:"Rahatlıq zonandan çıxmadan, potensialını heç vaxt tanımayacaqsan.", c:"Cəsarət"},
+  {t:"Bilik toplamaq deyil, onu tətbiq etmək güc yaradır.", c:"Öyrənmə"},
+  {t:"Yolun uzun olsa da, hər addım səni məqsədə yaxınlaşdırır.", c:"Hədəf"},
+  {t:"Ən yaxşı zaman başlamaq üçün — elə bu andır.", c:"Başlanğıc"},
+  {t:"Özünlə müqayisə et: dünənki səndən bir addım öndə ol.", c:"İnkişaf"},
+  {t:"Səbr acı, meyvəsi şirindir.", c:"Səbir"},
+  {t:"Çətinliklər səni sındırmaq üçün deyil, formalaşdırmaq üçün gəlir.", c:"Güc"},
+  {t:"Planın olmasa belə, istiqamətin olsun — yol özü göstərəcək.", c:"Hədəf"},
+  {t:"Hər uğurun arxasında saysız-hesabsız sakit səylər dayanır.", c:"Uğur"},
+  {t:"Özünə qarşı mehriban ol, amma məqsədinə qarşı ciddi qal.", c:"İnam"},
+  {t:"Karyerada irəliləmək, hər gün bir az daha yaxşı olmaqla başlayır.", c:"Karyera"},
+  {t:"Bacarmadığın deyil, hələ öyrənmədiyin şeylər var.", c:"Öyrənmə"},
+  {t:"Enerjini şikayətə deyil, həllə yönəlt.", c:"Əzmkarlıq"},
+  {t:"Böyük xəyallar, kiçik gündəlik addımlarla reallaşır.", c:"İnkişaf"},
+  {t:"Sən öz hekayənin müəllifisən — bugünkü səhifəni yaxşı yaz.", c:"İnam"}
+];
+
+let activeCat = 'Hamısı';
+let currentIndex = 0;
+let favorites = [];
+
+function loadFavorites(){
+  try{
+    const raw = localStorage.getItem('youdidit_fav_quotes');
+    favorites = raw ? JSON.parse(raw) : [];
+  }catch(e){ favorites = []; }
+}
+function saveFavorites(){
+  try{ localStorage.setItem('youdidit_fav_quotes', JSON.stringify(favorites)); }catch(e){}
+}
+
+function buildCats(){
+  const cats = ['Hamısı', ...new Set(QUOTES.map(q=>q.c))];
+  const row = document.getElementById('catRow');
+  row.innerHTML = '';
+  cats.forEach(c=>{
+    const el = document.createElement('div');
+    el.className = 'cat' + (c===activeCat?' active':'');
+    el.textContent = c;
+    el.onclick = () => { activeCat = c; buildCats(); newQuote(); };
+    row.appendChild(el);
+  });
+}
+
+function filteredQuotes(){
+  return activeCat==='Hamısı' ? QUOTES : QUOTES.filter(q=>q.c===activeCat);
+}
+
+function renderQuote(){
+  const list = filteredQuotes();
+  const q = list[currentIndex % list.length];
+  document.getElementById('quoteText').textContent = q.t;
+  document.getElementById('quoteTag').textContent = q.c.toUpperCase();
+  updateFavBtn(q);
+}
+
+function newQuote(){
+  const list = filteredQuotes();
+  let next = Math.floor(Math.random()*list.length);
+  if(list.length>1){
+    const currentText = document.getElementById('quoteText').textContent;
+    while(list[next].t === currentText){ next = Math.floor(Math.random()*list.length); }
+  }
+  currentIndex = next;
+  renderQuote();
+}
+
+function currentQuoteObj(){
+  const list = filteredQuotes();
+  return list[currentIndex % list.length];
+}
+
+function updateFavBtn(q){
+  const btn = document.getElementById('favBtn');
+  const isFav = favorites.some(f=>f.t===q.t);
+  btn.classList.toggle('active', isFav);
+  btn.innerHTML = isFav ? '💖 Sevimlilərdədir' : '🤍 Sevimlilərə əlavə et';
+}
+
+function toggleFav(){
+  const q = currentQuoteObj();
+  const idx = favorites.findIndex(f=>f.t===q.t);
+  if(idx>-1){ favorites.splice(idx,1); showToast('Sevimlilərdən silindi'); }
+  else { favorites.unshift(q); showToast('Sevimlilərə əlavə edildi'); }
+  saveFavorites();
+  updateFavBtn(q);
+  renderFavList();
+}
+
+function removeFav(t){
+  favorites = favorites.filter(f=>f.t!==t);
+  saveFavorites();
+  renderFavList();
+  updateFavBtn(currentQuoteObj());
+}
+
+function renderFavList(){
+  const box = document.getElementById('favList');
+  document.getElementById('favCount').textContent = favorites.length;
+  if(favorites.length===0){
+    box.innerHTML = '<p class="fav-empty">Hələ sevimli sitat yoxdur. Bəyəndiyin sitatı "Sevimlilərə əlavə et" düyməsi ilə buraya əlavə et.</p>';
+    return;
+  }
+  box.innerHTML = '';
+  favorites.forEach(f=>{
+    const row = document.createElement('div');
+    row.className = 'fav-item';
+    const p = document.createElement('p');
+    p.textContent = '"' + f.t + '" — ' + f.c;
+    const btn = document.createElement('button');
+    btn.textContent = 'Sil';
+    btn.onclick = () => removeFav(f.t);
+    row.appendChild(p); row.appendChild(btn);
+    box.appendChild(row);
+  });
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(()=>t.classList.remove('show'), 1800);
+}
+
+function copyQuote(){
+  const q = currentQuoteObj();
+  const text = '"' + q.t + '" — Youdidit.az';
+  navigator.clipboard.writeText(text).then(()=> showToast('Sitat kopyalandı')).catch(()=> showToast('Kopyalama alınmadı'));
+}
+
+function shareQuote(){
+  const q = currentQuoteObj();
+  const text = '"' + q.t + '" — Youdidit.az';
+  if(navigator.share){
+    navigator.share({text}).catch(()=>{});
+  } else {
+    copyQuote();
+  }
+}
+
+function setDate(){
+  const now = new Date();
+  const months = ['yanvar','fevral','mart','aprel','may','iyun','iyul','avqust','sentyabr','oktyabr','noyabr','dekabr'];
+  document.getElementById('dateBadge').textContent = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  // pick today's quote deterministically based on day-of-year
+  const start = new Date(now.getFullYear(),0,0);
+  const diff = now - start;
+  const dayOfYear = Math.floor(diff / 86400000);
+  currentIndex = dayOfYear % QUOTES.length;
+}
+
+loadFavorites();
+buildCats();
+setDate();
+renderQuote();
+renderFavList();
+</script>
+</body>
+</html>
