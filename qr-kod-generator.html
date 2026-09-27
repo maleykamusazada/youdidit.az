@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Kod Generator — Youdidit.az</title>
+<meta name="description" content="CV-nə, portfolion linkinə və ya LinkedIn profilinə QR kod yarat və PNG kimi yüklə.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button,input,select{font-family:inherit}
+.container{width:min(1080px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 80px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,34px);letter-spacing:-1px;margin-bottom:10px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:26px;max-width:600px}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.box{padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--border)}
+.box h3{font-size:13px;margin-bottom:14px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11.5px;font-weight:700;color:#d9dcef;margin-bottom:6px}
+.field input[type=text],.field input[type=url]{width:100%;padding:11px 13px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:11px;color:var(--white);font-size:13px}
+.field input:focus{outline:none;border-color:rgba(155,117,255,.5)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.color-field{display:flex;align-items:center;gap:10px;padding:6px 12px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:11px}
+.color-field input[type=color]{width:34px;height:34px;border:none;background:none;padding:0;cursor:pointer}
+.color-field span{font-size:12px;color:var(--muted)}
+.tmpl-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tmpl{flex:1 1 45%;padding:11px 6px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.03);text-align:center;cursor:pointer;font-size:11.5px;font-weight:700}
+.tmpl.active{border-color:rgba(155,117,255,.6);background:rgba(118,81,255,.14)}
+
+.preview-wrap{position:sticky;top:80px;padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--border);text-align:center}
+.qr-frame{display:inline-block;padding:18px;border-radius:16px;margin-bottom:16px}
+#qrbox{display:inline-block;line-height:0;border-radius:8px;overflow:hidden}
+.qr-hint{font-size:11.5px;color:var(--muted);margin-bottom:16px;min-height:16px}
+.dl-row{display:flex;gap:10px}
+.btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px;border:none;border-radius:12px;font-size:12.5px;font-weight:800;cursor:pointer}
+.btn-png{background:linear-gradient(135deg,#5d55ff,#a84fff);color:white}
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--white);border:1px solid var(--border)}
+
+footer{padding:28px 0;border-top:1px solid rgba(255,255,255,.07);text-align:center;color:#7f86a8;font-size:11px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.preview-wrap{position:static}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">SƏNƏD ALƏTİ</div>
+<h1>📱 QR Kod Generator</h1>
+<p class="sub">CV-nə, portfolion linkinə və ya LinkedIn profilinə QR kod yarat, rəngini seç və PNG kimi yüklə.</p>
+
+<div class="layout">
+<div>
+<div class="box">
+<h3>🎨 Fon üslubu</h3>
+<div class="tmpl-row">
+<div class="tmpl active" data-t="light" onclick="selectStyle('light')">Ağ fon</div>
+<div class="tmpl" data-t="dark" onclick="selectStyle('dark')">Tünd fon</div>
+</div>
+
+<h3>🔗 Məlumat</h3>
+<div class="field">
+<label>Link və ya mətn</label>
+<input type="text" id="fData" value="https://youdidit.az" oninput="scheduleUpdate()">
+</div>
+
+<h3>⚙️ Ayarlar</h3>
+<div class="grid2">
+<div class="field">
+<label>QR rəngi</label>
+<div class="color-field">
+<input type="color" id="fColor" value="#0d1128" oninput="scheduleUpdate()">
+<span>QR rəngi</span>
+</div>
+</div>
+<div class="field">
+<label>Arxa fon rəngi</label>
+<div class="color-field">
+<input type="color" id="fBg" value="#ffffff" oninput="scheduleUpdate()">
+<span>Arxa fon</span>
+</div>
+</div>
+</div>
+<div class="field">
+<label>Ölçü (piksel)</label>
+<input type="text" id="fSize" value="320" oninput="scheduleUpdate()">
+</div>
+</div>
+</div>
+
+<div class="preview-wrap">
+<div class="qr-frame" id="qrFrame">
+<div id="qrbox"></div>
+</div>
+<div class="qr-hint" id="qrHint"></div>
+<div class="dl-row">
+<button class="btn btn-png" onclick="downloadPNG()">⬇️ PNG yüklə</button>
+<button class="btn btn-ghost" onclick="copyLink()">📋 Linki kopyala</button>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer>Youdidit.az — Təhsil • İmtahan • Karyera • İnkişaf</footer>
+
+<script>
+let qr = null;
+let updateTimer = null;
+
+function scheduleUpdate(){
+  clearTimeout(updateTimer);
+  updateTimer = setTimeout(renderQR, 120);
+}
+
+function selectStyle(t){
+  document.querySelectorAll('.tmpl').forEach(el => el.classList.toggle('active', el.dataset.t === t));
+  if(t === 'light'){
+    document.getElementById('fColor').value = '#0d1128';
+    document.getElementById('fBg').value = '#ffffff';
+  } else {
+    document.getElementById('fColor').value = '#f8f7ff';
+    document.getElementById('fBg').value = '#0d1128';
+  }
+  renderQR();
+}
+
+function renderQR(){
+  const box = document.getElementById('qrbox');
+  const hint = document.getElementById('qrHint');
+  const data = document.getElementById('fData').value.trim();
+  const color = document.getElementById('fColor').value;
+  const bg = document.getElementById('fBg').value;
+  let size = parseInt(document.getElementById('fSize').value, 10);
+  if(!size || size < 100) size = 100;
+  if(size > 800) size = 800;
+
+  box.innerHTML = '';
+  document.getElementById('qrFrame').style.background = bg;
+
+  if(!data){
+    hint.textContent = 'Linki və ya mətni daxil et.';
+    return;
+  }
+
+  try{
+    qr = new QRCode(box, {
+      text: data,
+      width: size,
+      height: size,
+      colorDark: color,
+      colorLight: bg,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+    hint.textContent = data.length > 46 ? data.slice(0,46) + '…' : data;
+  }catch(e){
+    hint.textContent = 'QR kod yaradıla bilmədi, məlumatı yoxla.';
+  }
+}
+
+function downloadPNG(){
+  const canvasEl = document.querySelector('#qrbox canvas');
+  if(!canvasEl){ return; }
+  const bg = document.getElementById('fBg').value;
+  // compose with padding + background so downloaded PNG matches the preview frame
+  const pad = 24;
+  const out = document.createElement('canvas');
+  out.width = canvasEl.width + pad*2;
+  out.height = canvasEl.height + pad*2;
+  const octx = out.getContext('2d');
+  octx.fillStyle = bg;
+  octx.fillRect(0,0,out.width,out.height);
+  octx.drawImage(canvasEl, pad, pad);
+
+  const link = document.createElement('a');
+  link.download = 'qr-kod.png';
+  link.href = out.toDataURL('image/png');
+  link.click();
+}
+
+function copyLink(){
+  const data = document.getElementById('fData').value.trim();
+  if(!data) return;
+  navigator.clipboard.writeText(data).catch(()=>{});
+}
+
+renderQR();
+</script>
+</body>
+</html>
