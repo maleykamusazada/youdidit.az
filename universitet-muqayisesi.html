@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universitet Müqayisəsi — Youdidit.az</title>
+<meta name="description" content="Fərqli universitetləri yan-yana müqayisə et — ölkə, təhsil haqqı, dil və daha çoxu üzrə.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button,input,select{font-family:inherit}
+.container{width:min(1080px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 80px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,34px);letter-spacing:-1px;margin-bottom:10px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:8px;max-width:640px}
+.note{color:#7f86a8;font-size:11.5px;line-height:1.6;margin-bottom:26px;max-width:640px}
+
+.toprow{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border:1px solid var(--border);border-radius:12px;font-size:12.5px;font-weight:800;cursor:pointer;background:rgba(255,255,255,.03);color:var(--white)}
+.btn-primary{background:linear-gradient(135deg,#5d55ff,#a84fff);border:none}
+.btn-ghost{background:transparent}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:32px}
+.uni-card{padding:18px;border-radius:18px;background:var(--card);border:1px solid var(--border);position:relative}
+.uni-card .rm{position:absolute;top:10px;right:10px;background:none;border:none;color:#7f86a8;font-size:16px;cursor:pointer}
+.uni-card .f{margin-bottom:12px}
+.uni-card label{display:block;font-size:10.5px;font-weight:700;color:#9098bd;margin-bottom:5px;letter-spacing:.3px}
+.uni-card input{width:100%;padding:9px 11px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:9px;color:var(--white);font-size:13px}
+.uni-card input:focus{outline:none;border-color:rgba(155,117,255,.5)}
+.uni-card .f-name input{font-family:'Sora',sans-serif;font-weight:700;font-size:15px}
+
+.add-card{display:flex;align-items:center;justify-content:center;min-height:220px;border-radius:18px;border:1.5px dashed var(--border);cursor:pointer;color:var(--muted);font-weight:700;font-size:13px;flex-direction:column;gap:8px}
+.add-card:hover{border-color:rgba(155,117,255,.5);color:#cdbbff}
+.add-card .plus{font-size:26px}
+
+.compare-box{border-radius:20px;background:var(--card);border:1px solid var(--border);overflow:hidden;margin-bottom:20px}
+.compare-box h3{padding:18px 20px 0;font-size:13px}
+.table-wrap{overflow-x:auto;padding:18px 20px 20px}
+table{border-collapse:collapse;width:100%;min-width:520px}
+th,td{padding:11px 14px;text-align:left;font-size:12.5px;border-bottom:1px solid var(--border);white-space:nowrap}
+th{color:#9098bd;font-weight:700;font-size:10.5px;letter-spacing:.4px;text-transform:uppercase}
+td.uname{font-family:'Sora',sans-serif;font-weight:700;color:var(--white)}
+tr:last-child td{border-bottom:none}
+
+.empty{padding:40px 20px;text-align:center;color:var(--muted);font-size:13px}
+
+footer{padding:28px 0;border-top:1px solid rgba(255,255,255,.07);text-align:center;color:#7f86a8;font-size:11px}
+@media(max-width:600px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">İNTERAKTİV ALƏT</div>
+<h1>🏛️ Universitet Müqayisəsi</h1>
+<p class="sub">Fərqli universitetləri əlavə et, öz məlumatlarınla doldur və yan-yana müqayisə et.</p>
+<p class="note">Qeyd: Təhsil haqqı, reytinq və s. rəqəmlər tez-tez dəyişir — bu alət sənin öz araşdırdığın məlumatları daxil etmək üçündür, avtomatik yenilənən rəsmi məlumat bazası deyil.</p>
+
+<div class="toprow">
+<button class="btn btn-primary" onclick="addUni()">+ Universitet əlavə et</button>
+<button class="btn btn-ghost" onclick="fillSample()">✨ Nümunə ilə doldur</button>
+<button class="btn btn-ghost" onclick="clearAll()">🗑️ Hamısını sil</button>
+</div>
+
+<div class="cards" id="cards"></div>
+
+<div class="compare-box">
+<h3>📊 Yan-yana müqayisə</h3>
+<div class="table-wrap" id="tableWrap"></div>
+</div>
+
+</div>
+</section>
+
+<footer>Youdidit.az — Təhsil • İmtahan • Karyera • İnkişaf</footer>
+
+<script>
+const FIELDS = [
+  {key:'name', label:'Universitetin adı', placeholder:'Məs: Bakı Dövlət Universiteti', class:'f-name'},
+  {key:'location', label:'Ölkə / Şəhər', placeholder:'Məs: Bakı, Azərbaycan'},
+  {key:'lang', label:'Tədris dili', placeholder:'Məs: Azərbaycan / İngilis'},
+  {key:'tuition', label:'İllik təhsil haqqı', placeholder:'Məs: 1500 AZN'},
+  {key:'rank', label:'Reytinq / status', placeholder:'Məs: Yerli reytinq: 1-ci'},
+  {key:'program', label:'Maraqlı proqram', placeholder:'Məs: Kompüter Elmləri'}
+];
+
+let unis = [];
+let idCounter = 0;
+
+function newUni(data){
+  idCounter++;
+  return Object.assign({id:idCounter, name:'', location:'', lang:'', tuition:'', rank:'', program:''}, data||{});
+}
+
+function addUni(data){
+  if(unis.length>=6){ return; }
+  unis.push(newUni(data));
+  render();
+}
+
+function removeUni(id){
+  unis = unis.filter(u=>u.id!==id);
+  render();
+}
+
+function clearAll(){
+  unis = [];
+  render();
+}
+
+function fillSample(){
+  unis = [];
+  addUni({name:'ADA University', location:'Bakı, Azərbaycan', lang:'İngilis', tuition:'~4500 AZN', rank:'Yerli: tanınmış özəl universitet', program:'Beynəlxalq Münasibətlər'});
+  addUni({name:'Bakı Dövlət Universiteti', location:'Bakı, Azərbaycan', lang:'Azərbaycan / İngilis', tuition:'~800-1500 AZN', rank:'Ölkənin ən qədim dövlət universiteti', program:'Hüquq, Filologiya'});
+  addUni({name:'Nümunə Xarici Universitet', location:'Şəhər, Ölkə', lang:'İngilis', tuition:'Öz araşdırman əsasında doldur', rank:'Öz araşdırman əsasında doldur', program:'Öz araşdırman əsasında doldur'});
+  render();
+}
+
+function updateField(id, key, value){
+  const u = unis.find(x=>x.id===id);
+  if(u){ u[key]=value; renderTable(); }
+}
+
+function render(){
+  renderCards();
+  renderTable();
+}
+
+function renderCards(){
+  const wrap = document.getElementById('cards');
+  wrap.innerHTML = '';
+  unis.forEach(u=>{
+    const card = document.createElement('div');
+    card.className = 'uni-card';
+    const rm = document.createElement('button');
+    rm.className = 'rm'; rm.textContent = '✕';
+    rm.onclick = () => removeUni(u.id);
+    card.appendChild(rm);
+    FIELDS.forEach(f=>{
+      const fdiv = document.createElement('div');
+      fdiv.className = 'f' + (f.class ? ' '+f.class : '');
+      const lab = document.createElement('label'); lab.textContent = f.label;
+      const inp = document.createElement('input'); inp.type='text'; inp.placeholder = f.placeholder; inp.value = u[f.key] || '';
+      inp.oninput = (e) => updateField(u.id, f.key, e.target.value);
+      fdiv.appendChild(lab); fdiv.appendChild(inp);
+      card.appendChild(fdiv);
+    });
+    wrap.appendChild(card);
+  });
+  if(unis.length<6){
+    const add = document.createElement('div');
+    add.className = 'add-card';
+    add.innerHTML = '<div class="plus">+</div><div>Universitet əlavə et</div>';
+    add.onclick = () => addUni();
+    wrap.appendChild(add);
+  }
+}
+
+function renderTable(){
+  const wrap = document.getElementById('tableWrap');
+  if(unis.length===0){
+    wrap.innerHTML = '<div class="empty">Hələ universitet əlavə edilməyib. Yuxarıdan "+ Universitet əlavə et" düyməsinə bas və ya nümunə ilə doldur.</div>';
+    return;
+  }
+  let html = '<table><thead><tr><th>Xüsusiyyət</th>';
+  unis.forEach(u=>{ html += `<th>${escapeHtml(u.name || 'Universitet')}</th>`; });
+  html += '</tr></thead><tbody>';
+  const rows = [
+    {key:'location', label:'Ölkə / Şəhər'},
+    {key:'lang', label:'Tədris dili'},
+    {key:'tuition', label:'İllik təhsil haqqı'},
+    {key:'rank', label:'Reytinq / status'},
+    {key:'program', label:'Maraqlı proqram'}
+  ];
+  rows.forEach(r=>{
+    html += `<tr><td class="uname">${r.label}</td>`;
+    unis.forEach(u=>{ html += `<td>${escapeHtml(u[r.key] || '—')}</td>`; });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+addUni(); addUni();
+render();
+</script>
+</body>
+</html>
