@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF Sıxma / Birləşdirmə — Youdidit.az</title>
+<meta name="description" content="Bir neçə PDF faylını birləşdir və ya faylın ölçüsünü kiçilt — pulsuz, birbaşa brauzerdə, heç nə serverə yüklənmir.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10);--green:#20d3a3;--orange:#ff8b4d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+.container{width:min(760px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 80px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,34px);letter-spacing:-1px;margin-bottom:10px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:26px;max-width:580px}
+.tabs{display:flex;gap:8px;margin-bottom:24px}
+.tabbtn{flex:1;padding:13px;border-radius:13px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--muted);font-size:13px;font-weight:800;text-align:center}
+.tabbtn.active{background:linear-gradient(135deg,#5d55ff,#a84fff);color:white;border-color:transparent}
+.panel{display:none}
+.panel.active{display:block}
+.box{padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--border);margin-bottom:16px}
+.dropzone{border:2px dashed var(--border);border-radius:16px;padding:30px 18px;text-align:center;cursor:pointer;transition:.2s}
+.dropzone:hover{border-color:rgba(155,117,255,.5);background:rgba(118,81,255,.05)}
+.dropzone p{color:var(--muted);font-size:12.5px;margin-top:8px}
+.filelist{margin-top:16px}
+.fileitem{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;font-size:12.5px}
+.fileitem .fname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.fileitem .fsize{color:var(--muted);flex-shrink:0}
+.fileitem .rm{color:#ff8b8b;font-weight:800;cursor:pointer;flex-shrink:0;padding:0 4px}
+.reorder{display:flex;gap:6px;flex-shrink:0}
+.reorder button{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);width:24px;height:24px;border-radius:7px;font-size:11px}
+.quality-row{display:flex;gap:8px;margin:16px 0}
+.qopt{flex:1;padding:14px 8px;border-radius:13px;border:1px solid var(--border);background:rgba(255,255,255,.03);text-align:center;cursor:pointer;transition:.2s}
+.qopt.active{border-color:rgba(155,117,255,.6);background:rgba(118,81,255,.12)}
+.qopt strong{display:block;font-size:12.5px;margin-bottom:4px}
+.qopt span{color:var(--muted);font-size:10.5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:15px;border:none;border-radius:14px;font-size:13.5px;font-weight:800;background:linear-gradient(135deg,#5d55ff,#a84fff);box-shadow:0 12px 35px rgba(118,81,255,.32);color:white;margin-top:6px}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.status{margin-top:14px;font-size:12.5px;color:var(--muted);text-align:center;min-height:18px}
+.result{margin-top:18px;padding:18px;border-radius:16px;background:rgba(32,211,163,.08);border:1px solid rgba(32,211,163,.3);display:none}
+.result.show{display:block}
+.result .row{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px;color:var(--muted)}
+.result .row b{color:var(--white)}
+.result a.dl{display:block;margin-top:12px;text-align:center;padding:13px;border-radius:12px;background:linear-gradient(135deg,#20d3a3,#16cfff);color:#04140f;font-weight:800;font-size:13px}
+footer{padding:28px 0;border-top:1px solid rgba(255,255,255,.07);text-align:center;color:#7f86a8;font-size:11px}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">SƏNƏD ALƏTİ</div>
+<h1>📎 PDF Sıxma / Birləşdirmə</h1>
+<p class="sub">Bütün emal birbaşa sənin brauzerində baş verir — fayllar heç bir serverə yüklənmir.</p>
+
+<div class="tabs">
+<div class="tabbtn active" id="tabMerge" onclick="switchTab('merge')">🔗 Birləşdirmə</div>
+<div class="tabbtn" id="tabCompress" onclick="switchTab('compress')">🗜️ Sıxma</div>
+</div>
+
+<!-- MERGE PANEL -->
+<div class="panel active" id="panelMerge">
+<div class="box">
+<div class="dropzone" onclick="document.getElementById('mergeInput').click()">
+<div style="font-size:26px;">📄</div>
+<p>Birləşdirmək istədiyin PDF fayllarını seç (bir neçəsini birdən)</p>
+</div>
+<input type="file" id="mergeInput" accept="application/pdf" multiple hidden>
+<div class="filelist" id="mergeList"></div>
+<button class="btn" id="mergeBtn" disabled onclick="doMerge()">Birləşdir və yüklə →</button>
+<div class="status" id="mergeStatus"></div>
+<div class="result" id="mergeResult">
+<div class="row"><span>Fayl sayı</span><b id="mergeCount">0</b></div>
+<div class="row"><span>Ümumi ölçü</span><b id="mergeSize">0 KB</b></div>
+<a class="dl" id="mergeDownload" download="birlesdirilmis.pdf">⬇️ Birləşmiş PDF-i yüklə</a>
+</div>
+</div>
+</div>
+
+<!-- COMPRESS PANEL -->
+<div class="panel" id="panelCompress">
+<div class="box">
+<div class="dropzone" onclick="document.getElementById('compressInput').click()">
+<div style="font-size:26px;">📄</div>
+<p>Sıxılacaq bir PDF faylı seç</p>
+</div>
+<input type="file" id="compressInput" accept="application/pdf" hidden>
+<div class="filelist" id="compressList"></div>
+
+<div class="quality-row" id="qualityRow">
+<div class="qopt" data-q="high" onclick="selectQuality('high')">
+<strong>Yüngül sıxma</strong>
+<span>Yüksək keyfiyyət</span>
+</div>
+<div class="qopt active" data-q="medium" onclick="selectQuality('medium')">
+<strong>Orta sıxma</strong>
+<span>Tövsiyə olunur</span>
+</div>
+<div class="qopt" data-q="low" onclick="selectQuality('low')">
+<strong>Güclü sıxma</strong>
+<span>Kiçik fayl</span>
+</div>
+</div>
+
+<button class="btn" id="compressBtn" disabled onclick="doCompress()">Sıx və yüklə →</button>
+<div class="status" id="compressStatus"></div>
+<div class="result" id="compressResult">
+<div class="row"><span>Əvvəlki ölçü</span><b id="sizeBefore">-</b></div>
+<div class="row"><span>Yeni ölçü</span><b id="sizeAfter">-</b></div>
+<div class="row"><span>Azalma</span><b id="sizeSaved">-</b></div>
+<a class="dl" id="compressDownload" download="sixilmis.pdf">⬇️ Sıxılmış PDF-i yüklə</a>
+</div>
+<p style="color:var(--muted);font-size:11px;margin-top:12px;line-height:1.6;">Qeyd: sıxma prosesi hər səhifəni şəkil kimi yenidən yaradır (skan edilmiş və şəkil-ağırlıqlı PDF-lər üçün ən effektivdir). Uzun mətn sənədlərində fayl ölçüsü azala bilər, amma mətn artıq seçilə bilməyəcək.</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer>Youdidit.az — Təhsil • İmtahan • Karyera • İnkişaf</footer>
+
+<script>
+if(window.pdfjsLib){
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
+function switchTab(tab){
+  document.getElementById('tabMerge').classList.toggle('active', tab==='merge');
+  document.getElementById('tabCompress').classList.toggle('active', tab==='compress');
+  document.getElementById('panelMerge').classList.toggle('active', tab==='merge');
+  document.getElementById('panelCompress').classList.toggle('active', tab==='compress');
+}
+
+function formatSize(bytes){
+  if(bytes < 1024) return bytes + ' B';
+  if(bytes < 1024*1024) return (bytes/1024).toFixed(0) + ' KB';
+  return (bytes/(1024*1024)).toFixed(2) + ' MB';
+}
+
+// ---------- MERGE ----------
+let mergeFiles = [];
+
+document.getElementById('mergeInput').addEventListener('change', (e) => {
+  mergeFiles = mergeFiles.concat(Array.from(e.target.files));
+  renderMergeList();
+});
+
+function renderMergeList(){
+  const list = document.getElementById('mergeList');
+  list.innerHTML = mergeFiles.map((f, i) => `
+    <div class="fileitem">
+      <span class="fname">${i+1}. ${f.name}</span>
+      <span class="fsize">${formatSize(f.size)}</span>
+      <div class="reorder">
+        <button onclick="moveFile(${i},-1)" ${i===0?'disabled':''}>↑</button>
+        <button onclick="moveFile(${i},1)" ${i===mergeFiles.length-1?'disabled':''}>↓</button>
+      </div>
+      <span class="rm" onclick="removeFile(${i})">✕</span>
+    </div>`).join('');
+  document.getElementById('mergeBtn').disabled = mergeFiles.length < 2;
+}
+
+function moveFile(i, dir){
+  const j = i + dir;
+  if(j < 0 || j >= mergeFiles.length) return;
+  [mergeFiles[i], mergeFiles[j]] = [mergeFiles[j], mergeFiles[i]];
+  renderMergeList();
+}
+
+function removeFile(i){
+  mergeFiles.splice(i, 1);
+  renderMergeList();
+}
+
+async function doMerge(){
+  const btn = document.getElementById('mergeBtn');
+  const status = document.getElementById('mergeStatus');
+  btn.disabled = true;
+  status.textContent = '⏳ Birləşdirilir...';
+
+  try{
+    const mergedPdf = await PDFLib.PDFDocument.create();
+    let totalSize = 0;
+    for(const file of mergeFiles){
+      totalSize += file.size;
+      const bytes = await file.arrayBuffer();
+      const pdf = await PDFLib.PDFDocument.load(bytes, {ignoreEncryption: true});
+      const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+      copiedPages.forEach(page => mergedPdf.addPage(page));
+    }
+    const mergedBytes = await mergedPdf.save();
+    const blob = new Blob([mergedBytes], {type: 'application/pdf'});
+    const url = URL.createObjectURL(blob);
+
+    document.getElementById('mergeCount').textContent = mergeFiles.length;
+    document.getElementById('mergeSize').textContent = formatSize(mergedBytes.length);
+    document.getElementById('mergeDownload').href = url;
+    document.getElementById('mergeResult').classList.add('show');
+    status.textContent = '✅ Hazırdır!';
+  } catch(err){
+    console.error(err);
+    status.textContent = '❌ Xəta baş verdi — fayllardan birinin oxuna bilmədiyinə əmin ol.';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// ---------- COMPRESS ----------
+let compressFile = null;
+let selectedQuality = 'medium';
+const qualityMap = {
+  high:   {scale: 1.4, jpeg: 0.82},
+  medium: {scale: 1.1, jpeg: 0.6},
+  low:    {scale: 0.85, jpeg: 0.38}
+};
+
+document.getElementById('compressInput').addEventListener('change', (e) => {
+  compressFile = e.target.files[0];
+  const list = document.getElementById('compressList');
+  if(compressFile){
+    list.innerHTML = `<div class="fileitem"><span class="fname">${compressFile.name}</span><span class="fsize">${formatSize(compressFile.size)}</span></div>`;
+    document.getElementById('compressBtn').disabled = false;
+  }
+});
+
+function selectQuality(q){
+  selectedQuality = q;
+  document.querySelectorAll('.qopt').forEach(el => el.classList.toggle('active', el.dataset.q === q));
+}
+
+async function doCompress(){
+  const btn = document.getElementById('compressBtn');
+  const status = document.getElementById('compressStatus');
+  btn.disabled = true;
+
+  try{
+    const {scale, jpeg} = qualityMap[selectedQuality];
+    const originalSize = compressFile.size;
+    const buffer = await compressFile.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({data: buffer}).promise;
+    const newPdf = await PDFLib.PDFDocument.create();
+
+    for(let i = 1; i <= pdf.numPages; i++){
+      status.textContent = `⏳ Səhifə ${i} / ${pdf.numPages} emal edilir...`;
+      const page = await pdf.getPage(i);
+      const viewport = page.getViewport({scale});
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      const ctx = canvas.getContext('2d');
+      await page.render({canvasContext: ctx, viewport}).promise;
+
+      const dataUrl = canvas.toDataURL('image/jpeg', jpeg);
+      const jpegBytes = await (await fetch(dataUrl)).arrayBuffer();
+      const jpegImage = await newPdf.embedJpg(jpegBytes);
+
+      const ptWidth = viewport.width * 0.75;
+      const ptHeight = viewport.height * 0.75;
+      const newPage = newPdf.addPage([ptWidth, ptHeight]);
+      newPage.drawImage(jpegImage, {x: 0, y: 0, width: ptWidth, height: ptHeight});
+    }
+
+    status.textContent = '⏳ Fayl yaradılır...';
+    const newBytes = await newPdf.save();
+    const blob = new Blob([newBytes], {type: 'application/pdf'});
+    const url = URL.createObjectURL(blob);
+
+    document.getElementById('sizeBefore').textContent = formatSize(originalSize);
+    document.getElementById('sizeAfter').textContent = formatSize(newBytes.length);
+    const savedPct = Math.max(0, Math.round((1 - newBytes.length/originalSize) * 100));
+    document.getElementById('sizeSaved').textContent = savedPct + '%';
+    document.getElementById('compressDownload').href = url;
+    document.getElementById('compressResult').classList.add('show');
+    status.textContent = '✅ Hazırdır!';
+  } catch(err){
+    console.error(err);
+    status.textContent = '❌ Xəta baş verdi — faylın düzgün PDF olduğuna əmin ol.';
+  } finally {
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
