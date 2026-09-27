@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diplom / Sertifikat Şablonu — Youdidit.az</title>
+<meta name="description" content="Kurs, məktəb, idman və tədbirlər üçün hazır sertifikat şablonlarından istifadə et — PNG və ya PDF kimi yüklə.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&family=Playfair+Display:wght@600;700&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select{font-family:inherit}
+.container{width:min(1080px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{width:min(1180px,calc(100% - 32px));margin:auto;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Sora',sans-serif;font-size:20px;font-weight:800}
+.logo span{color:#9d65ff}
+.back{font-size:12px;color:#c2c6df;font-weight:600}
+.section{padding:44px 0 80px}
+.section-label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(26px,4vw,34px);letter-spacing:-1px;margin-bottom:10px}
+.sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:26px;max-width:640px}
+.layout{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:start}
+.box{padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--border)}
+.box h3{font-size:13px;margin-bottom:14px}
+.tmpl-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.tmpl{flex:1 1 30%;min-width:96px;padding:12px 6px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.03);text-align:center;cursor:pointer;font-size:11px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px}
+.tmpl .ic{font-size:15px}
+.tmpl.active{border-color:rgba(155,117,255,.6);background:rgba(118,81,255,.14)}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11.5px;font-weight:700;color:#d9dcef;margin-bottom:6px}
+.field input{width:100%;padding:11px 13px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:11px;color:var(--white);font-size:13px}
+.field input:focus{outline:none;border-color:rgba(155,117,255,.5)}
+.preview-wrap{position:sticky;top:80px;padding:14px;border-radius:20px;background:var(--card);border:1px solid var(--border)}
+canvas{width:100%;height:auto;border-radius:10px;display:block}
+.dl-row{display:flex;gap:10px;margin-top:14px}
+.btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px;border:none;border-radius:12px;font-size:12.5px;font-weight:800;cursor:pointer}
+.btn-png{background:linear-gradient(135deg,#5d55ff,#a84fff);color:white}
+.btn-pdf{background:linear-gradient(135deg,#20d3a3,#16cfff);color:#04140f}
+footer{padding:28px 0;border-top:1px solid rgba(255,255,255,.07);text-align:center;color:#7f86a8;font-size:11px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.preview-wrap{position:static}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="section-label">SƏNƏD ALƏTİ</div>
+<h1>🎖️ Diplom / Sertifikat Şablonu</h1>
+<p class="sub">Məlumatları doldur, uşaqlar, şagirdlər, idmançılar və ya peşəkarlar üçün uyğun şablonu seç, canlı önizləməyə bax və hazır sertifikatı PNG və ya PDF kimi yüklə.</p>
+
+<div class="layout">
+<div>
+<div class="box">
+<h3>🎨 Şablon (9 seçim)</h3>
+<div class="tmpl-row">
+<div class="tmpl active" data-t="purple" onclick="selectTemplate('purple')"><span class="ic">🟣</span>Bənövşəyi</div>
+<div class="tmpl" data-t="classic" onclick="selectTemplate('classic')"><span class="ic">⚪</span>Klassik Ağ</div>
+<div class="tmpl" data-t="gold" onclick="selectTemplate('gold')"><span class="ic">🟡</span>Qızılı</div>
+<div class="tmpl" data-t="kids" onclick="selectTemplate('kids')"><span class="ic">🧸</span>Uşaqlar üçün</div>
+<div class="tmpl" data-t="school" onclick="selectTemplate('school')"><span class="ic">🎒</span>Şagirdlər üçün</div>
+<div class="tmpl" data-t="sport" onclick="selectTemplate('sport')"><span class="ic">🏅</span>İdman</div>
+<div class="tmpl" data-t="academic" onclick="selectTemplate('academic')"><span class="ic">🎓</span>Akademik</div>
+<div class="tmpl" data-t="corporate" onclick="selectTemplate('corporate')"><span class="ic">💼</span>Korporativ</div>
+<div class="tmpl" data-t="language" onclick="selectTemplate('language')"><span class="ic">🌐</span>Dil Kursu</div>
+</div>
+
+<h3>📝 Məlumatlar</h3>
+<div class="field">
+<label>Sertifikatın başlığı</label>
+<input type="text" id="fTitle" value="İştirak Sertifikatı" oninput="draw()">
+</div>
+<div class="field">
+<label>Alıcının adı</label>
+<input type="text" id="fName" value="Ayan Məmmədova" oninput="draw()">
+</div>
+<div class="field">
+<label>Kurs / Tədbirin adı</label>
+<input type="text" id="fCourse" value="Rəqəmsal Marketinq Əsasları" oninput="draw()">
+</div>
+<div class="field">
+<label>Təşkilatın adı</label>
+<input type="text" id="fOrg" value="Youdidit.az" oninput="draw()">
+</div>
+<div class="field">
+<label>Tarix</label>
+<input type="text" id="fDate" value="27 sentyabr 2026" oninput="draw()">
+</div>
+<div class="field">
+<label>İmza sahibinin adı</label>
+<input type="text" id="fSigner" value="Aygün Vəliyeva" oninput="draw()">
+</div>
+<div class="field">
+<label>İmza sahibinin vəzifəsi</label>
+<input type="text" id="fRole" value="Proqram Direktoru" oninput="draw()">
+</div>
+</div>
+</div>
+
+<div class="preview-wrap">
+<canvas id="certCanvas" width="1400" height="990"></canvas>
+<div class="dl-row">
+<button class="btn btn-png" onclick="downloadPNG()">⬇️ PNG yüklə</button>
+<button class="btn btn-pdf" onclick="downloadPDF()">⬇️ PDF yüklə</button>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer>Youdidit.az — Təhsil • İmtahan • Karyera • İnkişaf</footer>
+
+<script>
+let activeTemplate = 'purple';
+const canvas = document.getElementById('certCanvas');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+
+function selectTemplate(t){
+  activeTemplate = t;
+  document.querySelectorAll('.tmpl').forEach(el => el.classList.toggle('active', el.dataset.t === t));
+  draw();
+}
+
+function val(id){ return document.getElementById(id).value || ''; }
+
+function wrapText(text, x, y, maxWidth, lineHeight){
+  const words = text.split(' ');
+  let line = '';
+  const lines = [];
+  words.forEach(word => {
+    const test = line + word + ' ';
+    if(ctx.measureText(test).width > maxWidth && line !== ''){
+      lines.push(line.trim());
+      line = word + ' ';
+    } else {
+      line = test;
+    }
+  });
+  lines.push(line.trim());
+  const startY = y - ((lines.length - 1) * lineHeight) / 2;
+  lines.forEach((l, i) => ctx.fillText(l, x, startY + i * lineHeight));
+  return lines.length;
+}
+
+/* ---------- shared decorative helpers ---------- */
+function star(cx, cy, r, color, alpha){
+  ctx.save();
+  ctx.globalAlpha = alpha!==undefined?alpha:1;
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  for(let i=0;i<10;i++){
+    const ang = Math.PI/5*i - Math.PI/2;
+    const rad = i%2===0 ? r : r*0.42;
+    const x = cx + Math.cos(ang)*rad, y = cy + Math.sin(ang)*rad;
+    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+function confettiScatter(colors, seedPositions){
+  seedPositions.forEach((p,i)=>{
+    const c = colors[i % colors.length];
+    if(p.type==='circle'){
+      ctx.save(); ctx.globalAlpha=0.85; ctx.fillStyle=c;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); ctx.restore();
+    } else if(p.type==='star'){
+      star(p.x,p.y,p.r,c,0.9);
+    } else {
+      ctx.save(); ctx.globalAlpha=0.85; ctx.fillStyle=c; ctx.translate(p.x,p.y); ctx.rotate(p.rot||0);
+      ctx.fillRect(-p.r*0.6,-p.r*0.25,p.r*1.2,p.r*0.5); ctx.restore();
+    }
+  });
+}
+
+function medalRibbon(cx, topY, ribbonColor, medalColor, starColor){
+  ctx.save();
+  ctx.fillStyle = ribbonColor;
+  ctx.beginPath(); ctx.moveTo(cx-26, topY); ctx.lineTo(cx-2, topY+70); ctx.lineTo(cx-40, topY+82); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(cx+26, topY); ctx.lineTo(cx+2, topY+70); ctx.lineTo(cx+40, topY+82); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = medalColor;
+  ctx.beginPath(); ctx.arc(cx, topY+78, 30, 0, Math.PI*2); ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.arc(cx, topY+78, 23, 0, Math.PI*2); ctx.stroke();
+  star(cx, topY+78, 13, starColor, 1);
+  ctx.restore();
+}
+
+function seal(cx, cy, ringColor, innerColor, starColor){
+  ctx.save();
+  ctx.strokeStyle = ringColor; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.arc(cx, cy, 34, 0, Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, 26, 0, Math.PI*2); ctx.stroke();
+  ctx.fillStyle = innerColor; ctx.beginPath(); ctx.arc(cx, cy, 22, 0, Math.PI*2); ctx.fill();
+  star(cx, cy, 13, starColor, 1);
+  ctx.restore();
+}
+
+function globeWatermark(cx, cy, r, color, alpha){
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.strokeStyle = color; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(cx, cy, r*0.42, r, 0, 0, Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(cx, cy, r, r*0.42, 0, 0, Math.PI*2); ctx.stroke();
+  ctx.restore();
+}
+
+function laurelLine(cx, y, spread, color){
+  ctx.save();
+  ctx.fillStyle = color; ctx.globalAlpha = 0.85;
+  for(let side=-1; side<=1; side+=2){
+    for(let i=0;i<5;i++){
+      const x = cx + side*(30 + i*16);
+      const yy = y - Math.abs(i-2)*3;
+      ctx.beginPath();
+      ctx.ellipse(x, yy, 9, 4.5, side*0.5, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+/* ---------- template renderers ---------- */
+
+function drawPurple(){
+  const grad = ctx.createLinearGradient(0,0,W,H);
+  grad.addColorStop(0,'#0b0e24'); grad.addColorStop(1,'#141032');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+  const glow = ctx.createRadialGradient(W*0.85,H*0.1,10,W*0.85,H*0.1,600);
+  glow.addColorStop(0,'rgba(118,81,255,.35)'); glow.addColorStop(1,'transparent');
+  ctx.fillStyle = glow; ctx.fillRect(0,0,W,H);
+
+  ctx.strokeStyle = 'rgba(180,150,255,.55)'; ctx.lineWidth = 3;
+  ctx.strokeRect(46,46,W-92,H-92);
+  ctx.strokeStyle = 'rgba(180,150,255,.25)'; ctx.lineWidth = 1;
+  ctx.strokeRect(62,62,W-124,H-124);
+
+  ctx.fillStyle = '#cdbbff'; ctx.font = '700 22px Sora'; ctx.textAlign='center';
+  ctx.fillText('S E R T İ F İ K A T', W/2, 150);
+
+  ctx.fillStyle = '#f8f7ff'; ctx.font = '800 58px Sora';
+  ctx.fillText(val('fTitle'), W/2, 225);
+
+  ctx.fillStyle = '#a6adcd'; ctx.font = '400 20px Inter';
+  ctx.fillText('Bu sənəd təsdiq edir ki,', W/2, 300);
+
+  ctx.fillStyle = '#ffffff'; ctx.font = '700 52px "Playfair Display"';
+  ctx.fillText(val('fName'), W/2, 385);
+  ctx.strokeStyle = 'rgba(180,150,255,.6)'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(W/2-220,405); ctx.lineTo(W/2+220,405); ctx.stroke();
+
+  ctx.fillStyle = '#a6adcd'; ctx.font = '400 19px Inter';
+  ctx.fillText('aşağıdakı proqramda uğurla iştirak etmişdir:', W/2, 450);
+
+  ctx.fillStyle = '#e0d7ff'; ctx.font = '700 30px Sora';
+  wrapText(val('fCourse'), W/2, 500, W-300, 36);
+
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#a6adcd'; ctx.font = '600 14px Inter';
+  ctx.fillText('TARİX', 150, H-160);
+  ctx.fillStyle = '#f8f7ff'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fDate'), 150, H-130);
+  ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.beginPath(); ctx.moveTo(150,H-110); ctx.lineTo(400,H-110); ctx.stroke();
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#f8f7ff'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fSigner'), W-150, H-155);
+  ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.beginPath(); ctx.moveTo(W-400,H-140); ctx.lineTo(W-150,H-140); ctx.stroke();
+  ctx.fillStyle = '#a6adcd'; ctx.font = '400 14px Inter';
+  ctx.fillText(val('fRole'), W-150, H-118);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#7d84a8'; ctx.font = '700 13px Sora';
+  ctx.fillText(val('fOrg'), W/2, H-70);
+}
+
+function drawClassic(){
+  ctx.fillStyle = '#faf8f2'; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle = '#b98b3e'; ctx.lineWidth=6; ctx.strokeRect(40,40,W-80,H-80);
+  ctx.strokeStyle = '#1b2540'; ctx.lineWidth=1.5; ctx.strokeRect(58,58,W-116,H-116);
+
+  ctx.fillStyle = '#b98b3e'; ctx.font = '700 20px Sora'; ctx.textAlign='center';
+  ctx.fillText('S E R T İ F İ K A T', W/2, 150);
+
+  ctx.fillStyle = '#1b2540'; ctx.font = '800 56px Sora';
+  ctx.fillText(val('fTitle'), W/2, 222);
+
+  ctx.fillStyle = '#5b6070'; ctx.font = '400 20px Inter';
+  ctx.fillText('Bu sənəd təsdiq edir ki,', W/2, 298);
+
+  ctx.fillStyle = '#1b2540'; ctx.font = '700 50px "Playfair Display"';
+  ctx.fillText(val('fName'), W/2, 382);
+  ctx.strokeStyle = '#b98b3e'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(W/2-220,402); ctx.lineTo(W/2+220,402); ctx.stroke();
+
+  ctx.fillStyle = '#5b6070'; ctx.font = '400 19px Inter';
+  ctx.fillText('aşağıdakı proqramda uğurla iştirak etmişdir:', W/2, 448);
+
+  ctx.fillStyle = '#1b2540'; ctx.font = '700 30px Sora';
+  wrapText(val('fCourse'), W/2, 498, W-300, 36);
+
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#8a8f9e'; ctx.font = '600 14px Inter';
+  ctx.fillText('TARİX', 150, H-160);
+  ctx.fillStyle = '#1b2540'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fDate'), 150, H-130);
+  ctx.strokeStyle='rgba(27,37,64,.3)'; ctx.beginPath(); ctx.moveTo(150,H-110); ctx.lineTo(400,H-110); ctx.stroke();
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#1b2540'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fSigner'), W-150, H-155);
+  ctx.strokeStyle='rgba(27,37,64,.3)'; ctx.beginPath(); ctx.moveTo(W-400,H-140); ctx.lineTo(W-150,H-140); ctx.stroke();
+  ctx.fillStyle = '#8a8f9e'; ctx.font = '400 14px Inter';
+  ctx.fillText(val('fRole'), W-150, H-118);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#b98b3e'; ctx.font = '700 13px Sora';
+  ctx.fillText(val('fOrg'), W/2, H-70);
+}
+
+function drawGold(){
+  ctx.fillStyle = '#0a0705'; ctx.fillRect(0,0,W,H);
+  const grad = ctx.createLinearGradient(0,0,W,H);
+  grad.addColorStop(0,'rgba(212,175,90,.08)'); grad.addColorStop(1,'rgba(212,175,90,0)');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+
+  ctx.strokeStyle = '#d4af5a'; ctx.lineWidth=5; ctx.strokeRect(42,42,W-84,H-84);
+  ctx.strokeStyle = 'rgba(212,175,90,.4)'; ctx.lineWidth=1; ctx.strokeRect(58,58,W-116,H-116);
+
+  ctx.fillStyle = '#d4af5a'; ctx.font = '700 20px Sora'; ctx.textAlign='center';
+  ctx.fillText('S E R T İ F İ K A T', W/2, 150);
+
+  ctx.fillStyle = '#f5e8c8'; ctx.font = '800 56px Sora';
+  ctx.fillText(val('fTitle'), W/2, 222);
+
+  ctx.fillStyle = '#b8a888'; ctx.font = '400 20px Inter';
+  ctx.fillText('Bu sənəd təsdiq edir ki,', W/2, 298);
+
+  ctx.fillStyle = '#f5e8c8'; ctx.font = '700 50px "Playfair Display"';
+  ctx.fillText(val('fName'), W/2, 382);
+  ctx.strokeStyle = '#d4af5a'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(W/2-220,402); ctx.lineTo(W/2+220,402); ctx.stroke();
+
+  ctx.fillStyle = '#b8a888'; ctx.font = '400 19px Inter';
+  ctx.fillText('aşağıdakı proqramda uğurla iştirak etmişdir:', W/2, 448);
+
+  ctx.fillStyle = '#e9d9ac'; ctx.font = '700 30px Sora';
+  wrapText(val('fCourse'), W/2, 498, W-300, 36);
+
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#8f8267'; ctx.font = '600 14px Inter';
+  ctx.fillText('TARİX', 150, H-160);
+  ctx.fillStyle = '#f5e8c8'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fDate'), 150, H-130);
+  ctx.strokeStyle='rgba(212,175,90,.3)'; ctx.beginPath(); ctx.moveTo(150,H-110); ctx.lineTo(400,H-110); ctx.stroke();
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#f5e8c8'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fSigner'), W-150, H-155);
+  ctx.strokeStyle='rgba(212,175,90,.3)'; ctx.beginPath(); ctx.moveTo(W-400,H-140); ctx.lineTo(W-150,H-140); ctx.stroke();
+  ctx.fillStyle = '#8f8267'; ctx.font = '400 14px Inter';
+  ctx.fillText(val('fRole'), W-150, H-118);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#d4af5a'; ctx.font = '700 13px Sora';
+  ctx.fillText(val('fOrg'), W/2, H-70);
+}
+
+function drawKids(){
+  const grad = ctx.createLinearGradient(0,0,W,H);
+  grad.addColorStop(0,'#fff6e0'); grad.addColorStop(1,'#ffe9f3');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+
+  ctx.strokeStyle = '#ff8fb3'; ctx.lineWidth=8; ctx.setLineDash([26,14]);
+  ctx.strokeRect(44,44,W-88,H-88);
+  ctx.setLineDash([]);
+  ctx.strokeStyle = '#5fc9ff'; ctx.lineWidth=2;
+  ctx.strokeRect(64,64,W-128,H-128);
+
+  confettiScatter(['#ff8fb3','#5fc9ff','#ffcb4d','#8fe3a0','#c29bff'], [
+    {type:'circle',x:110,y:110,r:10},{type:'star',x:170,y:90,r:14},{type:'circle',x:W-120,y:120,r:12},
+    {type:'star',x:W-180,y:95,r:12},{type:'circle',x:100,y:H-110,r:11},{type:'star',x:150,y:H-150,r:13},
+    {type:'circle',x:W-110,y:H-110,r:10},{type:'star',x:W-160,y:H-150,r:12},{type:'circle',x:W/2-380,y:250,r:8},
+    {type:'circle',x:W/2+380,y:250,r:8},{type:'triangle',x:220,y:H-70,r:16,rot:0.3},{type:'triangle',x:W-220,y:H-70,r:16,rot:-0.3}
+  ]);
+
+  ctx.fillStyle = '#ff6fa0'; ctx.font = '700 22px "Baloo 2", Sora'; ctx.textAlign='center';
+  ctx.fillText('★ SERTİFİKAT ★', W/2, 150);
+
+  ctx.fillStyle = '#3a2e4d'; ctx.font = '800 56px "Baloo 2", Sora';
+  ctx.fillText(val('fTitle'), W/2, 224);
+
+  ctx.fillStyle = '#7a6f8f'; ctx.font = '500 20px Inter';
+  ctx.fillText('Bu, fəxri sənəddir və göstərir ki,', W/2, 298);
+
+  ctx.fillStyle = '#2f6fb0'; ctx.font = '700 52px "Baloo 2", Sora';
+  ctx.fillText(val('fName'), W/2, 382);
+  ctx.strokeStyle = '#ffcb4d'; ctx.lineWidth=4; ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(W/2-200,402); ctx.lineTo(W/2+200,402); ctx.stroke(); ctx.lineCap='butt';
+
+  ctx.fillStyle = '#7a6f8f'; ctx.font = '500 19px Inter';
+  ctx.fillText('çox gözəl işlədi və uğurla tamamladı:', W/2, 448);
+
+  ctx.fillStyle = '#ff6fa0'; ctx.font = '700 30px "Baloo 2", Sora';
+  wrapText(val('fCourse'), W/2, 498, W-320, 36);
+
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#9a8fb0'; ctx.font = '700 14px Inter';
+  ctx.fillText('TARİX', 150, H-160);
+  ctx.fillStyle = '#3a2e4d'; ctx.font = '700 18px Inter';
+  ctx.fillText(val('fDate'), 150, H-130);
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#3a2e4d'; ctx.font = '700 18px Inter';
+  ctx.fillText(val('fSigner'), W-150, H-155);
+  ctx.fillStyle = '#9a8fb0'; ctx.font = '500 14px Inter';
+  ctx.fillText(val('fRole'), W-150, H-118);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#5fc9ff'; ctx.font = '700 13px Sora';
+  ctx.fillText(val('fOrg'), W/2, H-70);
+}
+
+function drawSchool(){
+  ctx.fillStyle = '#eef5ff'; ctx.fillRect(0,0,W,H);
+  const grad = ctx.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0,'rgba(255,255,255,.6)'); grad.addColorStop(1,'rgba(41,98,196,.05)');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+
+  ctx.strokeStyle = '#2962c4'; ctx.lineWidth=6; ctx.strokeRect(42,42,W-84,H-84);
+  ctx.strokeStyle = '#ff9a3d'; ctx.lineWidth=2; ctx.strokeRect(60,60,W-120,H-120);
+
+  // little ribbon banner behind label
+  ctx.save(); ctx.fillStyle='#ff9a3d'; ctx.globalAlpha=0.9;
+  ctx.beginPath(); ctx.moveTo(W/2-150,120); ctx.lineTo(W/2+150,120); ctx.lineTo(W/2+150,150); ctx.lineTo(W/2,138); ctx.lineTo(W/2-150,150); ctx.closePath(); ctx.fill();
+  ctx.restore();
+
+  ctx.fillStyle = '#ffffff'; ctx.font = '800 18px Sora'; ctx.textAlign='center';
+  ctx.fillText('S E R T İ F İ K A T', W/2, 141);
+
+  ctx.fillStyle = '#1b3a70'; ctx.font = '800 56px Sora';
+  ctx.fillText(val('fTitle'), W/2, 224);
+
+  ctx.fillStyle = '#5b7098'; ctx.font = '400 20px Inter';
+  ctx.fillText('Bu sənəd təsdiq edir ki, şagird', W/2, 298);
+
+  ctx.fillStyle = '#1b3a70'; ctx.font = '700 52px "Playfair Display"';
+  ctx.fillText(val('fName'), W/2, 383);
+  ctx.strokeStyle = '#ff9a3d'; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(W/2-210,403); ctx.lineTo(W/2+210,403); ctx.stroke();
+
+  ctx.fillStyle = '#5b7098'; ctx.font = '400 19px Inter';
+  ctx.fillText('aşağıdakı fənn / fəaliyyətdə uğur qazanmışdır:', W/2, 449);
+
+  ctx.fillStyle = '#2962c4'; ctx.font = '700 30px Sora';
+  wrapText(val('fCourse'), W/2, 499, W-300, 36);
+
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#7891b8'; ctx.font = '600 14px Inter';
+  ctx.fillText('TARİX', 150, H-160);
+  ctx.fillStyle = '#1b3a70'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fDate'), 150, H-130);
+  ctx.strokeStyle='rgba(27,58,112,.3)'; ctx.beginPath(); ctx.moveTo(150,H-110); ctx.lineTo(400,H-110); ctx.stroke();
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#1b3a70'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fSigner'), W-150, H-155);
+  ctx.strokeStyle='rgba(27,58,112,.3)'; ctx.beginPath(); ctx.moveTo(W-400,H-140); ctx.lineTo(W-150,H-140); ctx.stroke();
+  ctx.fillStyle = '#7891b8'; ctx.font = '400 14px Inter';
+  ctx.fillText(val('fRole'), W-150, H-118);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#ff9a3d'; ctx.font = '700 13px Sora';
+  ctx.fillText(val('fOrg'), W/2, H-70);
+}
+
+function drawSport(){
+  const grad = ctx.createLinearGradient(0,0,W,H);
+  grad.addColorStop(0,'#1a0505'); grad.addColorStop(1,'#2c0b0b');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+  const glow = ctx.createRadialGradient(W/2,90,10,W/2,90,320);
+  glow.addColorStop(0,'rgba(255,196,69,.35)'); glow.addColorStop(1,'transparent');
+  ctx.fillStyle = glow; ctx.fillRect(0,0,W,H);
+
+  ctx.strokeStyle = '#e2b23c'; ctx.lineWidth=5; ctx.strokeRect(42,42,W-84,H-84);
+  ctx.strokeStyle = 'rgba(226,178,60,.35)'; ctx.lineWidth=1; ctx.strokeRect(58,58,W-116,H-116);
+
+  medalRibbon(W/2, 30, '#c0392b', '#e2b23c', '#7a1f16');
+
+  ctx.fillStyle = '#e2b23c'; ctx.font = '700 20px Sora'; ctx.textAlign='center';
+  ctx.fillText('İ D M A N   S E R T İ F İ K A T I', W/2, 190);
+
+  ctx.fillStyle = '#fdf1d6'; ctx.font = '800 52px Sora';
+  ctx.fillText(val('fTitle'), W/2, 255);
+
+  ctx.fillStyle = '#cbb79a'; ctx.font = '400 20px Inter';
+  ctx.fillText('Bu sənəd təsdiq edir ki,', W/2, 322);
+
+  ctx.fillStyle = '#fdf1d6'; ctx.font = '700 50px "Playfair Display"';
+  ctx.fillText(val('fName'), W/2, 400);
+  ctx.strokeStyle = '#e2b23c'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(W/2-210,420); ctx.lineTo(W/2+210,420); ctx.stroke();
+
+  ctx.fillStyle = '#cbb79a'; ctx.font = '400 19px Inter';
+  ctx.fillText('aşağıdakı yarış / fəaliyyətdə uğur qazanmışdır:', W/2, 462);
+
+  ctx.fillStyle = '#f0c56b'; ctx.font = '700 30px Sora';
+  wrapText(val('fCourse'), W/2, 510, W-300, 36);
+
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#a8907a'; ctx.font = '600 14px Inter';
+  ctx.fillText('TARİX', 150, H-160);
+  ctx.fillStyle = '#fdf1d6'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fDate'), 150, H-130);
+  ctx.strokeStyle='rgba(226,178,60,.3)'; ctx.beginPath(); ctx.moveTo(150,H-110); ctx.lineTo(400,H-110); ctx.stroke();
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#fdf1d6'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fSigner'), W-150, H-155);
+  ctx.strokeStyle='rgba(226,178,60,.3)'; ctx.beginPath(); ctx.moveTo(W-400,H-140); ctx.lineTo(W-150,H-140); ctx.stroke();
+  ctx.fillStyle = '#a8907a'; ctx.font = '400 14px Inter';
+  ctx.fillText(val('fRole'), W-150, H-118);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#e2b23c'; ctx.font = '700 13px Sora';
+  ctx.fillText(val('fOrg'), W/2, H-70);
+}
+
+function drawAcademic(){
+  ctx.fillStyle = '#f3f1ea'; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle = '#1c2a4d'; ctx.lineWidth=7; ctx.strokeRect(38,38,W-76,H-76);
+  ctx.strokeStyle = '#8a1f2b'; ctx.lineWidth=2; ctx.strokeRect(56,56,W-112,H-112);
+
+  ctx.fillStyle = '#8a1f2b'; ctx.font = '700 19px Sora'; ctx.textAlign='center';
+  ctx.fillText('D İ P L O M', W/2, 148);
+
+  ctx.fillStyle = '#1c2a4d'; ctx.font = '800 54px "Playfair Display"';
+  ctx.fillText(val('fTitle'), W/2, 222);
+
+  ctx.fillStyle = '#5a5a5a'; ctx.font = '400 20px Inter';
+  ctx.fillText('Bu diplom təsdiq edir ki,', W/2, 296);
+
+  ctx.fillStyle = '#1c2a4d'; ctx.font = '700 50px "Playfair Display"';
+  ctx.fillText(val('fName'), W/2, 380);
+  laurelLine(W/2, 400, 220, '#8a1f2b');
+
+  ctx.fillStyle = '#5a5a5a'; ctx.font = '400 19px Inter';
+  ctx.fillText('aşağıdakı akademik proqramı uğurla bitirmişdir:', W/2, 452);
+
+  ctx.fillStyle = '#1c2a4d'; ctx.font = '700 30px Sora';
+  wrapText(val('fCourse'), W/2, 502, W-300, 36);
+
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#8a8a8a'; ctx.font = '600 14px Inter';
+  ctx.fillText('TARİX', 150, H-160);
+  ctx.fillStyle = '#1c2a4d'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fDate'), 150, H-130);
+  ctx.strokeStyle='rgba(28,42,77,.3)'; ctx.beginPath(); ctx.moveTo(150,H-110); ctx.lineTo(400,H-110); ctx.stroke();
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#1c2a4d'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fSigner'), W-150, H-155);
+  ctx.strokeStyle='rgba(28,42,77,.3)'; ctx.beginPath(); ctx.moveTo(W-400,H-140); ctx.lineTo(W-150,H-140); ctx.stroke();
+  ctx.fillStyle = '#8a8a8a'; ctx.font = '400 14px Inter';
+  ctx.fillText(val('fRole'), W-150, H-118);
+
+  seal(W/2, H-140, '#8a1f2b', '#f3f1ea', '#8a1f2b');
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#8a1f2b'; ctx.font = '700 13px Sora';
+  ctx.fillText(val('fOrg'), W/2, H-70);
+}
+
+function drawCorporate(){
+  ctx.fillStyle = '#0f1417'; ctx.fillRect(0,0,W,H);
+  const grad = ctx.createLinearGradient(0,0,W,0);
+  grad.addColorStop(0,'rgba(23,201,167,.10)'); grad.addColorStop(1,'transparent');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+
+  ctx.strokeStyle = 'rgba(23,201,167,.6)'; ctx.lineWidth=2; ctx.strokeRect(50,50,W-100,H-100);
+  ctx.fillStyle = '#17c9a7'; ctx.fillRect(50,50,90,4);
+  ctx.fillRect(50,50,4,90);
+  ctx.fillRect(W-140,H-54,90,4);
+  ctx.fillRect(W-54,H-140,4,90);
+
+  ctx.fillStyle = '#17c9a7'; ctx.font = '700 16px Sora'; ctx.textAlign='center'; ctx.letterSpacing='4px';
+  ctx.fillText('CERTIFICATE OF ACHIEVEMENT', W/2, 150);
+  ctx.letterSpacing='0px';
+
+  ctx.fillStyle = '#f4f6f5'; ctx.font = '700 54px Sora';
+  ctx.fillText(val('fTitle'), W/2, 222);
+
+  ctx.fillStyle = '#8b9793'; ctx.font = '400 19px Inter';
+  ctx.fillText('Bu sənəd təsdiq edir ki,', W/2, 296);
+
+  ctx.fillStyle = '#ffffff'; ctx.font = '600 48px Inter';
+  ctx.fillText(val('fName'), W/2, 378);
+  ctx.strokeStyle = '#17c9a7'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(W/2-200,398); ctx.lineTo(W/2+200,398); ctx.stroke();
+
+  ctx.fillStyle = '#8b9793'; ctx.font = '400 18px Inter';
+  ctx.fillText('aşağıdakı sahədə peşəkar töhfə vermişdir:', W/2, 446);
+
+  ctx.fillStyle = '#e6fff8'; ctx.font = '600 28px Sora';
+  wrapText(val('fCourse'), W/2, 494, W-320, 34);
+
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#6c7a76'; ctx.font = '600 13px Inter';
+  ctx.fillText('TARİX', 150, H-160);
+  ctx.fillStyle = '#f4f6f5'; ctx.font = '500 17px Inter';
+  ctx.fillText(val('fDate'), 150, H-130);
+  ctx.strokeStyle='rgba(244,246,245,.2)'; ctx.beginPath(); ctx.moveTo(150,H-110); ctx.lineTo(400,H-110); ctx.stroke();
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#f4f6f5'; ctx.font = '500 17px Inter';
+  ctx.fillText(val('fSigner'), W-150, H-155);
+  ctx.strokeStyle='rgba(244,246,245,.2)'; ctx.beginPath(); ctx.moveTo(W-400,H-140); ctx.lineTo(W-150,H-140); ctx.stroke();
+  ctx.fillStyle = '#6c7a76'; ctx.font = '400 13px Inter';
+  ctx.fillText(val('fRole'), W-150, H-118);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#17c9a7'; ctx.font = '700 12px Sora';
+  ctx.fillText(val('fOrg'), W/2, H-70);
+}
+
+function drawLanguage(){
+  const grad = ctx.createLinearGradient(0,0,W,H);
+  grad.addColorStop(0,'#08213a'); grad.addColorStop(1,'#0a3b3a');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+
+  globeWatermark(W-260, H-260, 190, '#ffffff', 0.05);
+
+  ctx.strokeStyle = 'rgba(120,220,210,.6)'; ctx.lineWidth = 3;
+  ctx.strokeRect(46,46,W-92,H-92);
+  ctx.strokeStyle = 'rgba(120,220,210,.25)'; ctx.lineWidth = 1;
+  ctx.strokeRect(62,62,W-124,H-124);
+
+  ctx.fillStyle = '#7fe3d6'; ctx.font = '700 20px Sora'; ctx.textAlign='center';
+  ctx.fillText('LANGUAGE CERTIFICATE', W/2, 150);
+
+  ctx.fillStyle = '#f2fbfa'; ctx.font = '800 56px Sora';
+  ctx.fillText(val('fTitle'), W/2, 224);
+
+  ctx.fillStyle = '#a7cfc9'; ctx.font = '400 20px Inter';
+  ctx.fillText('Bu sənəd təsdiq edir ki,', W/2, 298);
+
+  ctx.fillStyle = '#ffffff'; ctx.font = '700 52px "Playfair Display"';
+  ctx.fillText(val('fName'), W/2, 383);
+  ctx.strokeStyle = 'rgba(127,227,214,.7)'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(W/2-220,403); ctx.lineTo(W/2+220,403); ctx.stroke();
+
+  ctx.fillStyle = '#a7cfc9'; ctx.font = '400 19px Inter';
+  ctx.fillText('aşağıdakı dil kursunu uğurla tamamlamışdır:', W/2, 449);
+
+  ctx.fillStyle = '#c9f3ec'; ctx.font = '700 30px Sora';
+  wrapText(val('fCourse'), W/2, 499, W-300, 36);
+
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#7fa39c'; ctx.font = '600 14px Inter';
+  ctx.fillText('TARİX', 150, H-160);
+  ctx.fillStyle = '#f2fbfa'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fDate'), 150, H-130);
+  ctx.strokeStyle='rgba(242,251,250,.25)'; ctx.beginPath(); ctx.moveTo(150,H-110); ctx.lineTo(400,H-110); ctx.stroke();
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#f2fbfa'; ctx.font = '600 18px Inter';
+  ctx.fillText(val('fSigner'), W-150, H-155);
+  ctx.strokeStyle='rgba(242,251,250,.25)'; ctx.beginPath(); ctx.moveTo(W-400,H-140); ctx.lineTo(W-150,H-140); ctx.stroke();
+  ctx.fillStyle = '#7fa39c'; ctx.font = '400 14px Inter';
+  ctx.fillText(val('fRole'), W-150, H-118);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#7fe3d6'; ctx.font = '700 13px Sora';
+  ctx.fillText(val('fOrg'), W/2, H-70);
+}
+
+const RENDERERS = {
+  purple: drawPurple, classic: drawClassic, gold: drawGold,
+  kids: drawKids, school: drawSchool, sport: drawSport,
+  academic: drawAcademic, corporate: drawCorporate, language: drawLanguage
+};
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  (RENDERERS[activeTemplate] || drawPurple)();
+}
+
+function downloadPNG(){
+  const link = document.createElement('a');
+  link.download = 'sertifikat.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+async function downloadPDF(){
+  const pngDataUrl = canvas.toDataURL('image/png');
+  const pngBytes = await (await fetch(pngDataUrl)).arrayBuffer();
+  const pdfDoc = await PDFLib.PDFDocument.create();
+  const pngImage = await pdfDoc.embedPng(pngBytes);
+  const pageWidth = 842, pageHeight = 595; // A4 landscape in points
+  const page = pdfDoc.addPage([pageWidth, pageHeight]);
+  page.drawImage(pngImage, {x:0, y:0, width:pageWidth, height:pageHeight});
+  const pdfBytes = await pdfDoc.save();
+  const blob = new Blob([pdfBytes], {type:'application/pdf'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.download = 'sertifikat.pdf';
+  link.href = url;
+  link.click();
+}
+
+Promise.all([
+  document.fonts.load('700 50px "Playfair Display"'),
+  document.fonts.load('800 50px "Baloo 2"')
+]).then(draw);
+draw();
+</script>
+</body>
+</html>
