@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATS CV Analizi — Youdidit.az</title>
+<meta name="description" content="CV-ndəki açar sözləri iş elanı ilə müqayisə et, ATS uyğunluq faizini və çatışmayan açar sözləri anında gör.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<style>
+:root{--bg:#050713;--bg2:#090b1d;--card:#0d1128;--card2:#111735;--white:#f8f7ff;--muted:#a6adcd;--purple:#7651ff;--purple2:#a454ff;--blue:#397cff;--cyan:#16cfff;--pink:#f653c5;--green:#20d3a3;--red:#ff6161;--orange:#ff8b4d;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+.container{width:min(1000px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-family:'Sora',sans-serif;font-size:23px;font-weight:800;letter-spacing:-1px}
+.logo span{color:#9d65ff}
+.back-link{color:#c2c6df;font-size:12px;font-weight:700}
+.back-link:hover{color:white}
+.section{padding:50px 0 90px}
+.page-head{margin-bottom:34px}
+.badge{display:inline-flex;padding:8px 13px;border-radius:999px;background:rgba(118,81,255,.09);border:1px solid rgba(155,117,255,.24);color:#cdbbff;font-size:11px;font-weight:700;margin-bottom:16px}
+.page-head h1{font-family:'Sora',sans-serif;font-size:clamp(28px,4vw,40px);letter-spacing:-1.5px}
+.page-head p{color:var(--muted);font-size:13px;line-height:1.7;margin-top:12px;max-width:640px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.box{padding:22px;border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.015)),var(--card);border:1px solid var(--border)}
+.box label{display:block;font-size:12px;font-weight:700;color:#d9dcef;margin-bottom:10px}
+.box textarea{width:100%;min-height:220px;resize:vertical;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;color:var(--white);font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;padding:14px}
+.box textarea:focus{outline:none;border-color:rgba(155,117,255,.5)}
+.upload-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.upload-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:11px;background:rgba(118,81,255,.12);border:1px solid rgba(155,117,255,.35);color:#d9cfff;font-size:12px;font-weight:700;cursor:pointer;transition:.25s}
+.upload-btn:hover{background:rgba(118,81,255,.22)}
+.file-name{color:#7f86a8;font-size:11.5px}
+.upload-status{color:#8ff0d4;font-size:11.5px}
+.upload-error{color:#ffb4b4;font-size:11.5px}
+.actions{display:flex;justify-content:center;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 28px;border:none;border-radius:14px;font-size:13px;font-weight:800;transition:.3s;background:linear-gradient(135deg,#5d55ff,#a84fff);box-shadow:0 12px 35px rgba(118,81,255,.32);color:white}
+.btn:hover{transform:translateY(-3px);box-shadow:0 18px 45px rgba(118,81,255,.45)}
+.result{margin-top:36px;display:none}
+.result.show{display:block}
+.score-card{padding:28px;border-radius:22px;background:radial-gradient(circle at 90% 10%,rgba(118,81,255,.22),transparent 40%),linear-gradient(135deg,#0c102b,#090b1d);border:1px solid var(--border);display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.score-ring{position:relative;width:120px;height:120px;flex:none}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring circle{fill:none;stroke-width:10}
+.score-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:26px;font-weight:800}
+.score-text h2{font-family:'Sora',sans-serif;font-size:20px;margin-bottom:8px}
+.score-text p{color:var(--muted);font-size:13px;line-height:1.7}
+.kw-section{margin-top:22px;padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--border)}
+.kw-section h3{font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.kw-list{display:flex;flex-wrap:wrap;gap:8px}
+.kw-chip{padding:7px 12px;border-radius:9px;font-size:11px;font-weight:700}
+.kw-chip.matched{background:rgba(32,211,163,.14);border:1px solid rgba(32,211,163,.35);color:#8ff0d4}
+.kw-chip.missing{background:rgba(255,97,97,.12);border:1px solid rgba(255,97,97,.35);color:#ffb4b4}
+.tips{margin-top:22px;padding:22px;border-radius:20px;background:var(--card);border:1px solid var(--border)}
+.tips h3{font-size:14px;margin-bottom:12px}
+.tips ul{padding-left:18px;color:var(--muted);font-size:12.5px;line-height:2}
+footer{padding:28px 0;border-top:1px solid rgba(255,255,255,.07);text-align:center;color:#7f86a8;font-size:11px}
+@media(max-width:750px){.grid{grid-template-columns:1fr}.score-card{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="container nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<a href="aletler.html" class="back-link">← Alətlərə qayıt</a>
+</div>
+</nav>
+
+<section class="section">
+<div class="container">
+<div class="page-head">
+<div class="badge">🔎 Alət</div>
+<h1>ATS CV Analizi</h1>
+<p>CV mətnini və iş elanının mətnini aşağıya yapışdır. Alət iş elanındakı əsas açar sözləri çıxarıb, onların neçəsinin CV-də olduğunu göstərəcək və hansı sözlərin çatışmadığını deyəcək.</p>
+</div>
+
+<div class="grid">
+<div class="box">
+<label>📄 CV</label>
+<div class="upload-row">
+<label for="cvFile" class="upload-btn">📎 Fayl seç (PDF / DOCX / TXT)</label>
+<input type="file" id="cvFile" accept=".pdf,.docx,.txt" hidden>
+<span id="fileName" class="file-name">Fayl seçilməyib</span>
+</div>
+<textarea id="cvText" placeholder="...və ya CV mətnini birbaşa bura kopyala və yapışdır"></textarea>
+</div>
+<div class="box">
+<label>📋 İş elanının mətni</label>
+<textarea id="jobText" placeholder="İş elanının tam mətnini bura yapışdır..."></textarea>
+</div>
+</div>
+
+<div class="actions">
+<button class="btn" id="analyzeBtn">Analiz et →</button>
+</div>
+
+<div class="result" id="resultBox">
+<div class="score-card">
+<div class="score-ring">
+<svg width="120" height="120" viewBox="0 0 120 120">
+<circle cx="60" cy="60" r="52" stroke="rgba(255,255,255,.08)"></circle>
+<circle cx="60" cy="60" r="52" id="scoreArc" stroke="url(#grad)" stroke-linecap="round"></circle>
+<defs>
+<linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#7651ff"></stop>
+<stop offset="100%" stop-color="#a454ff"></stop>
+</linearGradient>
+</defs>
+</svg>
+<div class="score-num" id="scoreNum">0%</div>
+</div>
+<div class="score-text">
+<h2 id="scoreTitle">Uyğunluq nəticəsi</h2>
+<p id="scoreDesc">Nəticə burada görünəcək.</p>
+</div>
+</div>
+
+<div class="kw-section">
+<h3>✅ CV-də tapılan açar sözlər</h3>
+<div class="kw-list" id="matchedList"></div>
+</div>
+
+<div class="kw-section">
+<h3>⚠️ Çatışmayan açar sözlər</h3>
+<div class="kw-list" id="missingList"></div>
+</div>
+
+<div class="tips">
+<h3>💡 ATS üçün ümumi tövsiyələr</h3>
+<ul>
+<li>Çatışmayan açar sözlərdən sənə aid olanları CV-nin təcrübə və bacarıq bölmələrinə təbii şəkildə əlavə et.</li>
+<li>CV-ni cədvəl, sütun və şəkil əvəzinə sadə, tək sütunlu formatda hazırla — bir çox ATS sistemi mürəkkəb formatı düzgün oxumur.</li>
+<li>Standart bölmə başlıqlarından istifadə et: Təcrübə, Təhsil, Bacarıqlar, Layihələr.</li>
+<li>Qısaltmaların həm açıq, həm qısa formasını yaz (məs: "Search Engine Optimization (SEO)").</li>
+<li>Faylı .docx və ya mətn əsaslı .pdf formatında saxla, skan edilmiş şəkil-PDF istifadə etmə.</li>
+</ul>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer>Youdidit.az — Təhsil • İmtahan • Karyera • İnkişaf</footer>
+
+<script>
+const AZ_STOP = new Set(("və,ilə,üçün,olan,olub,olan,bir,bu,o,ki,da,də,ya,ya da,həm,çox,az,daha,ən,kimi,görə,üzrə,arası,artıq,indi,sonra,əvvəl,zaman,zamanı,yeni,əsas,əsasən,müxtəlif,hər,heç,bütün,bütün,işə,işi,işin,edir,edən,edərək,olacaq,olmalıdır,lazımdır,istəyirik,axtarırıq,namizəd,namizədin,namizəddən,tələb,tələb olunur,vəzifə,şirkət,şirkətimiz,haqqında,məsuliyyət,məsuliyyətlər,üzərində,daxil,ilə əlaqədar,ilə bağlı,üçündür").split(","));
+const EN_STOP = new Set(("the,and,for,with,that,this,are,you,your,will,have,has,from,our,who,job,role,work,working,team,about,into,such,using,use,ability,able,strong,skills,experience,years,year,required,requirement,requirements,responsibilities,responsible,including,include,candidate,candidates,we,or,to,of,in,on,as,is,be,an,a").split(","));
+
+function normalize(text){
+  return text.toLocaleLowerCase('az').replace(/[^a-zçğıöşüəi̇\s-]/gi,' ');
+}
+
+function tokenize(text){
+  return normalize(text).split(/\s+/).filter(w => w.length > 2 && !AZ_STOP.has(w) && !EN_STOP.has(w));
+}
+
+function extractKeywords(jobText, limit){
+  const words = tokenize(jobText);
+  const freq = {};
+  words.forEach(w => freq[w] = (freq[w]||0) + 1);
+  // simple bigrams for multi-word skills
+  for(let i=0;i<words.length-1;i++){
+    const bg = words[i] + ' ' + words[i+1];
+    freq[bg] = (freq[bg]||0) + 0.6;
+  }
+  return Object.entries(freq)
+    .sort((a,b) => b[1]-a[1])
+    .slice(0, limit)
+    .map(e => e[0]);
+}
+
+function cvContains(cvWordsSet, keyword){
+  if(keyword.includes(' ')){
+    return keyword.split(' ').every(part => [...cvWordsSet].some(w => w.startsWith(part.slice(0, Math.max(3, part.length-2)))));
+  }
+  const root = keyword.slice(0, Math.max(3, keyword.length-2));
+  return [...cvWordsSet].some(w => w.startsWith(root));
+}
+
+if(window['pdfjsLib']){
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
+async function extractPdfText(arrayBuffer){
+  const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+  let text = '';
+  for(let i = 1; i <= pdf.numPages; i++){
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    text += content.items.map(it => it.str).join(' ') + '\n';
+  }
+  return text;
+}
+
+async function extractDocxText(arrayBuffer){
+  const result = await mammoth.extractRawText({arrayBuffer});
+  return result.value;
+}
+
+document.getElementById('cvFile').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  const fileNameEl = document.getElementById('fileName');
+  if(!file) return;
+
+  fileNameEl.textContent = '⏳ Oxunur...';
+  fileNameEl.className = 'file-name';
+
+  try{
+    const ext = file.name.split('.').pop().toLowerCase();
+    let text = '';
+
+    if(ext === 'txt'){
+      text = await file.text();
+    } else if(ext === 'pdf'){
+      const buffer = await file.arrayBuffer();
+      text = await extractPdfText(buffer);
+    } else if(ext === 'docx'){
+      const buffer = await file.arrayBuffer();
+      text = await extractDocxText(buffer);
+    } else {
+      throw new Error('unsupported');
+    }
+
+    document.getElementById('cvText').value = text.trim();
+    fileNameEl.textContent = '✅ ' + file.name;
+    fileNameEl.className = 'upload-status';
+  } catch(err){
+    console.error(err);
+    fileNameEl.textContent = '❌ Fayl oxuna bilmədi — mətni əl ilə yapışdır';
+    fileNameEl.className = 'upload-error';
+  }
+});
+
+document.getElementById('analyzeBtn').addEventListener('click', () => {
+  const cvText = document.getElementById('cvText').value.trim();
+  const jobText = document.getElementById('jobText').value.trim();
+  if(!cvText || !jobText){
+    alert('Zəhmət olmasa həm CV, həm də iş elanı mətnini daxil et.');
+    return;
+  }
+
+  const keywords = extractKeywords(jobText, 25);
+  const cvWordsSet = new Set(tokenize(cvText));
+
+  const matched = [];
+  const missing = [];
+  keywords.forEach(k => {
+    if(cvContains(cvWordsSet, k)) matched.push(k); else missing.push(k);
+  });
+
+  const score = keywords.length ? Math.round((matched.length / keywords.length) * 100) : 0;
+
+  document.getElementById('resultBox').classList.add('show');
+  document.getElementById('scoreNum').textContent = score + '%';
+
+  const circumference = 2 * Math.PI * 52;
+  const arc = document.getElementById('scoreArc');
+  arc.style.strokeDasharray = circumference;
+  arc.style.strokeDashoffset = circumference - (score/100)*circumference;
+
+  let title, desc;
+  if(score >= 75){ title = 'Güclü uyğunluq'; desc = 'CV-n bu iş elanının açar sözləri ilə yaxşı üst-üstə düşür.'; }
+  else if(score >= 45){ title = 'Orta uyğunluq'; desc = 'Bir neçə vacib açar söz çatışmır — aşağıdakı siyahıya bax.'; }
+  else { title = 'Zəif uyğunluq'; desc = 'CV-n bu elana görə xeyli açar sözdən məhrumdur. Aşağıdakıları nəzərdən keçir.'; }
+  document.getElementById('scoreTitle').textContent = title;
+  document.getElementById('scoreDesc').textContent = desc;
+
+  const matchedList = document.getElementById('matchedList');
+  const missingList = document.getElementById('missingList');
+  matchedList.innerHTML = matched.length ? matched.map(k => `<span class="kw-chip matched">${k}</span>`).join('') : '<span style="color:#7f86a8;font-size:12px;">Uyğun açar söz tapılmadı.</span>';
+  missingList.innerHTML = missing.length ? missing.map(k => `<span class="kw-chip missing">${k}</span>`).join('') : '<span style="color:#7f86a8;font-size:12px;">Əla! Çatışmayan açar söz yoxdur.</span>';
+
+  document.getElementById('resultBox').scrollIntoView({behavior:'smooth', block:'start'});
+});
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
