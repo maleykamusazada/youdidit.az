@@ -103,23 +103,34 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const rng=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
 function pick(seed,n){const r=rng(seed),sh=a=>a.map(x=>[r(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);return sh(Q).slice(0,Math.min(n,Q.length)).map(x=>({q:x[0],a:x[1],o:sh(x.slice(1))}))}
 function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id===id))}
+
+/* TURN server (metered.ca) - fərqli şəbəkələrdə əlaqə üçün */
+const ICE={config:{iceServers:[
+ {urls:"stun:stun.relay.metered.ca:80"},
+ {urls:"turn:global.relay.metered.ca:80",username:"4b128d4a84cafef56f108745",credential:"sI6vY6cvgQettcVG"},
+ {urls:"turn:global.relay.metered.ca:80?transport=tcp",username:"4b128d4a84cafef56f108745",credential:"sI6vY6cvgQettcVG"},
+ {urls:"turn:global.relay.metered.ca:443",username:"4b128d4a84cafef56f108745",credential:"sI6vY6cvgQettcVG"},
+ {urls:"turns:global.relay.metered.ca:443?transport=tcp",username:"4b128d4a84cafef56f108745",credential:"sI6vY6cvgQettcVG"}
+]}};
+
 let peer,conn,isHost=false,me='',opp='Rəqib',code='',N=10,seed,qs,ix,sc,tt,osc,ot,t0,tmr,safe,myDone,oppDone,adv,gone,playing=false;
 const name=()=>($('nm').value.trim()||'Dost').slice(0,14);
 const mkc=()=>String(Math.floor(1000+Math.random()*9000));
 const send=m=>{try{conn&&conn.open&&conn.send(m)}catch(e){}};
 
 /* otaq */
-function openRoom(c){code=c;peer=new Peer('ydi-'+c);
+function openRoom(c){code=c;peer=new Peer('ydi-'+c,ICE);
 peer.on('open',()=>{$('rc').textContent=c;$('lp').textContent='Bu kodu dostuna göndər:';$('ls').textContent='Dostun gözlənilir...';show('sLobby')});
 peer.on('error',e=>{if(e.type==='unavailable-id'){peer.destroy();openRoom(mkc())}else $('hs').textContent='Əlaqə xətası ('+e.type+'). Yenidən cəhd et.'});
 peer.on('connection',c2=>{if(conn){c2.close();return}conn=c2;wire()})}
 $('mk').onclick=()=>{me=name();isHost=true;$('hs').textContent='Otaq açılır...';openRoom(mkc())};
 $('jn').onclick=()=>{const c=$('cd').value.trim();if(!/^\d{4}$/.test(c)){$('hs').textContent='4 rəqəmli kod yaz.';return}
-me=name();isHost=false;code=c;$('hs').textContent='Qoşulur...';peer=new Peer();
-peer.on('error',e=>{$('hs').textContent=e.type==='peer-unavailable'?'Belə otaq tapılmadı.':'Əlaqə xətası ('+e.type+').'});
-peer.on('open',()=>{conn=peer.connect('ydi-'+c,{reliable:true});wire()})};
+me=name();isHost=false;code=c;$('hs').textContent='Qoşulur...';peer=new Peer(undefined,ICE);
+peer.on('error',e=>{clearTimeout(window.jt);$('hs').textContent=e.type==='peer-unavailable'?'Belə otaq tapılmadı.':'Əlaqə xətası ('+e.type+').'});
+peer.on('open',()=>{conn=peer.connect('ydi-'+c,{reliable:true});wire();
+window.jt=setTimeout(()=>{if(!conn.open){$('hs').textContent='Qoşulmaq alınmadı. Yenidən cəhd et.';try{peer.destroy()}catch(e){}}},15000)})};
 function wire(){
-conn.on('open',()=>{send({t:'hi',n:me})});
+conn.on('open',()=>{clearTimeout(window.jt);send({t:'hi',n:me})});
 conn.on('data',d=>{
 if(d.t==='hi'){opp=String(d.n).slice(0,14);if(isHost){send({t:'hi',n:me});$('ls').textContent=opp+' qoşuldu!';$('st0').textContent='Duelə başla';chk()}else{$('hostBox').style.display='none';$('st0').style.display='none';$('sh').style.display='none';$('rc').textContent=code;$('lp').textContent='Qoşuldun. Otaq sahibi:';$('ls').textContent=opp+' sualları seçib başlatacaq...';show('sLobby')}}
 else if(d.t==='start'&&Array.isArray(d.qs)&&d.qs.length){begin(d.qs.slice(0,50).map(x=>({t:String(x.t),a:String(x.a),o:x.o.map(String),x:String(x.x||'')})))}
