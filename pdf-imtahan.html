@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="az">
 <head>
 <meta charset="utf-8">
@@ -54,7 +54,7 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 
 <section class="scr" id="sCfg">
 <h1>PDF oxundu. <span class="gold">Neçə sual?</span></h1>
-<p>AI mətni oxuyub real imtahan sualları hazırlayacaq. Hər dəfə fərqli suallar çıxır.</p>
+<p>AI mətni oxuyub real imtahan sualları hazırlayacaq. 30 və 50 sual üçün PDF uzun olsun (bir neçə səhifə). Böyük sayda suallar bir qədər çox vaxt aparır.</p>
 <div class="chips" id="chips"></div>
 <button class="btn" id="go">Suallar yarat və başla</button>
 <div class="st" id="gs"></div>
@@ -108,15 +108,18 @@ async function readPdf(file){const buf=await file.arrayBuffer(),pdf=await pdfjsL
 for(let p=1;p<=n;p++){const c=await(await pdf.getPage(p)).getTextContent();t+=c.items.map(i=>i.str).join(' ')+' '}return t}
 $('fi').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('us').textContent='PDF oxunur...';
 try{text=await readPdf(f);if(text.replace(/\s/g,'').length<300){$('us').textContent='Bu PDF-də oxuna bilən mətn yoxdur (şəkil kimi skan edilib).';return}cfg()}catch(err){$('us').textContent='PDF açılmadı. Başqa fayl yoxla.'}};
-function cfg(){$('chips').innerHTML='';[5,10,15,20].forEach(n=>{const b=document.createElement('button');b.textContent=n;b.className=n===N?'on':'';b.onclick=()=>{N=n;[...$('chips').children].forEach(x=>x.classList.toggle('on',x===b))};$('chips').appendChild(b)});$('gs').textContent='';show('sCfg')}
+function cfg(){$('chips').innerHTML='';[5,10,15,20,30,50].forEach(n=>{const b=document.createElement('button');b.textContent=n;b.className=n===N?'on':'';b.onclick=()=>{N=n;[...$('chips').children].forEach(x=>x.classList.toggle('on',x===b))};$('chips').appendChild(b)});$('gs').textContent='';show('sCfg')}
 function sample(t){t=t.replace(/\s+/g,' ');const w=3500;if(t.length<=14000)return t;return Array.from({length:4},()=>Math.floor(Math.random()*(t.length-w))).sort((a,b)=>a-b).map(i=>t.slice(i,i+w)).join(' ')}
-async function make(){const g=$('gs');g.textContent='AI suallar hazırlayır... (10-30 saniyə)';$('go').disabled=true;
-try{const r=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:sample(text),n:N})});let d={};try{d=await r.json()}catch(e){}
+async function one(n){const r=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:sample(text),n})});let d={};try{d=await r.json()}catch(e){}return{r,d}}
+async function make(){const g=$('gs');$('go').disabled=true;
+try{const k=N<=20?1:Math.ceil(N/17),per=N<=20?N:Math.min(20,Math.ceil(N/k)+2),all=[],seen=new Set();
+for(let i=0;i<k;i++){g.textContent='AI suallar hazırlayır... '+(k>1?(i+1)+'/'+k+' ':'')+'(10-30 saniyə)';
+const{r,d}=await one(per);
 if(r.status===404||r.status===405){g.textContent='Xəta: /api/generate tapılmadı. api/generate.js faylı repoda api qovluğunda olmalıdır və Vercel yenidən deploy etməlidir.';return null}
-if(r.status===429){g.textContent='Saatlıq limit doldu. Bir az sonra yenidən yoxla.';return null}
-if(!r.ok){g.textContent='Xəta ('+r.status+'): '+(d.error||'naməlum')+(d.detail?' | '+d.detail:'');return null}
-if(!d.questions||d.questions.length<3){g.textContent='AI uyğun sual qaytarmadı. Yenidən yoxla.';return null}
-return d.questions.map(x=>({t:x.q,a:x.o[x.a],o:shuf(x.o),x:x.x}))}
+if(!r.ok){if(all.length>=5)break;g.textContent=r.status===429?'Limit doldu. Bir az sonra yenidən yoxla.':'Xəta ('+r.status+'): '+(d.error||'naməlum')+(d.detail?' | '+d.detail:'');return null}
+(d.questions||[]).forEach(x=>{const key=x.q.toLowerCase().slice(0,40);if(!seen.has(key)){seen.add(key);all.push(x)}})}
+if(all.length<3){g.textContent='AI uyğun sual qaytarmadı. Yenidən yoxla.';return null}
+return all.slice(0,N).map(x=>({t:x.q,a:x.o[x.a],o:shuf(x.o),x:x.x}))}
 catch(e){g.textContent='Serverə qoşulmaq alınmadı. Səhifə Vercel saytından açılmalıdır, telefona yüklənmiş fayldan yox.';return null}
 finally{$('go').disabled=false}}
 async function run(){const qs=await make();if(!qs)return;Q=qs;ix=0;sc=0;wrong=[];ask();show('sQ')}
