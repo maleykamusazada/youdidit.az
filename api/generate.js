@@ -16,22 +16,29 @@ module.exports = async (req, res) => {
     'Hər sual üçün 1 cümləlik qısa izah yaz. Cavabı YALNIZ JSON massivi kimi ver: [{"q":"sual","o":["a","b","c","d"],"a":0,"x":"izah"}] ("a" düzgün variantın indeksidir).';
   const key = process.env.GEMINI_API_KEY;
   if (!key) return res.status(500).json({ error: 'GEMINI_API_KEY Vercel-də təyin edilməyib' });
-  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash-lite';
+  const models = [process.env.GEMINI_MODEL, 'gemini-3.1-flash-lite', 'gemini-3.5-flash-lite', 'gemini-3-flash-preview'].filter(Boolean);
+  const body = JSON.stringify({
+    systemInstruction: { parts: [{ text: system }] },
+    contents: [{ role: 'user', parts: [{ text: count + ' sual hazırla. Təsadüfilik nömrəsi: ' + Math.floor(Math.random() * 1e6) + '\n\nMƏTN:\n' + text.slice(0, 15000) }] }],
+    generationConfig: { responseMimeType: 'application/json', maxOutputTokens: 8192 }
+  });
   try {
-    const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: system }] },
-        contents: [{ role: 'user', parts: [{ text: count + ' sual hazırla. Təsadüfilik nömrəsi: ' + Math.floor(Math.random() * 1e6) + '\n\nMƏTN:\n' + text.slice(0, 15000) }] }],
-        generationConfig: { responseMimeType: 'application/json', maxOutputTokens: 4096 }
-      })
-    });
+    let r, lastErr = '';
+    for (const m of models) {
+      r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + m + ':generateContent', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
+        body
+      });
+      if (r.status !== 404) break;
+      lastErr = await r.text();
+    }
+    if (r.status === 404) return res.status(502).json({ error: 'AI xətası 404', detail: lastErr.slice(0, 160) });
     if (r.status === 429) return res.status(429).json({ error: 'limit' });
     if (!r.ok) { const e = await r.text(); return res.status(502).json({ error: 'AI xətası ' + r.status, detail: e.slice(0, 160) }); }
     const d = await r.json();
     const p = d.candidates && d.candidates[0] && d.candidates[0].content && d.candidates[0].content.parts;
-    const raw = (p && p[0] && p[0].text) || '';
+    const raw = (p && p.map(x => x.text || '').join('')) || '';
     const arr = JSON.parse((raw.match(/\[[\s\S]*\]/) || ['[]'])[0]);
     const questions = arr.filter(x => x && typeof x.q === 'string' && Array.isArray(x.o) && x.o.length >= 3 && Number.isInteger(x.a) && x.o[x.a] !== undefined)
       .slice(0, count).map(x => ({ q: x.q, o: x.o.map(String), a: x.a, x: String(x.x || '') }));
