@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PDF-dən imtahan | YOU DID IT!</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+:root{--ink:#0d0a2b;--violet:#6d4aff;--lav:#b9a6ff;--gold:#ffcf5c;--red:#ff6b7f;--green:#5ee0a0;--text:#f4f1ff;--dim:#b8b0e0;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%;background:radial-gradient(120% 60% at 80% 0%,#3a2a9c 0%,transparent 60%),radial-gradient(90% 50% at 0% 100%,#2a1c7a 0%,transparent 60%),var(--ink);background-attachment:fixed;font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;color:var(--text);-webkit-tap-highlight-color:transparent}
+.app{max-width:480px;margin:0 auto;min-height:100dvh;padding:28px 22px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.scr{display:none;flex-direction:column;gap:16px}.scr.on{display:flex;animation:in .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(18px)}}
+.brand{font-weight:800;color:var(--lav);font-size:15px}
+h1{font-size:clamp(30px,9.4vw,44px);font-weight:800;line-height:1.06;letter-spacing:-.02em}
+p{color:var(--dim);font-size:16px;line-height:1.5;font-weight:500}
+.gold{color:var(--gold)}
+.btn{display:block;width:100%;padding:17px;border:0;border-radius:16px;background:var(--violet);color:#fff;font:800 17px inherit;font-family:inherit;text-align:center;box-shadow:0 10px 30px #6d4aff66;cursor:pointer}
+.btn.alt{background:#ffffff12;box-shadow:none;border:1.5px solid #b9a6ff55}
+.drop{display:grid;gap:6px;place-items:center;text-align:center;padding:30px 18px;border-radius:22px;border:2px dashed #b9a6ff77;background:#ffffff0d;font-weight:800;font-size:18px;cursor:pointer}
+.drop small{font-weight:500;color:var(--dim);font-size:14px}
+.drop:focus-within{outline:3px solid var(--gold);outline-offset:2px}
+input[type=file]{position:absolute;opacity:0;width:1px;height:1px}
+.chips{display:flex;gap:8px}.chips button{flex:1;padding:13px 0;border-radius:14px;border:1.5px solid #b9a6ff55;background:#ffffff10;color:var(--text);font:800 17px inherit;font-family:inherit;cursor:pointer}
+.chips button.on{background:var(--violet);border-color:var(--violet)}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.st{text-align:center;font-weight:700;color:var(--lav);min-height:1.4em}
+.top{display:flex;justify-content:space-between;font-weight:800;font-size:15px;color:var(--lav)}
+.pb{height:8px;border-radius:8px;background:#ffffff22;overflow:hidden}.pb i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--gold));transition:width .4s}
+.q{font-size:clamp(20px,5.8vw,26px);font-weight:700;line-height:1.45}
+.q u{display:inline-block;min-width:3.2em;border-bottom:3px solid var(--gold);text-decoration:none}
+.op{display:grid;gap:10px}
+.op button{padding:16px;border-radius:16px;border:1.5px solid #b9a6ff44;background:#ffffff10;color:var(--text);font:700 18px inherit;font-family:inherit;text-align:left;cursor:pointer}
+.op button.ok{background:#5ee0a033;border-color:var(--green)}.op button.no{background:#ff6b7f33;border-color:var(--red)}
+.big{font-size:clamp(64px,22vw,110px);font-weight:800;color:var(--gold);line-height:1}
+.rv{display:grid;gap:10px;max-height:38dvh;overflow:auto}
+.rv div{padding:14px;border-radius:14px;background:#ffffff0d;border-left:4px solid var(--red);font-size:15px;line-height:1.45;color:var(--dim)}
+.rv b{color:var(--green)}
+@media (prefers-reduced-motion:reduce){.scr.on{animation:none}.pb i{transition:none}}
+</style>
+</head>
+<body>
+<main class="app">
+<div class="brand">youdidit.az</div>
+
+<section class="scr" id="sUp">
+<h1>PDF yüklə, <span class="gold">imtahan ol</span></h1>
+<p>Konspektini, dərs materialını və ya məqaləni yüklə. Sistem ondan təsadüfi suallar hazırlayır.</p>
+<label class="drop"><input type="file" id="fi" accept="application/pdf,.pdf">PDF seç<small>Fayl telefonundan çıxmır, hər şey brauzerdə işləyir</small></label>
+<div class="st" id="us"></div>
+</section>
+
+<section class="scr" id="sCfg">
+<h1>PDF oxundu. <span class="gold">Neçə sual?</span></h1>
+<p>AI mətni oxuyub real imtahan sualları hazırlayacaq. Hər dəfə fərqli suallar çıxır.</p>
+<div class="chips" id="chips"></div>
+<button class="btn" id="go">Suallar yarat və başla</button>
+<div class="st" id="gs"></div>
+</section>
+
+<section class="scr" id="sQ">
+<div class="top"><span id="pg"></span><span id="scr"></span></div>
+<div class="pb"><i id="pbi"></i></div>
+<div class="q" id="qt"></div>
+<div class="op" id="op"></div>
+<div class="st" id="ex" style="text-align:left"></div>
+<button class="btn" id="nx" style="display:none">Növbəti</button>
+</section>
+
+<section class="scr" id="sRes">
+<div class="big" id="rs"></div>
+<h1 id="rt"></h1>
+<div class="rv" id="rv"></div>
+<button class="btn" id="again">Yeni təsadüfi suallarla yenidən</button>
+<button class="btn alt" id="other2">Başqa PDF seç</button>
+</section>
+</main>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id===id))}
+/*GEN*/
+const W=/[\p{L}\p{N}][\p{L}\p{N}-]*/gu;
+function shuf(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function build(text){
+text=text.replace(/\s+/g,' ').replace(/https?:\S+/g,' ');
+const sents=[...new Set((text.match(/[^.!?]{45,230}[.!?]/g)||[]).map(s=>s.trim()))].filter(s=>(s.match(W)||[]).length>=7&&(s.match(/\d/g)||[]).length<8);
+const freq={},vocab=new Set();
+(text.match(W)||[]).forEach(w=>{const k=w.toLowerCase();freq[k]=(freq[k]||0)+1;if(w.length>=5&&!/\d/.test(w))vocab.add(w)});
+const V=[...vocab],out=[];
+for(const s of sents){
+const toks=[...s.matchAll(W)];
+const c=toks.filter((m,i)=>i>0&&m[0].length>=6&&!/\d/.test(m[0])&&freq[m[0].toLowerCase()]<=6);
+if(!c.length)continue;
+const m=c[Math.floor(Math.random()*c.length)],a=m[0],cap=a[0]===a[0].toUpperCase();
+const pool=V.filter(v=>v.toLowerCase()!==a.toLowerCase()&&Math.abs(v.length-a.length)<=3&&(v[0]===v[0].toUpperCase())===cap);
+if(pool.length<3)continue;
+const ds=new Set();let g=0;while(ds.size<3&&g++<80)ds.add(pool[Math.floor(Math.random()*pool.length)]);
+if(ds.size<3)continue;
+out.push({b:s.slice(0,m.index),e:s.slice(m.index+a.length),a,o:shuf([a,...ds])})}
+return out}
+/*ENDGEN*/
+let text='',N=10,Q=[],ix=0,sc=0,wrong=[];
+async function readPdf(file){const buf=await file.arrayBuffer(),pdf=await pdfjsLib.getDocument({data:buf}).promise;let t='';const n=Math.min(pdf.numPages,100);
+for(let p=1;p<=n;p++){const c=await(await pdf.getPage(p)).getTextContent();t+=c.items.map(i=>i.str).join(' ')+' '}return t}
+$('fi').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('us').textContent='PDF oxunur...';
+try{text=await readPdf(f);if(text.replace(/\s/g,'').length<300){$('us').textContent='Bu PDF-də oxuna bilən mətn yoxdur (şəkil kimi skan edilib).';return}cfg()}catch(err){$('us').textContent='PDF açılmadı. Başqa fayl yoxla.'}};
+function cfg(){$('chips').innerHTML='';[5,10,15,20].forEach(n=>{const b=document.createElement('button');b.textContent=n;b.className=n===N?'on':'';b.onclick=()=>{N=n;[...$('chips').children].forEach(x=>x.classList.toggle('on',x===b))};$('chips').appendChild(b)});$('gs').textContent='';show('sCfg')}
+function sample(t){t=t.replace(/\s+/g,' ');const w=3500;if(t.length<=14000)return t;return Array.from({length:4},()=>Math.floor(Math.random()*(t.length-w))).sort((a,b)=>a-b).map(i=>t.slice(i,i+w)).join(' ')}
+async function make(){const g=$('gs');g.textContent='AI suallar hazırlayır... (10-30 saniyə)';$('go').disabled=true;
+try{const r=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:sample(text),n:N})});let d={};try{d=await r.json()}catch(e){}
+if(r.status===404||r.status===405){g.textContent='Xəta: /api/generate tapılmadı. api/generate.js faylı repoda api qovluğunda olmalıdır və Vercel yenidən deploy etməlidir.';return null}
+if(r.status===429){g.textContent='Saatlıq limit doldu. Bir az sonra yenidən yoxla.';return null}
+if(!r.ok){g.textContent='Xəta ('+r.status+'): '+(d.error||'naməlum')+(d.detail?' | '+d.detail:'');return null}
+if(!d.questions||d.questions.length<3){g.textContent='AI uyğun sual qaytarmadı. Yenidən yoxla.';return null}
+return d.questions.map(x=>({t:x.q,a:x.o[x.a],o:shuf(x.o),x:x.x}))}
+catch(e){g.textContent='Serverə qoşulmaq alınmadı. Səhifə Vercel saytından açılmalıdır, telefona yüklənmiş fayldan yox.';return null}
+finally{$('go').disabled=false}}
+async function run(){const qs=await make();if(!qs)return;Q=qs;ix=0;sc=0;wrong=[];ask();show('sQ')}
+$('go').onclick=run;$('again').onclick=()=>{show('sCfg');run()};
+function ask(){const q=Q[ix];$('pg').textContent=(ix+1)+' / '+Q.length;$('scr').textContent='Xal: '+sc;$('pbi').style.width=ix/Q.length*100+'%';$('ex').textContent='';$('nx').style.display='none';
+$('qt').innerHTML=q.t?esc(q.t):esc(q.b)+'<u></u>'+esc(q.e);const b=$('op');b.innerHTML='';
+q.o.forEach(o=>{const x=document.createElement('button');x.textContent=o;x.onclick=()=>ans(x,o);b.appendChild(x)})}
+function ans(x,o){const q=Q[ix];[...$('op').children].forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add('ok')});
+if(o===q.a)sc++;else{x.classList.add('no');wrong.push(q)}
+$('ex').textContent=q.x?'💡 '+q.x:'';$('nx').textContent=ix+1<Q.length?'Növbəti':'Nəticəni gör';$('nx').style.display='block'}
+$('nx').onclick=()=>{++ix<Q.length?ask():end()};
+function end(){const p=Math.round(sc/Q.length*100);$('rs').textContent=sc+'/'+Q.length;
+$('rt').textContent=p>=90?'Möhtəşəm! 🔥':p>=70?'Yaxşı nəticə! 👏':p>=50?'Pis deyil, təkrar et':'Təkrar vaxtıdır 💪';
+$('rv').innerHTML=wrong.length?wrong.map(q=>'<div>'+esc(q.t||(q.b+'_____'+q.e))+'<br><b>'+esc(q.a)+'</b>'+(q.x?' · '+esc(q.x):'')+'</div>').join(''):'<p>Heç bir səhv yoxdur. Əla!</p>';show('sRes')}
+const back=()=>{$('fi').value='';$('us').textContent='';show('sUp')};$('other2').onclick=back;
+show('sUp');
+</script>
+</body>
+</html>
