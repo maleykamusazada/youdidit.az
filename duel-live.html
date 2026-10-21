@@ -122,13 +122,20 @@ const send=m=>{try{conn&&conn.open&&conn.send(m)}catch(e){}};
 function openRoom(c){code=c;peer=new Peer('ydi-'+c,ICE);
 peer.on('open',()=>{$('rc').textContent=c;$('lp').textContent='Bu kodu dostuna göndər:';$('ls').textContent='Dostun gözlənilir...';show('sLobby')});
 peer.on('error',e=>{if(e.type==='unavailable-id'){peer.destroy();openRoom(mkc())}else $('hs').textContent='Əlaqə xətası ('+e.type+'). Yenidən cəhd et.'});
-peer.on('connection',c2=>{if(conn){c2.close();return}conn=c2;wire()})}
+peer.on('connection',c2=>{if(conn){c2.close();return}conn=c2;wire()});
+/* telefon fona keçəndə siqnal bağlantısı kəsilir: avtomatik bərpa */
+peer.on('disconnected',()=>{try{peer.reconnect()}catch(e){}});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&peer&&peer.disconnected&&!peer.destroyed){try{peer.reconnect()}catch(e){}}})}
 $('mk').onclick=()=>{me=name();isHost=true;$('hs').textContent='Otaq açılır...';openRoom(mkc())};
 $('jn').onclick=()=>{const c=$('cd').value.trim();if(!/^\d{4}$/.test(c)){$('hs').textContent='4 rəqəmli kod yaz.';return}
 me=name();isHost=false;code=c;$('hs').textContent='Qoşulur...';peer=new Peer(undefined,ICE);
-peer.on('error',e=>{clearTimeout(window.jt);$('hs').textContent=e.type==='peer-unavailable'?'Belə otaq tapılmadı.':'Əlaqə xətası ('+e.type+').'});
-peer.on('open',()=>{conn=peer.connect('ydi-'+c,{reliable:true});wire();
-window.jt=setTimeout(()=>{if(!conn.open){$('hs').textContent='Qoşulmaq alınmadı. Yenidən cəhd et.';try{peer.destroy()}catch(e){}}},15000)})};
+let tries=0;
+const dial=()=>{conn=peer.connect('ydi-'+c,{reliable:true});wire();
+window.jt=setTimeout(()=>{if(!conn.open){$('hs').textContent='Qoşulmaq alınmadı. Yenidən cəhd et.';try{peer.destroy()}catch(e){}}},15000)};
+peer.on('error',e=>{clearTimeout(window.jt);
+if(e.type==='peer-unavailable'&&tries++<3){$('hs').textContent='Otaq axtarılır... ('+tries+'/3)';setTimeout(dial,2000);return}
+$('hs').textContent=e.type==='peer-unavailable'?'Belə otaq tapılmadı. Otaq yaradan şəxs səhifəni açıq saxlasın və kodu yoxla.':'Əlaqə xətası ('+e.type+').'});
+peer.on('open',dial)};
 function wire(){
 conn.on('open',()=>{clearTimeout(window.jt);send({t:'hi',n:me})});
 conn.on('data',d=>{
