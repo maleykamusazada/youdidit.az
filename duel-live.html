@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Canlı duel | YOU DID IT!</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<style>
+:root{--ink:#0d0a2b;--violet:#6d4aff;--lav:#b9a6ff;--gold:#ffcf5c;--red:#ff6b7f;--green:#5ee0a0;--text:#f4f1ff;--dim:#b8b0e0;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%;background:radial-gradient(120% 60% at 80% 0%,#3a2a9c 0%,transparent 60%),radial-gradient(90% 50% at 0% 100%,#2a1c7a 0%,transparent 60%),var(--ink);background-attachment:fixed;font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;color:var(--text);-webkit-tap-highlight-color:transparent}
+.app{max-width:460px;margin:0 auto;min-height:100dvh;padding:28px 22px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.scr{display:none;flex-direction:column;gap:16px}.scr.on{display:flex;animation:in .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(18px)}}
+.brand{font-weight:800;color:var(--lav);font-size:15px}
+h1{font-size:clamp(32px,10vw,46px);font-weight:800;line-height:1.05;letter-spacing:-.02em}
+p{color:var(--dim);font-size:17px;line-height:1.45;font-weight:500}
+.gold{color:var(--gold)}
+input{width:100%;padding:16px 18px;border-radius:16px;border:1.5px solid #b9a6ff55;background:#ffffff10;color:var(--text);font:700 17px inherit;font-family:inherit;outline:none}
+input:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btn{width:100%;padding:17px;border:0;border-radius:16px;background:var(--violet);color:#fff;font:800 17px inherit;font-family:inherit;box-shadow:0 10px 30px #6d4aff66;cursor:pointer}
+.btn.alt{background:#ffffff12;box-shadow:none;border:1.5px solid #b9a6ff55}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.code{font-size:clamp(56px,20vw,88px);font-weight:800;letter-spacing:.08em;text-align:center;color:var(--gold)}
+.chips{display:flex;gap:8px}.chips button{flex:1;padding:13px 0;border-radius:14px;border:1.5px solid #b9a6ff55;background:#ffffff10;color:var(--text);font:800 17px inherit;font-family:inherit;cursor:pointer}
+.chips button.on{background:var(--violet);border-color:var(--violet)}
+.st{text-align:center;font-weight:700;color:var(--lav);min-height:1.5em}
+.race{display:grid;gap:10px}
+.rc{display:grid;grid-template-columns:76px 1fr 36px;align-items:center;gap:10px;font-weight:800;font-size:14px}
+.rc .bar{height:10px;border-radius:10px;background:#ffffff1f;overflow:hidden}.rc .bar i{display:block;height:100%;width:0;border-radius:10px;transition:width .6s}
+.rc span:last-child{text-align:right}
+.tbw{height:8px;border-radius:8px;background:#ffffff22;overflow:hidden}.tb{height:100%;width:100%;background:linear-gradient(90deg,var(--gold),var(--red))}
+.top{display:flex;justify-content:space-between;font-weight:800;font-size:15px;color:var(--lav)}
+.q{font-size:clamp(26px,8vw,36px);font-weight:800;line-height:1.2;min-height:3.4em;display:flex;align-items:center}
+.op{display:grid;gap:12px}
+.op button{padding:17px;border-radius:16px;border:1.5px solid #b9a6ff44;background:#ffffff10;color:var(--text);font:700 19px inherit;font-family:inherit;text-align:left;cursor:pointer}
+.op button.ok{background:#5ee0a033;border-color:var(--green)}.op button.no{background:#ff6b7f33;border-color:var(--red)}
+.card{border-radius:24px;padding:22px;background:linear-gradient(160deg,#2a1f80cc,#14104a);border:1.5px solid #b9a6ff44;display:grid;gap:16px}
+.pl{display:grid;grid-template-columns:1fr auto;align-items:end;gap:4px 10px}
+.pl .nm{font-weight:800;font-size:17px}.pl .sc{font-weight:800;font-size:44px;line-height:1;text-align:right}.pl .sc small{font-size:18px;color:var(--dim)}.pl .tm{color:var(--dim);font-size:14px;font-weight:700}
+.sm{font-size:13px;color:var(--dim);text-align:center}
+@media (prefers-reduced-motion:reduce){.scr.on{animation:none}.tb,.rc .bar i{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+<div class="brand">youdidit.az</div>
+
+<section class="scr" id="sHome">
+<h1>Canlı duel <span class="gold">dostla eyni anda</span></h1>
+<p>Otaq yarat, kodu göndər. İkiniz də eyni sualı eyni anda görürsünüz.</p>
+<input id="nm" placeholder="Adın" maxlength="14" autocomplete="off" aria-label="Adın">
+<button class="btn" id="mk">Otaq yarat</button>
+<div class="row"><input id="cd" inputmode="numeric" maxlength="4" placeholder="Otaq kodu" aria-label="Otaq kodu"><button class="btn alt" id="jn">Qoşul</button></div>
+<div class="st" id="hs"></div>
+</section>
+
+<section class="scr" id="sLobby">
+<p id="lp">Bu kodu dostuna göndər:</p>
+<div class="code" id="rc">----</div>
+<div id="hostBox">
+<p style="margin-bottom:8px">Sual sayı:</p>
+<div class="chips" id="chips"></div>
+</div>
+<button class="btn alt" id="sh">Linki göndər</button>
+<button class="btn" id="st0" disabled>Rəqib gözlənilir...</button>
+<div class="st" id="ls"></div>
+</section>
+
+<section class="scr" id="sGame">
+<div class="top"><span id="pg"></span><span id="wt"></span></div>
+<div class="tbw"><div class="tb" id="tb"></div></div>
+<div class="q" id="qt"></div>
+<div class="op" id="op"></div>
+<div class="race" id="race"></div>
+</section>
+
+<section class="scr" id="sRes">
+<h1 id="vd"></h1>
+<div class="card" id="cdv"></div>
+<button class="btn" id="rm">Revanş</button>
+<div class="sm" id="rn"></div>
+<div class="sm">Daha çox test: youdidit-az.vercel.app</div>
+</section>
+</main>
+
+<script>
+/* Sual formatı: [sual, düzgün cavab, səhv1, səhv2]. Öz sual bazanızla əvəz edin. */
+const Q=[["She ___ a student.","is","am","are"],["I ___ breakfast at 8 every day.","have","has","having"],["There ___ two apples on the table.","are","is","be"],["What time ___ it?","is","are","do"],["He ___ football yesterday.","played","play","plays"],["___ you like coffee?","Do","Does","Is"],["This is ___ umbrella.","an","a","the"],["They ___ watching TV now.","are","is","am"],["My brother is ___ than me.","taller","tall","tallest"],["I ___ to Baku last year.","went","go","gone"],["She doesn't ___ milk.","drink","drinks","drinking"],["How ___ apples do you want?","many","much","more"],["He is good ___ maths.","at","in","on"],["If it rains, we ___ at home.","will stay","stay","stayed"],["She has lived here ___ 2020.","since","for","from"],["Where ___ you born?","were","was","are"],["I am interested ___ music.","in","on","at"],["I have ___ finished my homework.","already","ago","tomorrow"]];
+const LIM=15,COUNTS=[5,8,10,15],$=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rng=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+function pick(seed,n){const r=rng(seed),sh=a=>a.map(x=>[r(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);return sh(Q).slice(0,Math.min(n,Q.length)).map(x=>({q:x[0],a:x[1],o:sh(x.slice(1))}))}
+function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id===id))}
+let peer,conn,isHost=false,me='',opp='Rəqib',code='',N=8,seed,qs,ix,sc,tt,osc,ot,t0,tmr,safe,myDone,oppDone,adv,gone,playing=false;
+const name=()=>($('nm').value.trim()||'Dost').slice(0,14);
+const mkc=()=>String(Math.floor(1000+Math.random()*9000));
+const send=m=>{try{conn&&conn.open&&conn.send(m)}catch(e){}};
+
+/* otaq */
+function openRoom(c){code=c;peer=new Peer('ydi-'+c);
+peer.on('open',()=>{$('rc').textContent=c;$('lp').textContent='Bu kodu dostuna göndər:';$('ls').textContent='Dostun gözlənilir...';show('sLobby')});
+peer.on('error',e=>{if(e.type==='unavailable-id'){peer.destroy();openRoom(mkc())}else $('hs').textContent='Əlaqə xətası ('+e.type+'). Yenidən cəhd et.'});
+peer.on('connection',c2=>{if(conn){c2.close();return}conn=c2;wire()})}
+$('mk').onclick=()=>{me=name();isHost=true;$('hs').textContent='Otaq açılır...';openRoom(mkc())};
+$('jn').onclick=()=>{const c=$('cd').value.trim();if(!/^\d{4}$/.test(c)){$('hs').textContent='4 rəqəmli kod yaz.';return}
+me=name();isHost=false;code=c;$('hs').textContent='Qoşulur...';peer=new Peer();
+peer.on('error',e=>{$('hs').textContent=e.type==='peer-unavailable'?'Belə otaq tapılmadı.':'Əlaqə xətası ('+e.type+').'});
+peer.on('open',()=>{conn=peer.connect('ydi-'+c,{reliable:true});wire()})};
+function wire(){
+conn.on('open',()=>{send({t:'hi',n:me})});
+conn.on('data',d=>{
+if(d.t==='hi'){opp=String(d.n).slice(0,14);if(isHost){send({t:'hi',n:me});$('ls').textContent=opp+' qoşuldu!';$('st0').disabled=false;$('st0').textContent='Duelə başla'}else{$('rc').textContent=code;$('lp').textContent='Qoşuldun. Otaq sahibi:';$('ls').textContent=opp+' sualları seçib başlatacaq...';show('sLobby')}}
+else if(d.t==='start'){begin(d.seed,d.n)}
+else if(d.t==='ans'&&d.i===ix){oppDone=true;osc=d.sc;ot=d.tt;race();check()}});
+conn.on('close',()=>{gone=true;if(playing){oppDone=true;check()}else if(!isHost||$('sLobby').classList.contains('on')){$('ls').textContent=opp+' ayrıldı.'}})}
+/* paylaşma */
+$('sh').onclick=async()=>{const url=location.href.split('?')[0]+'?room='+code,text=me+' səni canlı duelə çağırır! Kod: '+code;try{if(navigator.share){await navigator.share({title:'YOU DID IT! Canlı duel',text,url});return}}catch(e){if(e.name==='AbortError')return}try{await navigator.clipboard.writeText(text+' '+url);$('sh').textContent='Link kopyalandı ✓'}catch(e){$('sh').textContent='Kod: '+code}};
+/* sual sayı */
+COUNTS.forEach(n=>{const b=document.createElement('button');b.textContent=n;b.className=n===N?'on':'';b.onclick=()=>{N=n;[...$('chips').children].forEach(x=>x.classList.toggle('on',x===b))};$('chips').appendChild(b)});
+$('st0').onclick=()=>{if(!isHost)return;const sd=Math.floor(Math.random()*1e9)+1;send({t:'start',seed:sd,n:N});begin(sd,N)};
+/* oyun */
+function begin(sd,n){seed=sd;qs=pick(sd,n);N=qs.length;ix=0;sc=0;tt=0;osc=0;ot=0;gone=gone&&false;playing=true;show('sGame');ask()}
+function race(){$('race').innerHTML=[[me,sc,'var(--gold)'],[opp,osc,'var(--violet)']].map(r=>'<div class="rc"><span>'+esc(r[0])+'</span><div class="bar"><i style="width:'+r[1]/N*100+'%;background:'+r[2]+'"></i></div><span>'+r[1]+'</span></div>').join('')}
+function ask(){const q=qs[ix];myDone=oppDone=adv=false;if(gone)oppDone=true;$('pg').textContent=(ix+1)+' / '+N;$('wt').textContent='';$('qt').textContent=q.q;const b=$('op');b.innerHTML='';q.o.forEach(o=>{const x=document.createElement('button');x.textContent=o;x.onclick=()=>ans(x,o);b.appendChild(x)});race();
+const bar=$('tb');bar.style.transition='none';bar.style.width='100%';void bar.offsetWidth;bar.style.transition='width '+LIM+'s linear';bar.style.width='0';t0=performance.now();clearTimeout(tmr);clearTimeout(safe);tmr=setTimeout(()=>ans(null,null),LIM*1000);safe=setTimeout(()=>{oppDone=true;check()},(LIM+4)*1000)}
+function ans(x,o){if(myDone)return;myDone=true;clearTimeout(tmr);const q=qs[ix];tt=+(tt+Math.min((performance.now()-t0)/1000,LIM)).toFixed(1);[...$('op').children].forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add('ok')});if(x){if(o===q.a)sc++;else x.classList.add('no')}
+send({t:'ans',i:ix,sc,tt});race();if(!oppDone)$('wt').textContent='Rəqib gözlənilir...';check()}
+function check(){if(!playing||adv||!(myDone&&oppDone))return;adv=true;clearTimeout(safe);setTimeout(()=>{++ix<N?ask():end()},900)}
+function row(n,s,t){return '<div class="pl"><span class="nm">'+esc(n)+'</span><span class="sc">'+s+'<small>/'+N+'</small></span><span class="tm">'+t.toFixed(1)+' san</span><span></span></div>'}
+function end(){playing=false;clearTimeout(tmr);clearTimeout(safe);const d=tt-ot,r=sc!==osc?(sc>osc?1:-1):(Math.abs(d)<.5?0:d<0?1:-1);
+$('vd').innerHTML=r>0?'Qalib sənsən! 🏆':r<0?esc(opp)+' qazandı':'Bərabərlik! 🤝';$('cdv').innerHTML=row(me,sc,tt)+row(opp,osc,ot);
+$('rm').style.display=isHost&&!gone?'block':'none';$('rn').textContent=gone?opp+' ayrıldı.':isHost?'':'Revanşı otaq sahibi başladır.';show('sRes')}
+$('rm').onclick=()=>{const sd=Math.floor(Math.random()*1e9)+1;send({t:'start',seed:sd,n:N});begin(sd,N)};
+/* linkdən giriş */
+const rp=new URLSearchParams(location.search).get('room');if(rp&&/^\d{4}$/.test(rp)){$('cd').value=rp;$('hs').textContent='Adını yaz və Qoşul düyməsinə bas.'}
+show('sHome');
+</script>
+</body>
+</html>
