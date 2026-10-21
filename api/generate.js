@@ -14,19 +14,24 @@ module.exports = async (req, res) => {
     'Suallar mətnin dilində olsun. "Boşluğu doldur" tipli sual yazma. Hər sual nə, niyə, necə, hansı, nəyə görə kimi real sual olsun və mətnin müxtəlif hissələrindən götürülsün. ' +
     'Hər sualın 4 variantı olsun, yalnız biri düzgün, səhvlər inandırıcı olsun. Düzgün cavabın yerini təsadüfi seç. Yalnız mətndə olan məlumata əsaslan. ' +
     'Hər sual üçün 1 cümləlik qısa izah yaz. Cavabı YALNIZ JSON massivi kimi ver: [{"q":"sual","o":["a","b","c","d"],"a":0,"x":"izah"}] ("a" düzgün variantın indeksidir).';
-  if (!process.env.ANTHROPIC_API_KEY) return res.status(500).json({ error: 'ANTHROPIC_API_KEY Vercel-də təyin edilməyib' });
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) return res.status(500).json({ error: 'GEMINI_API_KEY Vercel-də təyin edilməyib' });
+  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash-lite';
   try {
-    const r = await fetch('https://api.anthropic.com/v1/messages', {
+    const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
+      headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
       body: JSON.stringify({
-        model: 'claude-haiku-5-5', max_tokens: 4096, system,
-        messages: [{ role: 'user', content: count + ' sual hazırla. Təsadüfilik nömrəsi: ' + Math.floor(Math.random() * 1e6) + '\n\nMƏTN:\n' + text.slice(0, 15000) }]
+        systemInstruction: { parts: [{ text: system }] },
+        contents: [{ role: 'user', parts: [{ text: count + ' sual hazırla. Təsadüfilik nömrəsi: ' + Math.floor(Math.random() * 1e6) + '\n\nMƏTN:\n' + text.slice(0, 15000) }] }],
+        generationConfig: { responseMimeType: 'application/json', maxOutputTokens: 4096 }
       })
     });
+    if (r.status === 429) return res.status(429).json({ error: 'limit' });
     if (!r.ok) { const e = await r.text(); return res.status(502).json({ error: 'AI xətası ' + r.status, detail: e.slice(0, 160) }); }
     const d = await r.json();
-    const raw = (d.content && d.content[0] && d.content[0].text) || '';
+    const p = d.candidates && d.candidates[0] && d.candidates[0].content && d.candidates[0].content.parts;
+    const raw = (p && p[0] && p[0].text) || '';
     const arr = JSON.parse((raw.match(/\[[\s\S]*\]/) || ['[]'])[0]);
     const questions = arr.filter(x => x && typeof x.q === 'string' && Array.isArray(x.o) && x.o.length >= 3 && Number.isInteger(x.a) && x.o[x.a] !== undefined)
       .slice(0, count).map(x => ({ q: x.q, o: x.o.map(String), a: x.a, x: String(x.x || '') }));
