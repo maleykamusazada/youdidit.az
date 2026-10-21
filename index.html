@@ -123,6 +123,11 @@ button{font-family:inherit}
 .service-card p{color:#9299ba;font-size:11px;line-height:1.65}
 .service-arrow{position:absolute;right:18px;bottom:17px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.07)}
 
+/* NEW FEATURES */
+.new-box{padding:35px;border-radius:27px;background:radial-gradient(circle at 90% 0%,rgba(244,83,197,.14),transparent 34%),linear-gradient(135deg,#0c122d,#090b1e);border:1px solid rgba(255,255,255,.09)}
+.new-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:25px}
+.new-pill{display:inline-block;padding:3px 8px;margin-left:8px;border-radius:999px;background:linear-gradient(135deg,#f653c5,#a454ff);font-size:9px;font-weight:800;vertical-align:middle}
+
 /* INTERNATIONAL COURSES */
 .course-box{position:relative;overflow:hidden;border-radius:28px;padding:42px;border:1px solid rgba(144,108,255,.27);background:radial-gradient(circle at 88% 20%,rgba(164,92,255,.34),transparent 34%),radial-gradient(circle at 10% 100%,rgba(57,124,255,.16),transparent 35%),linear-gradient(135deg,#101438,#190d37)}
 .course-content{max-width:700px}
@@ -207,10 +212,11 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07);margin-top:20px
   .section{padding:60px 0}
   .section-head{display:block}
   .section-head .btn{margin-top:18px}
-  .exam-wrapper,.language-box,.course-box,.tests-box,.psychology-box,.cta{padding:25px 18px}
+  .exam-wrapper,.language-box,.new-box,.course-box,.tests-box,.psychology-box,.cta{padding:25px 18px}
   .exam-grid{grid-template-columns:1fr}
   .language-grid{grid-template-columns:repeat(2,1fr)}
   .services-grid{grid-template-columns:1fr}
+  .new-grid{grid-template-columns:1fr}
   .subject-grid{grid-template-columns:repeat(2,1fr)}
   .psychology-cards{grid-template-columns:1fr}
   .why-grid{grid-template-columns:1fr 1fr}
@@ -241,6 +247,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07);margin-top:20px
       <a href="aletler.html">Alətlər</a>
       <a href="lavazimatlar.html">Ləvazimatlar</a>
       <a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a>
+      <a href="#yeni">✨ Yeni</a>
       <a href="#services">Xidmətlər</a>
     </div>
 
@@ -260,6 +267,8 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07);margin-top:20px
     <a href="aletler.html">🧰 Alətlər</a>
     <a href="lavazimatlar.html">🛍️ Ləvazimatlar</a>
     <a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a>
+    <a href="pdf-imtahan.html">📄 PDF-dən imtahan</a>
+    <a href="duel-live.html">⚔️ Dostla canlı duel</a>
     <a href="#services">Xidmətlər</a>
     <a href="order.html" class="mobile-order">Sifariş et →</a>
   </div>
@@ -427,6 +436,47 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07);margin-top:20px
             <span class="exam-tag">Practice</span>
           </div>
           <span class="exam-link">Səviyyəni yoxla →</span>
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- NEW FEATURES -->
+
+<section class="section" id="yeni" style="padding-top:30px;">
+
+  <div class="container">
+
+    <div class="new-box">
+
+      <div class="section-label">YENİ İMKANLAR</div>
+
+      <h2 class="section-title">Sənə özəl imtahan, dostla yarış.</h2>
+
+      <p class="section-description">
+        Öz materialından imtahan hazırla və ya dostunla
+        eyni anda eyni suallarla yarış.
+      </p>
+
+      <div class="new-grid">
+
+        <a href="pdf-imtahan.html" class="service-card" style="--i1:#7656ff;--i2:#b452ff;">
+          <div class="service-icon">📄</div>
+          <h3>PDF-dən imtahan <span class="new-pill">YENİ</span></h3>
+          <p>Konspektini yüklə, süni intellekt real çoxvariantlı suallar hazırlasın və hər cavabı izah etsin.</p>
+          <div class="service-arrow">→</div>
+        </a>
+
+        <a href="duel-live.html" class="service-card" style="--i1:#f653c5;--i2:#9e52ff;">
+          <div class="service-icon">⚔️</div>
+          <h3>Dostla canlı duel <span class="new-pill">YENİ</span></h3>
+          <p>Otaq yarat, kodu dostuna göndər və eyni suallarla eyni anda yarışın. Qalib sürətə və düzgün cavaba görə seçilir.</p>
+          <div class="service-arrow">→</div>
         </a>
 
       </div>
@@ -926,6 +976,8 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07);margin-top:20px
       <a href="sinaqlar.html">Sinif sınaqları</a>
       <a href="lavazimatlar.html">Ləvazimatlar</a>
       <a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a>
+      <a href="pdf-imtahan.html">📄 PDF-dən imtahan</a>
+      <a href="duel-live.html">⚔️ Canlı duel</a>
       <a href="order.html">Sifariş</a>
       <a href="mailto:youdidit.az@gmail.com">✉ youdidit.az@gmail.com</a>
       <a href="https://www.instagram.com/youdidit.az/" target="_blank" rel="noopener">◎ @youdidit.az</a>
@@ -971,7 +1023,6 @@ document.querySelectorAll("#mobileMenu a").forEach(function(link){
 <!-- VERCEL WEB ANALYTICS -->
 <script defer src="/_vercel/insights/script.js"></script>
 
-<script defer src="/_vercel/insights/script.js"></script>
 </body>
 
 </html>
