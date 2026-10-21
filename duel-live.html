@@ -162,7 +162,7 @@ $('st0').disabled=true;
 try{const k=N<=20?1:Math.ceil(N/17),per=N<=20?N:Math.min(20,Math.ceil(N/k)+2),all=[],seen=new Set();
 for(let i=0;i<k;i++){stat('AI suallar hazırlayır... '+(k>1?(i+1)+'/'+k+' ':'')+'(10-30 san)');
 const r=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:sample(pdfText),n:per})});let d={};try{d=await r.json()}catch(e){}
-if(!r.ok){if(all.length>=5)break;stat(r.status===429?'Limit doldu, bir az sonra yenidən yoxla.':'Sual yaratmaq alınmadı ('+r.status+').');return null}
+if(!r.ok){if(all.length>=5)break;stat(r.status===429?'Limit doldu, bir az sonra yenidən yoxla.':'Sual yaratmaq alınmadı ('+r.status+') '+String(d.detail||d.error||'').slice(0,160));return null}
 (d.questions||[]).forEach(x=>{const key=x.q.toLowerCase().slice(0,40);if(!seen.has(key)){seen.add(key);all.push(x)}})}
 if(all.length<3){stat('Sual yaratmaq alınmadı.');return null}
 stat('');return all.slice(0,N).map(x=>({t:x.q,a:x.o[x.a],o:shuf(x.o),x:x.x||''}))}
