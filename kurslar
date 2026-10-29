@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="az"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kurslar — Youdidit.az</title>
+<meta name="description" content="Youdidit.az kursları: interaktiv dərslər, testlər, AI ilə yoxlanan tapşırıqlar və sertifikat.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050713;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.14),transparent 30%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.09),transparent 28%),var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}.container{width:min(1180px,calc(100% - 32px));margin:auto}
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-family:'Sora',sans-serif;font-size:23px;font-weight:800;letter-spacing:-1px}.logo span{color:#9d65ff}
+.nav-links{display:flex;align-items:center;gap:22px}.nav-links a{color:#c2c6df;font-size:12px;font-weight:600;transition:.25s}.nav-links a:hover,.nav-links a.on{color:#fff}
+.nav-button{padding:10px 19px;border-radius:999px;background:linear-gradient(135deg,#6b52ff,#a34eff);font-size:12px;font-weight:800;box-shadow:0 8px 25px rgba(118,81,255,.28);white-space:nowrap}
+.menu-toggle{display:none;width:42px;height:42px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.05);color:#fff;font-size:21px;cursor:pointer;align-items:center;justify-content:center}
+.mobile-menu{display:none;padding:10px 0 18px}.mobile-menu.active{display:block}
+.mobile-menu a{display:block;padding:13px 15px;margin-top:5px;border-radius:12px;color:#c2c6df;font-size:13px;font-weight:600;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}
+.mobile-menu .mobile-order{margin-top:10px;text-align:center;color:#fff;background:linear-gradient(135deg,#6b52ff,#a34eff);border-color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 21px;border-radius:14px;font-size:13px;font-weight:800;transition:.3s}
+.btn-primary{background:linear-gradient(135deg,#5d55ff,#a84fff);box-shadow:0 12px 35px rgba(118,81,255,.32)}.btn-primary:hover{transform:translateY(-3px)}
+.head{padding:70px 0 30px}.label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+h1{font-family:'Sora',sans-serif;font-size:clamp(32px,5vw,52px);letter-spacing:-2px;line-height:1.1}
+.sub{max-width:600px;color:var(--muted);font-size:14px;line-height:1.75;margin-top:14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:20px 0 70px}
+a.course{display:flex;color:inherit}.course{position:relative;overflow:hidden;padding:26px;border-radius:24px;border:1px solid var(--border);background:radial-gradient(circle at 90% 0%,rgba(118,81,255,.25),transparent 40%),linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015)),var(--card);transition:.35s;display:flex;flex-direction:column}
+.course:hover{transform:translateY(-6px);border-color:rgba(151,113,255,.45);box-shadow:0 25px 60px rgba(0,0,0,.35)}
+.ico{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:15px;background:linear-gradient(135deg,#7656ff,#b452ff);font-size:24px;margin-bottom:18px}
+.course h3{font-family:'Sora',sans-serif;font-size:18px;margin-bottom:8px}.course p{color:#9aa1c2;font-size:12px;line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 20px}.tag{padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#c6cae0;font-size:10px;font-weight:700}
+.course .btn{margin-top:auto}.soon{opacity:.6}.soon .ico{background:rgba(255,255,255,.08)}
+.badge{position:absolute;top:18px;right:18px;padding:5px 10px;border-radius:999px;background:rgba(32,211,163,.14);border:1px solid rgba(32,211,163,.35);color:#6fe9c6;font-size:10px;font-weight:800}
+footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.07)}.fi{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.fb{font-family:'Sora',sans-serif;font-weight:800}.fb span{color:#9b68ff}.fd{color:#7f86a8;font-size:10px;margin-top:5px}
+.fl{display:flex;flex-wrap:wrap;gap:17px;justify-content:center}.fl a{color:#9299b9;font-size:10px}.fl a:hover{color:#fff}
+@media(max-width:1000px){.nav-links,.nav-button{display:none}.menu-toggle{display:flex}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.container{width:calc(100% - 24px)}.grid{grid-template-columns:1fr}.fi{flex-direction:column;text-align:center}}
+</style></head><body>
+<nav class="navbar"><div class="container nav-inner">
+<a href="index.html" class="logo">Youdidit<span>.az</span></a>
+<div class="nav-links"><a href="index.html">Ana səhifə</a><a href="index.html#exams">İmtahanlar</a><a href="kurslar.html" class="on">Kurslar</a><a href="resources.html">Resurslar</a><a href="sinif-testleri.html">Sinif testləri</a><a href="aletler.html">Alətlər</a><a href="lavazimatlar.html">Ləvazimatlar</a><a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a><a href="index.html#services">Xidmətlər</a></div>
+<a href="order.html" class="nav-button">Sifariş et →</a>
+<button class="menu-toggle" id="mt" aria-label="Menyu" aria-expanded="false" type="button">☰</button></div>
+<div class="container mobile-menu" id="mm"><a href="index.html">Ana səhifə</a><a href="index.html#exams">İmtahanlar</a><a href="kurslar.html">Kurslar</a><a href="resources.html">Resurslar</a><a href="sinif-testleri.html">Sinif testləri</a><a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a><a href="index.html#services">Xidmətlər</a><a href="order.html" class="mobile-order">Sifariş et →</a></div></nav>
+<section class="head"><div class="container"><div class="label">KURSLAR</div><h1>Öyrən, yoxla, <span style="background:linear-gradient(90deg,#fff,#9a70ff,#c45aff);-webkit-background-clip:text;background-clip:text;color:transparent">sertifikat qazan.</span></h1>
+<p class="sub">İnteraktiv dərslər, testlər və AI ilə yoxlanan yazılı tapşırıqlar. Kursu bitirəndə unikal kodlu sertifikat alırsan.</p></div></section>
+<section><div class="container"><div class="grid">
+<a href="ir-kursu.html" class="course"><span class="badge">YENİ</span><div class="ico" style="background:linear-gradient(135deg,#7656ff,#b452ff)">👥</div><h3>İnsan resursları (HR) kursu</h3><p>Sıfırdan: işə qəbul, adaptasiya, Əmək Məcəlləsi, əmək haqqı və vergilər, Excel, KPI/OKR, təlim, kompensasiya və əmək təhlükəsizliyi.</p><div class="tags"><span class="tag">10 modul</span><span class="tag">46 dərs</span><span class="tag">Sertifikat</span></div><span class="btn btn-primary">Kursa başla →</span></a>
+<a href="huquq-kursu.html" class="course"><span class="badge">YENİ</span><div class="ico" style="background:linear-gradient(135deg,#7651ff,#397cff)">⚖️</div><h3>Hüquq kursu</h3><p>Müqavilələr, borc, əmək, ailə və miras, istehlakçı və rəqəmsal hüquqlar, inzibati məsuliyyət, hüquqi sənədlər və məhkəmə yolu. Təcrübi hallarla.</p><div class="tags"><span class="tag">7 modul</span><span class="tag">21 dərs</span><span class="tag">Sertifikat</span></div><span class="btn btn-primary">Kursa başla →</span></a>
+<a href="ekologiya-kursu.html" class="course"><span class="badge">YENİ</span><div class="ico" style="background:linear-gradient(135deg,#0cbd91,#28d9aa)">🌱</div><h3>Ekologiya və ətraf mühit</h3><p>Ekosistem, iqlim dəyişikliyi, su və hava, tullantılar, enerji, ekoloji hüquq və şirkətlər üçün tətbiq.</p><div class="tags"><span class="tag">7 modul</span><span class="tag">21 dərs</span><span class="tag">Sertifikat</span></div><span class="btn btn-primary">Kursa başla →</span></a>
+<a href="smm-kursu.html" class="course"><span class="badge">YENİ</span><div class="ico" style="background:linear-gradient(135deg,#f653c5,#9e52ff)">📱</div><h3>SMM və sosial media reklamı</h3><p>Strategiya, kontent, platformalar, Meta Ads, TikTok Ads, Google Ads, analitika və hüquq.</p><div class="tags"><span class="tag">8 modul</span><span class="tag">24 dərs</span><span class="tag">Sertifikat</span></div><span class="btn btn-primary">Kursa başla →</span></a>
+<div class="course soon"><div class="ico">✦</div><h3>Yeni kurslar tezliklə</h3><p>Yeni kurs əlavə olunduqca bu bölmədə görünəcək.</p><div class="tags"><span class="tag">Tezliklə</span></div></div>
+</div></div></section>
+<footer><div class="container fi"><div><div class="fb">Youdidit<span>.az</span></div><div class="fd">Təhsil • İmtahan • Karyera • İnkişaf</div></div>
+<div class="fl"><a href="index.html#exams">İmtahanlar</a><a href="kurslar.html">Kurslar</a><a href="resources.html">Resurslar</a><a href="sinif-testleri.html">Testlər</a><a href="order.html">Sifariş</a><a href="mailto:youdidit.az@gmail.com">✉ youdidit.az@gmail.com</a><a href="https://www.instagram.com/youdidit.az/" target="_blank" rel="noopener">◎ @youdidit.az</a></div></div></footer>
+<script>var mt=document.getElementById("mt"),mm=document.getElementById("mm");mt.addEventListener("click",function(){var o=mm.classList.toggle("active");mt.textContent=o?"✕":"☰";mt.setAttribute("aria-expanded",o)});</script>
+</body></html>
