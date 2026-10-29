@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sinif otağı | YOU DID IT!</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+:root{--ink:#0d0a2b;--violet:#6d4aff;--lav:#b9a6ff;--gold:#ffcf5c;--red:#ff6b7f;--green:#5ee0a0;--text:#f4f1ff;--dim:#b8b0e0;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%;background:radial-gradient(120% 60% at 80% 0%,#3a2a9c 0%,transparent 60%),radial-gradient(90% 50% at 0% 100%,#2a1c7a 0%,transparent 60%),var(--ink);background-attachment:fixed;font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;color:var(--text);-webkit-tap-highlight-color:transparent}
+.app{max-width:720px;margin:0 auto;min-height:100dvh;padding:26px 20px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.scr{display:none;flex-direction:column;gap:16px}.scr.on{display:flex;animation:in .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(18px)}}
+.brand{font-weight:800;color:var(--lav);font-size:15px}
+h1{font-size:clamp(30px,8vw,46px);font-weight:800;line-height:1.06;letter-spacing:-.02em}
+p{color:var(--dim);font-size:16px;line-height:1.5;font-weight:500}
+.gold{color:var(--gold)}
+input{width:100%;padding:16px 18px;border-radius:16px;border:1.5px solid #b9a6ff55;background:#ffffff10;color:var(--text);font:700 17px inherit;font-family:inherit;outline:none}
+input:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btn{width:100%;padding:17px;border:0;border-radius:16px;background:var(--violet);color:#fff;font:800 17px inherit;font-family:inherit;box-shadow:0 10px 30px #6d4aff66;cursor:pointer}
+.btn.alt{background:#ffffff12;box-shadow:none;border:1.5px solid #b9a6ff55}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.card{border-radius:22px;padding:20px;background:linear-gradient(160deg,#2a1f80cc,#14104a);border:1.5px solid #b9a6ff44;display:grid;gap:12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chips button{flex:1;min-width:52px;padding:13px 0;border-radius:14px;border:1.5px solid #b9a6ff55;background:#ffffff10;color:var(--text);font:800 16px inherit;font-family:inherit;cursor:pointer}
+.chips button.on{background:var(--violet);border-color:var(--violet)}
+.drop{display:grid;place-items:center;text-align:center;padding:16px;border-radius:16px;border:2px dashed #b9a6ff77;background:#ffffff0d;font-weight:800;cursor:pointer}
+input[type=file]{position:absolute;opacity:0;width:1px;height:1px}
+.drop:focus-within{outline:3px solid var(--gold);outline-offset:2px}
+.st{text-align:center;font-weight:700;color:var(--lav);min-height:1.4em}
+.code{font-size:clamp(64px,22vw,120px);font-weight:800;letter-spacing:.08em;text-align:center;color:var(--gold)}
+.pls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.pls span{padding:8px 14px;border-radius:99px;background:#6d4aff33;border:1px solid #b9a6ff55;font-weight:700;font-size:14px}
+.top{display:flex;justify-content:space-between;font-weight:800;font-size:15px;color:var(--lav)}
+.tbw{height:8px;border-radius:8px;background:#ffffff22;overflow:hidden}.tb{height:100%;width:100%;background:linear-gradient(90deg,var(--gold),var(--red))}
+.q{font-size:clamp(24px,6.5vw,38px);font-weight:800;line-height:1.25;min-height:2.6em;display:flex;align-items:center}
+.opg{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:620px){.opg.t{grid-template-columns:1fr 1fr}}
+.o0{--c:#6d4aff}.o1{--c:#ffcf5c}.o2{--c:#5ee0a0}.o3{--c:#ff6b7f}
+.opt,.opg button{padding:16px;border-radius:16px;border:1.5px solid #b9a6ff44;border-left:8px solid var(--c);background:#ffffff10;color:var(--text);font:700 18px inherit;font-family:inherit;text-align:left;cursor:pointer}
+.opt{cursor:default}.opt b{color:var(--c);margin-right:8px}.opg button b{color:var(--c);margin-right:8px}
+.opt.right{background:#5ee0a033;border-color:var(--green)}.opt.wrong{opacity:.4}
+.opg button.sel{background:#6d4aff55;border-color:var(--lav)}
+.ex{font-weight:700;color:var(--lav);font-size:16px;line-height:1.4;min-height:1.4em}
+.bd{display:grid;gap:8px}.bd div{display:grid;grid-template-columns:34px 1fr auto;gap:8px;align-items:center;padding:12px 14px;border-radius:14px;background:#ffffff10;font-weight:700}
+.bd div:first-child{background:#ffcf5c30;border:1px solid var(--gold)}
+.bd b{color:var(--gold)}
+.big{font-size:clamp(64px,20vw,110px);font-weight:800;line-height:1;text-align:center}
+.sm{font-size:13px;color:var(--dim);text-align:center}
+@media (prefers-reduced-motion:reduce){.scr.on{animation:none}.tb{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+<div class="brand">youdidit.az / Sinif otağı</div>
+
+<section class="scr" id="sHome">
+<h1>Sinif otağı <span class="gold">canlı yarış</span></h1>
+<p>Müəllim kod yaradır, şagirdlər telefonla qoşulur, suallar hamıda eyni anda çıxır və canlı reytinq göstərilir.</p>
+<div class="card"><b>Şagirdsən?</b>
+<input id="nm" placeholder="Adın" maxlength="14" autocomplete="off" aria-label="Adın">
+<input id="cd" inputmode="numeric" maxlength="4" placeholder="Otaq kodu" aria-label="Otaq kodu">
+<button class="btn" id="jn">Qoşul</button></div>
+<button class="btn alt" id="tch">Müəllimsən? Otaq yarat</button>
+<div class="st" id="hs"></div>
+</section>
+
+<section class="scr" id="sSetup">
+<h1>Otaq yarat</h1>
+<p>Suallar haradan olsun?</p>
+<div class="chips" id="src"><button class="on" data-s="s">Nümunə</button><button data-s="p">📄 PDF yüklə</button></div>
+<label class="drop" id="dropL" style="display:none"><input type="file" id="fi" accept="application/pdf,.pdf"><span id="fn">PDF seç</span></label>
+<p>Sual sayı:</p><div class="chips" id="cnt"></div>
+<p>Hər sual üçün vaxt (saniyə):</p><div class="chips" id="tim"></div>
+<button class="btn" id="mk">Otaq yarat</button>
+<div class="st" id="ss"></div>
+</section>
+
+<section class="scr" id="sLobbyT">
+<p style="text-align:center">Şagirdlər bu kodla qoşulsun:</p>
+<div class="code" id="rc">----</div>
+<button class="btn alt" id="sh">Linki göndər</button>
+<div class="pls" id="pls"></div>
+<div class="st" id="pc">Şagird gözlənilir...</div>
+<button class="btn" id="go" disabled>Oyunu başlat</button>
+<div class="st" id="ls"></div>
+</section>
+
+<section class="scr" id="sQT">
+<div class="top"><span id="tq"></span><span id="ta"></span></div>
+<div class="tbw"><div class="tb" id="ttb"></div></div>
+<div class="q" id="tqt"></div>
+<div class="opg t" id="tog"></div>
+<div class="ex" id="tex"></div>
+<div class="bd" id="tbd"></div>
+<button class="btn" id="nx" style="display:none">Növbəti</button>
+</section>
+
+<section class="scr" id="sEndT">
+<h1>Final 🏆</h1>
+<div class="bd" id="pod"></div>
+<button class="btn" id="again">Yeni oyun</button>
+</section>
+
+<section class="scr" id="sWaitS">
+<h1 id="wt"></h1>
+<p id="wp"></p>
+</section>
+
+<section class="scr" id="sQS">
+<div class="top"><span id="sqn"></span><span id="sme"></span></div>
+<div class="tbw"><div class="tb" id="stb"></div></div>
+<div class="q" id="sqt"></div>
+<div class="opg" id="sog"></div>
+<div class="st" id="sst"></div>
+</section>
+
+<section class="scr" id="sResS">
+<div class="big" id="rsI"></div>
+<h1 id="rsT" style="text-align:center"></h1>
+<p id="rsP" style="text-align:center"></p>
+<div class="ex" id="rsX" style="text-align:center"></div>
+<div class="card" id="rsR" style="text-align:center"></div>
+</section>
+
+<section class="scr" id="sEndS">
+<h1 style="text-align:center">Oyun bitdi</h1>
+<div class="big gold" id="enR"></div>
+<div class="card" id="enC" style="text-align:center"></div>
+</section>
+</main>
+
+<script>
+/* Sual formatı: [sual, düzgün cavab, səhv1, səhv2]. Nümunə rejimi üçün. */
+const Q=[["She ___ a student.","is","am","are"],["I ___ breakfast at 8 every day.","have","has","having"],["There ___ two apples on the table.","are","is","be"],["What time ___ it?","is","are","do"],["He ___ football yesterday.","played","play","plays"],["___ you like coffee?","Do","Does","Is"],["This is ___ umbrella.","an","a","the"],["They ___ watching TV now.","are","is","am"],["My brother is ___ than me.","taller","tall","tallest"],["I ___ to Baku last year.","went","go","gone"],["She doesn't ___ milk.","drink","drinks","drinking"],["How ___ apples do you want?","many","much","more"],["He is good ___ maths.","at","in","on"],["If it rains, we ___ at home.","will stay","stay","stayed"],["She has lived here ___ 2020.","since","for","from"],["Where ___ you born?","were","was","are"],["I am interested ___ music.","in","on","at"],["I have ___ finished my homework.","already","ago","tomorrow"]];
+const $=id=>document.getElementById(id),MAXP=40;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+const pick=n=>shuf(Q).slice(0,Math.min(n,Q.length)).map(x=>({t:x[0],a:x[1],o:shuf(x.slice(1)),x:''}));
+function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id===id))}
+function bar(el,s){el.style.transition='none';el.style.width='100%';void el.offsetWidth;el.style.transition='width '+s+'s linear';el.style.width='0'}
+const send=(c,m)=>{try{c&&c.open&&c.send(m)}catch(e){}};
+const bcast=m=>players.forEach(p=>send(p.conn,m));
+const mkc=()=>String(Math.floor(1000+Math.random()*9000));
+let peer,conn,code='',me='',players=new Map(),qs=[],ix=-1,N=10,LIM=15,src='s',pdfText='',qStart=0,tmr,open=false,started=false,myIx=-1,answered=false,ended=false;
+
+/* ---------- ortaq: chip düymələri ---------- */
+function chips(id,arr,get,set){const box=$(id);arr.forEach(v=>{const b=document.createElement('button');b.textContent=v;b.className=v===get()?'on':'';b.onclick=()=>{set(v);[...box.children].forEach(x=>x.classList.toggle('on',x===b))};box.appendChild(b)})}
+chips('cnt',[5,10,15,30,50],()=>N,v=>N=v);
+chips('tim',[10,15,20,30],()=>LIM,v=>LIM=v);
+function lockChips(){const cs=[...$('cnt').children];cs.forEach(b=>{const n=+b.textContent,off=src==='s'&&n>Q.length;b.disabled=off;b.style.opacity=off?.35:1;if(off&&b.classList.contains('on')){N=15;cs.forEach(x=>x.classList.toggle('on',+x.textContent===15))}})}
+
+/* ---------- müəllim: mənbə, PDF, AI ---------- */
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const stat=t=>{$('ls').textContent=t;$('ss').textContent=t};
+async function readPdf(f){const pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise;let t='';for(let i=1;i<=Math.min(pdf.numPages,100);i++){const c=await(await pdf.getPage(i)).getTextContent();t+=c.items.map(x=>x.str).join(' ')+' '}return t}
+function sample(t){t=t.replace(/\s+/g,' ');const w=3500;if(t.length<=14000)return t;return Array.from({length:4},()=>Math.floor(Math.random()*(t.length-w))).sort((a,b)=>a-b).map(i=>t.slice(i,i+w)).join(' ')}
+$('src').onclick=e=>{const b=e.target.closest('button');if(!b)return;src=b.dataset.s;[...$('src').children].forEach(x=>x.classList.toggle('on',x===b));$('dropL').style.display=src==='p'?'grid':'none';lockChips()};
+$('fi').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('fn').textContent='Oxunur...';try{pdfText=await readPdf(f);if(pdfText.replace(/\s/g,'').length<300){pdfText='';$('fn').textContent='Bu PDF-də mətn yoxdur. Başqasını seç.'}else $('fn').textContent='✓ '+f.name.slice(0,28)}catch(err){pdfText='';$('fn').textContent='PDF açılmadı'}};
+async function buildQs(){if(src==='s')return pick(N);
+try{const k=N<=20?1:Math.ceil(N/17),per=N<=20?N:Math.min(20,Math.ceil(N/k)+2),all=[],seen=new Set();
+for(let i=0;i<k;i++){stat('AI suallar hazırlayır... '+(k>1?(i+1)+'/'+k+' ':'')+'(10-30 san)');
+const r=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:sample(pdfText),n:per})});let d={};try{d=await r.json()}catch(e){}
+if(!r.ok){if(all.length>=5)break;stat(r.status===429?'Limit doldu, bir az sonra yenidən yoxla.':'Sual yaratmaq alınmadı ('+r.status+').');return null}
+(d.questions||[]).forEach(x=>{const key=x.q.toLowerCase().slice(0,40);if(!seen.has(key)){seen.add(key);all.push(x)}})}
+if(all.length<3){stat('Sual yaratmaq alınmadı.');return null}
+stat('');return all.slice(0,N).map(x=>({t:x.q,a:x.o[x.a],o:shuf(x.o),x:x.x||''}))}
+catch(e){stat('Serverə qoşulmaq alınmadı.');return null}}
+
+/* ---------- müəllim: otaq ---------- */
+$('tch').onclick=()=>show('sSetup');
+$('mk').onclick=()=>{if(src==='p'&&!pdfText){$('ss').textContent='Əvvəlcə PDF seç.';return}$('mk').disabled=true;$('ss').textContent='Otaq açılır...';openRoom(mkc())};
+function openRoom(c){code=c;peer=new Peer('ydc-'+c);
+peer.on('open',()=>{$('rc').textContent=c;renderPl();show('sLobbyT')});
+peer.on('error',e=>{if(e.type==='unavailable-id'){peer.destroy();openRoom(mkc())}else{$('mk').disabled=false;$('ss').textContent='Əlaqə xətası ('+e.type+'). Yenidən cəhd et.'}});
+peer.on('connection',c2=>{c2.on('data',d=>onT(c2,d));c2.on('close',()=>{const p=players.get(c2.peer);if(p){p.gone=true;if(!started)players.delete(c2.peer);renderPl();if(open)chkAll()}})})}
+function onT(c2,d){
+if(d.t==='join'){if(started){send(c2,{t:'late'});return}if(players.size>=MAXP){send(c2,{t:'full'});return}
+let base=String(d.n||'Şagird').slice(0,14),n=base,k=2;const names=[...players.values()].map(p=>p.n);while(names.includes(n))n=base+' '+k++;
+players.set(c2.peer,{conn:c2,n,s:0,a:null,gone:false,last:null});send(c2,{t:'ok',n});renderPl()}
+else if(d.t==='ans'){const p=players.get(c2.peer);if(p)handleAns(p,d)}}
+const live=()=>[...players.values()].filter(p=>!p.gone);
+function renderPl(){const L=live();$('pls').innerHTML=L.map(p=>'<span>'+esc(p.n)+'</span>').join('');$('pc').textContent=L.length?L.length+' şagird qoşulub':'Şagird gözlənilir...';$('go').disabled=started||L.length<1}
+$('sh').onclick=async()=>{const url=location.href.split('?')[0]+'?room='+code,text='Sinif otağına qoşul! Kod: '+code;try{if(navigator.share){await navigator.share({title:'YOU DID IT! Sinif otağı',text,url});return}}catch(e){if(e.name==='AbortError')return}try{await navigator.clipboard.writeText(text+' '+url);$('sh').textContent='Link kopyalandı ✓'}catch(e){$('sh').textContent='Kod: '+code}};
+$('go').onclick=async()=>{if(started)return;$('go').disabled=true;const q=await buildQs();if(!q){renderPl();return}qs=q;started=true;stat('');next()};
+function next(){ix++;if(ix>=qs.length)return finish();const q=qs[ix];players.forEach(p=>{p.a=null});open=true;qStart=performance.now();
+bcast({t:'q',i:ix,n:qs.length,q:q.t,o:q.o,lim:LIM});
+$('tq').textContent=(ix+1)+' / '+qs.length;$('tqt').textContent=q.t;$('tog').innerHTML=q.o.map((o,i)=>'<div class="opt o'+i+'"><b>'+'ABCD'[i]+'</b>'+esc(o)+'</div>').join('');$('tex').textContent='';$('tbd').innerHTML='';$('nx').style.display='none';
+bar($('ttb'),LIM);cntAns();show('sQT');clearTimeout(tmr);tmr=setTimeout(closeQ,LIM*1000+800)}
+function cntAns(){const L=live();$('ta').textContent=L.filter(p=>p.a).length+' / '+L.length+' cavab'}
+function chkAll(){cntAns();const L=live();if(open&&L.length&&L.every(p=>p.a))closeQ();else if(open&&!L.length)closeQ()}
+function handleAns(p,d){if(!open||d.i!==ix||p.a||!Number.isInteger(d.c))return;p.a={c:d.c,ms:Math.min(performance.now()-qStart,LIM*1000)};chkAll()}
+const ranking=()=>[...players.values()].sort((a,b)=>b.s-a.s);
+const board=R=>R.map((p,i)=>'<div><span>'+(i+1)+'</span><span>'+esc(p.n)+'</span><b>'+p.s+'</b></div>').join('');
+function closeQ(){if(!open)return;open=false;clearTimeout(tmr);const q=qs[ix];
+players.forEach(p=>{const ok=!!p.a&&q.o[p.a.c]===q.a;p.last={ok,pts:ok?500+Math.round(500*(1-p.a.ms/(LIM*1000))):0};p.s+=p.last.pts});
+const R=ranking();R.forEach((p,i)=>send(p.conn,{t:'res',ok:p.last.ok,pts:p.last.pts,total:p.s,rank:i+1,of:R.length,a:q.a,x:q.x||''}));
+[...$('tog').children].forEach((el,i)=>el.classList.add(q.o[i]===q.a?'right':'wrong'));
+$('tex').textContent=q.x?'💡 '+q.x:'';$('tbd').innerHTML=board(R.slice(0,5));$('nx').textContent=ix+1<qs.length?'Növbəti':'Final';$('nx').style.display='block';
+$('ta').textContent=R.filter(p=>p.last&&p.last.ok).length+' düzgün'}
+$('nx').onclick=next;
+function finish(){const R=ranking();R.forEach((p,i)=>send(p.conn,{t:'end',rank:i+1,of:R.length,total:p.s,top:R.slice(0,3).map(x=>x.n)}));$('pod').innerHTML=board(R.slice(0,10));show('sEndT')}
+$('again').onclick=()=>location.href=location.href.split('?')[0];
+
+/* ---------- şagird ---------- */
+function msg(t,p){$('wt').textContent=t;$('wp').textContent=p||'';show('sWaitS')}
+$('jn').onclick=()=>{const c=$('cd').value.trim();if(!/^\d{4}$/.test(c)){$('hs').textContent='4 rəqəmli kod yaz.';return}
+me=($('nm').value.trim()||'Şagird').slice(0,14);$('hs').textContent='Qoşulur...';peer=new Peer();
+peer.on('error',e=>{$('hs').textContent=e.type==='peer-unavailable'?'Belə otaq tapılmadı.':'Əlaqə xətası ('+e.type+').'});
+peer.on('open',()=>{conn=peer.connect('ydc-'+c,{reliable:true});conn.on('open',()=>send(conn,{t:'join',n:me}));conn.on('data',onS);conn.on('close',()=>{if(!ended)msg('Əlaqə kəsildi','Müəllimlə əlaqə kəsildi. Səhifəni yeniləyib yenidən qoşul.')})})};
+function onS(d){
+if(d.t==='ok'){me=d.n;msg('Qoşuldun, '+me+'!','Müəllim oyunu başlatmasını gözləyin...')}
+else if(d.t==='late')msg('Oyun artıq başlayıb','Növbəti oyunda qoşula bilərsən.');
+else if(d.t==='full')msg('Otaq doludur','Maksimum '+MAXP+' şagird qoşula bilər.');
+else if(d.t==='q'){myIx=d.i;answered=false;$('sqn').textContent=(d.i+1)+' / '+d.n;$('sme').textContent=me;$('sqt').textContent=d.q;$('sst').textContent='';
+const g=$('sog');g.innerHTML='';d.o.forEach((o,i)=>{const b=document.createElement('button');b.className='o'+i;b.innerHTML='<b>'+'ABCD'[i]+'</b>'+esc(o);b.onclick=()=>{if(answered)return;answered=true;send(conn,{t:'ans',i:myIx,c:i});[...g.children].forEach(x=>x.disabled=true);b.classList.add('sel');$('sst').textContent='Cavab göndərildi ✓ Nəticə gözlənilir...'};g.appendChild(b)});
+bar($('stb'),d.lim);show('sQS')}
+else if(d.t==='res'){$('rsI').textContent=d.ok?'✅':answered?'❌':'⏰';$('rsT').textContent=d.ok?'Düzgün!':answered?'Səhv':'Vaxt bitdi';
+$('rsP').innerHTML=(d.ok?'+'+d.pts+' xal<br>':'')+'Düzgün cavab: <b class="gold">'+esc(d.a)+'</b>';$('rsX').textContent=d.x?'💡 '+d.x:'';
+$('rsR').innerHTML='<div class="big gold" style="font-size:56px">'+d.rank+' / '+d.of+'</div><p>Yer · cəmi '+d.total+' xal</p>';show('sResS')}
+else if(d.t==='end'){ended=true;$('enR').textContent=d.rank+' / '+d.of;$('enC').innerHTML='<p>Cəmi: <b class="gold">'+d.total+'</b> xal</p><p style="margin-top:10px">Qaliblər: '+d.top.map((n,i)=>(i+1)+'. '+esc(n)).join(' · ')+'</p>';show('sEndS')}}
+/* link ilə giriş */
+const rp=new URLSearchParams(location.search).get('room');if(rp&&/^\d{4}$/.test(rp)){$('cd').value=rp;$('tch').style.display='none';$('hs').textContent='Adını yaz və Qoşul düyməsinə bas.'}
+lockChips();show('sHome');
+</script>
+</body>
+</html>
