@@ -4,104 +4,249 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daxil ol — Youdidit.az</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#050b1f">
 <style>
-*{box-sizing:border-box;margin:0}
-body{min-height:100vh;display:grid;place-items:center;padding:20px;font-family:Inter,system-ui,sans-serif;color:#f4f2ff;background:radial-gradient(80% 50% at 80% 0%,#2a1f5c,#070a14 70%)}
-.box{width:100%;max-width:420px;background:#141730cc;border:1px solid #2a2e4a;border-radius:24px;padding:28px;box-shadow:0 20px 60px #0008}
-.brand{display:block;font:800 28px Sora,sans-serif;color:#fff;text-decoration:none;margin-bottom:6px}
-.brand span{color:#8b5cf6}
-.sub{color:#9a97bd;font-size:14px;margin-bottom:20px}
-.tabs{display:grid;grid-template-columns:1fr 1fr;background:#0b0d1e;border-radius:14px;padding:4px;margin-bottom:18px}
-.tabs button{border:0;background:none;color:#9a97bd;font:600 14px Inter;padding:10px;border-radius:11px;cursor:pointer}
-.tabs button.on{background:#262a4d;color:#fff}
-form{display:grid;gap:12px}
-label{font-size:13px;color:#b9b6d8;display:grid;gap:6px}
-input{background:#0b0d1e;border:1px solid #2a2e4a;border-radius:12px;padding:13px 14px;color:#fff;font:500 15px Inter;outline:none}
-input:focus{border-color:#8b5cf6;box-shadow:0 0 0 3px #8b5cf633}
-.btn{border:0;border-radius:99px;padding:14px;font:700 15px Inter;color:#fff;cursor:pointer;background:linear-gradient(90deg,#5b5bf5,#9a50f7)}
-.btn:disabled{opacity:.6;cursor:wait}
-.g{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#222;border:0;border-radius:99px;padding:13px;font:600 15px Inter;cursor:pointer;width:100%}
-.or{text-align:center;color:#6f6c93;font-size:12px;margin:14px 0}
-.link{background:none;border:0;color:#a78bfa;font:600 13px Inter;cursor:pointer;justify-self:end;padding:0}
-#msg{min-height:20px;font-size:13px;margin-top:12px;text-align:center}
-#msg.err{color:#ff7b8a}#msg.ok{color:#4ade80}
-.hide{display:none}
+  :root { --accent:#4da3ff; --accent2:#7c8cff; --text:#eaf2ff; --muted:rgba(234,242,255,.68); --line:rgba(160,190,255,.25); }
+  * { box-sizing:border-box; }
+  html, body { margin:0; min-height:100%; }
+  body {
+    color:var(--text);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:linear-gradient(160deg,#030716 0%,#071433 38%,#0d2a6b 72%,#143c91 100%);
+    background-size:200% 200%;
+    animation:sky 22s ease-in-out infinite alternate;
+    overflow-x:hidden;
+  }
+  @keyframes sky { from { background-position:0% 0%; } to { background-position:100% 100%; } }
+
+  /* Hərəkətli işıq dumanları */
+  .glow { position:fixed; border-radius:50%; filter:blur(70px); opacity:.5; pointer-events:none; z-index:0; }
+  .g1 { width:340px; height:340px; background:#1f5fff; top:-80px; left:-100px; animation:drift1 18s ease-in-out infinite alternate; }
+  .g2 { width:300px; height:300px; background:#6a4dff; bottom:-90px; right:-80px; animation:drift2 24s ease-in-out infinite alternate; }
+  .g3 { width:220px; height:220px; background:#00b7ff; top:45%; left:55%; opacity:.28; animation:drift3 20s ease-in-out infinite alternate; }
+  @keyframes drift1 { to { transform:translate(180px,140px) scale(1.2); } }
+  @keyframes drift2 { to { transform:translate(-200px,-120px) scale(1.15); } }
+  @keyframes drift3 { to { transform:translate(-160px,90px) scale(.8); } }
+
+  #stars { position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+
+  .wrap { position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; }
+  .header { display:flex; align-items:center; gap:14px; padding:14px 18px; border-bottom:1px solid var(--line);
+            background:rgba(5,11,31,.45); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+  .logo { font-weight:800; font-size:20px; color:#fff; text-decoration:none; white-space:nowrap; }
+  .nav { display:flex; gap:16px; overflow-x:auto; flex:1; scrollbar-width:none; }
+  .nav::-webkit-scrollbar { display:none; }
+  .nav a { color:var(--muted); text-decoration:none; font-size:14px; white-space:nowrap; transition:color .2s; }
+  .nav a:hover { color:#fff; }
+  .cta { padding:8px 14px; border-radius:999px; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; text-decoration:none; font-weight:700; font-size:14px; white-space:nowrap; }
+
+  .main { flex:1; display:flex; align-items:center; justify-content:center; padding:28px 16px; }
+  .card {
+    width:100%; max-width:400px; padding:30px 24px; border-radius:22px;
+    background:rgba(255,255,255,.07); border:1px solid var(--line);
+    backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+    box-shadow:0 20px 60px rgba(0,10,50,.55), inset 0 1px 0 rgba(255,255,255,.12);
+    animation:rise .7s ease both;
+  }
+  @keyframes rise { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+  .eyebrow { font-size:12px; letter-spacing:.16em; font-weight:700; color:var(--accent); margin:0 0 6px; }
+  .card h1 { margin:0 0 6px; font-size:29px; line-height:1.15; }
+  .sub { margin:0 0 20px; color:var(--muted); font-size:15px; }
+  .card input {
+    width:100%; padding:13px 14px; margin-bottom:10px; border-radius:12px;
+    border:1px solid var(--line); background:rgba(3,8,30,.45); color:#fff; font:inherit; font-size:16px;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .card input::placeholder { color:rgba(234,242,255,.45); }
+  .card input:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(77,163,255,.25); }
+  .card button { width:100%; padding:13px; border-radius:12px; font:inherit; font-size:16px; font-weight:700; cursor:pointer; transition:transform .15s, box-shadow .2s; }
+  .card button:active { transform:scale(.98); }
+  .primary { border:0; color:#fff; background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow:0 8px 24px rgba(77,130,255,.45); }
+  .google { margin-top:8px; border:1px solid var(--line); background:rgba(255,255,255,.06); color:var(--text); }
+  .msg { min-height:20px; margin-bottom:8px; font-size:14px; color:#ff8a80; }
+  .msg.ok { color:#7dffb0; }
+  .or { text-align:center; color:var(--muted); font-size:13px; margin:12px 0 0; }
+  .links { display:flex; justify-content:space-between; margin-top:16px; font-size:14px; }
+  .links a { color:var(--accent); text-decoration:none; }
+  .footer { padding:20px 18px; border-top:1px solid var(--line); text-align:center; font-size:13px; color:var(--muted); background:rgba(5,11,31,.45); }
+  .footer b { display:block; font-size:16px; color:#fff; margin-bottom:2px; }
+  .footer a { color:var(--muted); margin:0 6px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    body, .glow, .card { animation:none !important; }
+  }
 </style>
 </head>
 <body>
-<div class="box">
-  <a class="brand" href="index.html">Youdidit<span>.az</span></a>
-  <p class="sub">Kurslara və testlərə daxil ol, sertifikat qazan.</p>
+<canvas id="stars"></canvas>
+<div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
 
-  <div class="tabs">
-    <button id="tLogin" class="on" type="button">Giriş</button>
-    <button id="tReg" type="button">Qeydiyyat</button>
-  </div>
+<div class="wrap">
+  <header class="header">
+    <a class="logo" href="index.html">Youdidit.az</a>
+    <nav class="nav">
+      <a href="index.html">Ana səhifə</a>
+      <a href="index.html#exams">İmtahanlar</a>
+      <a href="kurslar.html">Kurslar</a>
+      <a href="resources.html">Resurslar</a>
+      <a href="sinif-testleri.html">Sinif testləri</a>
+      <a href="index.html#services">Xidmətlər</a>
+    </nav>
+    <a class="cta" href="order.html">Sifariş et →</a>
+  </header>
 
-  <form id="fLogin">
-    <label>E-poçt<input type="email" id="lEmail" autocomplete="email" required></label>
-    <label>Parol<input type="password" id="lPass" autocomplete="current-password" required></label>
-    <button class="link" type="button" id="forgot">Parolu unutmusan?</button>
-    <button class="btn" type="submit">Daxil ol</button>
-  </form>
+  <main class="main">
+    <div class="card">
+      <p class="eyebrow">HESAB</p>
+      <h1 id="title">Daxil ol</h1>
+      <p class="sub" id="sub">Kurslara və sertifikatlara çıxış üçün hesabına daxil ol.</p>
 
-  <form id="fReg" class="hide">
-    <label>Ad<input type="text" id="rName" autocomplete="name" required></label>
-    <label>E-poçt<input type="email" id="rEmail" autocomplete="email" required></label>
-    <label>Parol (ən azı 6 simvol)<input type="password" id="rPass" minlength="6" autocomplete="new-password" required></label>
-    <button class="btn" type="submit">Qeydiyyatdan keç</button>
-  </form>
+      <input id="email" type="email" placeholder="E-poçt" autocomplete="email">
+      <input id="pass" type="password" placeholder="Şifrə (ən azı 6 simvol)" autocomplete="current-password">
+      <div id="msg" class="msg"></div>
 
-  <div class="or">və ya</div>
-  <button class="g" id="gBtn" type="button">
-    <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7a14.5 14.5 0 0 1 0-9.4l-7.9-6.1a24 24 0 0 0 0 21.6l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.9 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
-    Google ilə davam et
-  </button>
-  <div id="msg"></div>
+      <button id="submit" class="primary">Daxil ol</button>
+      <p class="or">və ya</p>
+      <button id="google" class="google">Google ilə davam et</button>
+
+      <div class="links">
+        <a href="#" id="switch">Qeydiyyat</a>
+        <a href="#" id="reset">Şifrəni unutdum</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <b>Youdidit.az</b>
+    Təhsil • İmtahan • Karyera • İnkişaf<br>
+    <a href="mailto:youdidit.az@gmail.com">✉ youdidit.az@gmail.com</a>
+    <a href="https://www.instagram.com/youdidit.az/">◎ @youdidit.az</a>
+  </footer>
 </div>
 
+<!-- Ulduzlar və axan ulduz -->
+<script>
+(function () {
+  var c = document.getElementById("stars"), x = c.getContext("2d");
+  var W, H, stars = [], shoot = null, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function resize() {
+    W = innerWidth; H = innerHeight;
+    c.width = W * dpr; c.height = H * dpr;
+    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var n = Math.round(W * H / 6500);
+    stars = [];
+    for (var i = 0; i < n; i++) stars.push({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 1.4 + .3,
+      p: Math.random() * 6.28, s: Math.random() * 1.6 + .4,
+      vy: Math.random() * .08 + .01
+    });
+  }
+
+  function newShoot() {
+    shoot = { x: Math.random() * W * .8, y: Math.random() * H * .35, l: 0, v: 9 + Math.random() * 5 };
+  }
+
+  function frame(t) {
+    x.clearRect(0, 0, W, H);
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      var a = .35 + .65 * (.5 + .5 * Math.sin(t / 1000 * s.s + s.p));
+      x.globalAlpha = a;
+      x.fillStyle = "#cfe3ff";
+      x.beginPath(); x.arc(s.x, s.y, s.r, 0, 6.28); x.fill();
+      if (!reduce) { s.y += s.vy; if (s.y > H) s.y = 0; }
+    }
+    if (shoot) {
+      shoot.l += shoot.v;
+      var ex = shoot.x + shoot.l, ey = shoot.y + shoot.l * .55;
+      var sx = ex - 140, sy = ey - 140 * .55;
+      var g = x.createLinearGradient(sx, sy, ex, ey);
+      g.addColorStop(0, "rgba(180,215,255,0)");
+      g.addColorStop(1, "rgba(255,255,255,.95)");
+      x.globalAlpha = 1; x.strokeStyle = g; x.lineWidth = 2;
+      x.beginPath(); x.moveTo(sx, sy); x.lineTo(ex, ey); x.stroke();
+      if (ex > W + 150 || ey > H + 150) shoot = null;
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+
+  resize();
+  addEventListener("resize", resize);
+  requestAnimationFrame(frame);
+  if (!reduce) (function loop() { newShoot(); setTimeout(loop, 4000 + Math.random() * 5000); })();
+})();
+</script>
+
 <script type="module">
-import { register, login, googleLogin, resetPassword, errText, auth } from "./auth.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+import { auth } from "./firebase-config.js";
+import {
+  GoogleAuthProvider, signInWithPopup, onAuthStateChanged,
+  createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail,
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-const $ = id => document.getElementById(id), msg = $("msg");
-const next = new URLSearchParams(location.search).get("next");
-const go = () => { location.href = next && /^[\w\-./]+\.html$/.test(next) ? next : "index.html"; };
-const say = (t, ok) => { msg.textContent = t; msg.className = ok ? "ok" : "err"; };
+const $ = (id) => document.getElementById(id);
+let mode = "login";
 
-function tab(isLogin) {
-  $("fLogin").classList.toggle("hide", !isLogin);
-  $("fReg").classList.toggle("hide", isLogin);
-  $("tLogin").classList.toggle("on", isLogin);
-  $("tReg").classList.toggle("on", !isLogin);
-  say("");
+// Giriş sonrası yönləndirmə (yalnız eyni saytın .html səhifələri)
+const nextParam = new URLSearchParams(location.search).get("next") || "";
+const next = /^[\w\-]+\.html$/.test(nextParam) ? nextParam : "index.html";
+
+const errors = {
+  "auth/invalid-email": "E-poçt düzgün deyil.",
+  "auth/missing-password": "Şifrəni yaz.",
+  "auth/weak-password": "Şifrə ən azı 6 simvol olmalıdır.",
+  "auth/email-already-in-use": "Bu e-poçt artıq qeydiyyatdadır.",
+  "auth/invalid-credential": "E-poçt və ya şifrə səhvdir.",
+  "auth/user-not-found": "Bu e-poçtla hesab yoxdur.",
+  "auth/wrong-password": "Şifrə səhvdir.",
+  "auth/too-many-requests": "Çox cəhd oldu, bir az sonra yenidən yoxla.",
+  "auth/unauthorized-domain": "Bu domen Firebase-də icazəli deyil.",
+  "auth/popup-closed-by-user": "",
+};
+const msg = (t, ok) => { $("msg").className = "msg" + (ok ? " ok" : ""); $("msg").textContent = t; };
+const fail = (err) => msg(errors[err.code] ?? "Xəta: " + err.code);
+
+function setMode(m) {
+  mode = m;
+  $("title").textContent = m === "login" ? "Daxil ol" : "Qeydiyyat";
+  $("sub").textContent = m === "login" ? "Kurslara və sertifikatlara çıxış üçün hesabına daxil ol." : "Yeni hesab yarat, bir neçə saniyə çəkir.";
+  $("submit").textContent = m === "login" ? "Daxil ol" : "Qeydiyyatdan keç";
+  $("switch").textContent = m === "login" ? "Qeydiyyat" : "Hesabım var";
+  $("pass").autocomplete = m === "login" ? "current-password" : "new-password";
+  msg("");
 }
-$("tLogin").onclick = () => tab(true);
-$("tReg").onclick = () => tab(false);
 
-async function run(btn, fn) {
-  btn.disabled = true;
-  try { await fn(); } catch (e) { say(errText(e)); }
-  btn.disabled = false;
-}
+$("switch").onclick = (e) => { e.preventDefault(); setMode(mode === "login" ? "signup" : "login"); };
 
-$("fLogin").onsubmit = e => { e.preventDefault();
-  run(e.submitter, async () => { await login($("lEmail").value.trim(), $("lPass").value); say("Uğurla daxil oldun!", true); go(); }); };
-
-$("fReg").onsubmit = e => { e.preventDefault();
-  run(e.submitter, async () => { await register($("rName").value.trim(), $("rEmail").value.trim(), $("rPass").value); say("Hesab yaradıldı!", true); go(); }); };
-
-$("gBtn").onclick = e => run(e.currentTarget, async () => { await googleLogin(); go(); });
-
-$("forgot").onclick = () => {
-  const email = $("lEmail").value.trim();
-  if (!email) return say("Əvvəlcə e-poçt ünvanını yaz.");
-  resetPassword(email).then(() => say("Parol bərpa linki e-poçtuna göndərildi.", true)).catch(e => say(errText(e)));
+$("submit").onclick = async () => {
+  const email = $("email").value.trim(), pass = $("pass").value;
+  try {
+    if (mode === "login") await signInWithEmailAndPassword(auth, email, pass);
+    else await createUserWithEmailAndPassword(auth, email, pass);
+  } catch (err) { fail(err); }
 };
 
-onAuthStateChanged(auth, u => { if (u) go(); });
+$("pass").addEventListener("keydown", (e) => { if (e.key === "Enter") $("submit").click(); });
+
+$("google").onclick = async () => {
+  try { await signInWithPopup(auth, new GoogleAuthProvider()); }
+  catch (err) { fail(err); }
+};
+
+$("reset").onclick = async (e) => {
+  e.preventDefault();
+  const email = $("email").value.trim();
+  if (!email) return msg("Əvvəlcə e-poçtu yaz.");
+  try { await sendPasswordResetEmail(auth, email); msg("Bərpa linki e-poçta göndərildi.", true); }
+  catch (err) { fail(err); }
+};
+
+// Giriş uğurlu olanda (və ya artıq daxil olubsa) yönləndir
+onAuthStateChanged(auth, (user) => { if (user) location.replace(next); });
 </script>
 </body>
 </html>
