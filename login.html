@@ -64,7 +64,7 @@ input:focus{border-color:#8b5cf6;box-shadow:0 0 0 3px #8b5cf633}
 
 <script type="module">
 import { register, login, googleLogin, resetPassword, errText, auth } from "./auth.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
 
 const $ = id => document.getElementById(id), msg = $("msg");
 const next = new URLSearchParams(location.search).get("next");
