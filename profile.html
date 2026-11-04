@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<script type="module" src="auth.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profilim — Youdidit.az</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#050713">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050713;--bg2:#090b1d;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--purple:#7651ff;--purple2:#a454ff;--blue:#397cff;--cyan:#16cfff;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.20),transparent 34%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.16),transparent 32%),linear-gradient(180deg,#050713,#080c26 60%,#0a1236);background-size:100% 100%;color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.container{width:min(1180px,calc(100% - 32px));margin:auto}
+
+/* Hərəkətli fon */
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.glow{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+.g1{width:360px;height:360px;background:rgba(118,81,255,.45);top:-90px;left:-110px;animation:d1 18s ease-in-out infinite alternate}
+.g2{width:320px;height:320px;background:rgba(57,124,255,.38);bottom:-100px;right:-90px;animation:d2 24s ease-in-out infinite alternate}
+.g3{width:230px;height:230px;background:rgba(22,207,255,.20);top:45%;left:55%;animation:d3 20s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate(180px,140px) scale(1.2)}}
+@keyframes d2{to{transform:translate(-200px,-120px) scale(1.15)}}
+@keyframes d3{to{transform:translate(-160px,90px) scale(.8)}}
+
+.page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
+
+/* NAVBAR (saytdakı kimi) */
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-family:'Sora',sans-serif;font-size:23px;font-weight:800;letter-spacing:-1px}
+.logo span{color:#9d65ff}
+.nav-links{display:flex;align-items:center;gap:22px}
+.nav-links a{color:#c2c6df;font-size:12px;font-weight:600;transition:.25s}
+.nav-links a:hover{color:white}
+.nav-button{padding:10px 19px;border-radius:999px;background:linear-gradient(135deg,#6b52ff,#a34eff);font-size:12px;font-weight:800;box-shadow:0 8px 25px rgba(118,81,255,.28);white-space:nowrap}
+.menu-toggle{display:none;width:42px;height:42px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.05);color:white;font-size:21px;cursor:pointer;align-items:center;justify-content:center}
+.mobile-menu{display:none;padding:10px 0 18px}
+.mobile-menu.active{display:block}
+.mobile-menu a{display:block;padding:13px 15px;margin-top:5px;border-radius:12px;color:#c2c6df;font-size:13px;font-weight:600;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}
+.mobile-menu .mobile-order{margin-top:10px;text-align:center;color:white;background:linear-gradient(135deg,#6b52ff,#a34eff);border-color:transparent}
+
+
+/* PROFİL */
+.main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:32px 16px 48px}
+.profile{width:min(860px,100%)}
+.panel{border-radius:27px;background:linear-gradient(145deg,rgba(27,32,77,.92),rgba(8,11,31,.95));border:1px solid rgba(255,255,255,.15);box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px rgba(118,81,255,.16);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.top{display:flex;align-items:center;gap:16px;padding:22px;animation:rise .6s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.avatar{width:64px;height:64px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#6b52ff,#a34eff);font-family:'Sora',sans-serif;font-size:26px;font-weight:800;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.who{flex:1;min-width:0}
+.who h1{font-family:'Sora',sans-serif;font-size:22px;letter-spacing:-.8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.who p{color:var(--muted);font-size:12px;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 18px;border-radius:14px;font-size:12px;font-weight:800;cursor:pointer;transition:.3s;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.04);color:var(--white)}
+.btn:hover{background:rgba(255,255,255,.09);transform:translateY(-2px)}
+.btn-primary{border:0;background:linear-gradient(135deg,#5d55ff,#a84fff);box-shadow:0 12px 35px rgba(118,81,255,.32)}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.stat{padding:16px 12px;text-align:center;border-radius:20px;background:rgba(255,255,255,.045);border:1px solid var(--border)}
+.stat b{display:block;font-family:'Sora',sans-serif;font-size:26px;letter-spacing:-1px;background:linear-gradient(90deg,#fff,#9a70ff,#c45aff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{display:block;color:#8e96b8;font-size:10px;font-weight:700;margin-top:4px}
+
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;padding:10px 15px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:#c2c6df;font:700 12px 'Inter',sans-serif;cursor:pointer;transition:.25s}
+.tab.on{background:linear-gradient(135deg,#6b52ff,#a34eff);color:#fff;border-color:transparent}
+
+.list{display:flex;flex-direction:column;gap:10px}
+.item{display:flex;align-items:center;gap:14px;padding:15px 16px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid var(--border);transition:.3s}
+.item:hover{border-color:rgba(155,117,255,.35);background:rgba(118,81,255,.08)}
+.ico{width:44px;height:44px;flex:none;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;background:linear-gradient(135deg,#6b52ff,#a34eff)}
+.ico.course{background:linear-gradient(135deg,#0cbd91,#397cff)}
+.ico.certificate{background:linear-gradient(135deg,#ff8b4d,#f653c5)}
+.info{flex:1;min-width:0}
+.info strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.info span{display:block;color:#8e96b8;font-size:11px;margin-top:4px}
+.badge{flex:none;padding:6px 10px;border-radius:999px;font-size:10px;font-weight:800;background:rgba(255,255,255,.07);color:#c9bbff;border:1px solid rgba(255,255,255,.1)}
+.badge.done{background:rgba(32,211,163,.12);color:#5ee9c1;border-color:rgba(32,211,163,.3)}
+.badge.score{background:rgba(118,81,255,.16);color:#d3c4ff;border-color:rgba(155,117,255,.35)}
+
+.certs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.cert{position:relative;overflow:hidden;padding:20px;border-radius:22px;background:radial-gradient(circle at 90% 0%,rgba(255,139,77,.22),transparent 45%),linear-gradient(145deg,rgba(27,32,77,.95),rgba(8,11,31,.97));border:1px solid rgba(255,190,120,.28)}
+.cert .tr{font-size:26px;margin-bottom:10px}
+.cert h3{font-size:14px;margin-bottom:6px}
+.cert p{color:#8e96b8;font-size:11px}
+.code{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.2);font:700 11px ui-monospace,Menlo,monospace}
+.code button{border:0;background:none;color:#b99cff;font:800 11px 'Inter',sans-serif;cursor:pointer}
+
+.empty{text-align:center;padding:42px 20px;color:var(--muted);font-size:13px;line-height:1.7}
+.empty .big{font-size:38px;margin-bottom:10px}
+.empty .row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+.err{padding:14px 16px;border-radius:14px;background:rgba(255,80,100,.1);border:1px solid rgba(255,100,120,.3);color:#ffb3bb;font-size:12px;line-height:1.6;margin-bottom:12px}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.top{flex-wrap:wrap}.who h1{font-size:19px}}
+/* FOOTER */
+footer{padding:28px 0;border-top:1px solid rgba(255,255,255,.07)}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.footer-brand{font-family:'Sora',sans-serif;font-weight:800}
+.footer-brand span{color:#9b68ff}
+.footer-description{color:#7f86a8;font-size:10px;margin-top:5px}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:17px}
+.footer-links a{color:#9299b9;font-size:10px}
+.footer-links a:hover{color:white}
+
+@media(max-width:1000px){.nav-links,.nav-button{display:none}.menu-toggle{display:flex}}
+@media(max-width:650px){.container{width:calc(100% - 24px)}.nav-inner{min-height:64px}.logo{font-size:20px}.card{padding:26px 18px}.footer-inner{flex-direction:column;text-align:center}}
+@media(prefers-reduced-motion:reduce){.glow,.card{animation:none!important}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+<div class="page">
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">Youdidit<span>.az</span></a>
+    <div class="nav-links">
+      <a href="index.html">Ana səhifə</a>
+      <a href="index.html#exams">İmtahanlar</a>
+      <a href="resources.html">Resurslar</a>
+      <a href="sinif-testleri.html">Sinif testləri</a>
+      <a href="kurslar.html">🎓 Kurslar</a>
+      <a href="aletler.html">Alətlər</a>
+      <a href="lavazimatlar.html">Ləvazimatlar</a>
+      <a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a>
+      <a href="index.html#services">Xidmətlər</a>
+    </div>
+    <a href="order.html" class="nav-button">Sifariş et →</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menyu" aria-expanded="false" type="button">☰</button>
+  </div>
+  <div class="container mobile-menu" id="mobileMenu">
+    <a href="index.html">Ana səhifə</a>
+    <a href="index.html#exams">İmtahanlar</a>
+    <a href="resources.html">Resurslar</a>
+    <a href="sinif-testleri.html">Sinif testləri</a>
+    <a href="kurslar.html">🎓 Kurslar</a>
+    <a href="aletler.html">🧰 Alətlər</a>
+    <a href="lavazimatlar.html">🛍️ Ləvazimatlar</a>
+    <a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a>
+    <a href="index.html#services">Xidmətlər</a>
+    <a href="order.html" class="mobile-order">Sifariş et →</a>
+  </div>
+</nav>
+
+<main class="main">
+  <div class="profile">
+
+    <section class="panel top">
+      <div class="avatar" id="avatar">?</div>
+      <div class="who">
+        <h1 id="pname">Profil</h1>
+        <p id="pmail"></p>
+      </div>
+      <button class="btn" id="logout" type="button">Çıxış</button>
+    </section>
+
+    <section class="stats">
+      <div class="stat"><b id="sExam">0</b><span>İmtahan</span></div>
+      <div class="stat"><b id="sCourse">0</b><span>Kurs</span></div>
+      <div class="stat"><b id="sCert">0</b><span>Sertifikat</span></div>
+      <div class="stat"><b id="sAvg">—</b><span>Orta nəticə</span></div>
+    </section>
+
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-f="all" type="button">Tarixçə</button>
+      <button class="tab" data-f="exam" type="button">📝 İmtahanlar</button>
+      <button class="tab" data-f="course" type="button">🎓 Kurslar</button>
+      <button class="tab" data-f="certificate" type="button">🏆 Sertifikatlar</button>
+    </div>
+
+    <div id="error"></div>
+    <div id="out"></div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-brand">Youdidit<span>.az</span></div>
+      <div class="footer-description">Təhsil • İmtahan • Karyera • İnkişaf</div>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:youdidit.az@gmail.com">✉ youdidit.az@gmail.com</a>
+      <a href="https://www.instagram.com/youdidit.az/" target="_blank" rel="noopener">◎ @youdidit.az</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var t=document.getElementById("menuToggle"),m=document.getElementById("mobileMenu");
+  t.addEventListener("click",function(){var o=m.classList.toggle("active");t.textContent=o?"✕":"☰";t.setAttribute("aria-expanded",o);});
+
+  var c=document.getElementById("stars"),x=c.getContext("2d");
+  var W,H,stars=[],shoot=null,dpr=Math.min(window.devicePixelRatio||1,2);
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function resize(){
+    W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.round(W*H/6500);stars=[];
+    for(var i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,p:Math.random()*6.28,s:Math.random()*1.6+.4,vy:Math.random()*.08+.01,v:Math.random()<.35});
+  }
+  function newShoot(){shoot={x:Math.random()*W*.8,y:Math.random()*H*.35,l:0,v:9+Math.random()*5};}
+  function frame(ts){
+    x.clearRect(0,0,W,H);
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i];x.globalAlpha=.3+.7*(.5+.5*Math.sin(ts/1000*s.s+s.p));
+      x.fillStyle=s.v?"#b9a2ff":"#dbe8ff";
+      x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fill();
+      if(!reduce){s.y+=s.vy;if(s.y>H)s.y=0;}
+    }
+    if(shoot){
+      shoot.l+=shoot.v;
+      var ex=shoot.x+shoot.l,ey=shoot.y+shoot.l*.55,sx=ex-140,sy=ey-77;
+      var g=x.createLinearGradient(sx,sy,ex,ey);
+      g.addColorStop(0,"rgba(164,84,255,0)");g.addColorStop(1,"rgba(255,255,255,.95)");
+      x.globalAlpha=1;x.strokeStyle=g;x.lineWidth=2;
+      x.beginPath();x.moveTo(sx,sy);x.lineTo(ex,ey);x.stroke();
+      if(ex>W+150||ey>H+150)shoot=null;
+    }
+    if(!reduce)requestAnimationFrame(frame);
+  }
+  resize();addEventListener("resize",resize);requestAnimationFrame(frame);
+  if(!reduce)(function loop(){newShoot();setTimeout(loop,4000+Math.random()*5000);})();
+})();
+</script>
+
+<script type="module">
+import { auth, app } from "./firebase-config.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, collection, query, orderBy, limit, getDocs }
+  from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const $ = (id) => document.getElementById(id);
+const db = getFirestore(app);
+let records = [];
+let filter = "all";
+
+const ICON = { exam: "📝", course: "🎓", certificate: "🏆" };
+const NAME = { exam: "İmtahan", course: "Kurs", certificate: "Sertifikat" };
+
+const pct = (r) => {
+  if (typeof r.score !== "number") return null;
+  if (typeof r.total === "number" && r.total > 0) return Math.round((r.score / r.total) * 100);
+  return r.score <= 100 ? Math.round(r.score) : null;
+};
+const fmtDate = (d) => d.toLocaleDateString("az-AZ", { day: "numeric", month: "long", year: "numeric" });
+const fmtTime = (d) => d.toLocaleTimeString("az-AZ", { hour: "2-digit", minute: "2-digit" });
+
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+
+function stats() {
+  const uniq = (t) => new Set(records.filter((r) => r.type === t).map((r) => r.title)).size;
+  $("sExam").textContent = uniq("exam");
+  $("sCourse").textContent = uniq("course");
+  $("sCert").textContent = records.filter((r) => r.type === "certificate").length;
+  const scores = records.filter((r) => r.type === "exam" && r.status === "done").map(pct).filter((x) => x !== null);
+  $("sAvg").textContent = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) + "%" : "—";
+}
+
+function renderEmpty(out) {
+  const box = el("div", "empty");
+  box.appendChild(el("div", "big", "✨"));
+  box.appendChild(el("div", "", "Burada hələ heç nə yoxdur. İmtahan və ya kursa başlayanda tarixçən avtomatik görünəcək."));
+  const row = el("div", "row");
+  const a = el("a", "btn btn-primary", "İmtahanlara bax →"); a.href = "index.html#exams";
+  const b = el("a", "btn", "🎓 Kurslar"); b.href = "kurslar.html";
+  row.append(a, b); box.appendChild(row);
+  out.appendChild(box);
+}
+
+function render() {
+  const out = $("out");
+  out.textContent = "";
+  const rows = records.filter((r) => filter === "all" || r.type === filter);
+  if (!rows.length) return renderEmpty(out);
+
+  if (filter === "certificate") {
+    const grid = el("div", "certs");
+    rows.forEach((r) => {
+      const c = el("div", "cert");
+      c.appendChild(el("div", "tr", "🏆"));
+      c.appendChild(el("h3", "", r.title));
+      c.appendChild(el("p", "", fmtDate(r.date)));
+      if (r.code) {
+        const code = el("div", "code");
+        code.appendChild(el("span", "", r.code));
+        const cp = el("button", "", "Kopyala"); cp.type = "button";
+        cp.onclick = () => { navigator.clipboard?.writeText(r.code); cp.textContent = "✓"; setTimeout(() => (cp.textContent = "Kopyala"), 1500); };
+        code.appendChild(cp);
+        c.appendChild(code);
+      }
+      grid.appendChild(c);
+    });
+    out.appendChild(grid);
+    return;
+  }
+
+  const list = el("div", "list");
+  rows.forEach((r) => {
+    const it = el("div", "item");
+    it.appendChild(el("div", "ico " + r.type, ICON[r.type] || "📝"));
+    const info = el("div", "info");
+    info.appendChild(el("strong", "", r.title));
+    info.appendChild(el("span", "", NAME[r.type] + " • " + fmtDate(r.date) + ", " + fmtTime(r.date)));
+    it.appendChild(info);
+    const p = pct(r);
+    if (p !== null) it.appendChild(el("div", "badge score", p + "%"));
+    it.appendChild(el("div", "badge" + (r.status === "done" ? " done" : ""), r.status === "done" ? "Tamamladı" : "Başladı"));
+    list.appendChild(it);
+  });
+  out.appendChild(list);
+}
+
+$("tabs").addEventListener("click", (e) => {
+  const t = e.target.closest(".tab"); if (!t) return;
+  filter = t.dataset.f;
+  document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("on", x === t));
+  render();
+});
+$("logout").onclick = async () => { await signOut(auth); location.href = "login.html"; };
+
+(async () => {
+  await auth.authStateReady();
+  const u = auth.currentUser;
+  if (!u) return;   // auth.js login.html-ə yönləndirir
+
+  const name = u.displayName || (u.email || "").split("@")[0] || "İstifadəçi";
+  $("pname").textContent = name;
+  $("pmail").textContent = u.email || "";
+  if (u.photoURL) {
+    const img = document.createElement("img"); img.src = u.photoURL; img.alt = ""; img.referrerPolicy = "no-referrer";
+    $("avatar").textContent = ""; $("avatar").appendChild(img);
+  } else {
+    $("avatar").textContent = name.charAt(0).toUpperCase();
+  }
+
+  try {
+    const q = query(collection(db, "users", u.uid, "records"), orderBy("ts", "desc"), limit(300));
+    const snap = await getDocs(q);
+    records = snap.docs.map((d) => {
+      const x = d.data();
+      return { ...x, date: x.ts?.toDate ? x.ts.toDate() : new Date() };
+    });
+  } catch (err) {
+    console.warn(err);
+    const e = el("div", "err", "Tarixçəni yükləmək mümkün olmadı (" + (err.code || "xəta") + "). Firebase-də Firestore Database yaradılıb və qaydalar (Rules) yerləşdirilibmi?");
+    $("error").appendChild(e);
+  }
+  stats();
+  render();
+})();
+</script>
+</body>
+</html>
