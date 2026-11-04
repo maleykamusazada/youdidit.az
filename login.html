@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daxil ol — Youdidit.az</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{min-height:100vh;display:grid;place-items:center;padding:20px;font-family:Inter,system-ui,sans-serif;color:#f4f2ff;background:radial-gradient(80% 50% at 80% 0%,#2a1f5c,#070a14 70%)}
+.box{width:100%;max-width:420px;background:#141730cc;border:1px solid #2a2e4a;border-radius:24px;padding:28px;box-shadow:0 20px 60px #0008}
+.brand{display:block;font:800 28px Sora,sans-serif;color:#fff;text-decoration:none;margin-bottom:6px}
+.brand span{color:#8b5cf6}
+.sub{color:#9a97bd;font-size:14px;margin-bottom:20px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:#0b0d1e;border-radius:14px;padding:4px;margin-bottom:18px}
+.tabs button{border:0;background:none;color:#9a97bd;font:600 14px Inter;padding:10px;border-radius:11px;cursor:pointer}
+.tabs button.on{background:#262a4d;color:#fff}
+form{display:grid;gap:12px}
+label{font-size:13px;color:#b9b6d8;display:grid;gap:6px}
+input{background:#0b0d1e;border:1px solid #2a2e4a;border-radius:12px;padding:13px 14px;color:#fff;font:500 15px Inter;outline:none}
+input:focus{border-color:#8b5cf6;box-shadow:0 0 0 3px #8b5cf633}
+.btn{border:0;border-radius:99px;padding:14px;font:700 15px Inter;color:#fff;cursor:pointer;background:linear-gradient(90deg,#5b5bf5,#9a50f7)}
+.btn:disabled{opacity:.6;cursor:wait}
+.g{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#222;border:0;border-radius:99px;padding:13px;font:600 15px Inter;cursor:pointer;width:100%}
+.or{text-align:center;color:#6f6c93;font-size:12px;margin:14px 0}
+.link{background:none;border:0;color:#a78bfa;font:600 13px Inter;cursor:pointer;justify-self:end;padding:0}
+#msg{min-height:20px;font-size:13px;margin-top:12px;text-align:center}
+#msg.err{color:#ff7b8a}#msg.ok{color:#4ade80}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="box">
+  <a class="brand" href="index.html">Youdidit<span>.az</span></a>
+  <p class="sub">Kurslara və testlərə daxil ol, sertifikat qazan.</p>
+
+  <div class="tabs">
+    <button id="tLogin" class="on" type="button">Giriş</button>
+    <button id="tReg" type="button">Qeydiyyat</button>
+  </div>
+
+  <form id="fLogin">
+    <label>E-poçt<input type="email" id="lEmail" autocomplete="email" required></label>
+    <label>Parol<input type="password" id="lPass" autocomplete="current-password" required></label>
+    <button class="link" type="button" id="forgot">Parolu unutmusan?</button>
+    <button class="btn" type="submit">Daxil ol</button>
+  </form>
+
+  <form id="fReg" class="hide">
+    <label>Ad<input type="text" id="rName" autocomplete="name" required></label>
+    <label>E-poçt<input type="email" id="rEmail" autocomplete="email" required></label>
+    <label>Parol (ən azı 6 simvol)<input type="password" id="rPass" minlength="6" autocomplete="new-password" required></label>
+    <button class="btn" type="submit">Qeydiyyatdan keç</button>
+  </form>
+
+  <div class="or">və ya</div>
+  <button class="g" id="gBtn" type="button">
+    <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7a14.5 14.5 0 0 1 0-9.4l-7.9-6.1a24 24 0 0 0 0 21.6l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.9 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+    Google ilə davam et
+  </button>
+  <div id="msg"></div>
+</div>
+
+<script type="module">
+import { register, login, googleLogin, resetPassword, errText, auth } from "./auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const $ = id => document.getElementById(id), msg = $("msg");
+const next = new URLSearchParams(location.search).get("next");
+const go = () => { location.href = next && /^[\w\-./]+\.html$/.test(next) ? next : "index.html"; };
+const say = (t, ok) => { msg.textContent = t; msg.className = ok ? "ok" : "err"; };
+
+function tab(isLogin) {
+  $("fLogin").classList.toggle("hide", !isLogin);
+  $("fReg").classList.toggle("hide", isLogin);
+  $("tLogin").classList.toggle("on", isLogin);
+  $("tReg").classList.toggle("on", !isLogin);
+  say("");
+}
+$("tLogin").onclick = () => tab(true);
+$("tReg").onclick = () => tab(false);
+
+async function run(btn, fn) {
+  btn.disabled = true;
+  try { await fn(); } catch (e) { say(errText(e)); }
+  btn.disabled = false;
+}
+
+$("fLogin").onsubmit = e => { e.preventDefault();
+  run(e.submitter, async () => { await login($("lEmail").value.trim(), $("lPass").value); say("Uğurla daxil oldun!", true); go(); }); };
+
+$("fReg").onsubmit = e => { e.preventDefault();
+  run(e.submitter, async () => { await register($("rName").value.trim(), $("rEmail").value.trim(), $("rPass").value); say("Hesab yaradıldı!", true); go(); }); };
+
+$("gBtn").onclick = e => run(e.currentTarget, async () => { await googleLogin(); go(); });
+
+$("forgot").onclick = () => {
+  const email = $("lEmail").value.trim();
+  if (!email) return say("Əvvəlcə e-poçt ünvanını yaz.");
+  resetPassword(email).then(() => say("Parol bərpa linki e-poçtuna göndərildi.", true)).catch(e => say(errText(e)));
+};
+
+onAuthStateChanged(auth, u => { if (u) go(); });
+</script>
+</body>
+</html>
