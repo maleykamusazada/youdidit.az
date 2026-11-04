@@ -1,7 +1,8 @@
-// Firebase Console → Project settings → Your apps → Web app → "firebaseConfig" bölməsindəki dəyərləri bura yapışdırın
 export const firebaseConfig = {
-  apiKey: "BURAYA_YAZIN",
-  authDomain: "BURAYA_YAZIN.firebaseapp.com",
-  projectId: "BURAYA_YAZIN",
-  appId: "BURAYA_YAZIN"
+  apiKey: "AIzaSyAf4v4US9Sr0KlrD82B0J3QgCDimWFK1vk",
+  authDomain: "youdiditaz-c93ea.firebaseapp.com",
+  projectId: "youdiditaz-c93ea",
+  storageBucket: "youdiditaz-c93ea.firebasestorage.app",
+  messagingSenderId: "480440678879",
+  appId: "1:480440678879:web:8cc4e75381052bc62c2c6a"
 };
