@@ -1,0 +1,44 @@
+name: Add login to all pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add-auth:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Insert auth.js into every HTML page
+        run: |
+          python3 - << 'PY'
+          import glob, re
+
+          SKIP = {"login.html"}          # giriş tələb olunmayan səhifələr (məs: "order.html" də əlavə edə bilərsən)
+          TAG = '<script type="module" src="auth.js"></script>'
+
+          for path in sorted(glob.glob("*.html")):
+              if path in SKIP:
+                  continue
+              html = open(path, encoding="utf-8").read()
+              if "auth.js" in html:
+                  print("artıq var:", path)
+                  continue
+              new, n = re.subn(r"(<head[^>]*>)", r"\1\n" + TAG, html, count=1, flags=re.I)
+              if n == 0:
+                  print("<head> tapılmadı:", path)
+                  continue
+              open(path, "w", encoding="utf-8").write(new)
+              print("əlavə edildi:", path)
+          PY
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Add auth.js to all pages"
+          git push
