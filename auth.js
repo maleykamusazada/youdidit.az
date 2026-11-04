@@ -42,3 +42,4 @@ onAuthStateChanged(auth, (user) => {
   if (!user) location.replace("login.html?next=" + encodeURIComponent(page));
   else document.documentElement.style.visibility = "";
 });
+
