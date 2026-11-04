@@ -5,179 +5,191 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daxil ol — Youdidit.az</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#050b1f">
+<meta name="theme-color" content="#050713">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --accent:#4da3ff; --accent2:#7c8cff; --text:#eaf2ff; --muted:rgba(234,242,255,.68); --line:rgba(160,190,255,.25); }
-  * { box-sizing:border-box; }
-  html, body { margin:0; min-height:100%; }
-  body {
-    color:var(--text);
-    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    background:linear-gradient(160deg,#030716 0%,#071433 38%,#0d2a6b 72%,#143c91 100%);
-    background-size:200% 200%;
-    animation:sky 22s ease-in-out infinite alternate;
-    overflow-x:hidden;
-  }
-  @keyframes sky { from { background-position:0% 0%; } to { background-position:100% 100%; } }
+:root{--bg:#050713;--bg2:#090b1d;--card:#0d1128;--white:#f8f7ff;--muted:#a6adcd;--purple:#7651ff;--purple2:#a454ff;--blue:#397cff;--cyan:#16cfff;--border:rgba(255,255,255,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(circle at 10% 0%,rgba(118,81,255,.20),transparent 34%),radial-gradient(circle at 90% 25%,rgba(57,124,255,.16),transparent 32%),linear-gradient(180deg,#050713,#080c26 60%,#0a1236);background-size:100% 100%;color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.container{width:min(1180px,calc(100% - 32px));margin:auto}
 
-  /* Hərəkətli işıq dumanları */
-  .glow { position:fixed; border-radius:50%; filter:blur(70px); opacity:.5; pointer-events:none; z-index:0; }
-  .g1 { width:340px; height:340px; background:#1f5fff; top:-80px; left:-100px; animation:drift1 18s ease-in-out infinite alternate; }
-  .g2 { width:300px; height:300px; background:#6a4dff; bottom:-90px; right:-80px; animation:drift2 24s ease-in-out infinite alternate; }
-  .g3 { width:220px; height:220px; background:#00b7ff; top:45%; left:55%; opacity:.28; animation:drift3 20s ease-in-out infinite alternate; }
-  @keyframes drift1 { to { transform:translate(180px,140px) scale(1.2); } }
-  @keyframes drift2 { to { transform:translate(-200px,-120px) scale(1.15); } }
-  @keyframes drift3 { to { transform:translate(-160px,90px) scale(.8); } }
+/* Hərəkətli fon */
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.glow{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+.g1{width:360px;height:360px;background:rgba(118,81,255,.45);top:-90px;left:-110px;animation:d1 18s ease-in-out infinite alternate}
+.g2{width:320px;height:320px;background:rgba(57,124,255,.38);bottom:-100px;right:-90px;animation:d2 24s ease-in-out infinite alternate}
+.g3{width:230px;height:230px;background:rgba(22,207,255,.20);top:45%;left:55%;animation:d3 20s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate(180px,140px) scale(1.2)}}
+@keyframes d2{to{transform:translate(-200px,-120px) scale(1.15)}}
+@keyframes d3{to{transform:translate(-160px,90px) scale(.8)}}
 
-  #stars { position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+.page{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
 
-  .wrap { position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; }
-  .header { display:flex; align-items:center; gap:14px; padding:14px 18px; border-bottom:1px solid var(--line);
-            background:rgba(5,11,31,.45); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
-  .logo { font-weight:800; font-size:20px; color:#fff; text-decoration:none; white-space:nowrap; }
-  .nav { display:flex; gap:16px; overflow-x:auto; flex:1; scrollbar-width:none; }
-  .nav::-webkit-scrollbar { display:none; }
-  .nav a { color:var(--muted); text-decoration:none; font-size:14px; white-space:nowrap; transition:color .2s; }
-  .nav a:hover { color:#fff; }
-  .cta { padding:8px 14px; border-radius:999px; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; text-decoration:none; font-weight:700; font-size:14px; white-space:nowrap; }
+/* NAVBAR (saytdakı kimi) */
+.navbar{position:sticky;top:0;z-index:1000;background:rgba(5,7,19,.76);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-family:'Sora',sans-serif;font-size:23px;font-weight:800;letter-spacing:-1px}
+.logo span{color:#9d65ff}
+.nav-links{display:flex;align-items:center;gap:22px}
+.nav-links a{color:#c2c6df;font-size:12px;font-weight:600;transition:.25s}
+.nav-links a:hover{color:white}
+.nav-button{padding:10px 19px;border-radius:999px;background:linear-gradient(135deg,#6b52ff,#a34eff);font-size:12px;font-weight:800;box-shadow:0 8px 25px rgba(118,81,255,.28);white-space:nowrap}
+.menu-toggle{display:none;width:42px;height:42px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.05);color:white;font-size:21px;cursor:pointer;align-items:center;justify-content:center}
+.mobile-menu{display:none;padding:10px 0 18px}
+.mobile-menu.active{display:block}
+.mobile-menu a{display:block;padding:13px 15px;margin-top:5px;border-radius:12px;color:#c2c6df;font-size:13px;font-weight:600;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}
+.mobile-menu .mobile-order{margin-top:10px;text-align:center;color:white;background:linear-gradient(135deg,#6b52ff,#a34eff);border-color:transparent}
 
-  .main { flex:1; display:flex; align-items:center; justify-content:center; padding:28px 16px; }
-  .card {
-    width:100%; max-width:400px; padding:30px 24px; border-radius:22px;
-    background:rgba(255,255,255,.07); border:1px solid var(--line);
-    backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
-    box-shadow:0 20px 60px rgba(0,10,50,.55), inset 0 1px 0 rgba(255,255,255,.12);
-    animation:rise .7s ease both;
-  }
-  @keyframes rise { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
-  .eyebrow { font-size:12px; letter-spacing:.16em; font-weight:700; color:var(--accent); margin:0 0 6px; }
-  .card h1 { margin:0 0 6px; font-size:29px; line-height:1.15; }
-  .sub { margin:0 0 20px; color:var(--muted); font-size:15px; }
-  .card input {
-    width:100%; padding:13px 14px; margin-bottom:10px; border-radius:12px;
-    border:1px solid var(--line); background:rgba(3,8,30,.45); color:#fff; font:inherit; font-size:16px;
-    transition:border-color .2s, box-shadow .2s;
-  }
-  .card input::placeholder { color:rgba(234,242,255,.45); }
-  .card input:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(77,163,255,.25); }
-  .card button { width:100%; padding:13px; border-radius:12px; font:inherit; font-size:16px; font-weight:700; cursor:pointer; transition:transform .15s, box-shadow .2s; }
-  .card button:active { transform:scale(.98); }
-  .primary { border:0; color:#fff; background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow:0 8px 24px rgba(77,130,255,.45); }
-  .google { margin-top:8px; border:1px solid var(--line); background:rgba(255,255,255,.06); color:var(--text); }
-  .msg { min-height:20px; margin-bottom:8px; font-size:14px; color:#ff8a80; }
-  .msg.ok { color:#7dffb0; }
-  .or { text-align:center; color:var(--muted); font-size:13px; margin:12px 0 0; }
-  .links { display:flex; justify-content:space-between; margin-top:16px; font-size:14px; }
-  .links a { color:var(--accent); text-decoration:none; }
-  .footer { padding:20px 18px; border-top:1px solid var(--line); text-align:center; font-size:13px; color:var(--muted); background:rgba(5,11,31,.45); }
-  .footer b { display:block; font-size:16px; color:#fff; margin-bottom:2px; }
-  .footer a { color:var(--muted); margin:0 6px; }
+/* GİRİŞ KARTI */
+.main{flex:1;display:flex;align-items:center;justify-content:center;padding:36px 16px}
+.card{width:min(420px,100%);padding:30px 24px;border-radius:27px;background:linear-gradient(145deg,rgba(27,32,77,.92),rgba(8,11,31,.95));border:1px solid rgba(255,255,255,.15);box-shadow:0 40px 100px rgba(0,0,0,.55),0 0 70px rgba(118,81,255,.22);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);animation:rise .7s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.label{color:#9d76ff;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+.card h1{font-family:'Sora',sans-serif;font-size:30px;letter-spacing:-1.2px;line-height:1.1}
+.sub{color:var(--muted);font-size:13px;line-height:1.7;margin:10px 0 22px}
+.card input{width:100%;padding:14px 15px;margin-bottom:10px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--white);font:inherit;font-size:15px;transition:.25s}
+.card input::placeholder{color:rgba(166,173,205,.6)}
+.card input:focus{outline:none;border-color:rgba(155,117,255,.6);box-shadow:0 0 0 3px rgba(118,81,255,.22)}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;padding:14px 21px;border-radius:14px;font-size:13px;font-weight:800;cursor:pointer;transition:.3s;border:0;color:var(--white)}
+.btn-primary{background:linear-gradient(135deg,#5d55ff,#a84fff);box-shadow:0 12px 35px rgba(118,81,255,.32)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 45px rgba(118,81,255,.45)}
+.btn-secondary{margin-top:10px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.13)}
+.btn-secondary:hover{background:rgba(255,255,255,.08);transform:translateY(-2px)}
+.msg{min-height:20px;margin-bottom:10px;font-size:12px;color:#ff8f9a}
+.msg.ok{color:#20d3a3}
+.or{text-align:center;color:#7f87a8;font-size:11px;margin:14px 0 0}
+.links{display:flex;justify-content:space-between;margin-top:18px;font-size:12px;font-weight:600}
+.links a{color:#b99cff}
+.links a:hover{color:#fff}
 
-  @media (prefers-reduced-motion: reduce) {
-    body, .glow, .card { animation:none !important; }
-  }
+/* FOOTER */
+footer{padding:28px 0;border-top:1px solid rgba(255,255,255,.07)}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.footer-brand{font-family:'Sora',sans-serif;font-weight:800}
+.footer-brand span{color:#9b68ff}
+.footer-description{color:#7f86a8;font-size:10px;margin-top:5px}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:17px}
+.footer-links a{color:#9299b9;font-size:10px}
+.footer-links a:hover{color:white}
+
+@media(max-width:1000px){.nav-links,.nav-button{display:none}.menu-toggle{display:flex}}
+@media(max-width:650px){.container{width:calc(100% - 24px)}.nav-inner{min-height:64px}.logo{font-size:20px}.card{padding:26px 18px}.footer-inner{flex-direction:column;text-align:center}}
+@media(prefers-reduced-motion:reduce){.glow,.card{animation:none!important}}
 </style>
 </head>
 <body>
 <canvas id="stars"></canvas>
 <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
 
-<div class="wrap">
-  <header class="header">
-    <a class="logo" href="index.html">Youdidit.az</a>
-    <nav class="nav">
+<div class="page">
+
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">Youdidit<span>.az</span></a>
+    <div class="nav-links">
       <a href="index.html">Ana səhifə</a>
       <a href="index.html#exams">İmtahanlar</a>
-      <a href="kurslar.html">Kurslar</a>
       <a href="resources.html">Resurslar</a>
       <a href="sinif-testleri.html">Sinif testləri</a>
+      <a href="kurslar.html">🎓 Kurslar</a>
+      <a href="aletler.html">Alətlər</a>
+      <a href="lavazimatlar.html">Ləvazimatlar</a>
+      <a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a>
       <a href="index.html#services">Xidmətlər</a>
-    </nav>
-    <a class="cta" href="order.html">Sifariş et →</a>
-  </header>
-
-  <main class="main">
-    <div class="card">
-      <p class="eyebrow">HESAB</p>
-      <h1 id="title">Daxil ol</h1>
-      <p class="sub" id="sub">Kurslara və sertifikatlara çıxış üçün hesabına daxil ol.</p>
-
-      <input id="email" type="email" placeholder="E-poçt" autocomplete="email">
-      <input id="pass" type="password" placeholder="Şifrə (ən azı 6 simvol)" autocomplete="current-password">
-      <div id="msg" class="msg"></div>
-
-      <button id="submit" class="primary">Daxil ol</button>
-      <p class="or">və ya</p>
-      <button id="google" class="google">Google ilə davam et</button>
-
-      <div class="links">
-        <a href="#" id="switch">Qeydiyyat</a>
-        <a href="#" id="reset">Şifrəni unutdum</a>
-      </div>
     </div>
-  </main>
+    <a href="order.html" class="nav-button">Sifariş et →</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menyu" aria-expanded="false" type="button">☰</button>
+  </div>
+  <div class="container mobile-menu" id="mobileMenu">
+    <a href="index.html">Ana səhifə</a>
+    <a href="index.html#exams">İmtahanlar</a>
+    <a href="resources.html">Resurslar</a>
+    <a href="sinif-testleri.html">Sinif testləri</a>
+    <a href="kurslar.html">🎓 Kurslar</a>
+    <a href="aletler.html">🧰 Alətlər</a>
+    <a href="lavazimatlar.html">🛍️ Ləvazimatlar</a>
+    <a href="psixoloji-imtahan.html">🧠 Psixoloji imtahan</a>
+    <a href="index.html#services">Xidmətlər</a>
+    <a href="order.html" class="mobile-order">Sifariş et →</a>
+  </div>
+</nav>
 
-  <footer class="footer">
-    <b>Youdidit.az</b>
-    Təhsil • İmtahan • Karyera • İnkişaf<br>
-    <a href="mailto:youdidit.az@gmail.com">✉ youdidit.az@gmail.com</a>
-    <a href="https://www.instagram.com/youdidit.az/">◎ @youdidit.az</a>
-  </footer>
+<main class="main">
+  <div class="card">
+    <div class="label">Hesab</div>
+    <h1 id="title">Daxil ol</h1>
+    <p class="sub" id="sub">Kurslara və sertifikatlara çıxış üçün hesabına daxil ol.</p>
+
+    <input id="email" type="email" placeholder="E-poçt" autocomplete="email">
+    <input id="pass" type="password" placeholder="Şifrə (ən azı 6 simvol)" autocomplete="current-password">
+    <div id="msg" class="msg"></div>
+
+    <button id="submit" class="btn btn-primary">Daxil ol</button>
+    <p class="or">və ya</p>
+    <button id="google" class="btn btn-secondary">Google ilə davam et</button>
+
+    <div class="links">
+      <a href="#" id="switch">Qeydiyyat</a>
+      <a href="#" id="reset">Şifrəni unutdum</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-brand">Youdidit<span>.az</span></div>
+      <div class="footer-description">Təhsil • İmtahan • Karyera • İnkişaf</div>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:youdidit.az@gmail.com">✉ youdidit.az@gmail.com</a>
+      <a href="https://www.instagram.com/youdidit.az/" target="_blank" rel="noopener">◎ @youdidit.az</a>
+    </div>
+  </div>
+</footer>
+
 </div>
 
-<!-- Ulduzlar və axan ulduz -->
 <script>
-(function () {
-  var c = document.getElementById("stars"), x = c.getContext("2d");
-  var W, H, stars = [], shoot = null, dpr = Math.min(window.devicePixelRatio || 1, 2);
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+(function(){
+  var t=document.getElementById("menuToggle"),m=document.getElementById("mobileMenu");
+  t.addEventListener("click",function(){var o=m.classList.toggle("active");t.textContent=o?"✕":"☰";t.setAttribute("aria-expanded",o);});
 
-  function resize() {
-    W = innerWidth; H = innerHeight;
-    c.width = W * dpr; c.height = H * dpr;
-    x.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var n = Math.round(W * H / 6500);
-    stars = [];
-    for (var i = 0; i < n; i++) stars.push({
-      x: Math.random() * W, y: Math.random() * H,
-      r: Math.random() * 1.4 + .3,
-      p: Math.random() * 6.28, s: Math.random() * 1.6 + .4,
-      vy: Math.random() * .08 + .01
-    });
+  var c=document.getElementById("stars"),x=c.getContext("2d");
+  var W,H,stars=[],shoot=null,dpr=Math.min(window.devicePixelRatio||1,2);
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function resize(){
+    W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.round(W*H/6500);stars=[];
+    for(var i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,p:Math.random()*6.28,s:Math.random()*1.6+.4,vy:Math.random()*.08+.01,v:Math.random()<.35});
   }
-
-  function newShoot() {
-    shoot = { x: Math.random() * W * .8, y: Math.random() * H * .35, l: 0, v: 9 + Math.random() * 5 };
-  }
-
-  function frame(t) {
-    x.clearRect(0, 0, W, H);
-    for (var i = 0; i < stars.length; i++) {
-      var s = stars[i];
-      var a = .35 + .65 * (.5 + .5 * Math.sin(t / 1000 * s.s + s.p));
-      x.globalAlpha = a;
-      x.fillStyle = "#cfe3ff";
-      x.beginPath(); x.arc(s.x, s.y, s.r, 0, 6.28); x.fill();
-      if (!reduce) { s.y += s.vy; if (s.y > H) s.y = 0; }
+  function newShoot(){shoot={x:Math.random()*W*.8,y:Math.random()*H*.35,l:0,v:9+Math.random()*5};}
+  function frame(ts){
+    x.clearRect(0,0,W,H);
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i];x.globalAlpha=.3+.7*(.5+.5*Math.sin(ts/1000*s.s+s.p));
+      x.fillStyle=s.v?"#b9a2ff":"#dbe8ff";
+      x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fill();
+      if(!reduce){s.y+=s.vy;if(s.y>H)s.y=0;}
     }
-    if (shoot) {
-      shoot.l += shoot.v;
-      var ex = shoot.x + shoot.l, ey = shoot.y + shoot.l * .55;
-      var sx = ex - 140, sy = ey - 140 * .55;
-      var g = x.createLinearGradient(sx, sy, ex, ey);
-      g.addColorStop(0, "rgba(180,215,255,0)");
-      g.addColorStop(1, "rgba(255,255,255,.95)");
-      x.globalAlpha = 1; x.strokeStyle = g; x.lineWidth = 2;
-      x.beginPath(); x.moveTo(sx, sy); x.lineTo(ex, ey); x.stroke();
-      if (ex > W + 150 || ey > H + 150) shoot = null;
+    if(shoot){
+      shoot.l+=shoot.v;
+      var ex=shoot.x+shoot.l,ey=shoot.y+shoot.l*.55,sx=ex-140,sy=ey-77;
+      var g=x.createLinearGradient(sx,sy,ex,ey);
+      g.addColorStop(0,"rgba(164,84,255,0)");g.addColorStop(1,"rgba(255,255,255,.95)");
+      x.globalAlpha=1;x.strokeStyle=g;x.lineWidth=2;
+      x.beginPath();x.moveTo(sx,sy);x.lineTo(ex,ey);x.stroke();
+      if(ex>W+150||ey>H+150)shoot=null;
     }
-    if (!reduce) requestAnimationFrame(frame);
+    if(!reduce)requestAnimationFrame(frame);
   }
-
-  resize();
-  addEventListener("resize", resize);
-  requestAnimationFrame(frame);
-  if (!reduce) (function loop() { newShoot(); setTimeout(loop, 4000 + Math.random() * 5000); })();
+  resize();addEventListener("resize",resize);requestAnimationFrame(frame);
+  if(!reduce)(function loop(){newShoot();setTimeout(loop,4000+Math.random()*5000);})();
 })();
 </script>
 
