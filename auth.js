@@ -1,48 +1,62 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import {
-  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail,
-  signOut, onAuthStateChanged, updateProfile
-} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
-import { firebaseConfig } from "./firebase-config.js";
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAf4v4US9Sr0KlrD82B0J3QgCDimWFK1vk",
+  authDomain: "youdiditaz-c93ea.firebaseapp.com",
+  projectId: "youdiditaz-c93ea",
+  storageBucket: "youdiditaz-c93ea.firebasestorage.app",
+  messagingSenderId: "480440678879",
+  appId: "1:480440678879:web:d1116f14fff2d1512c2c6a",
+};
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-const ERRORS = {
-  "auth/email-already-in-use": "Bu e-poçt artıq qeydiyyatdan keçib.",
-  "auth/invalid-email": "E-poçt ünvanı düzgün deyil.",
-  "auth/weak-password": "Parol ən azı 6 simvol olmalıdır.",
-  "auth/invalid-credential": "E-poçt və ya parol səhvdir.",
-  "auth/user-not-found": "Bu e-poçt ilə hesab tapılmadı.",
-  "auth/wrong-password": "Parol səhvdir.",
-  "auth/too-many-requests": "Çox cəhd edildi. Bir az sonra yenidən yoxlayın.",
-  "auth/popup-closed-by-user": "Google pəncərəsi bağlandı.",
-  "auth/network-request-failed": "İnternet bağlantısını yoxlayın."
-};
-export const errText = e => ERRORS[e.code] || "Xəta baş verdi. Yenidən cəhd edin.";
+// Düyməni yarat (nav/header varsa ora, yoxsa yuxarı sağ küncə)
+const btn = document.createElement("button");
+btn.id = "authBtn";
+btn.type = "button";
+btn.textContent = "Daxil ol";
+btn.style.cssText =
+  "padding:8px 14px;border:0;border-radius:999px;background:#1a73e8;color:#fff;" +
+  "font:600 14px system-ui,sans-serif;cursor:pointer;margin-left:10px;";
 
-export async function register(name, email, password) {
-  const cred = await createUserWithEmailAndPassword(auth, email, password);
-  if (name) await updateProfile(cred.user, { displayName: name });
-  return cred.user;
+const host = document.querySelector("header nav, nav, header");
+if (host) {
+  host.appendChild(btn);
+} else {
+  btn.style.cssText += "position:fixed;top:12px;right:12px;z-index:9999;";
+  document.body.appendChild(btn);
 }
-export const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
-export const googleLogin = () => signInWithPopup(auth, new GoogleAuthProvider());
-export const resetPassword = email => sendPasswordResetEmail(auth, email);
-export const logout = () => signOut(auth);
 
-// Naviqasiyada <a id="authLink"> varsa avtomatik yenilənir
-onAuthStateChanged(auth, user => {
-  const link = document.getElementById("authLink");
-  if (!link) return;
-  if (user) {
-    link.textContent = "Çıxış (" + (user.displayName || user.email.split("@")[0]) + ")";
-    link.href = "#";
-    link.onclick = async e => { e.preventDefault(); await logout(); location.reload(); };
-  } else {
-    link.textContent = "Daxil ol";
-    link.href = "login.html";
-    link.onclick = null;
+btn.addEventListener("click", async () => {
+  try {
+    if (auth.currentUser) {
+      await signOut(auth);
+    } else {
+      await signInWithPopup(auth, provider);
+    }
+  } catch (err) {
+    console.error("Auth xətası:", err.code, err.message);
+    if (err.code === "auth/unauthorized-domain") {
+      alert("Bu domen Firebase-də icazəli deyil (Authorized domains).");
+    }
   }
+});
+
+// Giriş vəziyyəti dəyişəndə düyməni yenilə
+onAuthStateChanged(auth, (user) => {
+  btn.textContent = user
+    ? `Çıxış (${(user.displayName || user.email || "").split(" ")[0]})`
+    : "Daxil ol";
+  window.currentUser = user || null;
+  document.dispatchEvent(new CustomEvent("authchange", { detail: user }));
 });
